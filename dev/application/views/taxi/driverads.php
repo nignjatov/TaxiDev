@@ -6,7 +6,7 @@
             <div class="col-sm-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Driver Ad List
+                        General Ad List
                     </header>
                     <div class="panel-body">
                         <div class="adv-table">
@@ -19,7 +19,7 @@
                                             <div class="col-md-3">
                                                 <div class="btn-group pull-right">
                                                     <a class="btn btn-primary" data-toggle="modal" onclick="addNewDriverAds()">
-                                                        Add Driver Ad <i class="fa fa-plus"></i>
+                                                        Add General Ad <i class="fa fa-plus"></i>
                                                     </a>
                                                 </div>
                                             </div>
@@ -98,6 +98,5 @@
     document.title = '<?php echo config_item("site_title");?>: Driver Wanted Ads\' List';
     $("#nav-accordion li a").removeClass("active");
     $("#driver_ad_menu a").addClass("active");
-    $("#operator_menu").addClass("active");
 </script>
 </html>
