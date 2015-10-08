@@ -400,3 +400,65 @@ ul {
 .well {
     box-shadow: none;
 }
+
+@media (min-width: 768px) {
+	
+.sidebar-nav {
+  background-color: #4a514f; 
+  left: 0;
+  list-style: none;
+  height: 100%;
+  margin: 0;
+  overflow-y: auto;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  width: 240px;
+  z-index: 1;
+}	
+.sidebar-nav .navbar .navbar-collapse {
+  padding: 0;
+  max-height: none;
+}
+.sidebar-nav .navbar ul {
+  float: none;
+}
+.sidebar-nav .navbar ul:not {
+  display: block;
+}
+.sidebar-nav .navbar li {
+  float: none;
+  display: block;
+}
+.sidebar-nav .navbar li a {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+.sidebar-nav .open .dropdown-menu {
+  position: static;
+  float: none;
+  width: auto;
+  margin: 0;
+  padding: 5px 0;
+  background-color: transparent;
+  border: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.sidebar-nav .open .dropdown-menu > li > a {
+  padding: 5px 15px 5px 25px;
+}
+.sidebar-nav .navbar-brand {
+  width: 100%;
+}
+}
+
+.sidebar-nav .open .dropdown-menu .dropdown-header  {
+  padding: 5px 15px 5px 25px;
+  color: #222222;
+  font-size: 14px;
+  font-weight: bold;
+}
+.sidebar-nav .divider {
+  background-color: #317256;
+}

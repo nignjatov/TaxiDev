@@ -99,9 +99,28 @@
     </header>
     <!--header end-->
     <aside>
-        <div id="sidebar" class="nav-collapse">
-            <!-- sidebar menu start-->
-            <div class="leftside-navigation">
+
+    </aside>
+    <!--sidebar end-->
+	
+	
+
+	<div class="sidebar-nav">
+    <div id="navbar-green" class="navbar navbar-inverse" role="navigation">
+    
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      
+      <div  class="navbar-collapse collapse sidebar-navbar-collapse">
+	  
+      
+        <ul class="nav navbar-nav">
                 <ul class="sidebar-menu" id="nav-accordion">
                     <li id="dashboard_menu">
                         <a href="<?php echo site_url('Dashboard/viewDashboard')?>">
@@ -144,8 +163,15 @@
 					<i class="fa fa-plus"></i>
 					<span>General Ad List</span></a></li>
                 </ul>
-            </div>
-            <!-- sidebar menu end-->
-        </div>
-    </aside>
-    <!--sidebar end-->
+        </ul>
+      </div><!--/.nav-collapse -->
+
+    </div><!--/.navbar -->
+  </div><!--/.sidebar-nav -->
+
+  
+  
+  
+  
+  
+  

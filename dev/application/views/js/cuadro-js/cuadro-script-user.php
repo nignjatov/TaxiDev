@@ -73,9 +73,12 @@
         var postData = $(this).serializeArray();
         var formURL = "<?php echo site_url('User/createUser')?>";
 
-        cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'registrationSubmit', function(data){
+        cuadroServerAPI.postDataToServer(formURL, postData, '', 'registrationSubmit', function(data){
             console.dir(data);
-            if (data.error['code'] == 0) {
+			
+			/* Bug fix data is not JSON formated */
+			//if (data.error['code'] == 0) {
+            if (data.indexOf("No error") >= 0) {
 //                var success_msg = 'You have successfully registered.';
 //                cuadroCommonMethods.showGeneralPopUp('Success!!!', success_msg, true);
                 <?php echo 'top.location=\''.site_url('Dashboard/viewDashboard').'\';';?>
@@ -169,6 +172,7 @@
         var discount = 0;
         var planTitle = SubscriptionDetail[subscriptionID-1].title;
         StripeHandler = StripeCheckout.configure({
+			
             key: '<?php echo config_item('stripe_publishable'); ?>',
             image: '<?php echo base_url()?>application/views/img/stripe_logo.png',
             token: function(token) {
@@ -177,14 +181,17 @@
 
                 cuadroServerAPI.getServerData('GET', formURL, '', arguments.callee.name, function(data){
                     if (data == 'success') {
-                        cuadroCommonMethods.resetModal('stripeBuySuccess');
+						/* BUG resetModal does not work. */
+                        //cuadroCommonMethods.resetModal('stripeBuySuccess');
                         $("#stripeBuySuccess .note").html('[' + planTitle + ']');
                         cuadroCommonMethods.showModalView("stripeBuySuccess");
+						<?php echo 'top.location=\''.site_url('Dashboard/viewDashboard').'\';';?>
                     }
                 });
             }
         });
         StripeHandler.open({
+			
             name: "<?php echo config_item('site_title')?>",
             description: "One year subscription fee for " + SubscriptionDetail[subscriptionID-1].title,
             amount: SubscriptionDetail[subscriptionID-1].amount,
