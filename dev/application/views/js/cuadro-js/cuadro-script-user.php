@@ -171,35 +171,40 @@
     function buySubscription(subscriptionID){
         var discount = 0;
         var planTitle = SubscriptionDetail[subscriptionID-1].title;
-        StripeHandler = StripeCheckout.configure({
-			
-            key: '<?php echo config_item('stripe_publishable'); ?>',
-            image: '<?php echo base_url()?>application/views/img/stripe_logo.png',
-            token: function(token) {
-                SubscriptionToken = token.id;
-                var formURL = '<?php echo site_url('Subscription/buySubscription')?>?plan='+SubscriptionDetail[subscriptionID-1].stripe_id+'&coupon=&stripeToken='+SubscriptionToken;
+        var amount = SubscriptionDetail[subscriptionID-1].amount;
+        if(amount > 0){
+            StripeHandler = StripeCheckout.configure({
 
-                cuadroServerAPI.getServerData('GET', formURL, '', arguments.callee.name, function(data){
-                    if (data == 'success') {
-						/* BUG resetModal does not work. */
-                        //cuadroCommonMethods.resetModal('stripeBuySuccess');
-                        $("#stripeBuySuccess .note").html('[' + planTitle + ']');
-                        cuadroCommonMethods.showModalView("stripeBuySuccess");
-						<?php echo 'top.location=\''.site_url('Dashboard/viewDashboard').'\';';?>
-                    }
-                });
-            }
-        });
-        StripeHandler.open({
-			
-            name: "<?php echo config_item('site_title')?>",
-            description: "One year subscription fee for " + SubscriptionDetail[subscriptionID-1].title,
-            amount: SubscriptionDetail[subscriptionID-1].amount,
-            panelLabel: "Buy Now",
-            email: UserEmail,
-            closed : function(){
-            }
-        });
+                key: '<?php echo config_item('stripe_publishable'); ?>',
+                image: '<?php echo base_url()?>application/views/img/stripe_logo.png',
+                token: function(token) {
+                    SubscriptionToken = token.id;
+                    var formURL = '<?php echo site_url('Subscription/buySubscription')?>?plan='+SubscriptionDetail[subscriptionID-1].stripe_id+'&coupon=&stripeToken='+SubscriptionToken;
+
+                    cuadroServerAPI.getServerData('GET', formURL, '', arguments.callee.name, function(data){
+                        if (data == 'success') {
+                            /* BUG resetModal does not work. */
+                            //cuadroCommonMethods.resetModal('stripeBuySuccess');
+                            $("#stripeBuySuccess .note").html('[' + planTitle + ']');
+                            cuadroCommonMethods.showModalView("stripeBuySuccess");
+                            <?php echo 'top.location=\''.site_url('Dashboard/viewDashboard').'\';';?>
+                        }
+                    });
+                }
+            });
+            StripeHandler.open({
+
+                name: "<?php echo config_item('site_title')?>",
+                description: "One year subscription fee for " + SubscriptionDetail[subscriptionID-1].title,
+                amount: SubscriptionDetail[subscriptionID-1].amount,
+                panelLabel: "Buy Now",
+                email: UserEmail,
+                closed : function(){
+                }
+            });
+        } else {
+            successfullyBuy();
+        }
     }
 
     function successfullyBuy(){
