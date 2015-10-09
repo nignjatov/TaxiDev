@@ -212,7 +212,7 @@ ul.sidebar-menu,ul.sidebar-menu li ul.sub {
 }
 ul.sidebar-menu {
     padding-top:80px;
-	background:#202025;
+	background:#4a514f;
 }
 #sidebar>ul>li>ul.sub {
     display:none;
@@ -254,10 +254,11 @@ ul.sidebar-menu li {
     border-bottom:1px solid rgba(255,255,255,0.05);
 }
 ul.sidebar-menu li.sub-menu {
-    line-height:15px;
-	background:#202025;
+    line-height:25px;
+	background:#4a514f;
 }
 ul.sidebar-menu ul.sub li {
+	line-height:15px;
     border-bottom:none;
 }
 ul.sidebar-menu li a span {

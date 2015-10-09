@@ -98,80 +98,66 @@
         </div>
     </header>
     <!--header end-->
+	
+	<!--sidebar start-->
     <aside>
-
-    </aside>
-    <!--sidebar end-->
-	
-	
-
-	<div class="sidebar-nav">
-    <div id="navbar-green" class="navbar navbar-inverse" role="navigation">
+		<div class="sidebar-nav">
+			<div id="navbar-green" class="navbar navbar-inverse" role="navigation">
     
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
       
-      <div  class="navbar-collapse collapse sidebar-navbar-collapse">
-	  
-      
-        <ul class="nav navbar-nav">
-                <ul class="sidebar-menu" id="nav-accordion">
-                    <li id="dashboard_menu">
-                        <a href="<?php echo site_url('Dashboard/viewDashboard')?>">
-                            <i class="fa fa-dashboard"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="sub-menu">
-                        <a id="operator_menu" href="javascript:;" class="active">
-                            <i class="fa fa-cab"></i>
-                            <span>Operator</span>
-                        </a>
-                        <ul class="sub">
-                            <li id="taxi_menu"><a href="<?php echo site_url('Operator/getAllTaxi')?>" class="active">Taxi List</a></li>
-                            <li id="taxi_ad_menu"><a href="<?php echo site_url('Operator/getAllTaxiAds')?>">Taxi Ad List</a></li>
-                        </ul>
-                    </li>
-                    <li class="sub-menu">
-                        <a id="operator_menu" href="javascript:;" class="active">
-                            <i class="fa fa-cab"></i>
-                            <span>Driver</span>
-                        </a>
-                        <ul class="sub">
-                            <li id="taxi_menu"><a href="<?php echo site_url('Journal/getAllJournal')?>" class="active">Journal</a></li>
-                        </ul>
-                    </li>
-                    <li id="roster_menu">
-                        <a href="<?php echo site_url('Roster/getAllRoster')?>">
-                            <i class="fa fa-calendar"></i>
-                            <span>Roster & paying</span>
-                        </a>
-                    </li>
-                    <li id="maintenance_menu">
-                        <a href="<?php echo site_url('Maintenance/getAllMaintenance')?>">
-                            <i class="fa fa-list-alt"></i>
-                            <span>Maintenance history</span>
-                        </a>
-                    </li>
-					<li id="driver_ad_menu"><a href="<?php echo site_url('Operator/getAllDriverAds')?>">
-					<i class="fa fa-plus"></i>
-					<span>General Ad List</span></a></li>
-                </ul>
-        </ul>
-      </div><!--/.nav-collapse -->
-
-    </div><!--/.navbar -->
-  </div><!--/.sidebar-nav -->
-
-  
-  
-  
-  
-  
-  
+				<div  class="navbar-collapse collapse sidebar-navbar-collapse">
+					<ul class="nav navbar-nav">
+						<ul class="sidebar-menu" id="nav-accordion">
+							<li class="sub-menu" id="dashboard_menu">
+								<a href="<?php echo site_url('Dashboard/viewDashboard')?>">
+									<i class="fa fa-dashboard"></i>
+									<span>Dashboard</span>
+								</a>
+							</li>
+							<li class="sub-menu">
+								<a id="operator_menu" href="javascript:;" class="active">
+									<i class="fa fa-cab"></i>
+									<span>Operator</span>
+								</a>
+								<ul class="sub">
+									<li id="taxi_menu"><a href="<?php echo site_url('Operator/getAllTaxi')?>" class="active">Taxi List</a></li>
+									<li id="taxi_ad_menu"><a href="<?php echo site_url('Operator/getAllTaxiAds')?>">Taxi Ad List</a></li>
+									<li id="driver_ad_menu"><a href="<?php echo site_url('Operator/getAllDriverAds')?>">Driver Ad List</a></li>
+								</ul>
+							</li>
+							<li class="sub-menu">
+								<a id="operator_menu" href="javascript:;" class="active">
+									<i class="fa fa-cab"></i>
+									<span>Driver</span>
+								</a>
+								<ul class="sub">
+									<li id="taxi_menu"><a href="<?php echo site_url('Journal/getAllJournal')?>" class="active">Journal</a></li>
+								</ul>
+							</li>
+							<li id="roster_menu" class="sub-menu">
+								<a href="<?php echo site_url('Roster/getAllRoster')?>">
+									<i class="fa fa-calendar"></i>
+									<span>Roster & paying</span>
+								</a>
+							</li>
+							<li id="maintenance_menu" class="sub-menu">
+								<a href="<?php echo site_url('Maintenance/getAllMaintenance')?>">
+									<i class="fa fa-list-alt"></i>
+									<span>Maintenance history</span>
+								</a>
+							</li>
+						</ul>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div><!--/.navbar -->
+		</div><!--/.sidebar-nav -->  
+    </aside>
+	<!--sidebar end-->

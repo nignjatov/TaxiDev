@@ -409,12 +409,13 @@ ul {
   list-style: none;
   height: 100%;
   margin: 0;
-  overflow-y: auto;
+  overflow-y: none;
   padding: 0;
-  position: fixed;
+  position: absolute;
   top: 0;
   width: 240px;
   z-index: 1;
+  top: 0px;
 }	
 .sidebar-nav .navbar .navbar-collapse {
   padding: 0;
