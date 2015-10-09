@@ -97,11 +97,11 @@
         cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'loginSubmit', function(data){
             console.dir(data);
             if (data.error['code'] == 0) {
-//                var success_msg = 'You have successfully registered.';
-//                cuadroCommonMethods.showGeneralPopUp('Success!!!', success_msg, true);
+                var success_msg = 'You have successfully registered.';
+                cuadroCommonMethods.showGeneralPopUp('Success!!!', success_msg, true);
                 <?php echo 'top.location=\''.site_url('Dashboard/viewDashboard').'\';';?>
             } else {
-//                cuadroCommonMethods.showGeneralPopUp('Error!!!', data.error['description'], false);
+                cuadroCommonMethods.showGeneralPopUp('Error!!!', data.error['description'], false);
             }
 //            $(".registrationLoaderBox").hide();
         });
@@ -203,7 +203,15 @@
                 }
             });
         } else {
-            successfullyBuy();
+            var formURL = '<?php echo site_url('Subscription/buyFreeSubscription')?>?plan='+SubscriptionDetail[subscriptionID-1].stripe_id;
+                cuadroServerAPI.getServerData('GET', formURL, '', arguments.callee.name, function(data){
+                    if (data == 'success') {
+
+                        $("#stripeBuySuccess .note").html('[' + planTitle + ']');
+                        cuadroCommonMethods.showModalView("stripeBuySuccess");
+                        <?php echo 'top.location=\''.site_url('Dashboard/viewDashboard').'\';';?>
+                    }
+                });
         }
     }
 

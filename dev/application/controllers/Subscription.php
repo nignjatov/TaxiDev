@@ -59,6 +59,17 @@ class Subscription extends CI_Controller {
         }
     }
 
+    public function buyFreeSubscription(){
+        $plan = $this->input->get("plan");
+        $user_email = $this->userDetail->email_id;
+        $charge = $this->Subscription_model->buyFreeSubscription($this->userDetail, $plan, $user_email);
+        if ($charge) {
+            echo 'success';
+        } else {
+            echo 'fail';
+        }
+    }
+
     public function upgradeSubscription(){
         list($stripeCustomerID, $stripeSubscriptionID) = $this->Subscription_model->getStripeSubscription($this->userDetail->ID);
         $plan = $this->input->get("plan");

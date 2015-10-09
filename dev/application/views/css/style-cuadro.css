@@ -3984,9 +3984,17 @@ section.wrapper {
 }
 
 .normal-subscription-header {
-    background-color: #2f7bbd;
+    background-color: #2AC4EA!important;
     color: #FFFFFF;
     text-align: center;
+}
+
+.current-subscription-header {
+    background-color: #c7cbd6;
+    color: #FFFFFF;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 .normal-subscription-title {
@@ -3997,7 +4005,7 @@ section.wrapper {
 }
 
 .btn_normal_subscription {
-    background-color: #2f7bbd;
+    background-color: #2AC4EA!important;
     color: #FFFFFF;
     alignment: center;
     text-transform: uppercase;
@@ -4010,11 +4018,20 @@ section.wrapper {
     text-align: center;
 }
 
-.free-subscription-header {
+.free-subscription-header-driver {
     background-color: #e75f27;
     color: #FFFFFF;
     text-align: center;
-    border-radius: 5px;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.free-subscription-header-operator {
+    background-color: #2AC4EA!important;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
 }
 
 .free-subscription-details {
@@ -4032,8 +4049,23 @@ section.wrapper {
     margin-top: 20px;
 }
 
-.btn-free-subscription {
+
+
+.btn-free-subscription-driver {
     background-color: #e75f27;
+    color: #FFFFFF;
+    font-size: 18px;
+    alignment: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    width: auto;
+    cursor: pointer;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.btn-free-subscription-operator {
+    background-color: #2AC4EA!important;
     color: #FFFFFF;
     font-size: 18px;
     alignment: center;

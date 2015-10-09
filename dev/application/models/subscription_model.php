@@ -84,6 +84,7 @@ class Subscription_model extends MY_Model {
         return false;
     }
 
+
     public function upgradeSubscription($user_detail, $stripeCustomerID, $stripeSubscriptionID, $plan){
         try {
             $secret_key = config_item('stripe_secret');
@@ -229,6 +230,39 @@ class Subscription_model extends MY_Model {
         } catch (Stripe_Error $e) {
             $this->printError($e);
             return false;
+        } catch (Exception $e) {
+            $this->printError($e);
+            return false;
+        } catch (ErrorException $e) {
+            $this->printError($e);
+            return false;
+        }
+    }
+
+    public function buyFreeSubscription($userDetail, $plan, $userEmail) {
+        try {
+
+            if (!$this->saveStripeCustomerId($userDetail->ID, NULL)) return false;
+
+            $subscriptionID = $this->subscriptionEntity->getSubscriptionIDFromStripeID($plan);
+            $subscriptionInfo = $this->subscriptionEntity->getSubscriptionDetail($subscriptionID);
+            $data = new stdClass();
+            $data->user_type = $subscriptionInfo['user_type'];
+            $data->subscription_id = $subscriptionInfo['id'];
+            $this->db->where("ID", $userDetail->ID);
+            $update_user_info = $this->db->update("wp_server_users", $data);
+
+            if (!$update_user_info) return false;
+
+            $data = new UserSubscriptionEntity();
+            $data->user_id = $userDetail->ID;
+            $data->subscription_id = $subscriptionID;
+            $data->activation_date = time();
+            $data->end_date = time() + (60*60*24*30);
+            $data->stripe_subscription_id = '';
+
+            $clientSubscriptionID = $this->db->insert("wp_user_subscription", $data);
+            return true;
         } catch (Exception $e) {
             $this->printError($e);
             return false;

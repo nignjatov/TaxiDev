@@ -12,7 +12,7 @@ class SubscriptionEntity
         array(
             "id" => 1,
             "title" => "Driver Subscription",
-            "detail" => "Unlimited Drivers Wanted ad",
+            "detail" => "Unlimited General Ads + Driver Journal",
             "user_type" => "driver",
             "stripe_id" => "DriverSubscription",
             "amount" => 0
@@ -56,6 +56,14 @@ class SubscriptionEntity
             "user_type" => "operator",
             "stripe_id" => "DiamondSubscription",
             "amount" => 17995
+        ),
+        array(
+            "id" => 7,
+            "title" => "Operator Subscription",
+            "detail" => "Unlimited General Ads",
+            "user_type" => "operator",
+            "stripe_id" => "OperatorSubscription",
+            "amount" => 0
         )
     );
 
