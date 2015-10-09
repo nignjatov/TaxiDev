@@ -130,7 +130,6 @@
 								<ul class="sub">
 									<li id="taxi_menu"><a href="<?php echo site_url('Operator/getAllTaxi')?>" class="active">Taxi List</a></li>
 									<li id="taxi_ad_menu"><a href="<?php echo site_url('Operator/getAllTaxiAds')?>">Taxi Ad List</a></li>
-									<li id="driver_ad_menu"><a href="<?php echo site_url('Operator/getAllDriverAds')?>">Driver Ad List</a></li>
 								</ul>
 							</li>
 							<li class="sub-menu">
@@ -154,6 +153,9 @@
 									<span>Maintenance history</span>
 								</a>
 							</li>
+							<li id="driver_ad_menu"><a href="<?php echo site_url('Operator/getAllDriverAds')?>">
+                                <i class="fa fa-plus"></i>
+                            <span>General Ad List</span></a></li>
 						</ul>
 					</ul>
 				</div><!--/.nav-collapse -->
