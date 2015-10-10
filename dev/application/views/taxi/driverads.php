@@ -69,19 +69,131 @@
             <form class="form-horizontal" id="driverAdsDetailForm">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="control-label col-md-3">Shift Start</label>
+                        <label class="control-label col-md-3">Name</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control m-bot15" id="driver_shift_start" name="shift_start">
+                            <input id="add_DWP_name" type="text" class="form-control m-bot15" id="driver_shift_start" name="shift_start">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Shift End</label>
+                        <label class="control-label col-md-3">Contact Number</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control m-bot15" id="driver_shift_end" name="shift_end">
+                            <input id="add_DWP_number" type="text" class="form-control m-bot15" id="driver_shift_end" name="shift_end">
                         </div>
                     </div>
+					<div class="form-group">
+                        <label class="control-label col-md-3">Looking for</label>
+						<div class="btn-group col-md-6" data-toggle="buttons">
+							<label class="btn btn-default col-md-6">
+								<input type="checkbox" name="garden" checked=""> Driver
+							</label>
+							<label class="btn btn-default col-md-6">
+								<input type="checkbox" name="garden" checked=""> Shift Share Partners
+							</label>
+						</div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-3">Type</label>
+						<div class="btn-group col-md-6" data-toggle="buttons">
+							<label class="btn btn-default col-md-6">
+								<input type="checkbox" name="garden" checked=""> Taxi
+							</label>
+							<label class="btn btn-default col-md-6">
+								<input type="checkbox" name="garden" checked=""> Hire Car
+							</label>
+						</div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-3">State</label>
+						<div class="dropdown col-md-6">
+							<button class="form-control m-bot15 dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Choose State
+							<span class="caret"></span></button>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+								<li ><a  href="#">HTML</a></li>
+							</ul>
+						</div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-3">Area</label>
+						<div class="dropdown col-md-6">
+							<button class="form-control m-bot15 dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Choose Arae
+							<span class="caret"></span></button>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+								<li ><a  href="#">HTML</a></li>
+							</ul>
+						</div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-3">Network</label>
+						<div class="dropdown col-md-6">
+							<button class="form-control m-bot15 dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Choose Network
+							<span class="caret"></span></button>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+								<li ><a  href="#">HTML</a></li>
+							</ul>
+						</div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-3">Shift</label>
+						<div class="btn-group col-md-6" data-toggle="buttons">
+							<label class="btn btn-default col-md-4">
+								<input type="checkbox" name="garden" checked=""> Day
+							</label>
+							<label class="btn btn-default col-md-4">
+								<input type="checkbox" name="garden" checked=""> Night
+							</label>
+							<label class="btn btn-default col-md-4">
+								<input type="checkbox" name="garden" checked=""> Night Plate
+							</label>
+						</div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-3">Days</label>
+						<div class="btn-group col-md-8" data-toggle="buttons">
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="garden" checked=""> Monday
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="garden" checked=""> Tuesday 
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="garden" checked=""> Wednesday 
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="garden" checked=""> Thursday
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="garden" checked=""> Friday
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="garden" checked=""> Saturday
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="garden" checked=""> Sunday
+							</label>
+						</div>
+                    </div>					
+					<div class="form-group">
+                        <label class="control-label col-md-3">Available vehicles</label>
+						<div class="btn-group col-md-8" data-toggle="buttons">
+							<label class="btn btn-default btn-sm">
+								<input type="checkbox" name="garden" checked=""> Sedan
+							</label>
+							<label class="btn btn-default btn-sm">
+								<input type="checkbox" name="garden" checked=""> Wagon
+							</label>
+							<label class="btn btn-default btn-sm">
+								<input type="checkbox" name="garden" checked=""> Maxi
+							</label>
+							<label class="btn btn-default btn-sm">
+								<input type="checkbox" name="garden" checked=""> Luxury/Executive
+							</label>
+							<label class="btn btn-default btn-sm">
+								<input type="checkbox" name="garden" checked=""> Other:Please specify
+							</label>
+						</div>
+                    </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Comment</label>
+                        <label class="control-label col-md-3">Description</label>
 
                         <div class="col-md-6">
                             <textarea id="comment" rows="6" class="form-control" name="comment"></textarea>
@@ -109,19 +221,203 @@
             <form class="form-horizontal" id="driverAdsDetailForm">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="control-label col-md-3">Shift Start</label>
+                        <label class="control-label col-md-3">Name</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control m-bot15" id="driver_shift_start" name="shift_start">
+                            <input id="add_DWP_name" type="text" class="form-control m-bot15" id="driver_shift_start" name="shift_start">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Shift End</label>
+                        <label class="control-label col-md-3">Contact Number</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control m-bot15" id="driver_shift_end" name="shift_end">
+                            <input id="add_DWP_number" type="text" class="form-control m-bot15" id="driver_shift_end" name="shift_end">
                         </div>
                     </div>
+					<div class="form-group">
+                        <label class="control-label col-md-3">Type</label>
+						<div class="btn-group col-md-6" data-toggle="buttons">
+							<label class="btn btn-default col-md-6">
+								<input type="checkbox" name="garden" checked=""> Taxi
+							</label>
+							<label class="btn btn-default col-md-6">
+								<input type="checkbox" name="garden" checked=""> Hire Car
+							</label>
+						</div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-3">State</label>
+						<div class="dropdown col-md-6">
+							<button class="form-control m-bot15 dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Choose State
+							<span class="caret"></span></button>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+								<li ><a  href="#">HTML</a></li>
+							</ul>
+						</div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-3">Area</label>
+						<div class="dropdown col-md-6">
+							<button class="form-control m-bot15 dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Choose Arae
+							<span class="caret"></span></button>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+								<li ><a  href="#">HTML</a></li>
+							</ul>
+						</div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-3">Network</label>
+						<div class="dropdown col-md-6">
+							<button class="form-control m-bot15 dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Choose Network
+							<span class="caret"></span></button>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+								<li ><a  href="#">HTML</a></li>
+							</ul>
+						</div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-3">Taxi Plate</label>
+                        <div class="col-md-6">
+                            <input id="" type="text" class="form-control m-bot15" id="driver_shift_end" name="shift_end">
+                        </div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-3">Shift Available</label>
+						<div class="btn-group col-md-8" data-toggle="buttons">
+							<label class="btn btn-info btn-xs">
+								<input type="checkbox" name="garden" checked=""> Monday
+							</label>
+							<label class="btn btn-info btn-xs">
+								<input type="checkbox" name="garden" checked=""> Tuesday 
+							</label>
+							<label class="btn btn-info btn-xs">
+								<input type="checkbox" name="garden" checked=""> Wednesday 
+							</label>
+							<label class="btn btn-info btn-xs">
+								<input type="checkbox" name="garden" checked=""> Thursday
+							</label>
+							<label class="btn btn-info btn-xs">
+								<input type="checkbox" name="garden" checked=""> Friday
+							</label>
+							<label class="btn btn-info btn-xs">
+								<input type="checkbox" name="garden" checked=""> Saturday
+							</label>
+							<label class="btn btn-info btn-xs">
+								<input type="checkbox" name="garden" checked=""> Sunday
+							</label>
+						</div>
+                    </div>	
+					
+					<div class="form-group">
+                        <div class="btn-group col-md-3" data-toggle="buttons">
+							<label class="btn btn-info btn-xs">
+								<input type="checkbox" name="garden" checked=""> Day Shift
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="garden" checked=""> Night Shift
+							</label>
+						</div>
+						<div class="btn-group col-md-8" data-toggle="buttons">
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="garden" checked=""> Monday
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="garden" checked=""> Tuesday 
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="garden" checked=""> Wednesday 
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="garden" checked=""> Thursday
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="garden" checked=""> Friday
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="garden" checked=""> Saturday
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="garden" checked=""> Sunday
+							</label>
+						</div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-3">Car Manufacturer</label>
+						<div class="dropdown col-md-6">
+							<button class="form-control m-bot15 dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Choose Manufacturer
+							<span class="caret"></span></button>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+								<li ><a  href="#">HTML</a></li>
+							</ul>
+						</div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-3">Year Manufactured</label>
+						<div class="col-md-6">
+                            <input id="" type="text" class="form-control m-bot15" id="driver_shift_start" name="shift_start">
+                        </div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-3">Fuel Type</label>
+						<div class="btn-group col-md-6" data-toggle="buttons">
+							<label class="btn btn-default col-md-6">
+								<input type="checkbox" name="garden" checked=""> LPG
+							</label>
+							<label class="btn btn-default col-md-6">
+								<input type="checkbox" name="garden" checked=""> Petrol
+							</label>
+						</div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-3">Kilometres travelled</label>
+						<div class="dropdown col-md-6">
+							<button class="form-control m-bot15 dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Choose km
+							<span class="caret"></span></button>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+								<li ><a  href="#">HTML</a></li>
+							</ul>
+						</div>
+                    </div>			
+					<div class="form-group">
+                        <label class="control-label col-md-3">Vehicle type</label>
+						<div class="btn-group col-md-8" data-toggle="buttons">
+							<label class="btn btn-default btn-sm">
+								<input type="checkbox" name="garden" checked=""> Sedan
+							</label>
+							<label class="btn btn-default btn-sm">
+								<input type="checkbox" name="garden" checked=""> Wagon
+							</label>
+							<label class="btn btn-default btn-sm">
+								<input type="checkbox" name="garden" checked=""> Maxi
+							</label>
+							<label class="btn btn-default btn-sm">
+								<input type="checkbox" name="garden" checked=""> Luxury/Executive
+							</label>
+							<label class="btn btn-default btn-sm">
+								<input type="checkbox" name="garden" checked=""> Other:Please specify
+							</label>
+						</div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-3">Options included</label>
+						<div class="btn-group col-md-6" data-toggle="buttons">
+							<label class="btn btn-default col-md-6">
+								<input type="checkbox" name="garden" checked=""> Baby capsule
+							</label>
+							<label class="btn btn-default col-md-6">
+								<input type="checkbox" name="garden" checked=""> Wheelchair accessible  
+							</label>
+						</div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-3">Lease Rate/Term</label>
+						<div class="col-md-6">
+                            <input id="" type="text" class="form-control m-bot15" id="driver_shift_start" name="shift_start">
+                        </div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-3">File upload</label>
+                    </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Comment</label>
+                        <label class="control-label col-md-3">Description</label>
 
                         <div class="col-md-6">
                             <textarea id="comment" rows="6" class="form-control" name="comment"></textarea>
