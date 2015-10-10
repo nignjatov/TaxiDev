@@ -442,26 +442,159 @@
                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
                 <h4 class="modal-title">Add Want to Drive post</h4>
             </div>
-            <form class="form-horizontal" id="driverAdsDetailForm">
+            <form class="form-horizontal"">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="control-label col-md-3">Shift Start</label>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control m-bot15" id="driver_shift_start" name="shift_start">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Shift End</label>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control m-bot15" id="driver_shift_end" name="shift_end">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Comment</label>
-
-                        <div class="col-md-6">
-                            <textarea id="comment" rows="6" class="form-control" name="comment"></textarea>
-                        </div>
+                        <table class="table table-responsive">
+                            <tbody>
+                                <tr>
+                                    <td><label class="control-label">Name</label></td>
+                                    <td><textarea id="nameArea" rows="1" class="form-control" name="name"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label">ContactNumber</label></td>
+                                    <td><textarea id="numberArea" rows="1" class="form-control" name="cntNumber"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label">Looking for</label></td>
+                                    <td><div class="col-md-5 checkbox-button">
+                                           <label class="centered">
+                                              <input type="radio" name="vehicleradio" style="display: none;" id="taxiChb"><span>Taxi</span>
+                                           </label>
+                                        </div>
+                                        <div class="col-md-5 checkbox-button">
+                                           <label>
+                                              <input type="radio" name="vehicleradio" style="display: none;" id="hireChb"><span>Hire Car</span>
+                                           </label>
+                                        </div></td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label">State</label></td>
+                                    <td>
+                                        <select class="form-control" id="stateSel">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label">Area</label></td>
+                                    <td>
+                                        <select class="form-control" id="areaSel">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label">Network</label></td>
+                                    <td>
+                                        <select class="form-control" id="networkSel">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label">Preferred shift</label></td>
+                                    <td><div class="col-md-3 checkbox-button">
+                                           <label class="centered">
+                                              <input type="checkbox" style="display: none;" id="dayChb"><span>Day</span>
+                                           </label>
+                                        </div>
+                                        <div class="col-md-3 checkbox-button">
+                                           <label>
+                                              <input type="checkbox" style="display: none;" id="nightChb"><span>Night</span>
+                                           </label>
+                                        </div>
+                                        <div class="col-md-4 checkbox-button">
+                                           <label>
+                                              <input type="checkbox" style="display: none;" id="nightPlateChb"><span>Night Plate</span>
+                                           </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label">Days</label></td>
+                                    <td><div class="checkbox-button">
+                                           <label class="centered">
+                                              <input type="checkbox" style="display: none;" id="mondayChb"><span>Monday</span>
+                                           </label>
+                                        </div>
+                                        <div class="checkbox-button">
+                                           <label>
+                                              <input type="checkbox" style="display: none;" id="tuesdayChb"><span>Tuesday</span>
+                                           </label>
+                                        </div>
+                                        <div class="checkbox-button col-sm-2">
+                                             <label>
+                                                <input type="checkbox" style="display: none;" id="wednesdayChb"><span>Wednesday</span>
+                                             </label>
+                                        </div>
+                                        <div class="checkbox-button col-sm-2">
+                                             <label>
+                                                <input type="checkbox" style="display: none;" id="thursdayChb"><span>Thursday</span>
+                                             </label>
+                                        </div>
+                                        <div class="checkbox-button">
+                                             <label>
+                                                <input type="checkbox" style="display: none;" id="fridayChb"><span>Friday</span>
+                                             </label>
+                                        </div>
+                                        <div class="checkbox-button col-sm-2">
+                                             <label>
+                                                <input type="checkbox" style="display: none;" id="saturdayChb"><span>Saturday</span>
+                                             </label>
+                                        </div>
+                                        <div class="checkbox-button">
+                                             <label>
+                                                <input type="checkbox" style="display: none;" id="sundayChb"><span>Sunday</span>
+                                             </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label" style="text-align: left;">Preferred vehicles</label></td>
+                                    <td><div class="checkbox-button col-sm-2">
+                                           <label class="centered">
+                                              <input type="checkbox" style="display: none;" id="sedanChb"><span>Sedan</span>
+                                           </label>
+                                        </div>
+                                        <div class="checkbox-button col-sm-2">
+                                           <label>
+                                              <input type="checkbox" style="display: none;" id="wagonChb"><span>Wagon</span>
+                                           </label>
+                                        </div>
+                                        <div class="checkbox-button col-sm-2">
+                                             <label>
+                                                <input type="checkbox" style="display: none;" id="maxiChb"><span>Maxi</span>
+                                             </label>
+                                        </div>
+                                        <div class="checkbox-button col-sm-3">
+                                             <label>
+                                                <input type="checkbox" style="display: none;" id="luxuryChb"><span>Luxury/Executive</span>
+                                             </label>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <textarea id="vehicleArea" rows="1" class="form-control" name="name"></textarea>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label class="control-label">Description</label></td>
+                                    <td><textarea id="commentArea" rows="6" class="form-control" name="comment"></textarea></td>
+                                </tr>
+                            <tbody>
+                        </table>
                     </div>
                 </div>
 
@@ -484,23 +617,117 @@
             </div>
             <form class="form-horizontal" id="driverAdsDetailForm">
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Shift Start</label>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control m-bot15" id="driver_shift_start" name="shift_start">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Shift End</label>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control m-bot15" id="driver_shift_end" name="shift_end">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Comment</label>
-
-                        <div class="col-md-6">
-                            <textarea id="comment" rows="6" class="form-control" name="comment"></textarea>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <table class="table table-responsive">
+                                <tbody>
+                                    <tr>
+                                        <td><label class="control-label">Name</label></td>
+                                        <td><textarea id="nameArea" rows="1" class="form-control" name="name"></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="control-label">ContactNumber</label></td>
+                                        <td><textarea id="numberArea" rows="1" class="form-control" name="cntNumber"></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="control-label">Want to</label></td>
+                                        <td><div class="col-md-3 checkbox-button">
+                                               <label class="centered">
+                                                  <input type="radio" name="wanttoradio" style="display: none;" id="sellChb"><span>Sell</span>
+                                               </label>
+                                            </div>
+                                            <div class="col-md-3 checkbox-button">
+                                               <label>
+                                                  <input type="radio" name="wanttoradio" style="display: none;" id="leaseChb"><span>Lease</span>
+                                               </label>
+                                            </div>
+                                            <div class="col-md-3 checkbox-button">
+                                               <label>
+                                                  <input type="radio" name="wanttoradio" style="display: none;" id="buyChb"><span>Buy</span>
+                                               </label>
+                                            </div></td>
+                                    </tr>
+                                        <tr>
+                                            <td><label class="control-label">Item</label></td>
+                                            <td><div class="checkbox-button">
+                                                   <label class="centered">
+                                                      <input type="radio" name="itemradio" style="display: none;" id="taxiChb"><span>Taxi</span>
+                                                   </label>
+                                                </div>
+                                                <div class="checkbox-button">
+                                                   <label>
+                                                      <input type="radio" name="itemradio" style="display: none;" id="carChb"><span>Car</span>
+                                                   </label>
+                                                </div>
+                                                <div class="checkbox-button">
+                                                   <label>
+                                                      <input type="radio" name="itemradio" style="display: none;" id="plateChb"><span>Plate</span>
+                                                   </label>
+                                                </div>
+                                                <div class="checkbox-button">
+                                                   <label>
+                                                      <input type="radio" name="itemradio" style="display: none;" id="otherChb"><span>Other</span>
+                                                   </label>
+                                                </div></td>
+                                        </tr>
+                                    <tr>
+                                        <td><label class="control-label">State</label></td>
+                                        <td>
+                                            <select class="form-control" id="stateSel">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="control-label">Area</label></td>
+                                        <td>
+                                            <select class="form-control" id="areaSel">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="control-label">Taxi Network</label></td>
+                                        <td>
+                                            <select class="form-control" id="networkSel">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="control-label">Car manufacturer</label></td>
+                                        <td>
+                                            <select class="form-control" id="manufacturerSel">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="control-label">Car Model</label></td>
+                                        <td><textarea id="modelArea" rows="1" class="form-control" name="name"></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="control-label">Description</label></td>
+                                        <td><textarea id="commentArea" rows="6" class="form-control" name="comment"></textarea></td>
+                                    </tr>
+                                <tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
