@@ -179,21 +179,24 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">Available vehicles</label>
 						<div class="btn-group col-md-9" data-toggle="buttons">
-							<label class="btn btn-default btn-xs">
+							<label class="btn btn-default btn-sm">
 								<input type="checkbox" name="garden" checked=""> Sedan
 							</label>
-							<label class="btn btn-default btn-xs">
+							<label class="btn btn-default btn-sm">
 								<input type="checkbox" name="garden" checked=""> Wagon
 							</label>
-							<label class="btn btn-default btn-xs">
+							<label class="btn btn-default btn-sm">
 								<input type="checkbox" name="garden" checked=""> Maxi
 							</label>
-							<label class="btn btn-default btn-xs">
+							<label class="btn btn-default btn-sm">
 								<input type="checkbox" name="garden" checked=""> Luxury/Executive
 							</label>
-							<label class="btn btn-default btn-xs">
-								<input type="checkbox" name="garden" checked=""> Other:Please specify (User Input)
+							<label class="btn btn-default btn-sm">
+								Other:
 							</label>
+							<div class="col-md-3">
+								<textarea id="comment" rows="1" class="form-control" name="vehiclesTypeInput"></textarea>
+							</div>
 						</div>
                     </div>
                     <div class="form-group">
@@ -393,7 +396,7 @@
                     </div>			
 					<div class="form-group">
                         <label class="control-label col-md-3">Vehicle type</label>
-						<div class="btn-group col-md-8" data-toggle="buttons">
+						<div class="btn-group col-md-9" data-toggle="buttons">
 							<label class="btn btn-default btn-sm">
 								<input type="checkbox" name="garden" checked=""> Sedan
 							</label>
@@ -407,8 +410,11 @@
 								<input type="checkbox" name="garden" checked=""> Luxury/Executive
 							</label>
 							<label class="btn btn-default btn-sm">
-								<input type="checkbox" name="garden" checked=""> Other:Please specify
+								Other:
 							</label>
+							<div class="col-md-3">
+								<textarea id="comment" rows="1" class="form-control" name="vehiclesTypeInput"></textarea>
+							</div>
 						</div>
                     </div>
 					<div class="form-group">
@@ -562,21 +568,24 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">Prefered Vehicles</label>
 						<div class="btn-group col-md-9" data-toggle="buttons">
-							<label class="btn btn-default btn-xs">
+							<label class="btn btn-default btn-sm">
 								<input type="checkbox" name="garden" checked=""> Sedan
 							</label>
-							<label class="btn btn-default btn-xs">
+							<label class="btn btn-default btn-sm">
 								<input type="checkbox" name="garden" checked=""> Wagon
 							</label>
-							<label class="btn btn-default btn-xs">
+							<label class="btn btn-default btn-sm">
 								<input type="checkbox" name="garden" checked=""> Maxi
 							</label>
-							<label class="btn btn-default btn-xs">
+							<label class="btn btn-default btn-sm">
 								<input type="checkbox" name="garden" checked=""> Luxury/Executive
 							</label>
-							<label class="btn btn-default btn-xs">
-								<input type="checkbox" name="garden" checked=""> Other:Please specify (User Input)
+							<label class="btn btn-default btn-sm">
+								Other:
 							</label>
+							<div class="col-md-3">
+								<textarea id="comment" rows="1" class="form-control" name="vehiclesTypeInput"></textarea>
+							</div>
 						</div>
                     </div>
                     <div class="form-group">
