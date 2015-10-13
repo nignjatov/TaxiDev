@@ -6,17 +6,17 @@
  * Time: 17:01
  */
 
-class GeneralAdTaxiAds_model extends MY_Model {
+class GeneralAdsWantToDrive_model extends MY_Model {
 
     public function __construct() {
         parent::__construct();
-        $this->load->library("entity/GeneralAdTaxiAdEntity");
+        $this->load->library("entity/GeneralAdsWantToDriveEntity");
     }
 
         private function getUserID($adsID) {
         $user_id = 0;
         $this->db->select('user_id');
-        $this->db->from('wp_taxi_post_ads');
+        $this->db->from('wp_general_ads_want_to_drive');
         $this->db->where('ID', $adsID);
 
         $query = $this->db->get();
@@ -33,7 +33,7 @@ class GeneralAdTaxiAds_model extends MY_Model {
 
     public function getAllDriverAds($userID){
         $this->db->select('*');
-        $this->db->from('wp_taxi_post_ads');
+        $this->db->from('wp_general_ads_want_to_drive');
         $this->db->where('user_id', $userID);
 
         $result = $this->db->get()->result();
@@ -48,7 +48,7 @@ class GeneralAdTaxiAds_model extends MY_Model {
     }
 
     public function getLocationBasedDriverAds($location){
-        $sql = sprintf("SELECT * FROM wp_taxi_post_ads WHERE user_id IN (SELECT user_id FROM wp_operators WHERE state LIKE '%s' OR state LIKE '%%s%' OR street_name LIKE '%%s%')", $location, $location);
+        $sql = sprintf("SELECT * FROM wp_general_ads_want_to_drive WHERE user_id IN (SELECT user_id FROM wp_operators WHERE state LIKE '%s' OR state LIKE '%%s%' OR street_name LIKE '%%s%')", $location, $location);
         $this->db->query($sql);
         return parent::returnData($this->db->get()->result());
     }
@@ -56,7 +56,7 @@ class GeneralAdTaxiAds_model extends MY_Model {
     public function getAdsDetail($adsID){
         $this->db->select("*");
         $this->db->where("ID", $adsID);
-        $this->db->from("wp_taxi_post_ads");
+        $this->db->from("wp_general_ads_want_to_drive");
 
         $query = $this->db->get();
         if ($query->num_rows()) {
@@ -71,7 +71,7 @@ class GeneralAdTaxiAds_model extends MY_Model {
             return parent::returnData(false, ConstExceptionCode::UPDATE_SUBSCRIPTION_ERROR);
         } else {
             $this->db->select('*');
-            $this->db->from('wp_taxi_post_ads');
+            $this->db->from('wp_general_ads_want_to_drive');
             $this->db->where('user_id', $userID);
             $this->db->where('is_active', true, false);
             $totalTaxi = $this->db->count_all_results();
@@ -87,7 +87,7 @@ class GeneralAdTaxiAds_model extends MY_Model {
     public function addAds($userID, $subscriptionID = 0) {
         $canAddMoreTaxi = 1;//$this->canAddMoreDriverAds($userID, $subscriptionID);
         if ($canAddMoreTaxi==1){//->error['code'] == 0) {
-            $newAdsEntity = new GeneralAdTaxiAdEntity;
+            $newAdsEntity = new GeneralAdsWantToDriveEntity;
             $newAdsEntity->user_id = $userID;
 
             $newAdsEntity->name = $this->input->post('name');
@@ -97,29 +97,19 @@ class GeneralAdTaxiAds_model extends MY_Model {
 			$newAdsEntity->state = $this->input->post('state');
 			$newAdsEntity->area = $this->input->post('area');
 			$newAdsEntity->network = $this->input->post('network');
-			$newAdsEntity->fuel = $this->input->post('fuel');
-			$newAdsEntity->plate = $this->input->post('plate');
-			$newAdsEntity->car = $this->input->post('car');
-			$newAdsEntity->year = $this->input->post('year');
-			$newAdsEntity->kilometers = $this->input->post('kilometers');
-			$newAdsEntity->lease = $this->input->post('lease');
-			
-			$newAdsEntity->options = "";
-			if (!empty($this->input->post('option_1'))) { 
-				$newAdsEntity->options .= $this->input->post('option_1');
-				$newAdsEntity->options .= ",";	
-			}
-			if (!empty($this->input->post('option_2'))) { 
-				$newAdsEntity->options .= $this->input->post('option_2');
 			}
 			
 			$newAdsEntity->shift = "";
-			if (!empty($this->input->post('dshift'))) { 
-				$newAdsEntity->shift .= $this->input->post('dshift');
+			if (!empty($this->input->post('shift_1'))) { 
+				$newAdsEntity->shift .= $this->input->post('shift_1');
 				$newAdsEntity->shift .= ",";	
 			}
-			if (!empty($this->input->post('nshift'))) { 
-				$newAdsEntity->shift .= $this->input->post('nshift');
+			if (!empty($this->input->post('shift_2'))) { 
+				$newAdsEntity->shift .= $this->input->post('shift_2');
+				$newAdsEntity->shift .= ",";	
+			}
+			if (!empty($this->input->post('shift_3'))) { 
+				$newAdsEntity->shift .= $this->input->post('shift_3');
 			}
 			
 			$newAdsEntity->days = "";
@@ -151,35 +141,6 @@ class GeneralAdTaxiAds_model extends MY_Model {
 				$newAdsEntity->days .= $this->input->post('days_7');
 			}
 			
-			$newAdsEntity->ndays = "";
-			if (!empty($this->input->post('ndays_1'))) { 
-				$newAdsEntity->ndays .= $this->input->post('ndays_1');
-				$newAdsEntity->ndays .= ",";	
-			}
-			if (!empty($this->input->post('ndays_2'))) { 
-				$newAdsEntity->ndays .= $this->input->post('ndays_2');
-				$newAdsEntity->ndays .= ",";	
-			}
-			if (!empty($this->input->post('ndays_3'))) { 
-				$newAdsEntity->ndays .= $this->input->post('ndays_3');
-				$newAdsEntity->ndays .= ",";	
-			}
-			if (!empty($this->input->post('ndays_4'))) { 
-				$newAdsEntity->ndays .= $this->input->post('ndays_4');
-				$newAdsEntity->ndays .= ",";	
-			}
-			if (!empty($this->input->post('ndays_5'))) { 
-				$newAdsEntity->ndays .= $this->input->post('ndays_5');
-				$newAdsEntity->ndays .= ",";	
-			}
-			if (!empty($this->input->post('ndays_6'))) { 
-				$newAdsEntity->ndays .= $this->input->post('ndays_6');
-				$newAdsEntity->ndays .= ",";	
-			}
-			if (!empty($this->input->post('ndays_7'))) { 
-				$newAdsEntity->ndays .= $this->input->post('ndays_7');
-			}
-			
 			$newAdsEntity->vehicles = "";
 			if (!empty($this->input->post('vehicles_1'))) { 
 				$newAdsEntity->vehicles .= $this->input->post('vehicles_1');
@@ -203,7 +164,7 @@ class GeneralAdTaxiAds_model extends MY_Model {
 			
             $newAdsEntity->comment = $this->input->post('comment');
 
-            if ($this->db->insert('wp_taxi_post_ads', $newAdsEntity)) {
+            if ($this->db->insert('wp_general_ads_want_to_drive', $newAdsEntity)) {
                 return parent::returnData($this->db->insert_id());
             } else {
                 return parent::returnData(false, ConstExceptionCode::UNKNOWN_ERROR_CODE);
@@ -213,7 +174,7 @@ class GeneralAdTaxiAds_model extends MY_Model {
 
     public function updateAds($userID, $adsID) {
         if ($userID == $this->getUserID($adsID)) {
-            $newAdsEntity = new GeneralAdTaxiAdEntity;
+            $newAdsEntity = new GeneralAdsWantToDriveEntity;
 
             $newAdsEntity->user_id = $userID;
 
@@ -233,7 +194,7 @@ class GeneralAdTaxiAds_model extends MY_Model {
 
             $this->db->where("ID", $adsID, false);
             $this->db->where("user_id", $userID, false);
-            if ($this->db->update('wp_taxi_post_ads', $newAdsEntity)) {
+            if ($this->db->update('wp_general_ads_want_to_drive', $newAdsEntity)) {
                 return parent::returnData($adsID);
             } else {
                 return parent::returnData(false, ConstExceptionCode::UNKNOWN_ERROR_CODE);
@@ -246,7 +207,7 @@ class GeneralAdTaxiAds_model extends MY_Model {
     public function removeAds($userID, $adsID) {
         if ($userID == $this->getUserID($adsID)) {
             $this->db->where("ID", $adsID, false);
-            if ($this->db->delete('wp_taxi_post_ads')) {
+            if ($this->db->delete('wp_general_ads_want_to_drive')) {
                 return parent::returnData(true);
             } else {
                 return parent::returnData(false, ConstExceptionCode::UNKNOWN_ERROR_CODE);

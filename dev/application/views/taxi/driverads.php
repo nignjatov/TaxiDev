@@ -20,7 +20,7 @@
                                                         Add General Ad<i class="fa fa-plus"></i>
                                                     </button>
                                                     <ul class="dropdown-menu">
-                                                        <li><a href="#driversWantedPostModal" data-toggle="modal">Drivers Wanted Post</a></li>
+                                                        <li><a href="#GeneralAdDriversWantedModal" data-toggle="modal">Drivers Wanted Post</a></li>
                                                         <li><a href="#GeneralAdTaxiAddModal" data-toggle="modal">Taxi Add Post</a></li>
                                                         <li><a href="#GeneralAdWantToDriveModal" data-toggle="modal">Want to Drive Post</a></li>
                                                         <li><a href="#CPLSPostModal" data-toggle="modal">Car/Plate/Lease/Sale Post</a></li>
@@ -59,14 +59,14 @@
 </section>
 
 <!-- Drivers Want Post Modal View Start -->
-<div class="modal fade" id="driversWantedPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="GeneralAdDriversWantedModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
                 <h4 class="modal-title">Add Drivers Wanted Post</h4>
             </div>
-            <form class="form-horizontal" id="driversWantedAdsForm">
+            <form class="form-horizontal" id="GeneralAdDriversWantedForm">
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="control-label col-md-3">Name</label>
@@ -237,7 +237,7 @@
                 </div>
 
                 <div class="modal-footer" style="display: block;">
-                    <button type="button" class="btn btn-info" id="driversWantedAdsFormSubmit">Add</button>
+                    <button type="button" class="btn btn-info" id="GeneralAdDriversWantedSubmit">Add</button>
                 </div>
             </form>
         </div>

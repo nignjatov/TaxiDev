@@ -6,17 +6,17 @@
  * Time: 17:01
  */
 
-class DriverWantedads_model extends MY_Model {
+class GeneralAdsDriverWanted_model extends MY_Model {
 
     public function __construct() {
         parent::__construct();
-        $this->load->library("entity/DriverWantedAdsEntity");
+        $this->load->library("entity/GeneralAdsDriverWantedEntity");
     }
 
         private function getUserID($adsID) {
         $user_id = 0;
         $this->db->select('user_id');
-        $this->db->from('wp_driver_ads');
+        $this->db->from('wp_general_ads_driver_wanted');
         $this->db->where('ID', $adsID);
 
         $query = $this->db->get();
@@ -33,7 +33,7 @@ class DriverWantedads_model extends MY_Model {
 
     public function getAllDriverAds($userID){
         $this->db->select('*');
-        $this->db->from('wp_driver_wanted_ads');
+        $this->db->from('wp_general_ads_driver_wanted');
         $this->db->where('user_id', $userID);
 
         $result = $this->db->get()->result();
@@ -48,7 +48,7 @@ class DriverWantedads_model extends MY_Model {
     }
 
     public function getLocationBasedDriverAds($location){
-        $sql = sprintf("SELECT * FROM wp_driver_wanted_ads WHERE user_id IN (SELECT user_id FROM wp_operators WHERE state LIKE '%s' OR state LIKE '%%s%' OR street_name LIKE '%%s%')", $location, $location);
+        $sql = sprintf("SELECT * FROM wp_general_ads_driver_wanted WHERE user_id IN (SELECT user_id FROM wp_operators WHERE state LIKE '%s' OR state LIKE '%%s%' OR street_name LIKE '%%s%')", $location, $location);
         $this->db->query($sql);
         return parent::returnData($this->db->get()->result());
     }
@@ -56,7 +56,7 @@ class DriverWantedads_model extends MY_Model {
     public function getAdsDetail($adsID){
         $this->db->select("*");
         $this->db->where("ID", $adsID);
-        $this->db->from("wp_driver_wanted_ads");
+        $this->db->from("wp_general_ads_driver_wanted");
 
         $query = $this->db->get();
         if ($query->num_rows()) {
@@ -71,7 +71,7 @@ class DriverWantedads_model extends MY_Model {
             return parent::returnData(false, ConstExceptionCode::UPDATE_SUBSCRIPTION_ERROR);
         } else {
             $this->db->select('*');
-            $this->db->from('wp_driver_wanted_ads');
+            $this->db->from('wp_general_ads_driver_wanted');
             $this->db->where('user_id', $userID);
             $this->db->where('is_active', true, false);
             $totalTaxi = $this->db->count_all_results();
@@ -87,7 +87,7 @@ class DriverWantedads_model extends MY_Model {
     public function addAds($userID, $subscriptionID = 0) {
         $canAddMoreTaxi = 1;// $this->canAddMoreDriverAds($userID, $subscriptionID);
         if ($canAddMoreTaxi==1){//}->error['code'] == 0) {
-            $newAdsEntity = new DriverWantedAdsEntity;
+            $newAdsEntity = new GeneralAdsDriverWantedEntity;
             $newAdsEntity->user_id = $userID;
 
             $newAdsEntity->name = $this->input->post('name');
@@ -172,7 +172,7 @@ class DriverWantedads_model extends MY_Model {
 			
             $newAdsEntity->comment = $this->input->post('comment');
 
-            if ($this->db->insert('wp_driver_wanted_ads', $newAdsEntity)) {
+            if ($this->db->insert('wp_general_ads_driver_wanted', $newAdsEntity)) {
                 return parent::returnData($this->db->insert_id());
             } else {
                 return parent::returnData(false, ConstExceptionCode::UNKNOWN_ERROR_CODE);
@@ -182,7 +182,7 @@ class DriverWantedads_model extends MY_Model {
 
     public function updateAds($userID, $adsID) {
         if ($userID == $this->getUserID($adsID)) {
-            $newAdsEntity = new DriverWantedAdsEntity;
+            $newAdsEntity = new GeneralAdsDriverWantedEntity;
 
             $newAdsEntity->user_id = $userID;
 
@@ -202,7 +202,7 @@ class DriverWantedads_model extends MY_Model {
 
             $this->db->where("ID", $adsID, false);
             $this->db->where("user_id", $userID, false);
-            if ($this->db->update('wp_driver_wanted_ads', $newAdsEntity)) {
+            if ($this->db->update('wp_general_ads_driver_wanted', $newAdsEntity)) {
                 return parent::returnData($adsID);
             } else {
                 return parent::returnData(false, ConstExceptionCode::UNKNOWN_ERROR_CODE);
@@ -215,7 +215,7 @@ class DriverWantedads_model extends MY_Model {
     public function removeAds($userID, $adsID) {
         if ($userID == $this->getUserID($adsID)) {
             $this->db->where("ID", $adsID, false);
-            if ($this->db->delete('wp_driver_wanted_ads')) {
+            if ($this->db->delete('wp_general_ads_driver_wanted')) {
                 return parent::returnData(true);
             } else {
                 return parent::returnData(false, ConstExceptionCode::UNKNOWN_ERROR_CODE);

@@ -172,15 +172,15 @@ $("#driver_shift_end").datepicker({
 updateDriverAdsList();
 
 /* Driver Wanted Adds */
-$("#driversWantedAdsFormSubmit").click(function(e) {
-    $("form#driversWantedAdsForm").submit();
+$("#GeneralAdDriversWantedSubmit").click(function(e) {
+    $("form#GeneralAdDriversWantedForm").submit();
 });
 
-$("form#driversWantedAdsForm").submit(function(e){
+$("form#GeneralAdDriversWantedForm").submit(function(e){
     console.log('form submit');
-    $("#driversWantedPostModal").modal('hide');
+    $("#GeneralAdDriversWantedModal").modal('hide');
     var postData = $(this).serializeArray();
-    var formURL = $("#driversWantedAdsFormSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('DriverWantedAds/addDriverAds?')?>" : "<?php echo site_url('DriverWantedAds/addDriverAds?')?>" + selectedDriverAdsID;
+    var formURL = $("#GeneralAdDriversWantedSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('GeneralAdsDriverWanted/addDriverAds?')?>" : "<?php echo site_url('GeneralAdsDriverWanted/addDriverAds?')?>" + selectedDriverAdsID;
 
     cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){
         if (data.error['code'] == 0) {
@@ -213,7 +213,7 @@ $("form#GeneralAdTaxiAddForm").submit(function(e){
     console.log('form submit');
     $("#GeneralAdTaxiAddModal").modal('hide');
     var postData = $(this).serializeArray();
-    var formURL = $("#GeneralAdTaxiAddSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('GeneralAdTaxiPostAds/addDriverAds?')?>" : "<?php echo site_url('GeneralAdTaxiPostAds/addDriverAds?')?>" + selectedDriverAdsID;
+    var formURL = $("#GeneralAdTaxiAddSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('GeneralAdsTaxiAdds/addDriverAds?')?>" : "<?php echo site_url('GeneralAdsTaxiAdds/addDriverAds?')?>" + selectedDriverAdsID;
 
     cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){
         if (data.error['code'] == 0) {
@@ -246,7 +246,7 @@ $("form#GeneralAdWantToDriveForm").submit(function(e){
     console.log('form submit');
     $("#GeneralAdWantToDriveModal").modal('hide');
     var postData = $(this).serializeArray();
-    var formURL = $("#GeneralAdWantToDriveSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('GeneralAdWantToDriveAds/addDriverAds?')?>" : "<?php echo site_url('GeneralAdWantToDriveAds/addDriverAds?')?>" + selectedDriverAdsID;
+    var formURL = $("#GeneralAdWantToDriveSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('GeneralAdsWantToDrive/addDriverAds?')?>" : "<?php echo site_url('GeneralAdsWantToDrive/addDriverAds?')?>" + selectedDriverAdsID;
 
     cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){
         if (data.error['code'] == 0) {

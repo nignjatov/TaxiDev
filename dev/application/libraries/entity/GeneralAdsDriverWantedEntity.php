@@ -6,7 +6,8 @@
  * Time: 2:15
  */
 
-class DriverWantedAdsEntity {
+class GeneralAdsDriverWantedEntity {
+	
     // user id
     var $user_id;
 

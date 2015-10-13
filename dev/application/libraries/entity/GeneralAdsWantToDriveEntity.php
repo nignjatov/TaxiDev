@@ -6,7 +6,7 @@
  * Time: 2:15
  */
 
-class GeneralAdTaxiAdEntity {
+class GeneralAdsWantToDriveEntity {
     // user id
     var $user_id;
 
@@ -28,38 +28,14 @@ class GeneralAdTaxiAdEntity {
 	// network
 	var $network;
 	
-	// plate
-	var $plate;
-	
 	// shift
 	var $shift;
 	
 	// days
 	var $days;
 	
-	// ndays
-	var $ndays;
-	
-	// car;
-	var $car;
-	
-	// year
-	var $year;
-	
 	// vehicles
 	var $vehicles;
-	
-	// fuel
-	var $fuel;
-	
-	// kilometers
-	var $kilometers;
-	
-	// options
-	var $options;
-	
-	// lease
-	var $lease;
 
     // comment
     var $comment;
