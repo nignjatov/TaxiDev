@@ -23,7 +23,7 @@
                                                         <li><a href="#GeneralAdDriversWantedModal" data-toggle="modal">Drivers Wanted Post</a></li>
                                                         <li><a href="#GeneralAdTaxiAddModal" data-toggle="modal">Taxi Add Post</a></li>
                                                         <li><a href="#GeneralAdWantToDriveModal" data-toggle="modal">Want to Drive Post</a></li>
-                                                        <li><a href="#CPLSPostModal" data-toggle="modal">Car/Plate/Lease/Sale Post</a></li>
+                                                        <li><a href="#GeneralAdCPLSModal" data-toggle="modal">Car/Plate/Lease/Sale Post</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -704,106 +704,148 @@
 <!-- Want to drive post Modal View End -->
 
 <!-- CPLS Post Modal View Start -->
-<div class="modal fade" id="CPLSPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="GeneralAdCPLSModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
                 <h4 class="modal-title">Add Car/Plate/Lease/Sale post</h4>
             </div>
-            <form class="form-horizontal" id="driverAdsDetailForm">
+            <form class="form-horizontal" id="GeneralAdCPLSForm">
                 <div class="modal-body">
-                    <div class="modal-body">
                     <div class="form-group">
                         <label class="control-label col-md-3">Name</label>
                         <div class="col-md-6">
-                            <input id="add_APLS_post_name" type="text" class="form-control m-bot15" id="driver_shift_start" name="shift_start">
+                            <input type="text" class="form-control m-bot15" name="name">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3">Contact Number</label>
                         <div class="col-md-6">
-                            <input id="add_APLS_post_contact_number" type="text" class="form-control m-bot15" id="driver_shift_end" name="shift_end">
+                            <input type="text" class="form-control m-bot15" name="contact">
                         </div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Want To</label>
-						<div id="add_APLS_post_want_to" class="btn-group col-md-6">
-							<button type="button" class="active btn btn-default col-md-4" id="">Sell</button>
-							<button type="button" class="btn btn-default col-md-4" id="">Lease</button>
-							<button type="button" class="btn btn-default col-md-4" id="">Buy</button>
+						<div id="add_cpls_want_to" class="btn-group col-md-6" data-toggle="buttons">
+							<button type="button" class="active btn btn-default col-md-4" value="Sell">Sell</button>
+							<button type="button" class="btn btn-default col-md-4" value="Lease">Lease</button>
+							<button type="button" class="btn btn-default col-md-4" value="Buy">Buy</button>
+							<input type="hidden" name="want_to" id="add_cpls_want_to_input" value="Sell">
 							<script>
-								$("#add_APLS_post_want_to > .btn").click(function(){
-									$("#add_APLS_post_want_to > .btn").removeClass("active");
+								$("#add_cpls_want_to > .btn").click(function(){
+									$("#add_cpls_want_to > .btn").removeClass("active");
 									$(this).addClass("active");
+									
+									/* Set input */
+									$("#add_cpls_want_to_input").val($(this).val());
 								});
 							</script>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Item</label>
-						<div id="add_APLS_post_item" class="btn-group col-md-6">
-							<button type="button" class="active btn btn-default col-md-3" id="">Taxi</button>
-							<button type="button" class="btn btn-default col-md-3" id="">Car</button>
-							<button type="button" class="btn btn-default col-md-3" id="">Plate</button>
-							<button type="button" class="btn btn-default col-md-3" id="">Other</button>
+						<div id="add_cpls_item" class="btn-group col-md-6" data-toggle="buttons">
+							<button type="button" class="active btn btn-default col-md-3" value="Taxi">Taxi</button>
+							<button type="button" class="btn btn-default col-md-3" value="Car">Car</button>
+							<button type="button" class="btn btn-default col-md-3" value="Plate">Plate</button>
+							<button type="button" class="btn btn-default col-md-3" value="Other">Other</button>
+							<input type="hidden" name="item" id="add_cpls_item_input" value="Taxi">
 							<script>
-								$("#add_APLS_post_item > .btn").click(function(){
-									$("#add_APLS_post_item > .btn").removeClass("active");
+								$("#add_cpls_item > .btn").click(function(){
+									$("#add_cpls_item > .btn").removeClass("active");
 									$(this).addClass("active");
+									
+									/* Set input */
+									$("#add_cpls_item_input").val($(this).val());
 								});
 							</script>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">State</label>
-						<div id="" class="dropdown col-md-6">
-							<select class="form-control" id="">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
+						<div class="dropdown col-md-6">
+							<select class="form-control" name="state">
+								<?php
+									$row = 1;
+									if (($handle = fopen("application/files/states.csv", "r")) !== FALSE) {
+										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+											$num = count($data);
+											$row++;
+											for ($c=0; $c < $num; $c++) {
+												echo "<option>" . $data[$c] . "</option>\n";
+											}
+										}
+										fclose($handle);
+									}
+								?>
                             </select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Area</label>
-						<div id="" class="dropdown col-md-6">
-							<select class="form-control" id="">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
+						<div class="dropdown col-md-6">
+							<select class="form-control" name="area">
+								<?php
+									$row = 1;
+									if (($handle = fopen("application/files/areas.csv", "r")) !== FALSE) {
+										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+											$num = count($data);
+											$row++;
+											for ($c=0; $c < $num; $c++) {
+												echo "<option>" . $data[$c] . "</option>\n";
+											}
+										}
+										fclose($handle);
+									}
+								?>
                             </select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Taxi Network</label>
-						<div id="" class="dropdown col-md-6">
-							<select class="form-control" id="">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
+						<div class="dropdown col-md-6">
+							<select class="form-control" name="network">
+								<?php
+									$row = 1;
+									if (($handle = fopen("application/files/networks.csv", "r")) !== FALSE) {
+										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+											$num = count($data);
+											$row++;
+											for ($c=0; $c < $num; $c++) {
+												echo "<option>" . $data[$c] . "</option>\n";
+											}
+										}
+										fclose($handle);
+									}
+								?>
                             </select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Car Manufacturer</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" id="stateSel">
-								<option>Audi</option>
-								<option>Others</option>
+							<select class="form-control" name="car">
+								<?php
+									$row = 1;
+									if (($handle = fopen("application/files/cars.csv", "r")) !== FALSE) {
+										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+											$num = count($data);
+											$row++;
+											for ($c=0; $c < $num; $c++) {
+												echo "<option>" . $data[$c] . "</option>\n";
+											}
+										}
+										fclose($handle);
+									}
+								?>
                             </select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Car Model</label>
 						<div class="col-md-6">
-                            <input id="" type="text" class="form-control m-bot15" id="driver_shift_start" name="shift_start">
+                            <input id="" type="text" class="form-control m-bot15" name="model">
                         </div>
                     </div>
                     <div class="form-group">
@@ -815,7 +857,7 @@
                 </div>
 
                 <div class="modal-footer" style="display: block;">
-                    <button type="button" class="btn btn-info" id="driverads_submit_button">Add</button>
+                    <button type="button" class="btn btn-info" id="GeneralAdCPLSSubmit">Add</button>
                 </div>
             </form>
         </div>
