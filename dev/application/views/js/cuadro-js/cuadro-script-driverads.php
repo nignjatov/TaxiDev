@@ -213,7 +213,7 @@ $("form#GeneralAdTaxiAddForm").submit(function(e){
     console.log('form submit');
     $("#GeneralAdTaxiAddModal").modal('hide');
     var postData = $(this).serializeArray();
-    var formURL = $("#GeneralAdTaxiAddSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('GeneralAdsTaxiAdds/addDriverAds?')?>" : "<?php echo site_url('GeneralAdsTaxiAdds/addDriverAds?')?>" + selectedDriverAdsID;
+    var formURL = $("#GeneralAdTaxiAddSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('GeneralAdsTaxiAds/addDriverAds?')?>" : "<?php echo site_url('GeneralAdsTaxiAds/addDriverAds?')?>" + selectedDriverAdsID;
 
     cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){
         if (data.error['code'] == 0) {

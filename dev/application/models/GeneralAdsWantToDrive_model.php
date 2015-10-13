@@ -92,12 +92,10 @@ class GeneralAdsWantToDrive_model extends MY_Model {
 
             $newAdsEntity->name = $this->input->post('name');
 			$newAdsEntity->contact = $this->input->post('contact');
-			
 			$newAdsEntity->type = $this->input->post('type');
 			$newAdsEntity->state = $this->input->post('state');
 			$newAdsEntity->area = $this->input->post('area');
 			$newAdsEntity->network = $this->input->post('network');
-			}
 			
 			$newAdsEntity->shift = "";
 			if (!empty($this->input->post('shift_1'))) { 
