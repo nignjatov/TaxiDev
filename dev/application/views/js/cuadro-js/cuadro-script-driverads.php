@@ -236,4 +236,37 @@ $("form#taxiAddForm").submit(function(e){
     });
     e.preventDefault(); //STOP default action
 });
+
+/* Want to drive Adds */
+$("#GeneralAdWantToDriveSubmit").click(function(e) {
+    $("form#GeneralAdWantToDriveForm").submit();
+});
+
+$("form#GeneralAdWantToDriveForm").submit(function(e){
+    console.log('form submit');
+    $("#GeneralAdWantToDriveModal").modal('hide');
+    var postData = $(this).serializeArray();
+    var formURL = $("#GeneralAdWantToDriveSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('GeneralAdWantToDriveAds/addDriverAds?')?>" : "<?php echo site_url('GeneralAdWantToDriveAds/addDriverAds?')?>" + selectedDriverAdsID;
+
+    cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){
+        if (data.error['code'] == 0) {
+            $('#driverads_list_wrapper').remove();
+            var temp = '<table id="driverads_list" cellpadding="0" cellspacing="0" border="0"' + 'class="dynamic-table display table table-bordered">' +
+                '<thead><tr>' +
+                '<th>Shift Start</th>' +
+                '<th>Shift End</th>' +
+                '<th>Comment</th>' +
+                '<th>Action</th>' +
+                '</tr></thead><tbody></tbody></table>';
+            $(".adv-table").append(temp);
+            updateDriverAdsList();
+        } else if (data.error['code'] == 208) {
+            cuadroCommonMethods.showModalView("subscriptionUpdateNeeded");
+        } else {
+//                cuadroCommonMethods.showGeneralPopUp('Error!!!', data.error['description'], false);
+        }
+//            $(".registrationLoaderBox").hide();
+    });
+    e.preventDefault(); //STOP default action
+});
 </script>
