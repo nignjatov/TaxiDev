@@ -109,11 +109,19 @@
                         <label class="control-label col-md-3">State</label>
 						<div class="dropdown col-md-6">
 							<select class="form-control" name="state">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
+								<?php
+									$row = 1;
+									if (($handle = fopen("application/files/states.csv", "r")) !== FALSE) {
+										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+											$num = count($data);
+											$row++;
+											for ($c=0; $c < $num; $c++) {
+												echo "<option>" . $data[$c] . "</option>\n";
+											}
+										}
+										fclose($handle);
+									}
+								?>
                             </select>
 						</div>
                     </div>
@@ -121,11 +129,19 @@
                         <label class="control-label col-md-3">Area</label>
 						<div class="dropdown col-md-6">
 							<select class="form-control" name="area">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
+								<?php
+									$row = 1;
+									if (($handle = fopen("application/files/areas.csv", "r")) !== FALSE) {
+										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+											$num = count($data);
+											$row++;
+											for ($c=0; $c < $num; $c++) {
+												echo "<option>" . $data[$c] . "</option>\n";
+											}
+										}
+										fclose($handle);
+									}
+								?>
                             </select>
 						</div>
                     </div>
@@ -133,11 +149,19 @@
                         <label class="control-label col-md-3">Network</label>
 						<div class="dropdown col-md-6">
 							<select class="form-control" name="network">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
+								<?php
+									$row = 1;
+									if (($handle = fopen("application/files/networks.csv", "r")) !== FALSE) {
+										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+											$num = count($data);
+											$row++;
+											for ($c=0; $c < $num; $c++) {
+												echo "<option>" . $data[$c] . "</option>\n";
+											}
+										}
+										fclose($handle);
+									}
+								?>
                             </select>
 						</div>
                     </div>
