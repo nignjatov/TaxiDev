@@ -21,7 +21,7 @@
                                                     </button>
                                                     <ul class="dropdown-menu">
                                                         <li><a href="#driversWantedPostModal" data-toggle="modal">Drivers Wanted Post</a></li>
-                                                        <li><a href="#taxiAddPostModal" data-toggle="modal">Taxi Add Post</a></li>
+                                                        <li><a href="#taxiAddModal" data-toggle="modal">Taxi Add Post</a></li>
                                                         <li><a href="#WantToDrivePostModal" data-toggle="modal">Want to Drive Post</a></li>
                                                         <li><a href="#CPLSPostModal" data-toggle="modal">Car/Plate/Lease/Sale Post</a></li>
                                                     </ul>
@@ -246,105 +246,133 @@
 <!-- Drivers Want Post Modal View End -->
 
 <!-- Taxi add post Modal View Start -->
-<div class="modal fade" id="taxiAddPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="taxiAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
                 <h4 class="modal-title">Add Taxi post</h4>
             </div>
-            <form class="form-horizontal" id="driverAdsDetailForm">
+            <form class="form-horizontal" id="taxiAddForm">
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="control-label col-md-3">Name</label>
                         <div class="col-md-6">
-                            <input id="add_taxi_post_name" type="text" class="form-control m-bot15" id="driver_shift_start" name="shift_start">
+                            <input type="text" class="form-control m-bot15" name="name">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3">Contact Number</label>
                         <div class="col-md-6">
-                            <input id="add_taxi_post_contact_number" type="text" class="form-control m-bot15" id="driver_shift_end" name="shift_end">
+                            <input type="text" class="form-control m-bot15" name="contact">
                         </div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Type</label>
-						<div id="add_taxi_post_type" class="btn-group col-md-6">
-							<button type="button" class="active btn btn-default col-md-6" id="">Taxi</button>
-							<button type="button" class="btn btn-default col-md-6" id="">Hire Car</button>
+						<div id="add_taxi_type" class="btn-group col-md-6" data-toggle="buttons">
+							<button type="button" class="active btn btn-default col-md-6" value="Taxi">Taxi</button>
+							<button type="button" class="btn btn-default col-md-6" value="Hire Car">Hire Car</button>
+							<input type="hidden" name="type" id="add_taxi_input" value="Taxi">
 							<script>
-								$("#add_taxi_post_type > .btn").click(function(){
-									$("#add_taxi_post_type > .btn").removeClass("active");
+								$("#add_taxi_type > .btn").click(function(){
+									$("#add_taxi_type > .btn").removeClass("active");
 									$(this).addClass("active");
+									
+									/* Set input */
+									$("#add_taxi_input").val($(this).val());
 								});
 							</script>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">State</label>
-						<div id="" class="dropdown col-md-6">
-							<select class="form-control" id="">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
+						<div class="dropdown col-md-6">
+							<select class="form-control" name="state">
+								<?php
+									$row = 1;
+									if (($handle = fopen("application/files/states.csv", "r")) !== FALSE) {
+										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+											$num = count($data);
+											$row++;
+											for ($c=0; $c < $num; $c++) {
+												echo "<option>" . $data[$c] . "</option>\n";
+											}
+										}
+										fclose($handle);
+									}
+								?>
                             </select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Area</label>
-						<div id="" class="dropdown col-md-6">
-							<select class="form-control" id="">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
+						<div class="dropdown col-md-6">
+							<select class="form-control" name="area">
+								<?php
+									$row = 1;
+									if (($handle = fopen("application/files/areas.csv", "r")) !== FALSE) {
+										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+											$num = count($data);
+											$row++;
+											for ($c=0; $c < $num; $c++) {
+												echo "<option>" . $data[$c] . "</option>\n";
+											}
+										}
+										fclose($handle);
+									}
+								?>
                             </select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Network</label>
-						<div id="" class="dropdown col-md-6">
-							<select class="form-control" id="">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
+						<div class="dropdown col-md-6">
+							<select class="form-control" name="network">
+								<?php
+									$row = 1;
+									if (($handle = fopen("application/files/networks.csv", "r")) !== FALSE) {
+										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+											$num = count($data);
+											$row++;
+											for ($c=0; $c < $num; $c++) {
+												echo "<option>" . $data[$c] . "</option>\n";
+											}
+										}
+										fclose($handle);
+									}
+								?>
                             </select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Taxi Plate</label>
                         <div class="col-md-6">
-                            <input id="add_taxi_post_plate" type="text" class="form-control m-bot15" id="driver_shift_end" name="shift_end">
+                            <input id="add_taxi_post_plate" type="text" class="form-control m-bot15" name="plate">
                         </div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Shift Available</label>
 						<div class="btn-group col-md-8" data-toggle="buttons">
 							<label class="btn btn-info btn-xs">
-								<input type="checkbox" name="garden" checked=""> Monday
+								<input type="checkbox" name="days_1" value="Monday"> Monday
 							</label>
 							<label class="btn btn-info btn-xs">
-								<input type="checkbox" name="garden" checked=""> Tuesday 
+								<input type="checkbox" name="days_2" value="Tuesday"> Tuesday 
 							</label>
 							<label class="btn btn-info btn-xs">
-								<input type="checkbox" name="garden" checked=""> Wednesday 
+								<input type="checkbox" name="days_3" value="Wednesday"> Wednesday 
 							</label>
 							<label class="btn btn-info btn-xs">
-								<input type="checkbox" name="garden" checked=""> Thursday
+								<input type="checkbox" name="days_4" value="Thursday"> Thursday
 							</label>
 							<label class="btn btn-info btn-xs">
-								<input type="checkbox" name="garden" checked=""> Friday
+								<input type="checkbox" name="days_5" value="Friday"> Friday
 							</label>
 							<label class="btn btn-info btn-xs">
-								<input type="checkbox" name="garden" checked=""> Saturday
+								<input type="checkbox" name="days_6" value="Saturday"> Saturday
 							</label>
 							<label class="btn btn-info btn-xs">
-								<input type="checkbox" name="garden" checked=""> Sunday
+								<input type="checkbox" name="days_7" value="Sunday"> Sunday
 							</label>
 						</div>
                     </div>	
@@ -352,60 +380,75 @@
 					<div class="form-group">
                         <div class="btn-group col-md-3" data-toggle="buttons">
 							<label class="btn btn-info btn-xs">
-								<input type="checkbox" name="garden" checked=""> Day Shift
+								<input type="checkbox" name="dshift" value="Day Shift"> Day Shift
 							</label>
 							<label class="btn btn-default btn-xs">
-								<input type="checkbox" name="garden" checked=""> Night Shift
+								<input type="checkbox" name="nshift" value="Night Shift"> Night Shift
 							</label>
 						</div>
 						<div class="btn-group col-md-8" data-toggle="buttons">
 							<label class="btn btn-default btn-xs">
-								<input type="checkbox" name="garden" checked=""> Monday
+								<input type="checkbox" name="ndays_1" value="Monday"> Monday
 							</label>
 							<label class="btn btn-default btn-xs">
-								<input type="checkbox" name="garden" checked=""> Tuesday 
+								<input type="checkbox" name="ndays_2" value="Tuesday"> Tuesday 
 							</label>
 							<label class="btn btn-default btn-xs">
-								<input type="checkbox" name="garden" checked=""> Wednesday 
+								<input type="checkbox" name="ndays_3" value="Wednesday"> Wednesday 
 							</label>
 							<label class="btn btn-default btn-xs">
-								<input type="checkbox" name="garden" checked=""> Thursday
+								<input type="checkbox" name="ndays_4" value="Thursday"> Thursday
 							</label>
 							<label class="btn btn-default btn-xs">
-								<input type="checkbox" name="garden" checked=""> Friday
+								<input type="checkbox" name="ndays_5" value="Friday"> Friday
 							</label>
 							<label class="btn btn-default btn-xs">
-								<input type="checkbox" name="garden" checked=""> Saturday
+								<input type="checkbox" name="ndays_6" value="Saturday"> Saturday
 							</label>
 							<label class="btn btn-default btn-xs">
-								<input type="checkbox" name="garden" checked=""> Sunday
+								<input type="checkbox" name="ndays_7" value="Sunday"> Sunday
 							</label>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Car Manufacturer</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" id="stateSel">
-								<option>Audi</option>
-								<option>Others</option>
+							<select class="form-control" name="car">
+								<?php
+									$row = 1;
+									if (($handle = fopen("application/files/cars.csv", "r")) !== FALSE) {
+										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+											$num = count($data);
+											$row++;
+											for ($c=0; $c < $num; $c++) {
+												echo "<option>" . $data[$c] . "</option>\n";
+											}
+										}
+										fclose($handle);
+									}
+								?>
                             </select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Year Manufactured</label>
 						<div class="col-md-6">
-                            <input id="" type="text" class="form-control m-bot15" id="driver_shift_start" name="shift_start">
+                            <input id="" type="text" class="form-control m-bot15" name="year">
                         </div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Fuel Type</label>
-						<div id="add_taxi_post_fuel_type" class="btn-group col-md-6">
-							<button type="button" class="active btn btn-default col-md-6" id="">LPG</button>
-							<button type="button" class="btn btn-default col-md-6" id="">Petrol</button>
+						<div id="add_taxi_fuel_type" class="btn-group col-md-6">
+							<button type="button" class="active btn btn-default col-md-6" value="LPG">LPG</button>
+							<button type="button" class="btn btn-default col-md-6" value="Petrol">Petrol</button>
+							<input type="hidden" name="fuel" id="add_taxi_fuel_input" value="LPG">
 							<script>
-								$("#add_taxi_post_fuel_type > .btn").click(function(){
-									$("#add_taxi_post_fuel_type > .btn").removeClass("active");
+								$("#add_taxi_fuel_type > .btn").click(function(){
+									$("#add_taxi_fuel_type > .btn").removeClass("active");
 									$(this).addClass("active");
+									
+									/* Set input */
+									$("#add_taxi_fuel_input").val($(this).val());
 								});
 							</script>
 						</div>
@@ -413,7 +456,7 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">Kilometres travelled</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" id="">
+							<select class="form-control" name="kilometers">
 								<option>1</option>
 								<option>2</option>
 								<option>3</option>
@@ -426,22 +469,22 @@
                         <label class="control-label col-md-3">Vehicle type</label>
 						<div class="btn-group col-md-9" data-toggle="buttons">
 							<label class="btn btn-default btn-sm">
-								<input type="checkbox" name="garden" checked=""> Sedan
+								<input type="checkbox" name="vehicles_1" value="Sedan"> Sedan
 							</label>
 							<label class="btn btn-default btn-sm">
-								<input type="checkbox" name="garden" checked=""> Wagon
+								<input type="checkbox" name="vehicles_2" value="Wagon"> Wagon
 							</label>
 							<label class="btn btn-default btn-sm">
-								<input type="checkbox" name="garden" checked=""> Maxi
+								<input type="checkbox" name="vehicles_3" value="Maxi"> Maxi
 							</label>
 							<label class="btn btn-default btn-sm">
-								<input type="checkbox" name="garden" checked=""> Luxury/Executive
+								<input type="checkbox" name="vehicles_4" value="Luxury/Executive"> Luxury/Executive
 							</label>
-							<label class="btn btn-default btn-sm">
+							<label class="control-label col-md-1">
 								Other:
 							</label>
 							<div class="col-md-3">
-								<textarea id="comment" rows="1" class="form-control" name="vehiclesTypeInput"></textarea>
+								<textarea rows="1" class="form-control" name="vehicles_5"></textarea>
 							</div>
 						</div>
                     </div>
@@ -449,17 +492,17 @@
                         <label class="control-label col-md-3">Options included</label>
 						<div class="btn-group col-md-6" data-toggle="buttons">
 							<label class="btn btn-default col-md-6">
-								<input type="checkbox" name="garden" checked=""> Baby capsule
+								<input type="checkbox" name="option_1" value="Baby capsule"> Baby capsule
 							</label>
 							<label class="btn btn-default col-md-6">
-								<input type="checkbox" name="garden" checked=""> Wheelchair accessible  
+								<input type="checkbox" name="option_2" value="Wheelchair accessible"> Wheelchair accessible  
 							</label>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Lease Rate/Term</label>
 						<div class="col-md-6">
-                            <input id="" type="text" class="form-control m-bot15" id="driver_shift_start" name="shift_start">
+                            <input id="" type="text" class="form-control m-bot15" id="driver_shift_start" name="lease">
                         </div>
                     </div>
 					<div class="form-group">
@@ -467,14 +510,13 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3">Description</label>
-
                         <div class="col-md-6">
                             <textarea id="comment" rows="6" class="form-control" name="comment"></textarea>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer" style="display: block;">
-                    <button type="button" class="btn btn-info" id="driverads_submit_button">Add</button>
+                    <button type="button" class="btn btn-info" id="taxiAddSubmit">Add</button>
                 </div>
             </form>
         </div>
