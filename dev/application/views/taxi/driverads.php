@@ -727,37 +727,55 @@
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Want To</label>
-						<div id="add_cpls_want_to" class="btn-group col-md-6" data-toggle="buttons">
-							<button type="button" class="active btn btn-default col-md-4" value="Sell">Sell</button>
-							<button type="button" class="btn btn-default col-md-4" value="Lease">Lease</button>
-							<button type="button" class="btn btn-default col-md-4" value="Buy">Buy</button>
+						<div id="add_cpls_want_to" class="btn-group col-md-9" data-toggle="buttons">
+							<label class="active btn btn-default col-md-3" name="Sell">
+								<input type="checkbox"> Sell
+							</label>
+							<label class="btn btn-default col-md-3" name="Lease">
+								<input type="checkbox"> Lease
+							</label>
+							<label class="btn btn-default col-md-3" name="Buy">
+								<input type="checkbox"> Buy
+							</label>
 							<input type="hidden" name="want_to" id="add_cpls_want_to_input" value="Sell">
 							<script>
 								$("#add_cpls_want_to > .btn").click(function(){
-									$("#add_cpls_want_to > .btn").removeClass("active");
-									$(this).addClass("active");
+									if(!$(this).hasClass("active"))
+										$(this).siblings().removeClass("active");
+									else
+										$(this).removeClass("active");
 									
 									/* Set input */
-									$("#add_cpls_want_to_input").val($(this).val());
+									$("#add_cpls_want_to_input").val($(this).attr('name'));
 								});
 							</script>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Item</label>
-						<div id="add_cpls_item" class="btn-group col-md-6" data-toggle="buttons">
-							<button type="button" class="active btn btn-default col-md-3" value="Taxi">Taxi</button>
-							<button type="button" class="btn btn-default col-md-3" value="Car">Car</button>
-							<button type="button" class="btn btn-default col-md-3" value="Plate">Plate</button>
-							<button type="button" class="btn btn-default col-md-3" value="Other">Other</button>
+						<div id="add_cpls_item" class="btn-group col-md-9" data-toggle="buttons">
+							<label class="active btn btn-default col-md-3" name="Taxi">
+								<input type="checkbox"> Taxi
+							</label>
+							<label class="btn btn-default col-md-3" name="Car">
+								<input type="checkbox"> Car
+							</label>
+							<label class="btn btn-default col-md-3" name="Plate">
+								<input type="checkbox"> Plate
+							</label>
+							<label class="btn btn-default col-md-3" name="Other">
+								<input type="checkbox"> Other
+							</label>
 							<input type="hidden" name="item" id="add_cpls_item_input" value="Taxi">
 							<script>
 								$("#add_cpls_item > .btn").click(function(){
-									$("#add_cpls_item > .btn").removeClass("active");
-									$(this).addClass("active");
+									if(!$(this).hasClass("active"))
+										$(this).siblings().removeClass("active");
+									else
+										$(this).removeClass("active");
 									
 									/* Set input */
-									$("#add_cpls_item_input").val($(this).val());
+									$("#add_cpls_item_input").val($(this).attr('name'));
 								});
 							</script>
 						</div>
