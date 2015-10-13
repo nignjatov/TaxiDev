@@ -66,44 +66,49 @@
                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
                 <h4 class="modal-title">Add Drivers Wanted Post</h4>
             </div>
-            <form class="form-horizontal" id="driverAdsDetailForm">
+            <form class="form-horizontal" id="driversWantedAdsForm">
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="control-label col-md-3">Name</label>
                         <div class="col-md-6">
-                            <input id="add_drivers_wanted_post_name" type="text" class="form-control m-bot15" id="driver_shift_start" name="shift_start">
+                            <input type="text" class="form-control m-bot15" name="name">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3">Contact Number</label>
                         <div class="col-md-6">
-                            <input id="add_drivers_wanted_post_number" type="text" class="form-control m-bot15" id="driver_shift_end" name="shift_end">
+                            <input type="text" class="form-control m-bot15" name="contact">
                         </div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Looking for</label>
 						<div class="btn-group col-md-6" data-toggle="buttons">
-							<label class="btn btn-default col-md-6"><input type="checkbox" name="garden" checked=""> Driver</label>
-							<label class="btn btn-default col-md-6"><input type="checkbox" name="garden" checked=""> Shift Share Partners</label>
+							<label class="btn btn-default col-md-6"><input type="checkbox" name="looking_for_1" value="Driver"> Driver</label>
+							<label class="btn btn-default col-md-6"><input type="checkbox" name="looking_for_2" value="Shift Share Partners"> Shift Share Partners</label>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Type</label>
-						<div id="add_drivers_wanted_post_type" class="btn-group col-md-6">
-							<button type="button" class="active btn btn-default col-md-6" id="">Taxi</button>
-							<button type="button" class="btn btn-default col-md-6" id="">Hire Car</button>
+						<div id="add_dwp_type" class="btn-group col-md-6" data-toggle="buttons">
+							<button type="button" class="active btn btn-default col-md-6" value="Taxi">Taxi</button>
+							<button type="button" class="btn btn-default col-md-6" value="Hire Car">Hire Car</button>
+							<input type="hidden" name="type" id="add_dwp_type_input" value="Taxi">
 							<script>
-								$("#add_drivers_wanted_post_type > .btn").click(function(){
-									$("#add_drivers_wanted_post_type > .btn").removeClass("active");
+								$("#add_dwp_type > .btn").click(function(){
+									$("#add_dwp_type > .btn").removeClass("active");
 									$(this).addClass("active");
+									
+									/* Set input */
+									$("#add_dwp_type_input").val($(this).val());
 								});
+							</script>
 							</script>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">State</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" id="">
+							<select class="form-control" name="state">
 								<option>1</option>
 								<option>2</option>
 								<option>3</option>
@@ -115,7 +120,7 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">Area</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" id="">
+							<select class="form-control" name="area">
 								<option>1</option>
 								<option>2</option>
 								<option>3</option>
@@ -127,7 +132,7 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">Network</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" id="">
+							<select class="form-control" name="network">
 								<option>1</option>
 								<option>2</option>
 								<option>3</option>
@@ -140,13 +145,13 @@
                         <label class="control-label col-md-3">Shift</label>
 						<div class="btn-group col-md-6" data-toggle="buttons">
 							<label class="btn btn-default col-md-4">
-								<input type="checkbox" name="garden" checked=""> Day
+								<input type="checkbox" name="shift_1" value="Day"> Day
 							</label>
 							<label class="btn btn-default col-md-4">
-								<input type="checkbox" name="garden" checked=""> Night
+								<input type="checkbox" name="shift_2" value="Night"> Night
 							</label>
 							<label class="btn btn-default col-md-4">
-								<input type="checkbox" name="garden" checked=""> Night Plate
+								<input type="checkbox" name="shift_3" value="Night Plate"> Night Plate
 							</label>
 						</div>
                     </div>
@@ -154,25 +159,25 @@
                         <label class="control-label col-md-3">Days</label>
 						<div class="btn-group col-md-8" data-toggle="buttons">
 							<label class="btn btn-default btn-xs">
-								<input type="checkbox" name="garden" checked=""> Monday
+								<input type="checkbox" name="days_1" value="Monday"> Monday
 							</label>
 							<label class="btn btn-default btn-xs">
-								<input type="checkbox" name="garden" checked=""> Tuesday 
+								<input type="checkbox" name="days_2" value="Tuesday"> Tuesday 
 							</label>
 							<label class="btn btn-default btn-xs">
-								<input type="checkbox" name="garden" checked=""> Wednesday 
+								<input type="checkbox" name="days_3" value="Wednesday"> Wednesday 
 							</label>
 							<label class="btn btn-default btn-xs">
-								<input type="checkbox" name="garden" checked=""> Thursday
+								<input type="checkbox" name="days_4" value="Thursday"> Thursday
 							</label>
 							<label class="btn btn-default btn-xs">
-								<input type="checkbox" name="garden" checked=""> Friday
+								<input type="checkbox" name="days_5" value="Friday"> Friday
 							</label>
 							<label class="btn btn-default btn-xs">
-								<input type="checkbox" name="garden" checked=""> Saturday
+								<input type="checkbox" name="days_6" value="Saturday"> Saturday
 							</label>
 							<label class="btn btn-default btn-xs">
-								<input type="checkbox" name="garden" checked=""> Sunday
+								<input type="checkbox" name="days_7" value="Sunday"> Sunday
 							</label>
 						</div>
                     </div>					
@@ -180,28 +185,27 @@
                         <label class="control-label col-md-3">Available vehicles</label>
 						<div class="btn-group col-md-9" data-toggle="buttons">
 							<label class="btn btn-default btn-sm">
-								<input type="checkbox" name="garden" checked=""> Sedan
+								<input type="checkbox" name="vehicles_1" value="Sedan"> Sedan
 							</label>
 							<label class="btn btn-default btn-sm">
-								<input type="checkbox" name="garden" checked=""> Wagon
+								<input type="checkbox" name="vehicles_2" value="Wagon"> Wagon
 							</label>
 							<label class="btn btn-default btn-sm">
-								<input type="checkbox" name="garden" checked=""> Maxi
+								<input type="checkbox" name="vehicles_3" value="Maxi"> Maxi
 							</label>
 							<label class="btn btn-default btn-sm">
-								<input type="checkbox" name="garden" checked=""> Luxury/Executive
+								<input type="checkbox" name="vehicles_4" value="Luxury/Executive"> Luxury/Executive
 							</label>
-							<label class="btn btn-default btn-sm">
+							<label class="control-label col-md-1">
 								Other:
 							</label>
 							<div class="col-md-3">
-								<textarea id="comment" rows="1" class="form-control" name="vehiclesTypeInput"></textarea>
+								<textarea rows="1" class="form-control" name="vehicles_5"></textarea>
 							</div>
 						</div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3">Description</label>
-
                         <div class="col-md-6">
                             <textarea id="comment" rows="6" class="form-control" name="comment"></textarea>
                         </div>
@@ -209,7 +213,7 @@
                 </div>
 
                 <div class="modal-footer" style="display: block;">
-                    <button type="button" class="btn btn-info" id="driverads_submit_button">Add</button>
+                    <button type="button" class="btn btn-info" id="driversWantedAdsFormSubmit">Add</button>
                 </div>
             </form>
         </div>

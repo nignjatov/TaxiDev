@@ -170,4 +170,37 @@ $("#driver_shift_end").datepicker({
         $(this).datepicker('hide');
     });
 updateDriverAdsList();
+
+/* Driver WAnted Adds */
+$("#driversWantedAdsFormSubmit").click(function(e) {
+    $("form#driversWantedAdsForm").submit();
+});
+
+$("form#driversWantedAdsForm").submit(function(e){
+    console.log('form submit');
+    $("#driverAdsDetailModal").modal('hide');
+    var postData = $(this).serializeArray();
+    var formURL = $("#driversWantedAdsFormSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('DriverWantedAds/addDriverAds?')?>" : "<?php echo site_url('DriverWantedAds/addDriverAds?')?>" + selectedDriverAdsID;
+
+    cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){
+        if (data.error['code'] == 0) {
+            $('#driverads_list_wrapper').remove();
+            var temp = '<table id="driverads_list" cellpadding="0" cellspacing="0" border="0"' + 'class="dynamic-table display table table-bordered">' +
+                '<thead><tr>' +
+                '<th>Shift Start</th>' +
+                '<th>Shift End</th>' +
+                '<th>Comment</th>' +
+                '<th>Action</th>' +
+                '</tr></thead><tbody></tbody></table>';
+            $(".adv-table").append(temp);
+            updateDriverAdsList();
+        } else if (data.error['code'] == 208) {
+            cuadroCommonMethods.showModalView("subscriptionUpdateNeeded");
+        } else {
+//                cuadroCommonMethods.showGeneralPopUp('Error!!!', data.error['description'], false);
+        }
+//            $(".registrationLoaderBox").hide();
+    });
+    e.preventDefault(); //STOP default action
+});
 </script>
