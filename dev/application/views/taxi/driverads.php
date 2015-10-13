@@ -21,7 +21,7 @@
                                                     </button>
                                                     <ul class="dropdown-menu">
                                                         <li><a href="#driversWantedPostModal" data-toggle="modal">Drivers Wanted Post</a></li>
-                                                        <li><a href="#taxiAddModal" data-toggle="modal">Taxi Add Post</a></li>
+                                                        <li><a href="#GeneralAdTaxiAddModal" data-toggle="modal">Taxi Add Post</a></li>
                                                         <li><a href="#GeneralAdWantToDriveModal" data-toggle="modal">Want to Drive Post</a></li>
                                                         <li><a href="#CPLSPostModal" data-toggle="modal">Car/Plate/Lease/Sale Post</a></li>
                                                     </ul>
@@ -246,14 +246,14 @@
 <!-- Drivers Want Post Modal View End -->
 
 <!-- Taxi add post Modal View Start -->
-<div class="modal fade" id="taxiAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="GeneralAdTaxiAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
                 <h4 class="modal-title">Add Taxi post</h4>
             </div>
-            <form class="form-horizontal" id="taxiAddForm">
+            <form class="form-horizontal" id="GeneralAdTaxiAddForm">
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="control-label col-md-3">Name</label>
@@ -516,7 +516,7 @@
                     </div>
                 </div>
                 <div class="modal-footer" style="display: block;">
-                    <button type="button" class="btn btn-info" id="taxiAddSubmit">Add</button>
+                    <button type="button" class="btn btn-info" id="GeneralAdTaxiAddSubmit">Add</button>
                 </div>
             </form>
         </div>
@@ -640,25 +640,25 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">Days</label>
 						<div class="btn-group col-md-8" data-toggle="buttons">
-							<label class="btn btn-default btn-xs">
+							<label class="btn btn-info btn-xs">
 								<input type="checkbox" name="days_1" value="Monday"> Monday
 							</label>
-							<label class="btn btn-default btn-xs">
+							<label class="btn btn-info btn-xs">
 								<input type="checkbox" name="days_2" value="Tuesday"> Tuesday 
 							</label>
-							<label class="btn btn-default btn-xs">
+							<label class="btn btn-info btn-xs">
 								<input type="checkbox" name="days_3" value="Wednesday"> Wednesday 
 							</label>
-							<label class="btn btn-default btn-xs">
+							<label class="btn btn-info btn-xs">
 								<input type="checkbox" name="days_4" value="Thursday"> Thursday
 							</label>
-							<label class="btn btn-default btn-xs">
+							<label class="btn btn-info btn-xs">
 								<input type="checkbox" name="days_5" value="Friday"> Friday
 							</label>
-							<label class="btn btn-default btn-xs">
+							<label class="btn btn-info btn-xs">
 								<input type="checkbox" name="days_6" value="Saturday"> Saturday
 							</label>
-							<label class="btn btn-default btn-xs">
+							<label class="btn btn-info btn-xs">
 								<input type="checkbox" name="days_7" value="Sunday"> Sunday
 							</label>
 						</div>

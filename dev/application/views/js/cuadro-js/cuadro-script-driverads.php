@@ -205,15 +205,15 @@ $("form#driversWantedAdsForm").submit(function(e){
 });
 
 /* Taxi Adds */
-$("#taxiAddSubmit").click(function(e) {
-    $("form#taxiAddForm").submit();
+$("#GeneralAdTaxiAddSubmit").click(function(e) {
+    $("form#GeneralAdTaxiAddForm").submit();
 });
 
-$("form#taxiAddForm").submit(function(e){
+$("form#GeneralAdTaxiAddForm").submit(function(e){
     console.log('form submit');
-    $("#taxiAddModal").modal('hide');
+    $("#GeneralAdTaxiAddModal").modal('hide');
     var postData = $(this).serializeArray();
-    var formURL = $("#taxiAddSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('GeneralAdTaxiPostAds/addDriverAds?')?>" : "<?php echo site_url('GeneralAdTaxiPostAds/addDriverAds?')?>" + selectedDriverAdsID;
+    var formURL = $("#GeneralAdTaxiAddSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('GeneralAdTaxiPostAds/addDriverAds?')?>" : "<?php echo site_url('GeneralAdTaxiPostAds/addDriverAds?')?>" + selectedDriverAdsID;
 
     cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){
         if (data.error['code'] == 0) {
