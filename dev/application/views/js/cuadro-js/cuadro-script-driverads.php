@@ -38,6 +38,30 @@ var driverAdsObject = {
             "aaSorting": [[ 1, "desc" ]]
         });
     },
+	populateGeneralAdsList: function(){
+        var allDriverAdsObjects = this.allObjects;
+        var totalDriverAds = allDriverAdsObjects.length;
+        var driverAdsListString = '';
+        for (var i = 0; i < totalDriverAds; i++) {
+            var tr_class = i % 2 == 0 ? "gradeA" : "gradeB";
+            driverAdsListString += '<tr class="'+tr_class+'">';
+            driverAdsListString += '<td>'+allDriverAdsObjects[i].name+'</td>';
+            driverAdsListString += '<td>'+allDriverAdsObjects[i].contact+'</td>';
+			driverAdsListString += '<td>'+allDriverAdsObjects[i].date+'</td>';
+            driverAdsListString += '<td>'+allDriverAdsObjects[i].comment+'</td>';
+            driverAdsListString += '<td class="action_button">' +
+                '<a data-toggle="modal" class="edit" title="" onclick="viewDriverAdsDetail('+allDriverAdsObjects[i].ID+')" ><i class="ico-pencil"></i></a>' +
+                '<a data-toggle="modal" class="remove" title="" onclick="deleteDriverAdsDetail('+allDriverAdsObjects[i].ID+')" ><i class="ico-close"></i></a>' +
+                '</td>';
+            driverAdsListString += '</tr>';
+        }
+
+        $("#driverads_list tbody").html(driverAdsListString);
+
+        $('#driverads_list').dataTable( {
+            "aaSorting": [[ 1, "desc" ]]
+        });
+    },
     getDriverAdsDetailFromID: function (ID) {
         var driverAdsDetailArray = [];
         var allDriverAdsObjects = this.allObjects;
@@ -71,6 +95,37 @@ function updateDriverAdsList () {
         driverAdsObject.allObjects = data.result.result;
         driverAdsObject.populateDriverAdsList();
         driverAdsObject.initDriverAdsPage();
+    });
+}
+function updateGeneralAdsList () {
+	var rets = [];
+	
+	var serverURL = "<?php echo site_url('GeneralAdsDriverWanted/getAllDriverAdsDetail')?>";
+    cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', 'updateDriverAdsList', function(data){
+		var serverURL = "<?php echo site_url('GeneralAdsTaxiAds/getAllDriverAdsDetail')?>";
+		for(var k in data.result.result) 
+			rets.push(data.result.result[k]);
+
+		cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', 'updateDriverAdsList', function(data){
+			var serverURL = "<?php echo site_url('GeneralAdsCPLS/getAllDriverAdsDetail')?>";
+			for(var k in data.result.result) 
+				rets.push(data.result.result[k]);
+			
+			cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', 'updateDriverAdsList', function(data){
+				var serverURL = "<?php echo site_url('GeneralAdsWantToDrive/getAllDriverAdsDetail')?>";
+				for(var k in data.result.result) 
+					rets.push(data.result.result[k]);
+
+				cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', 'updateDriverAdsList', function(data){
+					for(var k in data.result.result) 
+						rets.push(data.result.result[k]);
+			
+					driverAdsObject.allObjects = rets;
+					driverAdsObject.populateGeneralAdsList();
+					driverAdsObject.initDriverAdsPage();
+				});	
+			});
+		});
     });
 }
 
@@ -107,8 +162,9 @@ function deleteDriverAdsDetail(driverAdsID){
             $('#driverads_list_wrapper').remove();
             var temp = '<table id="driverads_list" cellpadding="0" cellspacing="0" border="0"' + 'class="dynamic-table display table table-bordered">' +
                 '<thead><tr>' +
-                '<th>Shift Start</th>' +
-                '<th>Shift End</th>' +
+                '<th>Name</th>' +
+                '<th>Contact</th>' +
+				'<th>Date</th>' +
                 '<th>Comment</th>' +
                 '<th>Action</th>' +
                 '</tr></thead><tbody></tbody></table>';
@@ -133,8 +189,9 @@ $("form#driverAdsDetailForm").submit(function(e){
             $('#driverads_list_wrapper').remove();
             var temp = '<table id="driverads_list" cellpadding="0" cellspacing="0" border="0"' + 'class="dynamic-table display table table-bordered">' +
                 '<thead><tr>' +
-                '<th>Shift Start</th>' +
-                '<th>Shift End</th>' +
+                '<th>Name</th>' +
+                '<th>Contact</th>' +
+				'<th>Date</th>' +
                 '<th>Comment</th>' +
                 '<th>Action</th>' +
                 '</tr></thead><tbody></tbody></table>';
@@ -169,7 +226,7 @@ $("#driver_shift_end").datepicker({
     .on('changeDate', function (ev) {
         $(this).datepicker('hide');
     });
-updateDriverAdsList();
+updateGeneralAdsList();
 
 /* Driver Wanted Adds */
 $("#GeneralAdDriversWantedSubmit").click(function(e) {
@@ -187,13 +244,14 @@ $("form#GeneralAdDriversWantedForm").submit(function(e){
             $('#driverads_list_wrapper').remove();
             var temp = '<table id="driverads_list" cellpadding="0" cellspacing="0" border="0"' + 'class="dynamic-table display table table-bordered">' +
                 '<thead><tr>' +
-                '<th>Shift Start</th>' +
-                '<th>Shift End</th>' +
+                '<th>Name</th>' +
+                '<th>Contact</th>' +
+				'<th>Date</th>' +
                 '<th>Comment</th>' +
                 '<th>Action</th>' +
                 '</tr></thead><tbody></tbody></table>';
             $(".adv-table").append(temp);
-            updateDriverAdsList();
+            updateGeneralAdsList();
         } else if (data.error['code'] == 208) {
             cuadroCommonMethods.showModalView("subscriptionUpdateNeeded");
         } else {
@@ -220,13 +278,14 @@ $("form#GeneralAdTaxiAddForm").submit(function(e){
             $('#driverads_list_wrapper').remove();
             var temp = '<table id="driverads_list" cellpadding="0" cellspacing="0" border="0"' + 'class="dynamic-table display table table-bordered">' +
                 '<thead><tr>' +
-                '<th>Shift Start</th>' +
-                '<th>Shift End</th>' +
+                '<th>Name</th>' +
+                '<th>Contact</th>' +
+				'<th>Date</th>' +
                 '<th>Comment</th>' +
                 '<th>Action</th>' +
                 '</tr></thead><tbody></tbody></table>';
             $(".adv-table").append(temp);
-            updateDriverAdsList();
+            updateGeneralAdsList();
         } else if (data.error['code'] == 208) {
             cuadroCommonMethods.showModalView("subscriptionUpdateNeeded");
         } else {
@@ -253,13 +312,14 @@ $("form#GeneralAdWantToDriveForm").submit(function(e){
             $('#driverads_list_wrapper').remove();
             var temp = '<table id="driverads_list" cellpadding="0" cellspacing="0" border="0"' + 'class="dynamic-table display table table-bordered">' +
                 '<thead><tr>' +
-                '<th>Shift Start</th>' +
-                '<th>Shift End</th>' +
+                '<th>Name</th>' +
+                '<th>Contact</th>' +
+				'<th>Date</th>' +
                 '<th>Comment</th>' +
                 '<th>Action</th>' +
                 '</tr></thead><tbody></tbody></table>';
             $(".adv-table").append(temp);
-            updateDriverAdsList();
+            updateGeneralAdsList();
         } else if (data.error['code'] == 208) {
             cuadroCommonMethods.showModalView("subscriptionUpdateNeeded");
         } else {
@@ -286,13 +346,14 @@ $("form#GeneralAdCPLSForm").submit(function(e){
             $('#driverads_list_wrapper').remove();
             var temp = '<table id="driverads_list" cellpadding="0" cellspacing="0" border="0"' + 'class="dynamic-table display table table-bordered">' +
                 '<thead><tr>' +
-                '<th>Shift Start</th>' +
-                '<th>Shift End</th>' +
+                '<th>Name</th>' +
+                '<th>Contact</th>' +
+				'<th>Date</th>' +
                 '<th>Comment</th>' +
                 '<th>Action</th>' +
                 '</tr></thead><tbody></tbody></table>';
             $(".adv-table").append(temp);
-            updateDriverAdsList();
+            updateGeneralAdsList();
         } else if (data.error['code'] == 208) {
             cuadroCommonMethods.showModalView("subscriptionUpdateNeeded");
         } else {

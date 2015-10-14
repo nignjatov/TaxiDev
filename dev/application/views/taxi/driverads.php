@@ -34,8 +34,9 @@
                             <table id="driverads_list" cellpadding="0" cellspacing="0" border="0" class="dynamic-table display table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>Shift Start</th>
-                                    <th>Shift End</th>
+                                    <th>Name</th>
+                                    <th>Contact</th>
+									<th>Date</th>
                                     <th>Comment</th>
                                     <th>Action</th>
                                 </tr>
