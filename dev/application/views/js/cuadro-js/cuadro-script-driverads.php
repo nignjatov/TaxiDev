@@ -1,5 +1,6 @@
 <script>
 var selectedDriverAdsID = 0;
+var serverUrl ="http://localhost:8083/dev/scripts/";
 var driverAdsObject = {
     allObjects: [],
     getDriverList: function (){
@@ -99,31 +100,31 @@ function updateDriverAdsList () {
 }
 function updateGeneralAdsList () {
 	var rets = [];
-	
+
 	var serverURL = "<?php echo site_url('GeneralAdsDriverWanted/getAllDriverAdsDetail')?>";
     cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', 'updateDriverAdsList', function(data){
 		var serverURL = "<?php echo site_url('GeneralAdsTaxiAds/getAllDriverAdsDetail')?>";
-		for(var k in data.result.result) 
+		for(var k in data.result.result)
 			rets.push(data.result.result[k]);
 
 		cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', 'updateDriverAdsList', function(data){
 			var serverURL = "<?php echo site_url('GeneralAdsCPLS/getAllDriverAdsDetail')?>";
-			for(var k in data.result.result) 
+			for(var k in data.result.result)
 				rets.push(data.result.result[k]);
-			
+
 			cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', 'updateDriverAdsList', function(data){
 				var serverURL = "<?php echo site_url('GeneralAdsWantToDrive/getAllDriverAdsDetail')?>";
-				for(var k in data.result.result) 
+				for(var k in data.result.result)
 					rets.push(data.result.result[k]);
 
 				cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', 'updateDriverAdsList', function(data){
-					for(var k in data.result.result) 
+					for(var k in data.result.result)
 						rets.push(data.result.result[k]);
-			
+
 					driverAdsObject.allObjects = rets;
 					driverAdsObject.populateGeneralAdsList();
 					driverAdsObject.initDriverAdsPage();
-				});	
+				});
 			});
 		});
     });
@@ -252,6 +253,7 @@ $("form#GeneralAdDriversWantedForm").submit(function(e){
                 '</tr></thead><tbody></tbody></table>';
             $(".adv-table").append(temp);
             updateGeneralAdsList();
+            cuadroServerAPI.postDataToServer("http://localhost:8083/dev/scripts/driverWantedAddStore.php", postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){});
         } else if (data.error['code'] == 208) {
             cuadroCommonMethods.showModalView("subscriptionUpdateNeeded");
         } else {
@@ -286,6 +288,7 @@ $("form#GeneralAdTaxiAddForm").submit(function(e){
                 '</tr></thead><tbody></tbody></table>';
             $(".adv-table").append(temp);
             updateGeneralAdsList();
+            cuadroServerAPI.postDataToServer("http://localhost:8083/dev/scripts/taxiAddStore.php", postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){});
         } else if (data.error['code'] == 208) {
             cuadroCommonMethods.showModalView("subscriptionUpdateNeeded");
         } else {
@@ -320,6 +323,7 @@ $("form#GeneralAdWantToDriveForm").submit(function(e){
                 '</tr></thead><tbody></tbody></table>';
             $(".adv-table").append(temp);
             updateGeneralAdsList();
+            cuadroServerAPI.postDataToServer("http://localhost:8083/dev/scripts/WantToDriveAdStore.php", postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){});
         } else if (data.error['code'] == 208) {
             cuadroCommonMethods.showModalView("subscriptionUpdateNeeded");
         } else {
@@ -354,6 +358,7 @@ $("form#GeneralAdCPLSForm").submit(function(e){
                 '</tr></thead><tbody></tbody></table>';
             $(".adv-table").append(temp);
             updateGeneralAdsList();
+            cuadroServerAPI.postDataToServer("http://localhost:8083/dev/scripts/CPLSAdStore.php", postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){});
         } else if (data.error['code'] == 208) {
             cuadroCommonMethods.showModalView("subscriptionUpdateNeeded");
         } else {
