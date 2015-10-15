@@ -32,7 +32,7 @@ class Driverads_model extends MY_Model {
     }
 
     public function getAllDriverAds($userID){
-        $this->db->select('*');
+        /*$this->db->select('*');
         $this->db->from('wp_driver_ads');
         $this->db->where('user_id', $userID);
         $this->db->order_by('shift_end', 'DESC');
@@ -44,6 +44,41 @@ class Driverads_model extends MY_Model {
         foreach ($result AS $driverAdsInfo) {
             $driverAdsInfo->shift_end = $driverAdsInfo->shift_end > 0 ? $this->timezone->convertMKTimeToDate($driverAdsInfo->shift_end) : '';
             $driverAdsInfo->shift_start = $driverAdsInfo->shift_start > 0 ? $this->timezone->convertMKTimeToDate($driverAdsInfo->shift_start) : '';
+            $allDriverAds[$count++] = $driverAdsInfo;
+        }*/
+		
+		$allDriverAds = array();
+        $count = 0;
+		
+		$this->db->select('*');
+        $this->db->from('wp_general_ads_driver_wanted');
+        $this->db->where('user_id', $userID);
+        $result = $this->db->get()->result();
+        foreach ($result AS $driverAdsInfo) {
+            $allDriverAds[$count++] = $driverAdsInfo;
+        }
+		
+		$this->db->select('*');
+        $this->db->from('wp_general_ads_taxi_ads');
+        $this->db->where('user_id', $userID);
+        $result = $this->db->get()->result();
+        foreach ($result AS $driverAdsInfo) {
+            $allDriverAds[$count++] = $driverAdsInfo;
+        }
+		
+		$this->db->select('*');
+        $this->db->from('wp_general_ads_want_to_drive');
+        $this->db->where('user_id', $userID);
+        $result = $this->db->get()->result();
+        foreach ($result AS $driverAdsInfo) {
+            $allDriverAds[$count++] = $driverAdsInfo;
+        }
+		
+		$this->db->select('*');
+        $this->db->from('wp_general_ads_cpls');
+        $this->db->where('user_id', $userID);
+        $result = $this->db->get()->result();
+        foreach ($result AS $driverAdsInfo) {
             $allDriverAds[$count++] = $driverAdsInfo;
         }
 

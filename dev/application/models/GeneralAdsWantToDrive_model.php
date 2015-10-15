@@ -161,7 +161,8 @@ class GeneralAdsWantToDrive_model extends MY_Model {
 			}
 			
             $newAdsEntity->comment = $this->input->post('comment');
-
+			$newAdsEntity->add_type = 3;
+			
             if ($this->db->insert('wp_general_ads_want_to_drive', $newAdsEntity)) {
                 return parent::returnData($this->db->insert_id());
             } else {

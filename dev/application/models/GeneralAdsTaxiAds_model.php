@@ -202,7 +202,7 @@ class GeneralAdsTaxiAds_model extends MY_Model {
 			}
 			
             $newAdsEntity->comment = $this->input->post('comment');
-
+			$newAdsEntity->add_type = 2;
             if ($this->db->insert('wp_general_ads_taxi_ads', $newAdsEntity)) {
                 return parent::returnData($this->db->insert_id());
             } else {

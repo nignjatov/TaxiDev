@@ -63,4 +63,7 @@ class GeneralAdsTaxiAdsEntity {
 
     // comment
     var $comment;
+	
+	// add_type
+	var $add_type;
 } 

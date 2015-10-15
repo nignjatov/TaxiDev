@@ -170,6 +170,7 @@ class GeneralAdsDriverWanted_model extends MY_Model {
 				$newAdsEntity->vehicles .= $this->input->post('vehicles_5');
 			}
 			
+			$newAdsEntity->add_type = 1;
             $newAdsEntity->comment = $this->input->post('comment');
 
             if ($this->db->insert('wp_general_ads_driver_wanted', $newAdsEntity)) {

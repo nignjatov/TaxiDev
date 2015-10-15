@@ -100,8 +100,9 @@ class GeneralAdsCPLS_model extends MY_Model {
 			$newAdsEntity->car = $this->input->post('car');
 			$newAdsEntity->model = $this->input->post('model');
             $newAdsEntity->comment = $this->input->post('comment');
-
-            if ($this->db->insert('wp_general_ads_cpls', $newAdsEntity)) {
+			$newAdsEntity->add_type = 4;
+            
+			if ($this->db->insert('wp_general_ads_cpls', $newAdsEntity)) {
                 return parent::returnData($this->db->insert_id());
             } else {
                 return parent::returnData(false, ConstExceptionCode::UNKNOWN_ERROR_CODE);
