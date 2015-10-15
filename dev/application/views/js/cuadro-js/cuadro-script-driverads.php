@@ -111,15 +111,15 @@ function updateDriverAdsList () {
     });
 }
 function updateGeneralAdsList () {
-	var rets = [];
 	var serverURL = "<?php echo site_url('Driverads/getAllDriverAdsDetail')?>";
 	cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', 'updateDriverAdsList', function(data){
-		for(var k in data.result.result) {
-			rets.push(data.result.result[k]);
-		}
-		driverAdsObject.allObjects = rets;
-		driverAdsObject.populateGeneralAdsList();
-		driverAdsObject.initDriverAdsPage();
+		if (data.error['code'] == 0) {
+			driverAdsObject.allObjects = data.result.result;
+			driverAdsObject.populateGeneralAdsList();
+			driverAdsObject.initDriverAdsPage();
+		} else if (data.error['code'] == 208) {
+            cuadroCommonMethods.showModalView("subscriptionUpdateNeeded");
+        }
 	});
 }
 
