@@ -520,6 +520,12 @@
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">File upload</label>
+						<div class="btn-group col-md-6">
+							<label class="btn btn-info" for="my-file-selector">
+								<input id="my-file-selector" type="file" style="display:none;">
+								Choose File
+							</label>
+						</div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3">Description</label>
