@@ -232,6 +232,7 @@ updateGeneralAdsList();
 /* Driver Wanted Adds */
 $("#GeneralAdDriversWantedSubmit").click(function(e) {
     $("form#GeneralAdDriversWantedForm").submit();
+	$("form#GeneralAdDriversWantedForm").trigger( "reset" );
 });
 
 $("form#GeneralAdDriversWantedForm").submit(function(e){
@@ -267,6 +268,7 @@ $("form#GeneralAdDriversWantedForm").submit(function(e){
 /* Taxi Adds */
 $("#GeneralAdTaxiAddSubmit").click(function(e) {
     $("form#GeneralAdTaxiAddForm").submit();
+	$("form#GeneralAdTaxiAddForm").trigger( "reset" );
 });
 
 $("form#GeneralAdTaxiAddForm").submit(function(e){
@@ -302,6 +304,7 @@ $("form#GeneralAdTaxiAddForm").submit(function(e){
 /* Want to drive Adds */
 $("#GeneralAdWantToDriveSubmit").click(function(e) {
     $("form#GeneralAdWantToDriveForm").submit();
+	$("form#GeneralAdWantToDriveForm").trigger( "reset" );
 });
 
 $("form#GeneralAdWantToDriveForm").submit(function(e){
@@ -337,6 +340,7 @@ $("form#GeneralAdWantToDriveForm").submit(function(e){
 /* Car/Plate/Lease/Sale Adds */
 $("#GeneralAdCPLSSubmit").click(function(e) {
     $("form#GeneralAdCPLSForm").submit();
+	$("form#GeneralAdCPLSForm").trigger( "reset" );
 });
 
 $("form#GeneralAdCPLSForm").submit(function(e){
