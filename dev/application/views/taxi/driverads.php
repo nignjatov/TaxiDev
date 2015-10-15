@@ -167,6 +167,12 @@
 						</div>
                     </div>
 					<div class="form-group">
+                        <label class="control-label col-md-3">Postal Code</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control m-bot15">
+                        </div>
+                    </div>
+					<div class="form-group">
                         <label class="control-label col-md-3">Shift</label>
 						<div class="btn-group col-md-6" data-toggle="buttons">
 							<label class="btn btn-default col-md-4">
@@ -344,6 +350,12 @@
 								?>
                             </select>
 						</div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-3">Postal Code</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control m-bot15">
+                        </div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Taxi Plate</label>
@@ -625,6 +637,12 @@
 						</div>
                     </div>
 					<div class="form-group">
+                        <label class="control-label col-md-3">Postal Code</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control m-bot15">
+                        </div>
+                    </div>
+					<div class="form-group">
                         <label class="control-label col-md-3">Prefered Shift</label>
 						<div class="btn-group col-md-6" data-toggle="buttons">
 							<label class="btn btn-default col-md-4">
@@ -840,6 +858,12 @@
 								?>
                             </select>
 						</div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-3">Postal Code</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control m-bot15">
+                        </div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Car Manufacturer</label>
