@@ -169,7 +169,7 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">Postal Code</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control m-bot15">
+                            <input type="text" class="form-control m-bot15" name="postal_code">
                         </div>
                     </div>
 					<div class="form-group">
@@ -354,7 +354,7 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">Postal Code</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control m-bot15">
+                            <input type="text" class="form-control m-bot15" name="postal_code">
                         </div>
                     </div>
 					<div class="form-group">
@@ -645,7 +645,7 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">Postal Code</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control m-bot15">
+                            <input type="text" class="form-control m-bot15" name="postal_code">
                         </div>
                     </div>
 					<div class="form-group">
@@ -868,7 +868,7 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">Postal Code</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control m-bot15">
+                            <input type="text" class="form-control m-bot15" name="postal_code">
                         </div>
                     </div>
 					<div class="form-group">

@@ -1,6 +1,6 @@
 <?php
 
-	var_dump($_REQUEST);
+
 
 	include_once './config.php';
 
@@ -26,6 +26,8 @@
 		$looking_for .= $_REQUEST['looking_for_2'];
 	}
 
+	$looking_for = rtrim($looking_for, ",");
+
 	$shift = "";
 	if (!empty($_REQUEST['shift_1'])) {
 		$shift .= $_REQUEST['shift_1'];
@@ -38,6 +40,8 @@
 	if (!empty($_REQUEST['shift_3'])) {
 		$shift .= $_REQUEST['shift_3'];
 	}
+
+	$shift = rtrim($shift, ",");
 
 	$days = "";
 	if (!empty($_REQUEST['days_1'])) {
@@ -68,6 +72,8 @@
 		$days .= $_REQUEST['days_7'];
 	}
 
+	$days = rtrim($days, ",");
+
 	$vehicles = "";
 	if (!empty($_REQUEST['vehicles_1'])) {
 		$vehicles .= $_REQUEST['vehicles_1'];
@@ -88,13 +94,17 @@
 	if (!empty($_REQUEST['vehicles_5'])) {
 		$vehicles .= $_REQUEST['vehicles_5'];
 	}
+	$vehicles = rtrim($vehicles, ",");
 
 
-
-	$result = $conn->query("INSERT INTO wp_general_ads_driver_wanted(user_id,name,contact,looking_for,type,state,area,network,shift,days,vehicles,comment)".
+	$result = $conn->query("INSERT INTO wp_general_ads_driver_wanted(user_id,name,contact,looking_for,type,state,area,network,shift,days,vehicles,comment,postal_code)".
 							  " VALUES(0,'".$_REQUEST['name']."', '".$_REQUEST['contact']."', '".$looking_for."', '".$_REQUEST['type']."', '".$_REQUEST['state'].
 							  "', '".$_REQUEST['area']."','".$_REQUEST['network']."', '".$shift."', '".$days."', '".$vehicles.
-							  "', '".$_REQUEST['comment']."');");
+							  "', '".$_REQUEST['comment']."', '".$_REQUEST['postal_code']."');");
 
+	echo "INSERT INTO wp_general_ads_driver_wanted(user_id,name,contact,looking_for,type,state,area,network,shift,days,vehicles,comment,postal_code)".
+         							  " VALUES(0,'".$_REQUEST['name']."', '".$_REQUEST['contact']."', '".$looking_for."', '".$_REQUEST['type']."', '".$_REQUEST['state'].
+         							  "', '".$_REQUEST['area']."','".$_REQUEST['network']."', '".$shift."', '".$days."', '".$vehicles.
+         							  "', '".$_REQUEST['comment']."', '".$_REQUEST['postal_code']."');";
 	$conn->close();
 ?>

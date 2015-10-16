@@ -150,15 +150,15 @@ function addNewDriverAds() {
 
 function deleteDriverAdsDetail(driverAdsID, type){
 	var serverURL = "<?php echo site_url('DriverAds/removeDriverAds?driverads_id=')?>" + driverAdsID;
-	if( type == 4 )
+	if( type == 4 ){
 		serverURL = "<?php echo site_url('GeneralAdsCPLS/removeDriverAds?driverads_id=')?>" + driverAdsID;
-	else if( type == 3 )
+	} else if( type == 3 ){
 		serverURL = "<?php echo site_url('GeneralAdsWantToDrive/removeDriverAds?driverads_id=')?>" + driverAdsID;
-	else if( type == 2 )
+	} else if( type == 2 ){
 		serverURL = "<?php echo site_url('GeneralAdsTaxiAds/removeDriverAds?driverads_id=')?>" + driverAdsID;
-	else if( type == 1)
+	}else if( type == 1){
 		serverURL = "<?php echo site_url('GeneralAdsDriverWanted/removeDriverAds?driverads_id=')?>" + driverAdsID;
-	
+	}
 
     cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', '', function(data){
         if (data.error['code'] == 0) {
@@ -171,6 +171,7 @@ function deleteDriverAdsDetail(driverAdsID, type){
 				'<th>Date</th>' +
                 '<th>Action</th>' +
                 '</tr></thead><tbody></tbody></table>';
+                cuadroServerAPI.getServerData('GET', 'http://localhost:8083/dev/scripts/deleteAd.php?type='+type+'&id='+driverAdsID, 'JSONp', '', function(data){});
             $(".adv-table").append(temp);
             updateGeneralAdsList();
         }

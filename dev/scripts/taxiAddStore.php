@@ -25,6 +25,8 @@
 		$options .= $_REQUEST['option_2'];
 	}
 
+	$options = rtrim($options, ",");
+
 	$shift = "";
 	if (!empty($_REQUEST['dshift'])) {
 		$shift .= $_REQUEST['dshift'];
@@ -33,6 +35,7 @@
 	if (!empty($_REQUEST['nshift'])) {
 		$shift .= $_REQUEST['nshift'];
 	}
+	$shift = rtrim($shift, ",");
 
 	$days = "";
 	if (!empty($_REQUEST['days_1'])) {
@@ -63,6 +66,8 @@
 		$days .= $_REQUEST['days_7'];
 	}
 
+	$days = rtrim($days, ",");
+
 	$ndays = "";
 	if (!empty($_REQUEST['ndays_1'])) {
 		$ndays .= $_REQUEST['ndays_1'];
@@ -91,6 +96,7 @@
 	if (!empty($_REQUEST['ndays_7'])) {
 		$ndays .= $_REQUEST['ndays_7'];
 	}
+	$ndays = rtrim($ndays, ",");
 
 	$vehicles = "";
 	if (!empty($_REQUEST['vehicles_1'])) {
@@ -112,20 +118,14 @@
 	if (!empty($_REQUEST['vehicles_5'])) {
 		$vehicles .= $_REQUEST['vehicles_5'];
 	}
+	$vehicles = rtrim($vehicles, ",");
 
-	$sql = "INSERT INTO wp_general_ads_taxi_ads(user_id,name,contact,type,state,area,network,plate,shift,days,ndays,car,year,vehicles".
-           							",fuel,kilometers,options,lease,comment) VALUES(0,'".$_REQUEST['name']."', '".$_REQUEST['contact']."', '"
-           							.$_REQUEST['plate']."', '".$shift."', '".$days."', '".$ndays."', '"
-           							.$_REQUEST['car']."', '".$_REQUEST['year']."', '".$vehicles."', '".$_REQUEST['fuel']."', '"
-           							.$_REQUEST['kilometers']."', '".$options."', '".$_REQUEST['lease']."', '".$_REQUEST['comment']."');";
-
-	echo $sql;
 	$result = $conn->query("INSERT INTO wp_general_ads_taxi_ads(user_id,name,contact,type,state,area,network,plate,shift,days,ndays,car,year,vehicles".
-							",fuel,kilometers,options,lease,comment) VALUES(0,'".$_REQUEST['name']."', '".$_REQUEST['contact']."', '"
+							",fuel,kilometers,options,lease,comment,postal_code) VALUES(0,'".$_REQUEST['name']."', '".$_REQUEST['contact']."', '"
 							.$_REQUEST['type']."', '".$_REQUEST['state']."', '".$_REQUEST['area']."', '".$_REQUEST['network']."', '"
 							.$_REQUEST['plate']."', '".$shift."', '".$days."', '".$ndays."', '"
 							.$_REQUEST['car']."', '".$_REQUEST['year']."', '".$vehicles."', '".$_REQUEST['fuel']."', '"
-							.$_REQUEST['kilometers']."', '".$options."', '".$_REQUEST['lease']."', '".$_REQUEST['comment']."');");
+							.$_REQUEST['kilometers']."', '".$options."', '".$_REQUEST['lease']."', '".$_REQUEST['comment']."', '".$_REQUEST['postal_code']."');");
 
 	echo $result;
 	$conn->close();
