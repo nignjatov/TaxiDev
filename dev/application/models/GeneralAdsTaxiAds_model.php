@@ -105,99 +105,99 @@ class GeneralAdsTaxiAds_model extends MY_Model {
 			$newAdsEntity->lease = $this->input->post('lease');
 			
 			$newAdsEntity->options = "";
-			if (!empty($this->input->post('option_1'))) { 
+			if ($this->input->post('option_1') != "") { 
 				$newAdsEntity->options .= $this->input->post('option_1');
 				$newAdsEntity->options .= ",";	
 			}
-			if (!empty($this->input->post('option_2'))) { 
+			if ($this->input->post('option_2' != "")) { 
 				$newAdsEntity->options .= $this->input->post('option_2');
 			}
 			
 			$newAdsEntity->shift = "";
-			if (!empty($this->input->post('dshift'))) { 
+			if ($this->input->post('dshift') != "") { 
 				$newAdsEntity->shift .= $this->input->post('dshift');
 				$newAdsEntity->shift .= ",";	
 			}
-			if (!empty($this->input->post('nshift'))) { 
+			if ($this->input->post('nshift') != "") { 
 				$newAdsEntity->shift .= $this->input->post('nshift');
 			}
 			
 			$newAdsEntity->days = "";
-			if (!empty($this->input->post('days_1'))) { 
+			if ($this->input->post('days_1') != "") { 
 				$newAdsEntity->days .= $this->input->post('days_1');
 				$newAdsEntity->days .= ",";	
 			}
-			if (!empty($this->input->post('days_2'))) { 
+			if ($this->input->post('days_2')!= "") { 
 				$newAdsEntity->days .= $this->input->post('days_2');
 				$newAdsEntity->days .= ",";	
 			}
-			if (!empty($this->input->post('days_3'))) { 
+			if ($this->input->post('days_3') != "") { 
 				$newAdsEntity->days .= $this->input->post('days_3');
 				$newAdsEntity->days .= ",";	
 			}
-			if (!empty($this->input->post('days_4'))) { 
+			if ($this->input->post('days_4') != "") { 
 				$newAdsEntity->days .= $this->input->post('days_4');
 				$newAdsEntity->days .= ",";	
 			}
-			if (!empty($this->input->post('days_5'))) { 
+			if ($this->input->post('days_5') != "") { 
 				$newAdsEntity->days .= $this->input->post('days_5');
 				$newAdsEntity->days .= ",";	
 			}
-			if (!empty($this->input->post('days_6'))) { 
+			if ($this->input->post('days_6') != "") { 
 				$newAdsEntity->days .= $this->input->post('days_6');
 				$newAdsEntity->days .= ",";	
 			}
-			if (!empty($this->input->post('days_7'))) { 
+			if ($this->input->post('days_7') != "") { 
 				$newAdsEntity->days .= $this->input->post('days_7');
 			}
 			
 			$newAdsEntity->ndays = "";
-			if (!empty($this->input->post('ndays_1'))) { 
+			if ($this->input->post('ndays_1') != "") { 
 				$newAdsEntity->ndays .= $this->input->post('ndays_1');
 				$newAdsEntity->ndays .= ",";	
 			}
-			if (!empty($this->input->post('ndays_2'))) { 
+			if ($this->input->post('ndays_2') !="") { 
 				$newAdsEntity->ndays .= $this->input->post('ndays_2');
 				$newAdsEntity->ndays .= ",";	
 			}
-			if (!empty($this->input->post('ndays_3'))) { 
+			if ($this->input->post('ndays_3') !="") { 
 				$newAdsEntity->ndays .= $this->input->post('ndays_3');
 				$newAdsEntity->ndays .= ",";	
 			}
-			if (!empty($this->input->post('ndays_4'))) { 
+			if ($this->input->post('ndays_4') != "") { 
 				$newAdsEntity->ndays .= $this->input->post('ndays_4');
 				$newAdsEntity->ndays .= ",";	
 			}
-			if (!empty($this->input->post('ndays_5'))) { 
+			if ($this->input->post('ndays_5') != "") { 
 				$newAdsEntity->ndays .= $this->input->post('ndays_5');
 				$newAdsEntity->ndays .= ",";	
 			}
-			if (!empty($this->input->post('ndays_6'))) { 
+			if ($this->input->post('ndays_6') != "") { 
 				$newAdsEntity->ndays .= $this->input->post('ndays_6');
 				$newAdsEntity->ndays .= ",";	
 			}
-			if (!empty($this->input->post('ndays_7'))) { 
+			if ($this->input->post('ndays_7') != "") { 
 				$newAdsEntity->ndays .= $this->input->post('ndays_7');
 			}
 			
 			$newAdsEntity->vehicles = "";
-			if (!empty($this->input->post('vehicles_1'))) { 
+			if ($this->input->post('vehicles_1') !="") { 
 				$newAdsEntity->vehicles .= $this->input->post('vehicles_1');
 				$newAdsEntity->vehicles .= ",";	
 			}
-			if (!empty($this->input->post('vehicles_2'))) { 
+			if ($this->input->post('vehicles_2') !="") { 
 				$newAdsEntity->vehicles .= $this->input->post('vehicles_2');
 				$newAdsEntity->vehicles .= ",";	
 			}
-			if (!empty($this->input->post('vehicles_3'))) { 
+			if ($this->input->post('vehicles_3')!= "") { 
 				$newAdsEntity->vehicles .= $this->input->post('vehicles_3');
 				$newAdsEntity->vehicles .= ",";	
 			}
-			if (!empty($this->input->post('vehicles_4'))) { 
+			if ($this->input->post('vehicles_4') != "") { 
 				$newAdsEntity->vehicles .= $this->input->post('vehicles_4');
 				$newAdsEntity->vehicles .= ",";	
 			}
-			if (!empty($this->input->post('vehicles_5'))) { 
+			if ($this->input->post('vehicles_5') != "") { 
 				$newAdsEntity->vehicles .= $this->input->post('vehicles_5');
 			}
 			
