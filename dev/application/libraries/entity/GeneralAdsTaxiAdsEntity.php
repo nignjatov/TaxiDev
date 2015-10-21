@@ -66,4 +66,6 @@ class GeneralAdsTaxiAdsEntity {
 	
 	// add_type
 	var $add_type;
+
+	var $postal_code;
 } 

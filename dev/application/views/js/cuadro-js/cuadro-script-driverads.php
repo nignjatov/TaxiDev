@@ -150,15 +150,15 @@ function addNewDriverAds() {
 
 function deleteDriverAdsDetail(driverAdsID, type){
 	var serverURL = "<?php echo site_url('DriverAds/removeDriverAds?driverads_id=')?>" + driverAdsID;
-	if( type == 4 )
+	if( type == 4 ){
 		serverURL = "<?php echo site_url('GeneralAdsCPLS/removeDriverAds?driverads_id=')?>" + driverAdsID;
-	else if( type == 3 )
+	} else if( type == 3 ){
 		serverURL = "<?php echo site_url('GeneralAdsWantToDrive/removeDriverAds?driverads_id=')?>" + driverAdsID;
-	else if( type == 2 )
+	} else if( type == 2 ){
 		serverURL = "<?php echo site_url('GeneralAdsTaxiAds/removeDriverAds?driverads_id=')?>" + driverAdsID;
-	else if( type == 1)
+	}else if( type == 1){
 		serverURL = "<?php echo site_url('GeneralAdsDriverWanted/removeDriverAds?driverads_id=')?>" + driverAdsID;
-	
+	}
 
     cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', '', function(data){
         if (data.error['code'] == 0) {
@@ -256,7 +256,6 @@ $("form#GeneralAdDriversWantedForm").submit(function(e){
                 '</tr></thead><tbody></tbody></table>';
             $(".adv-table").append(temp);
             updateGeneralAdsList();
-            cuadroServerAPI.postDataToServer("http://localhost:8083/dev/scripts/driverWantedAddStore.php", postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){});
         } else if (data.error['code'] == 208) {
             cuadroCommonMethods.showModalView("subscriptionUpdateNeeded");
         } else {
@@ -292,7 +291,6 @@ $("form#GeneralAdTaxiAddForm").submit(function(e){
                 '</tr></thead><tbody></tbody></table>';
             $(".adv-table").append(temp);
             updateGeneralAdsList();
-            cuadroServerAPI.postDataToServer("http://localhost:8083/dev/scripts/taxiAddStore.php", postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){});
         } else if (data.error['code'] == 208) {
             cuadroCommonMethods.showModalView("subscriptionUpdateNeeded");
         } else {
@@ -328,7 +326,6 @@ $("form#GeneralAdWantToDriveForm").submit(function(e){
                 '</tr></thead><tbody></tbody></table>';
             $(".adv-table").append(temp);
             updateGeneralAdsList();
-            cuadroServerAPI.postDataToServer("http://localhost:8083/dev/scripts/WantToDriveAdStore.php", postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){});
         } else if (data.error['code'] == 208) {
             cuadroCommonMethods.showModalView("subscriptionUpdateNeeded");
         } else {
@@ -364,7 +361,6 @@ $("form#GeneralAdCPLSForm").submit(function(e){
                 '</tr></thead><tbody></tbody></table>';
             $(".adv-table").append(temp);
             updateGeneralAdsList();
-            cuadroServerAPI.postDataToServer("http://localhost:8083/dev/scripts/CPLSAdStore.php", postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){});
         } else if (data.error['code'] == 208) {
             cuadroCommonMethods.showModalView("subscriptionUpdateNeeded");
         } else {
