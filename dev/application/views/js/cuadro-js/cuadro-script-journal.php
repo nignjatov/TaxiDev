@@ -186,7 +186,7 @@ function updateJournalList () {
             console.dir(data.result.result);
         journalObject.allObjects = data.result.result;
         journalObject.populateJournalList();
-        //journalObject.initJournalPage();
+        journalObject.initJournalPage();
     });
 }
 
@@ -214,7 +214,7 @@ function deleteJournalDetail(journalID){
     cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', '', function(data){
         if (data.error['code'] == 0) {
             $('#journal_list_wrapper').remove();
-            /*var temp = '<table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered tb_roster_paying" id="journal_list">' +
+            var temp = '<table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered tb_roster_paying" id="journal_list">' +
                 '<thead>' +
                 '<tr>' +
                 '<th>Date</th>' +
@@ -227,10 +227,11 @@ function deleteJournalDetail(journalID){
                 '<th>Cash</th>' +
                 '<th>Eftpos Shift Total</th>' +
                 '<th>Docket</th>' +
+				'<th>Action</th>' +
                 '</tr>' +
                 '</thead>' +
                 '<tbody></tbody></table>';
-            $(".adv-table").append(temp);*/
+            $(".adv-table").append(temp);
             updateJournalList();
         }
     });
@@ -249,8 +250,8 @@ $("form#journalDetailForm").submit(function(e){
 
     cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'journalDetailFormSubmit', function(data){
         if (data.error['code'] == 0) {
-            //$('#journal_list_wrapper').remove();
-           /* var temp = '<table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered tb_roster_paying" id="journal_list">' +
+            $('#journal_list_wrapper').remove();
+            var temp = '<table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered tb_roster_paying" id="journal_list">' +
                 '<thead>' +
                 '<tr>' +
                 '<th>Date</th>' +
@@ -263,10 +264,11 @@ $("form#journalDetailForm").submit(function(e){
                 '<th>Cash</th>' +
                 '<th>Eftpos Shift Total</th>' +
                 '<th>Docket</th>' +
+				'<th>Action</th>' +
                 '</tr>' +
                 '</thead>' +
                 '<tbody></tbody></table>';
-            $(".adv-table").append(temp);*/
+            $(".adv-table").append(temp);
             updateJournalList();
         } else {
 //                cuadroCommonMethods.showGeneralPopUp('Error!!!', data.error['description'], false);
