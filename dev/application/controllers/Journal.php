@@ -37,7 +37,7 @@ class Journal extends MY_Controller {
 
     public function removeJournal() {
         $journal_id = $this->input->get('journal_id');
-        parent::returnData($this->Journal_model->updateJournal($this->userID, $journal_id));
+        parent::returnData($this->Journal_model->removeJournal($this->userID, $journal_id));
     }
 
     public function getAllJournalDetail() {
