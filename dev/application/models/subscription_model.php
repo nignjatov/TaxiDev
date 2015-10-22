@@ -65,7 +65,7 @@ class Subscription_model extends MY_Model {
         $data->end_date = $endDate;
         $data->stripe_subscription_id = $stripeSubscriptionID;
 
-        $clientSubscriptionID = $this->db->insert("wp_user_subscription", $data);
+        $clientSubscriptionID = $this->db->update("wp_user_subscription", $data);
         if ($clientSubscriptionID) {
             $paymentData = new PaymentEntity();
             $paymentData->user_id = $userID;
