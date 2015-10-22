@@ -147,7 +147,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Network</label>
+                        <label class="control-label col-md-3">Available Network</label>
 						<div class="dropdown col-md-6">
 							<select class="form-control" name="network">
 								<?php
@@ -165,9 +165,15 @@
 								?>
                             </select>
 						</div>
+						<label class="control-label col-md-1">
+							Other:
+						</label>
+						<div class="col-md-2">
+							<textarea rows="1" class="form-control" name="taxiOther"></textarea>
+						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Postal Code</label>
+                        <label class="control-label col-md-3">Suburb/Postcode</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control m-bot15" name="postal_code">
                         </div>
@@ -347,6 +353,7 @@
 										}
 										fclose($handle);
 									}
+
 								?>
                             </select>
 						</div>
@@ -519,7 +526,7 @@
                         </div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">File upload</label>
+                        <label class="control-label col-md-3">Upload car pic</label>
 						<div class="btn-group col-md-6">
 							<label class="btn btn-info" for="my-file-selector">
 								<input id="my-file-selector" type="file" style="display:none;">
@@ -641,9 +648,15 @@
 								?>
                             </select>
 						</div>
+						<label class="control-label col-md-1">
+							Other:
+						</label>
+						<div class="col-md-2">
+							<textarea rows="1" class="form-control" name="taxiOther"></textarea>
+						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Postal Code</label>
+                        <label class="control-label col-md-3">Suburb/Postcode</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control m-bot15" name="postal_code">
                         </div>
@@ -711,8 +724,25 @@
 							</div>
 						</div>
                     </div>
+					<div class="form-group">
+						<label class="control-label col-md-3">Options included</label>
+						<div class="btn-group col-md-6" data-toggle="buttons">
+							<label class="btn btn-default col-md-6">
+								<input type="checkbox" name="option_1" value="Baby capsule"> Baby capsule
+							</label>
+							<label class="btn btn-default col-md-6">
+								<input type="checkbox" name="option_2" value="Wheelchair accessible"> Wheelchair accessible
+							</label>
+						</div>
+						<label class="control-label col-md-1">
+							Other:
+						</label>
+						<div class="col-md-2">
+							<textarea rows="1" class="form-control" name="vehicles_5"></textarea>
+						</div>
+					</div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Description</label>
+                        <label class="control-label col-md-3">Comment</label>
                         <div class="col-md-6">
                             <textarea id="comment" rows="6" class="form-control" name="comment"></textarea>
                         </div>
@@ -864,6 +894,12 @@
 								?>
                             </select>
 						</div>
+						<label class="control-label col-md-1">
+							Other:
+						</label>
+						<div class="col-md-2">
+							<textarea rows="1" class="form-control" name="taxiOther"></textarea>
+						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Postal Code</label>
@@ -897,12 +933,28 @@
                             <input id="" type="text" class="form-control m-bot15" name="model">
                         </div>
                     </div>
+					<div class="form-group">
+						<label class="control-label col-md-3">Upload car pic</label>
+						<div class="btn-group col-md-6">
+							<label class="btn btn-info" for="my-file-selector">
+								<input id="my-file-selector" type="file" style="display:none;">
+								Choose File
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3">Price/Rate</label>
+						<div class="col-md-6">
+							<input id="" type="text" class="form-control m-bot15" id="driver_shift_start" name="priceRate">
+						</div>
+					</div>
                     <div class="form-group">
                         <label class="control-label col-md-3">Description</label>
                         <div class="col-md-6">
                             <textarea id="comment" rows="6" class="form-control" name="comment"></textarea>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="modal-footer" style="display: block;">
