@@ -43,12 +43,13 @@ class Roster extends MY_Controller {
 
     public function getAllRosterDetail() {
         $allTaxi = $this->Taxi_model->getAllTaxi($this->userID);
-        $start_date = mktime(0, 0, 0, date('m'), date('d'), date('Y'));// - 200 * 86400;
-        $end_date = mktime(0, 0, 0, date('m'), date('d'), date('Y')) + config_item('next_schedule_date') * 86400 - 1;
+        //$start_date = mktime(0, 0, 0, date('m'), date('d'), date('Y'));// - 200 * 86400;
+        //$end_date = mktime(0, 0, 0, date('m'), date('d'), date('Y')) + config_item('next_schedule_date') * 86400 - 1;
         if (empty($allTaxi->result)) {
             parent::returnData(array());
         } else {
-            parent::returnData($this->Roster_model->getAllRosterWithDateRange($this->userID, $allTaxi->result, $start_date, $end_date));
+			parent::returnData($this->Roster_model->getAllRoster($this->userID));
+            //parent::returnData($this->Roster_model->getAllRosterWithDateRange($this->userID, $allTaxi->result, $start_date, $end_date));
         }
     }
 

@@ -55,6 +55,7 @@
                                     <th>Cash</th>
                                     <th>Eftpos Shift Total</th>
                                     <th>Docket</th>
+									<th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody></tbody>

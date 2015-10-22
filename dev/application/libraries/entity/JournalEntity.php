@@ -9,6 +9,7 @@
 class JournalEntity {
     // user id
     var $user_id;
+	var $paying_date;
     var $license_plate_no;
     var $shift = 'Morning';
     var $kilometer_driven = 0;

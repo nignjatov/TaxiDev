@@ -194,6 +194,17 @@ class Roster_model extends MY_Model {
             $newRosterEntity->paying_date = $this->timezone->convertDateToMKTime($paying_date);
         }
 
+		/* Ensure that taxi can be rented only once specific shift in a day */
+		$this->db->select('*');
+        $this->db->from('wp_roster_paying');
+        $this->db->where('paying_date', $newRosterEntity->paying_date);
+		$this->db->where('shift', $newRosterEntity->shift);
+		$this->db->where('taxi_id', $newRosterEntity->taxi_id);
+		$is_already_rented = $this->db->get()->result();
+        if (!empty($is_already_rented)) {
+            return parent::returnData(false, ConstExceptionCode::UNKNOWN_ERROR_CODE);
+        }
+
         $newRosterEntity->comment = $this->input->post('comment');
 
 //        echo $this->db->last_query().'<br>;
