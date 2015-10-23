@@ -106,7 +106,10 @@ class GeneralAdsDriverWanted_model extends MY_Model {
             $newAdsEntity->type = $this->input->post('type');
 			$newAdsEntity->state = $this->input->post('state');
 			$newAdsEntity->area = $this->input->post('area');
+			
 			$newAdsEntity->network = $this->input->post('network');
+			if ($this->input->post('taxiOther') != "") 
+				$newAdsEntity->network .= ",".$this->input->post('taxiOther');
 			
 			$newAdsEntity->shift = "";
 			if ($this->input->post('shift_1') != "") {

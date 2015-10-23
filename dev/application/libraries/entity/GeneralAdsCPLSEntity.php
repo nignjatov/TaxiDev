@@ -43,5 +43,9 @@ class GeneralAdsCPLSEntity {
 	// add_type
 	var $add_type;
 
+	// postal_code
 	var $postal_code;
+	
+	// pricerate
+	var $pricerate;
 } 

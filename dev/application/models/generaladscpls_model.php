@@ -96,11 +96,17 @@ class GeneralAdsCPLS_model extends MY_Model {
 			$newAdsEntity->item = $this->input->post('item');
 			$newAdsEntity->state = $this->input->post('state');
 			$newAdsEntity->area = $this->input->post('area');
+			
 			$newAdsEntity->network = $this->input->post('network');
+			if ($this->input->post('taxiOther') != "") 
+				$newAdsEntity->network .= ",".$this->input->post('taxiOther');
+			
 			$newAdsEntity->car = $this->input->post('car');
 			$newAdsEntity->model = $this->input->post('model');
             $newAdsEntity->comment = $this->input->post('comment');
-            $newAdsEntity->postal_code= $this->input->post('postal_code');
+            $newAdsEntity->postal_code = $this->input->post('postal_code');
+			$newAdsEntity->pricerate = $this->input->post('priceRate');
+	
 			$newAdsEntity->add_type = 4;
             
 			if ($this->db->insert('wp_general_ads_cpls', $newAdsEntity)) {
