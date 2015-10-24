@@ -5,7 +5,7 @@
                 $filter = $filter." WHERE state like '%".$_GET["filter"]."%' or area like '%".$_GET["filter"]."%' or network like '%".$_GET["filter"]."%'";
         }
 
-	include_once $_SERVER['DOCUMENT_ROOT'].'/dev/scripts/serverConfig.php';
+	include_once $_SERVER['DOCUMENT_ROOT'].'/dev/scripts/config.php';
 
 	$username = ''.USERNAME;
 	$password = ''.PASSWORD;

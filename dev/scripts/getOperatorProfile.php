@@ -8,7 +8,7 @@
 	if($filter == ""){
 		return json_encode("");
 	}
-	include_once $_SERVER['DOCUMENT_ROOT'].'/dev/scripts/serverConfig.php';
+	include_once $_SERVER['DOCUMENT_ROOT'].'/dev/scripts/config.php';
 
 	$username = ''.USERNAME;
 	$password = ''.PASSWORD;
@@ -24,7 +24,7 @@
 	$conn->select_db(''.DBNAME);
 	$sql = "SELECT o.user_id, o.contact_name, d.mobile_1, d.mobile_2, d.phone, d.fax, "
 		."d.state, d.postcode, d.suburb, d.street_number, d.street_name, o.abn_number FROM wp_operators o, wp_user_detail d "
-		."WHERE d.user_id = o.user_id;" ;
+		."WHERE o.user_id=".$filter." AND d.user_id = ".$filter.";" ;
     	$result = $conn->query($sql);
 
         $ret = "[";
@@ -90,7 +90,7 @@
 							}
 						}
 					  $taxis .= "]";
-					  $row['taxis'] = $taxis;
+					  $row['taxisfleet'] = $taxis;
                       $tmp = json_encode($row);
 
                       $cnt = $cnt + 1;

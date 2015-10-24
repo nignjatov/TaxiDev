@@ -29,7 +29,7 @@
 		$vehicle = $_GET["vehicle"];
 	}
 
-	include_once $_SERVER['DOCUMENT_ROOT'].'/dev/scripts/serverConfig.php';
+	include_once $_SERVER['DOCUMENT_ROOT'].'/dev/scripts/config.php';
 
 	$username = ''.USERNAME;
 	$password = ''.PASSWORD;
@@ -50,7 +50,7 @@
 
         $ret = "[";
         $cnt = 0;
-        var_dump($result);
+ 
     	if ($result->num_rows > 0) {
     	        while($row = $result->fetch_assoc()) {
 
@@ -118,19 +118,30 @@
 					  $row['numbers'] = $numbers;
 					  $row['address'] = $address;
 
-					  $countSql = "SELECT taxi_network from wp_taxi_details WHERE user_id = ".$row['id']." AND taxi_network like '%".$network."%' AND car_type like '%".$vehicle."%';";
+					  $countSql = "SELECT taxi_network,car_type,fuel_type from wp_taxi_details WHERE user_id = ".$row['id']." AND taxi_network like '%".$network."%' AND car_type like '%".$vehicle."%';";
 					  $taxiResult = $conn->query($countSql);
 					  $taxis = "";
-
+                                          $fuels = "";
+                                          $vehicles = ""; 
 					    if ($taxiResult->num_rows > 0) {
 							while($taxirow = $taxiResult->fetch_assoc()) {
 								if($taxirow['taxi_network'] != ""){
 									$taxis .= $taxirow['taxi_network'] . ",";
 								}
+								if(($taxirow['car_type'] != "") && (strpos($vehicles,$taxirow['car_type']) === false)){
+									$vehicles .= $taxirow['car_type'] . ",";
+								}
+								if($taxirow['fuel_type'] != "" && (strpos($fuels,$taxirow['fuel_type']) === false)){
+									$fuels .= $taxirow['fuel_type'] . ",";
+								}
 							}
 						}
 						$taxis = rtrim($taxis,",");
 						$row['taxis'] = $taxis;
+                                                $fuels = rtrim($fuels,",");
+						$row['fuels'] = $fuels;
+						$vehicles = rtrim($vehicles ,",");
+						$row['vehicles'] = $vehicles ;
 
                       $tmp = json_encode($row);
 
