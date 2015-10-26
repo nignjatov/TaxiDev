@@ -70,7 +70,7 @@ class User extends CI_Controller {
         $user_name = $this->input->post('user_name');
         $user_password = $this->input->post('user_password');
         if (!empty($user_name) && !empty($user_password)){
-            $this->userID = $this->User_model->getUserID($user_name, md5($user_password.config_item('encryption_key')));
+            $this->userID = $this->User_model->getUserID($user_name, md5($user_password/*.config_item('encryption_key')*/));
             if ($this->userID){
                 if (isset($_REQUEST['rememberMe']) && strcmp($_REQUEST['rememberMe'],'remember-me') == 0){
                     $this->session->sess_expiration = config_item('remember_session_expiry_time');
@@ -92,7 +92,7 @@ class User extends CI_Controller {
 
                     UserEntity::setUserValues($userEntity);
                     $this->subscriptionID = $userEntity->subscription_id;
-                    $array = array('user_id' => $this->userID, 'user_name' => $user_name,'user_pass' => md5($user_password.config_item('encryption_key')));
+                    $array = array('user_id' => $this->userID, 'user_name' => $user_name,'user_pass' => md5($user_password/*.config_item('encryption_key')*/));
                     $this->session->set_userdata($array);
 
                     self::returnData(true);
@@ -145,21 +145,23 @@ class User extends CI_Controller {
 	log_message('info', 'The purpose of some variable is to provide some value.');
         $email = $this->input->post('email_id');
         $isValidEmailForRegister = $this->User_model->isValidEmailForRegister($email);
-        $this->util->echoObject($isValidEmailForRegister);
+        //$this->util->echoObject($isValidEmailForRegister);
         if ($isValidEmailForRegister->result) {
             $user_name = $this->input->post('user_name');
             $isValidUserNameForRegister = $this->User_model->isValidUserNameForRegister($user_name);
-            $this->util->echoObject($isValidUserNameForRegister);
+            //$this->util->echoObject($isValidUserNameForRegister);
             if ($isValidUserNameForRegister->result) {
                 $result = $this->User_model->createUser($_REQUEST);
-                $this->util->echoObject($result);
+                //$this->util->echoObject($result);
                 if ($result->result) {
                     $user_name = $this->input->post('user_name');
                     $user_pass = $this->input->post('user_password');
-                    $array = array('user_id' => $result->result, 'user_name' => $user_name,'user_pass' => md5($user_pass.config_item('encryption_key')));
+                    $array = array('user_id' => $result->result, 'user_name' => $user_name,'user_pass' => md5($user_pass/*.config_item('encryption_key')*/));
                     $this->session->set_userdata($array);
                 }
-                echo $_GET['callback'].'('.(json_encode($result)).')';
+				
+				self::returnData(true);
+                ///echo $_GET['callback'].'('.(json_encode($result)).')';
             } else {
                 echo $_GET['callback'].'('.(json_encode($isValidUserNameForRegister)).')';
             }

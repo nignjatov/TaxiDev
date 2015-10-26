@@ -73,17 +73,15 @@
         var postData = $(this).serializeArray();
         var formURL = "<?php echo site_url('User/createUser')?>";
 
-        cuadroServerAPI.postDataToServer(formURL, postData, '', 'registrationSubmit', function(data){
+        cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'registrationSubmit', function(data){
             console.dir(data);
 			
-			/* Bug fix data is not JSON formated */
-			//if (data.error['code'] == 0) {
-            if (data.indexOf("No error") >= 0) {
-//                var success_msg = 'You have successfully registered.';
-//                cuadroCommonMethods.showGeneralPopUp('Success!!!', success_msg, true);
+			if (data.error['code'] == 0) {
+                var success_msg = 'You have successfully registered.';
+                cuadroCommonMethods.showGeneralPopUp('Success!!!', success_msg, true);
                 <?php echo 'top.location=\''.site_url('Dashboard/viewDashboard').'\';';?>
             } else {
-//                cuadroCommonMethods.showGeneralPopUp('Error!!!', data.error['description'], false);
+                cuadroCommonMethods.showGeneralPopUp('Error!!!', data.error['description'], false);
             }
 //            $(".registrationLoaderBox").hide();
         });
@@ -96,6 +94,7 @@
 
         cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'loginSubmit', function(data){
             console.dir(data);
+			
             if (data.error['code'] == 0) {
                 var success_msg = 'You have successfully registered.';
                 cuadroCommonMethods.showGeneralPopUp('Success!!!', success_msg, true);
@@ -105,6 +104,7 @@
             }
 //            $(".registrationLoaderBox").hide();
         });
+		 
         e.preventDefault(); //STOP default action
     });
 

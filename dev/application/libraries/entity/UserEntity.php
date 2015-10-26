@@ -43,6 +43,10 @@ final class UserEntity
     }
 
     public static function setUserValues($userEntity){
+		if(self::$singleton_instance === null) {
+            self::$singleton_instance = new UserEntity();
+        }
+		
         self::$singleton_instance->first_name = isset($userEntity->first_name) ? $userEntity->first_name : self::$singleton_instance->first_name;
         self::$singleton_instance->last_name = isset($userEntity->last_name) ? $userEntity->last_name : self::$singleton_instance->last_name;
 //        self::$singleton_instance->user_name = isset($userEntity->user_name) ? $userEntity->user_name : self::$singleton_instance->user_name;
