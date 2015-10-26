@@ -262,26 +262,14 @@ function addNewRoster() {
 function deleteRosterDetail(rosterID){
     var serverURL = "<?php echo site_url('Roster/removeRoster?roster_id=')?>" + rosterID;
 
-    cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', '', function(data){
-        if (data.error['code'] == 0) {
-            $('#roster_list_wrapper').remove();
-            var temp = '<table cellpadding="0" cellspacing="0" border="0"' +
-                'class="display table table-bordered tb_roster_paying"' +
-                'id="roster_list">' +
-                '<thead><tr>' +
-                '<th>Taxi #</th>' +
-                '<th>Date</th>' +
-                '<th>Shift</th>' +
-                '<th>Driver Name</th>' +
-                '<th>Paid</th>' +
-                '<th>Amount Paid</th>' +
-                '<th>Balance</th>' +
-                '<th>Action</th>' +
-                '</tr></thead><tbody></tbody></table>';
-            $(".adv-table").append(temp);
-            updateRosterList();
-        }
-    });
+	$('#confirmationModal').modal('show'); 
+	$('#confirmDelete').click(function(e) {
+		cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', '', function(data){
+			if (data.error['code'] == 0) 
+					<?php echo 'top.location=\''.site_url('Roster/getAllRoster').'\';';?>
+				
+		});
+	});
 }
 
 $("#roster_submit_button").click(function(e) {
@@ -296,28 +284,8 @@ $("form#rosterDetailForm").submit(function(e){
     var formURL = $(this).attr("action");
 
     cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'rosterDetailFormSubmit', function(data){
-        if (data.error['code'] == 0) {
-            $('#roster_list_wrapper').remove();
-            var temp = '<table cellpadding="0" cellspacing="0" border="0"' +
-                'class="display table table-bordered tb_roster_paying"' +
-                'id="roster_list">' +
-                '<thead><tr>' +
-                '<th>Taxi #</th>' +
-                '<th>Date</th>' +
-                '<th>Shift</th>' +
-                '<th>Driver Name</th>' +
-                '<th>Paid</th>' +
-                '<th>Amount Paid</th>' +
-                '<th>Balance</th>' +
-                '<th>Action</th>' +
-                '</tr></thead><tbody></tbody></table>';
-            $(".adv-table").append(temp);
-            updateRosterList();
-        } else {
-//                cuadroCommonMethods.showGeneralPopUp('Error!!!', data.error['description'], false);
-        }
-//            $(".registrationLoaderBox").hide();
-
+        if (data.error['code'] == 0) 
+            <?php echo 'top.location=\''.site_url('Roster/getAllRoster').'\';';?>
     });
 });
 
