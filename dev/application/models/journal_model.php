@@ -96,22 +96,26 @@ class Journal_model extends MY_Model {
     public function addJournal($userID) {
         $newJournalEntity = new JournalEntity;
         $newJournalEntity->user_id = $userID;
-        $newJournalEntity->license_plate_no = $this->input->post('license_plate_no');
+        $newJournalEntity->license_plate_no = $this->input->post('license_plate_no');//taxi number
         $newJournalEntity->shift = $this->input->post('journal_shift');
-        $newJournalEntity->kilometer_driven = $this->input->post('kilometer_driven');
-        $newJournalEntity->shift_rate = $this->input->post('shift_rate');
-        $newJournalEntity->fuel_cost = $this->input->post('fuel_cost');
-        $newJournalEntity->other_cost = $this->input->post('other_cost');
-        $newJournalEntity->cash_payment = $this->input->post('cash_payment');
-        $newJournalEntity->eftpos_shift_total = $this->input->post('eftpos_shift_total');
-        $newJournalEntity->docket = $this->input->post('docket');
+        $newJournalEntity->shift_rate = $this->input->post('shift_rate');//shift rate
+        $newJournalEntity->fuel_cost = $this->input->post('fuel_cost');//fuel cost
+        $newJournalEntity->other_cost = $this->input->post('other_cost');//other cost
+        $newJournalEntity->cash_payment = $this->input->post('cash_payment');//total cash
+        $newJournalEntity->eftpos_shift_total = $this->input->post('eftpos_shift_total');//total eftpos
+        $newJournalEntity->docket = $this->input->post('docket');//docket
 
-        $paying_date = $this->input->post('paying_date');
+        $paying_date = $this->input->post('paying_date');//date
+
+        //operator name
+        $newJournalEntity->operator_name = $this->input->post('operator_name');//operator
+        //paid
+        $newJournalEntity->paid = $this->input->post('journal_paid');//paid
         if (!empty($paying_date)) {
             $newJournalEntity->paying_date = $this->timezone->convertDateToMKTime($paying_date);
         }
 
-        $newJournalEntity->comment = $this->input->post('comment');
+        $newJournalEntity->comment = $this->input->post('comment');//comment
 
 //        echo $this->db->last_query().'<br>;
         if ($this->db->insert('wp_driver_journal', $newJournalEntity)) {
@@ -129,7 +133,6 @@ class Journal_model extends MY_Model {
             $newJournalEntity->user_id = $userID;
             $newJournalEntity->license_plate_no = $this->input->post('license_plate_no');
             $newJournalEntity->shift = $this->input->post('journal_shift');
-            $newJournalEntity->kilometer_driven = $this->input->post('kilometer_driven');
             $newJournalEntity->shift_rate = $this->input->post('shift_rate');
             $newJournalEntity->fuel_cost = $this->input->post('fuel_cost');
             $newJournalEntity->other_cost = $this->input->post('other_cost');

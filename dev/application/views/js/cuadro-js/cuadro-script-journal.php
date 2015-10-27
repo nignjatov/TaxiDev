@@ -13,7 +13,7 @@ var journalObject = {
             journalListString += '<td>'+allJournalObjects[i].paying_date+'</td>';
             journalListString += '<td>'+allJournalObjects[i].shift+'</td>';
             journalListString += '<td>'+allJournalObjects[i].license_plate_no+'<span style="display: none">td_item_id'+allJournalObjects[i].ID+'td_item_id</span> </td>';
-            journalListString += '<td>'+allJournalObjects[i].kilometer_driven+'</td>';
+            journalListString += '<td>'+allJournalObjects[i].operator_name+'</td>';
             journalListString += '<td>'+allJournalObjects[i].shift_rate+'</td>';
             journalListString += '<td>'+allJournalObjects[i].fuel_cost+'</td>';
             journalListString += '<td>'+allJournalObjects[i].other_cost+'</td>';
@@ -48,7 +48,7 @@ var journalObject = {
         $("#paying_date").val(journalDetail.paying_date);
         $("#journal_shift").val(journalDetail.journal_shift);
         $("#journal_shift").val(journalDetail.journal_shift);
-        $("#kilometer_driven").val(journalDetail.kilometer_driven);
+        $("#operator_name").val(journalDetail.operator_name);
         $("#shift_rate").val(journalDetail.shift_rate);
         $("#fuel_cost").val(journalDetail.fuel_cost);
         $("#other_cost").val(journalDetail.other_cost);
@@ -73,7 +73,7 @@ var journalObject = {
         sOut += '<tr><td>License Plate No:</td><td>'+aData.license_plate_no+'</td></tr>';
         sOut += '<tr><td>Date:</td><td>'+aData.paying_date+'</td></tr>';
         sOut += '<tr><td>Shift:</td><td>'+aData.Shift+'</td></tr>';
-        sOut += '<tr><td>Kilometer Driven:</td><td>'+aData.kilometer_driven+'</td></tr>';
+        sOut += '<tr><td>Operator name:</td><td>'+aData.operator_name+'</td></tr>';
         sOut += '<tr><td>Shift Rate (AU$):</td><td>'+aData.shift_rate+'</td></tr>';
         sOut += '<tr><td>Fuel Cost (AU$):</td><td>'+aData.fuel_cost+'</td></tr>';
         sOut += '<tr><td>Other Cost (AU$):</td><td>'+aData.other_cost+'</td></tr>';
@@ -162,7 +162,7 @@ function searchJournal() {
             '<th>Date</th>' +
             '<th>Shift</th>' +
             '<th>Taxi #</th>' +
-            '<th>Kilometer Driven</th>' +
+            '<th>Operator name</th>' +
             '<th>Shift Rate</th>' +
             '<th>Fuel Cost</th>' +
             '<th>Other Cost</th>' +
@@ -203,7 +203,7 @@ function viewJournalDetail(journalID){
 function addNewJournal() {
     cuadroCommonMethods.resetModal("journalDetailForm");
     $('form#journalDetailForm').attr('action', "<?php echo site_url('Journal/addJournal')?>");
-    $("#journalDetailModal h4.modal-title").html("Add New Journal Information");
+    $("#journalDetailModal h4.modal-title").html("Driver Daily Journal");
     $("#journal_submit_button ").html("Add New Journal Information");
     $("#journalDetailModal").modal('show');
 }
@@ -220,7 +220,7 @@ function deleteJournalDetail(journalID){
                 '<th>Date</th>' +
                 '<th>Shift</th>' +
                 '<th>Taxi #</th>' +
-                '<th>Kilometer Driven</th>' +
+                '<th>Operator name</th>' +
                 '<th>Shift Rate</th>' +
                 '<th>Fuel Cost</th>' +
                 '<th>Other Cost</th>' +
@@ -247,7 +247,7 @@ $("form#journalDetailForm").submit(function(e){
     $("#journalDetailModal").modal('hide');
     var postData = $(this).serializeArray();
     var formURL = $(this).attr("action");
-
+    console.log(postData);
     cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'journalDetailFormSubmit', function(data){
         if (data.error['code'] == 0) {
             $('#journal_list_wrapper').remove();
@@ -257,7 +257,7 @@ $("form#journalDetailForm").submit(function(e){
                 '<th>Date</th>' +
                 '<th>Shift</th>' +
                 '<th>Taxi #</th>' +
-                '<th>Kilometer Driven</th>' +
+                '<th>Operator name</th>' +
                 '<th>Shift Rate</th>' +
                 '<th>Fuel Cost</th>' +
                 '<th>Other Cost</th>' +

@@ -48,7 +48,7 @@
                                     <th>Date</th>
                                     <th>Shift</th>
                                     <th>Taxi #</th>
-                                    <th>Kilometer Driven</th>
+                                    <th>Operator Name</th>
                                     <th>Shift Rate</th>
                                     <th>Fuel Cost</th>
                                     <th>Other Cost</th>
@@ -81,7 +81,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                <h4 class="modal-title">Add Journal</h4>
+                <h4 class="modal-title">Driver Daily Journal</h4>
             </div>
             <form class="form-horizontal" id="journalDetailForm" method="POST">
                 <div class="modal-body">
@@ -108,13 +108,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Kilometer Driven</label>
+                        <label class="control-label col-md-3">Operator Name</label>
                         <div class="col-md-6">
-                            <div id="spinner3">
-                                <div class="">
-                                    <input id="kilometer_driven" name="kilometer_driven" type="number" maxlength="6" class="form-control" min="0">
-                                </div>
-                            </div>
+                            <input id="operator_name" name="operator_name" type="text" maxlength="30" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
@@ -125,6 +121,15 @@
                                     <input id="shift_rate" name="shift_rate" type="number" maxlength="6" class="form-control" min="0">
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Paid</label>
+                        <div class="col-md-6">
+                            <select id="journal_paid" name="journal_paid" class="form-control form-control-inline input-medium">
+                                <option selected value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -148,7 +153,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Cash Payment</label>
+                        <label class="control-label col-md-3">Total Cash</label>
                         <div class="col-md-6">
                             <div id="spinner3">
                                 <div class="">
@@ -158,7 +163,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Eftpos Shift Total</label>
+                        <label class="control-label col-md-3">Total Eftpos</label>
                         <div class="col-md-6">
                             <div id="spinner3">
                                 <div class="">
@@ -168,7 +173,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Docket</label>
+                        <label class="control-label col-md-3">Total docket</label>
                         <div class="col-md-6">
                             <div id="spinner3">
                                 <div class="">
