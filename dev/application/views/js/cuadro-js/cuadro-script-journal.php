@@ -100,12 +100,12 @@ var journalObject = {
     initJournalPage: function() {
         /*
          * Insert a 'details' column to the table
-         */
+
         var nCloneTh = document.createElement( 'th' );
         var nCloneTd = document.createElement( 'td' );
         nCloneTd.innerHTML = '<img src="<?php echo base_url()?>application/views/img/details_open.png">';
         nCloneTd.className = "center";
-
+ */
         $('#journal_list thead tr').each( function () {
             this.insertBefore( nCloneTh, this.childNodes[0] );
         } );
