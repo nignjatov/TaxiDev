@@ -28,24 +28,26 @@
                                     </div>
                                 </div>
                             </div>
-                            <table id="taxi_list" cellpadding="0" cellspacing="0" border="0"
-                                   class="dynamic-table display table table-bordered tb_roster_paying"
-                                   id="hidden-table-info">
-                                <thead>
-                                <tr>
-                                    <th>Taxi #</th>
-                                    <th>Taxi Network</th>
-                                    <th>Car type</th>
-                                    <th>Car Style</th>
-                                    <th>Fuel type</th>
-                                    <th>Kilometres (Circle one)</th>
-                                    <th>Insurance Due Date</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
+							<div class="table-responsive">
+								<table id="taxi_list" cellpadding="0" cellspacing="0" border="0"
+                                   class="dynamic-table display table table-bordered tb_roster_paying table-hover">
+									<thead>
+									<tr>
+										<th></th>
+										<th>Taxi #</th>
+										<th>Taxi Network</th>
+										<th>Car type</th>
+										<th>Car Style</th>
+										<th>Fuel type</th>
+										<th>Kilometres (Circle one)</th>
+										<th>Insurance Due Date</th>
+										<th>Action</th>
+									</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>	
                         </div>
                     </div>
                 </section>

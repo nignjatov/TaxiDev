@@ -21,9 +21,27 @@
         populateTaxiList: function(){
             var allTaxiObjects = this.allObjects;
             var totalTaxi = allTaxiObjects.length;
-            var taxiListString = '';
+			
+			/* Table header */
+            var taxiListString = '<thead>';
+			taxiListString += '<tr>';
+			taxiListString += '<th></th>';
+			taxiListString += '<th>Taxi #</th>';
+			taxiListString += '<th>Taxi Network</th>';
+			taxiListString += '<th>Car type</th>';
+			taxiListString += '<th>Car Style</th>';
+			taxiListString += '<th>Fuel type</th>';
+			taxiListString += '<th>Kilometres (Circle one)</th>';
+			taxiListString += '<th>Insurance Due Date</th>';
+			taxiListString += '<th>Action</th>';
+			taxiListString += '</tr>';
+			taxiListString += '</thead>';
+			taxiListString += '<tbody>';
+			
+			/* Table content */ 
             for (var i = 0; i < totalTaxi; i++) {
                 taxiListString += '<tr class="gradeA">';
+				taxiListString += '<td center><img src="<?php echo base_url()?>application/views/img/details_open.png"></td>';
                 taxiListString += '<td>'+allTaxiObjects[i].license_plate_no+'<span style="display: none">td_item_id'+allTaxiObjects[i].ID+'td_item_id</span> </td>';
                 taxiListString += '<td>'+allTaxiObjects[i].taxi_network+'</td>';
                 taxiListString += '<td>'+allTaxiObjects[i].car_type+'</td>';
@@ -37,8 +55,11 @@
                     '</td>';
                 taxiListString += '</tr>';
             }
-
-            $("#taxi_list tbody").html(taxiListString);
+			
+			taxiListString += '</tbody>';
+			
+            $("#taxi_list").html(taxiListString);
+			
         },
         getTaxiDetailFromID: function (ID) {
             var taxiDetailArray = [];
@@ -126,22 +147,6 @@
         },
         initTaxiPage: function() {
             /*
-             * Insert a 'details' column to the table
-             */
-            var nCloneTh = document.createElement( 'th' );
-            var nCloneTd = document.createElement( 'td' );
-            nCloneTd.innerHTML = '<img src="<?php echo base_url()?>application/views/img/details_open.png">';
-            nCloneTd.className = "center";
-
-            $('#taxi_list thead tr').each( function () {
-                this.insertBefore( nCloneTh, this.childNodes[0] );
-            } );
-
-            $('#taxi_list tbody tr').each( function () {
-                this.insertBefore(  nCloneTd.cloneNode( true ), this.childNodes[0] );
-            } );
-
-            /*
              * Initialse DataTables, with no sorting on the 'details' column
              */
             var oTable = $('#taxi_list').dataTable( {
@@ -173,15 +178,36 @@
         }
     }
 
-    function updateTaxiList () {
+    function initTaxiList () {
         var serverURL = "<?php echo site_url('Taxi/getAllTaxiDetail')?>";
-
         cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', updateTaxiList, function(data){
 //            $('#taxi_list').dataTable().fnClearTable();
 //            console.dir(data);
             taxiObject.allObjects = data.result.result;
             taxiObject.populateTaxiList();
             taxiObject.initTaxiPage();
+        });
+    }
+	
+	function updateTaxiList () {
+        var serverURL = "<?php echo site_url('Taxi/getAllTaxiDetail')?>";
+        cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', updateTaxiList, function(data){
+//            $('#taxi_list').dataTable().fnClearTable();
+//            console.dir(data);
+			
+			$('#taxi_list').dataTable().fnDestroy();
+            taxiObject.allObjects = data.result.result;
+            taxiObject.populateTaxiList();
+			
+			/*
+             * Initialse DataTables, with no sorting on the 'details' column
+             */
+			var oTable = $('#taxi_list').dataTable( {
+                "aoColumnDefs": [
+                    { "bSortable": false, "aTargets": [ 0 ] }
+                ],
+                "aaSorting": [[1, 'asc']]
+            });
         });
     }
 
@@ -214,21 +240,6 @@
 
         cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', updateTaxiList, function(data){
             if (data.error['code'] == 0) {
-                $('#taxi_list_wrapper').remove();
-                var temp = '<table id="taxi_list" cellpadding="0" cellspacing="0" border="0"' +
-                    'class="dynamic-table display table table-bordered tb_roster_paying"' +
-                    'id="hidden-table-info">' +
-                    '<thead><tr>' +
-                    '<th>Taxi #</th>' +
-                    '<th>Taxi Network</th>' +
-                    '<th>Car type</th>' +
-                    '<th>Car Style</th>' +
-                    '<th>Fuel type</th>' +
-                    '<th>Kilometres (Circle one)</th>' +
-                    '<th>Insurance Due Date</th>' +
-                    '<th>Action</th>' +
-                    '</tr></thead><tbody></tbody></table>';
-                $(".adv-table").append(temp);
                 updateTaxiList();
             }
         });
@@ -246,21 +257,6 @@
 
         cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'loginSubmit', function(data){
             if (data.error['code'] == 0) {
-                $('#taxi_list_wrapper').remove();
-                var temp = '<table id="taxi_list" cellpadding="0" cellspacing="0" border="0"' +
-                    'class="dynamic-table display table table-bordered tb_roster_paying"' +
-                    'id="hidden-table-info">' +
-                    '<thead><tr>' +
-                    '<th>Taxi #</th>' +
-                    '<th>Taxi Network</th>' +
-                    '<th>Car type</th>' +
-                    '<th>Car Style</th>' +
-                    '<th>Fuel type</th>' +
-                    '<th>Kilometres (Circle one)</th>' +
-                    '<th>Insurance Due Date</th>' +
-                    '<th>Action</th>' +
-                    '</tr></thead><tbody></tbody></table>';
-                $(".adv-table").append(temp);
                 updateTaxiList();
             } else if (data.error['code'] == 208) {
                 cuadroCommonMethods.showModalView("subscriptionUpdateNeeded");
@@ -291,5 +287,5 @@
         .on('changeDate', function (ev) {
             $(this).datepicker('hide');
         });
-    updateTaxiList();
+    initTaxiList();
 </script>
