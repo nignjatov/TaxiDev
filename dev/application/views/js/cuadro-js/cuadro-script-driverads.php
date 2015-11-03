@@ -767,6 +767,10 @@ $("#OptionDriverWantedModal").click(function(e){
 	$("#add_dwp_type_input").val('Taxi');
 	
 	$("form#GeneralAdDriversWantedForm").trigger( "reset" );
+	
+	$("#GeneralAdDriversWantedModal select[name=state] option").filter(function() { return $(this).text() == 'NSW'; }).prop('selected', true);
+	refreshArea('GeneralAdDriversWantedModal');
+	
 	$("#GeneralAdDriversWantedModal h4.modal-title").html("Add New Driver Ads Information");
 	$("#GeneralAdDriversWantedSubmit").html("Add New Driver Ads Information");
 	$("#GeneralAdDriversWantedModal").modal('show');
@@ -781,6 +785,10 @@ $("#OptionTaxiAddModal").click(function(e){
 	$("#add_taxi_fuel_input").val('LPG');
 	
 	$("form#GeneralAdTaxiAddForm").trigger( "reset" );
+	
+	$("#GeneralAdTaxiAddModal select[name=state] option").filter(function() { return $(this).text() == 'NSW'; }).prop('selected', true);
+	refreshArea('GeneralAdTaxiAddModal');
+	
 	$("#GeneralAdTaxiAddModal h4.modal-title").html("Add New Driver Ads Information");
 	$("#GeneralAdTaxiAddSubmit").html("Add New Driver Ads Information");
 	$("#GeneralAdTaxiAddModal").modal('show');
@@ -793,6 +801,10 @@ $("#OptionWantToDriveModal").click(function(e){
 	$("#add_wtdp_type_input").val('Taxi');
 	
 	$("form#GeneralAdWantToDriveForm").trigger( "reset" );
+	
+	$("#GeneralAdWantToDriveModal select[name=state] option").filter(function() { return $(this).text() == 'NSW'; }).prop('selected', true);
+	refreshArea('GeneralAdWantToDriveModal');
+	
 	$("#GeneralAdWantToDriveModal h4.modal-title").html("Add New Driver Ads Information");
 	$("#GeneralAdWantToDriveSubmit").html("Add New Driver Ads Information");
 	$("#GeneralAdWantToDriveModal").modal('show');
@@ -807,6 +819,13 @@ $("#OptionCPLSModal").click(function(e){
 	$("#add_cpls_item_input").val('Taxi');
 
 	$("form#GeneralAdCPLSForm").trigger( "reset" );
+	
+	$("#GeneralAdCPLSModal select[name=state] option").filter(function() { return $(this).text() == 'NSW'; }).prop('selected', true);
+	refreshArea('GeneralAdCPLSModal');
+	
+	$("#GeneralAdCPLSModal select[name=car] option").filter(function() { return $(this).text() == 'Toyota'; }).prop('selected', true);
+	refreshCars('GeneralAdCPLSModal');
+	
 	$("#GeneralAdCPLSModal h4.modal-title").html("Add New Driver Ads Information");
 	$("#GeneralAdCPLSSubmit").html("Add New Driver Ads Information");
 	$("#GeneralAdCPLSModal").modal('show');
@@ -828,6 +847,7 @@ function refreshArea(modal){
 		}
 	});
 }
+
 function refreshNetwork(modal){
 	var setSelected=false;
 	$("#" + modal + " [name='network'] option").each(function(){
