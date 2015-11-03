@@ -794,7 +794,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-3">Name</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control m-bot15" name="name">
+                            <input id="sdsd" type="text" class="form-control m-bot15" name="name">
                         </div>
                     </div>
                     <div class="form-group">
