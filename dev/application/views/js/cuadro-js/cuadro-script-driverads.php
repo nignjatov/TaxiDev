@@ -34,7 +34,7 @@ var driverAdsObject = {
             driverAdsListString += '</tr>';
         }
 
-		$('#driverads_list').dataTable().fnDestroy();
+		//$('#driverads_list').dataTable().fnDestroy();
 		
         $("#driverads_list tbody").html(driverAdsListString);
 
@@ -166,11 +166,21 @@ var driverAdsObject = {
 			$("#GeneralAdDriversWantedModal label input[name=vehicles_3]").prop('checked', true);
 		} else 
 			$("#GeneralAdDriversWantedModal label input[name=vehicles_3]").parents().removeClass("active");			
-		if(vehicles.indexOf("Luxury/Executive") > -1) {
+		if(vehicles.indexOf("SUV") > -1) {
 			$("#GeneralAdDriversWantedModal label input[name=vehicles_4]").parents().addClass("active");
 			$("#GeneralAdDriversWantedModal label input[name=vehicles_4]").prop('checked', true);
 		} else 
 			$("#GeneralAdDriversWantedModal label input[name=vehicles_4]").parents().removeClass("active");	
+		if(vehicles.indexOf("Van") > -1) {
+			$("#GeneralAdDriversWantedModal label input[name=vehicles_5]").parents().addClass("active");
+			$("#GeneralAdDriversWantedModal label input[name=vehicles_5]").prop('checked', true);
+		} else 
+			$("#GeneralAdDriversWantedModal label input[name=vehicles_5]").parents().removeClass("active");	
+		if(vehicles.indexOf("Luxury/Executive") > -1) {
+			$("#GeneralAdDriversWantedModal label input[name=vehicles_6]").parents().addClass("active");
+			$("#GeneralAdDriversWantedModal label input[name=vehicles_6]").prop('checked', true);
+		} else 
+			$("#GeneralAdDriversWantedModal label input[name=vehicles_6]").parents().removeClass("active");	
 			
 		$("#GeneralAdDriversWantedModal select[name=state] option").filter(function() { return $(this).text() == driverAdsDetail.state; }).prop('selected', true);
 		$("#GeneralAdDriversWantedModal select[name=area] option").filter(function() { return $(this).text() == driverAdsDetail.area; }).prop('selected', true);
@@ -207,6 +217,18 @@ var driverAdsObject = {
 			$("#add_taxi_fuel_type").val("Petrol");
 		} else { 
 			$("#GeneralAdTaxiAddModal label[name='Petrol']").removeClass("active");
+		}
+		if(driverAdsDetail.fuel == "Hybrid") {
+			$("#GeneralAdTaxiAddModal label[name='Hybrid']").addClass("active");
+			$("#add_taxi_fuel_type").val("Hybrid");
+		} else { 
+			$("#GeneralAdTaxiAddModal label[name='Hybrid']").removeClass("active");
+		}
+		if(driverAdsDetail.fuel == "Diesel") {
+			$("#GeneralAdTaxiAddModal label[name='Diesel']").addClass("active");
+			$("#add_taxi_fuel_type").val("Diesel");
+		} else { 
+			$("#GeneralAdTaxiAddModal label[name='Diesel']").removeClass("active");
 		}
 		
 		var days = driverAdsDetail.days;
@@ -331,12 +353,22 @@ var driverAdsObject = {
 			$("#GeneralAdTaxiAddModal label input[name=vehicles_3]").parents().addClass("active");
 			$("#GeneralAdTaxiAddModal label input[name=vehicles_3]").prop('checked', true);
 		} else 
-			$("#GeneralAdTaxiAddModal label input[name=vehicles_3]").parents().removeClass("active");			
-		if(vehicles.indexOf("Luxury/Executive") > -1) {
+			$("#GeneralAdTaxiAddModal label input[name=vehicles_3]").parents().removeClass("active");
+		if(vehicles.indexOf("SUV") > -1) {
 			$("#GeneralAdTaxiAddModal label input[name=vehicles_4]").parents().addClass("active");
 			$("#GeneralAdTaxiAddModal label input[name=vehicles_4]").prop('checked', true);
 		} else 
-			$("#GeneralAdTaxiAddModal label input[name=vehicles_4]").parents().removeClass("active");	
+			$("#GeneralAdTaxiAddModal label input[name=vehicles_4]").parents().removeClass("active");
+		if(vehicles.indexOf("Van") > -1) {
+			$("#GeneralAdTaxiAddModal label input[name=vehicles_5]").parents().addClass("active");
+			$("#GeneralAdTaxiAddModal label input[name=vehicles_5]").prop('checked', true);
+		} else 
+			$("#GeneralAdTaxiAddModal label input[name=vehicles_5]").parents().removeClass("active");		
+		if(vehicles.indexOf("Luxury/Executive") > -1) {
+			$("#GeneralAdTaxiAddModal label input[name=vehicles_6]").parents().addClass("active");
+			$("#GeneralAdTaxiAddModal label input[name=vehicles_6]").prop('checked', true);
+		} else 
+			$("#GeneralAdTaxiAddModal label input[name=vehicles_6]").parents().removeClass("active");	
 		
 		var options = driverAdsDetail.options;
 		if(options.indexOf("Baby capsule") > -1) {
@@ -455,12 +487,22 @@ var driverAdsObject = {
 			$("#GeneralAdWantToDriveModal label input[name=vehicles_3]").parents().addClass("active");
 			$("#GeneralAdWantToDriveModal label input[name=vehicles_3]").prop('checked', true);
 		} else 
-			$("#GeneralAdWantToDriveModal label input[name=vehicles_3]").parents().removeClass("active");			
-		if(vehicles.indexOf("Luxury/Executive") > -1) {
+			$("#GeneralAdWantToDriveModal label input[name=vehicles_3]").parents().removeClass("active");	
+		if(vehicles.indexOf("SUV") > -1) {
 			$("#GeneralAdWantToDriveModal label input[name=vehicles_4]").parents().addClass("active");
 			$("#GeneralAdWantToDriveModal label input[name=vehicles_4]").prop('checked', true);
 		} else 
-			$("#GeneralAdWantToDriveModal label input[name=vehicles_4]").parents().removeClass("active");
+			$("#GeneralAdWantToDriveModal label input[name=vehicles_4]").parents().removeClass("active");	
+		if(vehicles.indexOf("Van") > -1) {
+			$("#GeneralAdWantToDriveModal label input[name=vehicles_5]").parents().addClass("active");
+			$("#GeneralAdWantToDriveModal label input[name=vehicles_5]").prop('checked', true);
+		} else 
+			$("#GeneralAdWantToDriveModal label input[name=vehicles_5]").parents().removeClass("active");			
+		if(vehicles.indexOf("Luxury/Executive") > -1) {
+			$("#GeneralAdWantToDriveModal label input[name=vehicles_6]").parents().addClass("active");
+			$("#GeneralAdWantToDriveModal label input[name=vehicles_6]").prop('checked', true);
+		} else 
+			$("#GeneralAdWantToDriveModal label input[name=vehicles_6]").parents().removeClass("active");
 		
 		var options = driverAdsDetail.options;
 		if(options.indexOf("Baby capsule") > -1) {

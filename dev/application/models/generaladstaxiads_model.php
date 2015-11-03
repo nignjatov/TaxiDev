@@ -185,6 +185,12 @@ class GeneralAdsTaxiAds_model extends MY_Model {
 
 			if ($this->input->post('vehicles_5') != "")
 				$newAdsEntity->vehicles .= $this->input->post('vehicles_5');
+			
+			if ($this->input->post('vehicles_6') != "")
+				$newAdsEntity->vehicles .= $this->input->post('vehicles_6');
+			
+			if ($this->input->post('vehicles_7') != "")
+				$newAdsEntity->vehicles .= $this->input->post('vehicles_7');
 
                         $newAdsEntity->vehicles = trim($newAdsEntity->vehicles , ",");
 			
@@ -299,6 +305,12 @@ class GeneralAdsTaxiAds_model extends MY_Model {
 
 			if ($this->input->post('vehicles_5') != "")
 				$newAdsEntity->vehicles .= $this->input->post('vehicles_5');
+			
+			if ($this->input->post('vehicles_6') != "")
+				$newAdsEntity->vehicles .= $this->input->post('vehicles_6');
+			
+			if ($this->input->post('vehicles_7') != "")
+				$newAdsEntity->vehicles .= $this->input->post('vehicles_7');
 
                         $newAdsEntity->vehicles = trim($newAdsEntity->vehicles , ",");
 			

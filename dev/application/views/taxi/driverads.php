@@ -31,19 +31,21 @@
                                     </div>
                                 </div>
                             </div>
-                            <table id="driverads_list" cellpadding="0" cellspacing="0" border="0" class="dynamic-table display table table-bordered">
-                                <thead>
-                                <tr>
-									<th>Type</th>
-                                    <th>Name</th>
-                                    <th>Contact</th>
-									<th>Date</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
+                            <div class="table-responsive"> 
+								<table id="driverads_list" cellpadding="0" cellspacing="0" border="0" class="dynamic-table display table table-bordered">
+									<thead>
+									<tr>
+										<th>Type</th>
+										<th>Name</th>
+										<th>Contact</th>
+										<th>Date</th>
+										<th>Action</th>
+									</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
                         </div>
                     </div>
                 </section>
@@ -220,23 +222,29 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">Available vehicles</label>
 						<div class="btn-group col-md-9" data-toggle="buttons">
-							<label class="btn btn-default btn-sm">
+							<label class="btn btn-default btn-xs">
 								<input type="checkbox" name="vehicles_1" value="Sedan"> Sedan
 							</label>
-							<label class="btn btn-default btn-sm">
+							<label class="btn btn-default btn-xs">
 								<input type="checkbox" name="vehicles_2" value="Wagon"> Wagon
 							</label>
-							<label class="btn btn-default btn-sm">
+							<label class="btn btn-default btn-xs">
 								<input type="checkbox" name="vehicles_3" value="Maxi"> Maxi
 							</label>
-							<label class="btn btn-default btn-sm">
-								<input type="checkbox" name="vehicles_4" value="Luxury/Executive"> Luxury/Executive
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="vehicles_4" value="SUV"> SUV
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="vehicles_5" value="Van"> Van
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="vehicles_6" value="Luxury/Executive"> Luxury/Executive
 							</label>
 							<label class="control-label col-md-1">
 								Other:
 							</label>
 							<div class="col-md-3">
-								<textarea rows="1" class="form-control" name="vehicles_5"></textarea>
+								<textarea rows="1" class="form-control" name="vehicles_7"></textarea>
 							</div>
 						</div>
                     </div>
@@ -452,12 +460,18 @@
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Fuel Type</label>
-						<div id="add_taxi_fuel_type" class="btn-group col-md-9" data-toggle="buttons">
-							<label class="active btn btn-default col-md-4" name="LPG">
+						<div id="add_taxi_fuel_type" class="btn-group col-md-6" data-toggle="buttons">
+							<label class="active btn btn-default col-md-3" name="LPG">
 								<input type="checkbox"> LPG
 							</label>
-							<label class="btn btn-default col-md-4" name="Petrol">
+							<label class="btn btn-default col-md-3" name="Petrol">
 								<input type="checkbox"> Petrol
+							</label>
+							<label class="btn btn-default col-md-3" name="Hybrid">
+								<input type="checkbox"> Hybrid
+							</label>
+							<label class="btn btn-default col-md-3" name="Diesel">
+								<input type="checkbox"> Diesel
 							</label>
 							<input type="hidden" name="fuel" id="add_taxi_fuel_input" value="LPG">
 							<script>
@@ -488,23 +502,29 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">Vehicle type</label>
 						<div class="btn-group col-md-9" data-toggle="buttons">
-							<label class="btn btn-default btn-sm">
+							<label class="btn btn-default btn-xs">
 								<input type="checkbox" name="vehicles_1" value="Sedan"> Sedan
 							</label>
-							<label class="btn btn-default btn-sm">
+							<label class="btn btn-default btn-xs">
 								<input type="checkbox" name="vehicles_2" value="Wagon"> Wagon
 							</label>
-							<label class="btn btn-default btn-sm">
+							<label class="btn btn-default btn-xs">
 								<input type="checkbox" name="vehicles_3" value="Maxi"> Maxi
 							</label>
-							<label class="btn btn-default btn-sm">
-								<input type="checkbox" name="vehicles_4" value="Luxury/Executive"> Luxury/Executive
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="vehicles_4" value="SUV"> SUV
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="vehicles_5" value="Van"> Van
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="vehicles_6" value="Luxury/Executive"> Luxury/Executive
 							</label>
 							<label class="control-label col-md-1">
 								Other:
 							</label>
 							<div class="col-md-3">
-								<textarea rows="1" class="form-control" name="vehicles_5"></textarea>
+								<textarea rows="1" class="form-control" name="vehicles_7"></textarea>
 							</div>
 						</div>
                     </div>
@@ -704,23 +724,29 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">Prefered Vehicles</label>
 						<div class="btn-group col-md-9" data-toggle="buttons">
-							<label class="btn btn-default btn-sm">
+							<label class="btn btn-default btn-xs">
 								<input type="checkbox" name="vehicles_1" value="Sedan"> Sedan
 							</label>
-							<label class="btn btn-default btn-sm">
+							<label class="btn btn-default btn-xs">
 								<input type="checkbox" name="vehicles_2" value="Wagon"> Wagon
 							</label>
-							<label class="btn btn-default btn-sm">
+							<label class="btn btn-default btn-xs">
 								<input type="checkbox" name="vehicles_3" value="Maxi"> Maxi
 							</label>
-							<label class="btn btn-default btn-sm">
-								<input type="checkbox" name="vehicles_4" value="Luxury/Executive"> Luxury/Executive
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="vehicles_4" value="SUV"> SUV
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="vehicles_5" value="Van"> Van
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="vehicles_6" value="Luxury/Executive"> Luxury/Executive
 							</label>
 							<label class="control-label col-md-1">
 								Other:
 							</label>
 							<div class="col-md-3">
-								<textarea rows="1" class="form-control" name="vehicles_5"></textarea>
+								<textarea rows="1" class="form-control" name="vehicles_7"></textarea>
 							</div>
 						</div>
                     </div>
