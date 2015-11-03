@@ -1,0 +1,81 @@
+[
+	{
+		"Toyota":[
+			"Aurion",
+			"Avalon",
+			"Camry",
+			"Corolla",
+			"Prius",
+			"Tarago",
+			"Hiace",
+			"Landcruiser",
+			"Rav4"
+		]
+	},
+	{
+		"Ford":[
+			"Falcon",
+			"Falcon G6E",
+			"Fairlanes",
+			"Territory",
+			"Kuga"		
+		]
+	},
+	{
+		"Holden":[
+			"Commodore",
+			"Statesman",
+			"Caprice",
+			"Captiva"	
+		]
+	},
+	{
+		"Hyundai":[
+			"i40",
+			"i45",
+			"iMax",
+			"Genesis",
+			"Santa fe"		
+		]
+	},
+	{
+		"Audi":[
+			"A Series",
+			"S Series",
+			"Q Series"		
+		]
+	},
+	{
+		"Mercedes":[
+			"C Class",
+			"CLS Class",
+			"S Class",
+			"M Class",
+			"GL Class",
+			"Vans"		
+		]
+	},
+	{
+		"BMW":[
+			"5 Series",
+			"6 Series",
+			"7 Series",
+			"8 Series",
+			"X Series"		
+		]
+	},
+	{
+		"Volkswagen":[
+			"Passat",
+			"Transporter",
+			"Toureg",
+			"Multivan"		
+		]
+	},
+	{
+		"Chrysler":[
+			"300",
+			"300C"		
+		]
+	}
+]

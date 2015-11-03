@@ -1,0 +1,147 @@
+[
+	{
+		"NSW":[
+			{
+				"Sydney":[
+					"Apple",
+					"TCS",
+					"Legion",
+					"Premier",
+					"St. George",
+					"Manly",
+					"Silver Service",
+					"mTaxi",
+					"RSL",
+					"GM Cabs",
+					"Lime",
+					"Yellow",
+					"Silver Top",
+					"YourTaxi"
+				]
+			},
+			{
+				"NSW Regional":[
+					"Newcastles Taxis",
+					"Silver Service",
+					"Radio Cabs Wollongong",
+					"Tweed Heads",
+					"mTaxi"				
+				]
+			}
+		]	
+	},	
+	{
+		"Victoria":[
+			{
+				"Melbourne":[
+					"Silver Top",
+					"13CABS",
+					"West Suburban"				
+				]
+			},
+			{
+				"VIC":[
+					"Geelong Taxi",
+					"Morwell Taxis",					
+					"13CABS"				
+				]
+			}
+		]	
+	},
+	{
+		"ACT":[
+			{
+				"Canberra":[
+					"Canberra Ellite",
+					"Silver Service"			
+				]
+			},
+			{
+				"ACT Regional":[
+					"Canberra Ellite",
+					"Silver Service"				
+				]
+			}
+		]	
+	},	
+	{
+		"QLD":[
+			{
+				"Brisbane":[
+					"Yellow Cabs",
+					"B & W Cabs Redcliffe",
+					"B & W Cabs Brisbane"			
+				]
+			},
+			{
+				"QLD Regional":[
+					"Gold Coast Cabs",
+					"Sunshine Coast Cabs",
+					"Hervey Bay Taxi",
+					"Rocky Cabs",
+					"B&W Cabs Toowoomba",
+					"B&W Cabs Maryborough",
+					"Yellow Cabs Rockhampton",
+					"Yellow Cabs Yeppoon",
+					"Yellow Cabs Warwick",
+					"Mackay Taxis",
+					"Whitbury Taxi"
+				]
+			}
+		]	
+	},
+	{
+		"SA":[
+			{
+				"Adelaide":[
+					"Adelaide Independent Taxi",
+					"Yellow Cabs Adelaide",
+					"Suburban Taxi Adelaide",
+					"Adelaide Taxi",
+					"Adelaide Access Taxis"			
+				]
+			},
+			{
+				"SA Regional":[
+					"Suburban Taxi",
+					"Independent Taxi",
+					"13Cabs",
+					"Dess Cabs Port Augusta"				
+				]
+			}
+		]	
+	},
+	{
+		"WA":[
+			{
+				"Perth":[
+					"Swan Taxis",
+					"B&W Cabs Perth"			
+				]
+			},
+			{
+				"WA Regional":[
+					"B&W Cabs Mandurah"			
+				]
+			}
+		]	
+	},		
+	{
+		"Tasmania":[
+			{
+				"Hobart":[
+					"Yellow Cabs Hobart",
+					"TCS",
+					"United Taxis",
+					"131008 Hobart"			
+				]
+			},
+			{
+				"Tasmania Regional":[
+					"TCS",
+					"United Taxis"			
+				]
+			}
+		]	
+	}
+]

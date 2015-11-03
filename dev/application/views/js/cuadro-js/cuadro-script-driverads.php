@@ -805,13 +805,60 @@ $("#OptionCPLSModal").click(function(e){
 	$("#add_cpls_want_to_input").val('Sell');
 	$("#add_cpls_item label[name=Taxi]").addClass("active");
 	$("#add_cpls_item_input").val('Taxi');
-	
+
 	$("form#GeneralAdCPLSForm").trigger( "reset" );
 	$("#GeneralAdCPLSModal h4.modal-title").html("Add New Driver Ads Information");
 	$("#GeneralAdCPLSSubmit").html("Add New Driver Ads Information");
 	$("#GeneralAdCPLSModal").modal('show');
 });
 
+/* Connected selects handles */
+function refreshArea(modal){
+	var setSelected=false;
+	$("#" + modal + " [name='area'] option").each(function(){
+		if ($(this).attr('state') != $("#" + modal + " [name='state']").find('option:selected').text()) {
+			$(this).addClass("hidden");
+		} else {
+			if(!setSelected) {
+				$(this).attr("selected", "selected");
+				setSelected=true;
+			}
+			$(this).removeClass("hidden");
+			refreshNetwork(modal);
+		}
+	});
+}
+function refreshNetwork(modal){
+	var setSelected=false;
+	$("#" + modal + " [name='network'] option").each(function(){
+		if ($(this).attr('area') != $("#" + modal + " [name='area']").find('option:selected').text()) {
+			$(this).addClass("hidden");
+		} else {
+			if(!setSelected) {
+				$(this).attr("selected", "selected");
+				setSelected=true;
+			}
+			$(this).removeClass("hidden");
+		}
+	});
+}
+
+function refreshCars(modal){
+	var setSelected=false;
+	$("#" + modal + " [name='model'] option").each(function(){
+		if ($(this).attr('car') != $("#" + modal + " [name='car']").find('option:selected').text()) {
+			$(this).addClass("hidden");
+		} else {
+			if(!setSelected) {
+				$(this).attr("selected", "selected");
+				setSelected=true;
+			}
+			$(this).removeClass("hidden");
+		}
+	});
+}	
+
+/* main */
 updateGeneralAdsList();
 
 </script>

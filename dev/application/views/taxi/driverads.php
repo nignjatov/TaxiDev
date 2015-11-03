@@ -114,61 +114,55 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">State</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="state">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/states.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
+							<select id="state" onchange="refreshArea('GeneralAdDriversWantedModal')" class="form-control" name="state">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$json = json_decode($string, true);
+
+								foreach ($json as $states) {
+									foreach($states as $state => $areas) {
+										echo '<option>'.$state.'</option>';
 									}
-								?>
-                            </select>
+								}
+							?>
+							</select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Area</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="area">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/areas.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
-									}
-								?>
-                            </select>
+							<select id="area"  onchange="refreshNetwork('GeneralAdDriversWantedModal')" class="form-control" name="area">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$states = json_decode($string, true);
+
+								foreach ($json as $states) 
+									foreach($states as $state => $areasArray) 
+										foreach($areasArray as $areas) 
+											foreach($areas as $area => $networks) 
+												echo '<option state="'.$state.'">'.$area.'</option>';
+								
+							?>	
+							</select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Available Network</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="network">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/networks.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
-									}
-								?>
-                            </select>
+							<select id="network" class="form-control" name="network">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$states = json_decode($string, true);
+
+								foreach ($json as $states) 
+									foreach($states as $state => $areasArray) 
+										foreach($areasArray as $areas) 
+											foreach($areas as $area => $networks) 
+												foreach($networks as $network) 
+													echo '<option area="'.$area.'">'.$network.'</option>';
+		
+							?>	
+							</select>
 						</div>
 						<label class="control-label col-md-1">
 							Other:
@@ -311,62 +305,55 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">State</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="state">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/states.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
+							<select id="state" onchange="refreshArea('GeneralAdTaxiAddModal')" class="form-control" name="state">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$json = json_decode($string, true);
+
+								foreach ($json as $states) {
+									foreach($states as $state => $areas) {
+										echo '<option>'.$state.'</option>';
 									}
-								?>
-                            </select>
+								}
+							?>
+							</select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Area</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="area">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/areas.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
-									}
-								?>
-                            </select>
+							<select id="area"  onchange="refreshNetwork('GeneralAdTaxiAddModal')" class="form-control" name="area">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$states = json_decode($string, true);
+
+								foreach ($json as $states) 
+									foreach($states as $state => $areasArray) 
+										foreach($areasArray as $areas) 
+											foreach($areas as $area => $networks) 
+												echo '<option state="'.$state.'">'.$area.'</option>';
+								
+							?>	
+							</select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Network</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="network">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/networks.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
-									}
+							<select id="network" class="form-control" name="network">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$states = json_decode($string, true);
 
-								?>
-                            </select>
+								foreach ($json as $states) 
+									foreach($states as $state => $areasArray) 
+										foreach($areasArray as $areas) 
+											foreach($areas as $area => $networks) 
+												foreach($networks as $network) 
+													echo '<option area="'.$area.'">'.$network.'</option>';
+		
+							?>	
+							</select>
 						</div>
                     </div>
 					<div class="form-group">
@@ -444,21 +431,17 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">Car Manufacturer</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="car">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/cars.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
-									}
-								?>
-                            </select>
+							<select onchange="" class="form-control" name="car">
+							<?php
+								$string = file_get_contents("application/files/cars.json");
+								$json = json_decode($string, true);
+
+
+								foreach ($json as $cars) 
+									foreach($cars as $car => $models) 
+										echo '<option>'.$car.'</option>';
+							?>
+							</select>
 						</div>
                     </div>
 					<div class="form-group">
@@ -615,61 +598,55 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">State</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="state">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/states.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
+							<select id="state" onchange="refreshArea('GeneralAdWantToDriveModal')" class="form-control" name="state">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$json = json_decode($string, true);
+
+								foreach ($json as $states) {
+									foreach($states as $state => $areas) {
+										echo '<option>'.$state.'</option>';
 									}
-								?>
-                            </select>
+								}
+							?>
+							</select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Area</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="area">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/areas.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
-									}
-								?>
-                            </select>
+							<select id="area"  onchange="refreshNetwork('GeneralAdWantToDriveModal')" class="form-control" name="area">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$states = json_decode($string, true);
+
+								foreach ($json as $states) 
+									foreach($states as $state => $areasArray) 
+										foreach($areasArray as $areas) 
+											foreach($areas as $area => $networks) 
+												echo '<option state="'.$state.'">'.$area.'</option>';
+								
+							?>	
+							</select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Network</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="network">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/networks.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
-									}
-								?>
-                            </select>
+							<select id="network" class="form-control" name="network">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$states = json_decode($string, true);
+
+								foreach ($json as $states) 
+									foreach($states as $state => $areasArray) 
+										foreach($areasArray as $areas) 
+											foreach($areas as $area => $networks) 
+												foreach($networks as $network) 
+													echo '<option area="'.$area.'">'.$network.'</option>';
+		
+							?>	
+							</select>
 						</div>
 						<label class="control-label col-md-1">
 							Other:
@@ -861,61 +838,55 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">State</label>
 						<div class="dropdown col-md-6">
-							<select id="staterr" class="form-control" name="state">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/states.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
+							<select onchange="refreshArea('GeneralAdCPLSModal')" class="form-control" name="state">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$json = json_decode($string, true);
+
+								foreach ($json as $states) {
+									foreach($states as $state => $areas) {
+										echo '<option>'.$state.'</option>';
 									}
-								?>
-                            </select>
+								}
+							?>
+							</select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Area</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="area">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/areas.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
-									}
-								?>
-                            </select>
+							<select onchange="refreshNetwork('GeneralAdCPLSModal')" class="form-control" name="area">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$states = json_decode($string, true);
+
+								foreach ($json as $states) 
+									foreach($states as $state => $areasArray) 
+										foreach($areasArray as $areas) 
+											foreach($areas as $area => $networks) 
+												echo '<option state="'.$state.'">'.$area.'</option>';
+								
+							?>	
+							</select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Taxi Network</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="network">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/networks.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
-									}
-								?>
-                            </select>
+							<select id="network" class="form-control" name="network">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$states = json_decode($string, true);
+
+								foreach ($json as $states) 
+									foreach($states as $state => $areasArray) 
+										foreach($areasArray as $areas) 
+											foreach($areas as $area => $networks) 
+												foreach($networks as $network) 
+													echo '<option area="'.$area.'">'.$network.'</option>';
+		
+							?>	
+							</select>
 						</div>
 						<label class="control-label col-md-1">
 							Other:
@@ -933,28 +904,32 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">Car Manufacturer</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="car">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/cars.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
-									}
-								?>
-                            </select>
+							<select onchange="refreshCars('GeneralAdCPLSModal')" class="form-control" name="car">
+							<?php
+								$string = file_get_contents("application/files/cars.json");
+								$json = json_decode($string, true);
+
+
+								foreach ($json as $cars) 
+									foreach($cars as $car => $models) 
+										echo '<option>'.$car.'</option>';
+							?>
+							</select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Car Model</label>
 						<div class="col-md-6">
 							<select class="form-control" name="model">
-								<option>1</option>
+							<?php
+								$string = file_get_contents("application/files/cars.json");
+								$states = json_decode($string, true);
+
+								foreach ($json as $cars) 
+									foreach($cars as $car => $models) 
+										foreach($models as $model) 
+											echo '<option car="'.$car.'">'.$model.'</option>';
+							?>	
 							</select>
                         </div>
                     </div>
@@ -992,8 +967,9 @@
 <!-- CPLS Post Modal View End -->
 </body>
 <script>
-    document.title = '<?php echo config_item("site_title");?>: Driver Wanted Ads\' List';
-    $("#nav-accordion li a").removeClass("active");
-    $("#driver_ad_menu a").addClass("active");
+document.title = '<?php echo config_item("site_title");?>: Driver Wanted Ads\' List';
+$("#nav-accordion li a").removeClass("active");
+$("#driver_ad_menu a").addClass("active");
+	
 </script>
 </html>
