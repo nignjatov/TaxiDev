@@ -59,8 +59,107 @@ var driverAdsObject = {
         $("#GeneralAdDriversWantedModal input[name=name]").val(driverAdsDetail.name);
 		$("#GeneralAdDriversWantedModal input[name=contact]").val(driverAdsDetail.contact);
 		
+		if(driverAdsDetail.type == "Taxi") {
+			$("#GeneralAdDriversWantedModal label[name=Taxi]").addClass("active");
+			$("#add_dwp_type_input").val("Taxi");
+		} else { 
+			$("#GeneralAdDriversWantedModal label[name=Taxi]").removeClass("active");
+		}	
+		if(driverAdsDetail.type == "Hire Car") {
+			$("#GeneralAdDriversWantedModal label[name='Hire Car']").addClass("active");
+			$("#add_dwp_type_input").val("Hire Car");
+		} else { 
+			$("#GeneralAdDriversWantedModal label[name='Hire Car']").removeClass("active");
+		}
 
+		var lookingFor = driverAdsDetail.looking_for;
+		if(lookingFor.indexOf("Driver") > -1) {
+			$("#GeneralAdDriversWantedModal label input[name=looking_for_1]").parents().addClass("active");
+		} else { 
+			$("#GeneralAdDriversWantedModal label input[name=looking_for_1]").parents().removeClass("active");
+		}
+		if(lookingFor.indexOf("Shift Share Partners") > -1) {
+			$("#GeneralAdDriversWantedModal label input[name=looking_for_2]").parents().addClass("active");
+		} else { 
+			$("#GeneralAdDriversWantedModal label input[name=looking_for_2]").parents().removeClass("active");
+		}
 		
+		var shift = driverAdsDetail.shift;
+		if(shift.indexOf("Day") > -1) {
+			$("#GeneralAdDriversWantedModal label input[name=shift_1]").parents().addClass("active");
+		} else { 
+			$("#GeneralAdDriversWantedModal label input[name=shift_1]").parents().removeClass("active");
+		}
+		if(shift.indexOf("Night Plate") > -1) {
+			shift.replace("Night Plate", "");
+			$("#GeneralAdDriversWantedModal label input[name=shift_3]").parents().addClass("active");
+		} else { 
+			$("#GeneralAdDriversWantedModal label input[name=shift_3]").parents().removeClass("active");
+		}
+		if(shift.indexOf("Night") > -1) {
+			$("#GeneralAdDriversWantedModal label input[name=shift_2]").parents().addClass("active");
+		} else { 
+			$("#GeneralAdDriversWantedModal label input[name=shift_2]").parents().removeClass("active");
+		}
+
+		var days = driverAdsDetail.days;
+		if(days.indexOf("Monday") > -1) 
+			$("#GeneralAdDriversWantedModal label input[name=days_1]").parents().addClass("active");
+		else 
+			$("#GeneralAdDriversWantedModal label input[name=days_1]").parents().removeClass("active");
+			
+		if(days.indexOf("Tuesday") > -1) 
+			$("#GeneralAdDriversWantedModal label input[name=days_2]").parents().addClass("active");
+		else 
+			$("#GeneralAdDriversWantedModal label input[name=days_2]").parents().removeClass("active");
+		
+		if(days.indexOf("Wednesday") > -1) 
+			$("#GeneralAdDriversWantedModal label input[name=days_3]").parents().addClass("active");
+		else 
+			$("#GeneralAdDriversWantedModal label input[name=days_3]").parents().removeClass("active");
+		
+		if(days.indexOf("Thursday") > -1) 
+			$("#GeneralAdDriversWantedModal label input[name=days_4]").parents().addClass("active");
+		else 
+			$("#GeneralAdDriversWantedModal label input[name=days_4]").parents().removeClass("active");
+			
+		if(days.indexOf("Friday") > -1) 
+			$("#GeneralAdDriversWantedModal label input[name=days_5]").parents().addClass("active");
+		else 
+			$("#GeneralAdDriversWantedModal label input[name=days_5]").parents().removeClass("active");
+			
+		if(days.indexOf("Saturday") > -1) 
+			$("#GeneralAdDriversWantedModal label input[name=days_6]").parents().addClass("active");
+		else 
+			$("#GeneralAdDriversWantedModal label input[name=days_6]").parents().removeClass("active");
+			
+		if(days.indexOf("Sunday") > -1) 
+			$("#GeneralAdDriversWantedModal label input[name=days_7]").parents().addClass("active");
+		else 
+			$("#GeneralAdDriversWantedModal label input[name=days_7]").parents().removeClass("active");
+			
+		var vehicles = driverAdsDetail.vehicles;
+		if(vehicles.indexOf("Sedan") > -1) 
+			$("#GeneralAdDriversWantedModal label input[name=vehicles_1]").parents().addClass("active");
+		else 
+			$("#GeneralAdDriversWantedModal label input[name=vehicles_1]").parents().removeClass("active");
+		if(vehicles.indexOf("Wagon") > -1) 
+			$("#GeneralAdDriversWantedModal label input[name=vehicles_2]").parents().addClass("active");
+		else 
+			$("#GeneralAdDriversWantedModal label input[name=vehicles_2]").parents().removeClass("active");
+		if(vehicles.indexOf("Maxi") > -1) 
+			$("#GeneralAdDriversWantedModal label input[name=vehicles_3]").parents().addClass("active");
+		else 
+			$("#GeneralAdDriversWantedModal label input[name=vehicles_3]").parents().removeClass("active");			
+		if(vehicles.indexOf("Luxury/Executive") > -1) 
+			$("#GeneralAdDriversWantedModal label input[name=vehicles_4]").parents().addClass("active");
+		else 
+			$("#GeneralAdDriversWantedModal label input[name=vehicles_4]").parents().removeClass("active");	
+			
+		$("#GeneralAdDriversWantedModal select[name=state] option").filter(function() { return $(this).text() == driverAdsDetail.state; }).prop('selected', true);
+		$("#GeneralAdDriversWantedModal select[name=area] option").filter(function() { return $(this).text() == driverAdsDetail.area; }).prop('selected', true);
+		$("#GeneralAdDriversWantedModal select[name=network] option").filter(function() { return $(this).text() == driverAdsDetail.network; }).prop('selected', true);
+		$("#GeneralAdDriversWantedModal input[name=postal_code]").val(driverAdsDetail.postal_code);
 		$("#GeneralAdDriversWantedModal input[name=comment]").val(driverAdsDetail.comment);
     },
 	setGeneralAdTaxiAddModal: function (driverAdsDetail){
@@ -68,6 +167,157 @@ var driverAdsObject = {
         $("#GeneralAdTaxiAddModal input[name=name]").val(driverAdsDetail.name);
 		$("#GeneralAdTaxiAddModal input[name=contact]").val(driverAdsDetail.contact);
 		
+		if(driverAdsDetail.type == "Taxi") {
+			$("#GeneralAdTaxiAddModal label[name=Taxi]").addClass("active");
+			$("#add_tap_type_input").val("Taxi");
+		} else { 
+			$("#GeneralAdTaxiAddModal label[name=Taxi]").removeClass("active");
+		}	
+		if(driverAdsDetail.type == "Hire Car") {
+			$("#GeneralAdTaxiAddModal label[name='Hire Car']").addClass("active");
+			$("#add_tap_type_input").val("Hire Car");
+		} else { 
+			$("#GeneralAdTaxiAddModal label[name='Hire Car']").removeClass("active");
+		}
+		
+		if(driverAdsDetail.fuel == "LPG") {
+			$("#GeneralAdTaxiAddModal label[name=LPG]").addClass("active");
+			$("#add_taxi_fuel_type").val("LPG");
+		} else { 
+			$("#GeneralAdTaxiAddModal label[name=LPG]").removeClass("active");
+		}	
+		if(driverAdsDetail.fuel == "Petrol") {
+			$("#GeneralAdTaxiAddModal label[name='Petrol']").addClass("active");
+			$("#add_taxi_fuel_type").val("Petrol");
+		} else { 
+			$("#GeneralAdTaxiAddModal label[name='Petrol']").removeClass("active");
+		}
+		
+		var days = driverAdsDetail.days;
+		if(days.indexOf("Monday") > -1) 
+			$("#GeneralAdTaxiAddModal label input[name=days_1]").parents().addClass("active");
+		else 
+			$("#GeneralAdTaxiAddModal label input[name=days_1]").parents().removeClass("active");
+			
+		if(days.indexOf("Tuesday") > -1) 
+			$("#GeneralAdTaxiAddModal label input[name=days_2]").parents().addClass("active");
+		else 
+			$("#GeneralAdTaxiAddModal label input[name=days_2]").parents().removeClass("active");
+		
+		if(days.indexOf("Wednesday") > -1) 
+			$("#GeneralAdTaxiAddModal label input[name=days_3]").parents().addClass("active");
+		else 
+			$("#GeneralAdTaxiAddModal label input[name=days_3]").parents().removeClass("active");
+		
+		if(days.indexOf("Thursday") > -1) 
+			$("#GeneralAdTaxiAddModal label input[name=days_4]").parents().addClass("active");
+		else 
+			$("#GeneralAdTaxiAddModal label input[name=days_4]").parents().removeClass("active");
+			
+		if(days.indexOf("Friday") > -1) 
+			$("#GeneralAdTaxiAddModal label input[name=days_5]").parents().addClass("active");
+		else 
+			$("#GeneralAdTaxiAddModal label input[name=days_5]").parents().removeClass("active");
+			
+		if(days.indexOf("Saturday") > -1) 
+			$("#GeneralAdTaxiAddModal label input[name=days_6]").parents().addClass("active");
+		else 
+			$("#GeneralAdTaxiAddModal label input[name=days_6]").parents().removeClass("active");
+			
+		if(days.indexOf("Sunday") > -1) 
+			$("#GeneralAdTaxiAddModal label input[name=days_7]").parents().addClass("active");
+		else 
+			$("#GeneralAdTaxiAddModal label input[name=days_7]").parents().removeClass("active");
+		
+		var ndays = driverAdsDetail.ndays;
+		if(ndays.indexOf("Monday") > -1) 
+			$("#GeneralAdTaxiAddModal label input[name=ndays_1]").parents().addClass("active");
+		else 
+			$("#GeneralAdTaxiAddModal label input[name=ndays_1]").parents().removeClass("active");
+			
+		if(ndays.indexOf("Tuesday") > -1) 
+			$("#GeneralAdTaxiAddModal label input[name=ndays_2]").parents().addClass("active");
+		else 
+			$("#GeneralAdTaxiAddModal label input[name=ndays_2]").parents().removeClass("active");
+		
+		if(ndays.indexOf("Wednesday") > -1) 
+			$("#GeneralAdTaxiAddModal label input[name=ndays_3]").parents().addClass("active");
+		else 
+			$("#GeneralAdTaxiAddModal label input[name=ndays_3]").parents().removeClass("active");
+		
+		if(ndays.indexOf("Thursday") > -1) 
+			$("#GeneralAdTaxiAddModal label input[name=ndays_4]").parents().addClass("active");
+		else 
+			$("#GeneralAdTaxiAddModal label input[name=ndays_4]").parents().removeClass("active");
+			
+		if(ndays.indexOf("Friday") > -1) 
+			$("#GeneralAdTaxiAddModal label input[name=ndays_5]").parents().addClass("active");
+		else 
+			$("#GeneralAdTaxiAddModal label input[name=ndays_5]").parents().removeClass("active");
+			
+		if(ndays.indexOf("Saturday") > -1) 
+			$("#GeneralAdTaxiAddModal label input[name=ndays_6]").parents().addClass("active");
+		else 
+			$("#GeneralAdTaxiAddModal label input[name=ndays_6]").parents().removeClass("active");
+			
+		if(ndays.indexOf("Sunday") > -1) 
+			$("#GeneralAdTaxiAddModal label input[name=ndays_7]").parents().addClass("active");
+		else 
+			$("#GeneralAdTaxiAddModal label input[name=ndays_7]").parents().removeClass("active");
+		
+		var shift = driverAdsDetail.shift;
+		if(shift.indexOf("Day Shift") > -1) {
+			$("#GeneralAdTaxiAddModal label input[name=dshift]").parents().addClass("active");
+		} else { 
+			$("#GeneralAdTaxiAddModal label input[name=dshift]").parents().removeClass("active");
+		}
+		if(shift.indexOf("Night Shift") > -1) {
+			$("#GeneralAdTaxiAddModal label input[name=nshift]").parents().addClass("active");
+		} else { 
+			$("#GeneralAdTaxiAddModal label input[name=nshift]").parents().removeClass("active");
+		}
+		
+		$("#GeneralAdTaxiAddModal select[name=state] option").filter(function() { return $(this).text() == driverAdsDetail.state; }).prop('selected', true);
+		$("#GeneralAdTaxiAddModal select[name=area] option").filter(function() { return $(this).text() == driverAdsDetail.area; }).prop('selected', true);
+		$("#GeneralAdTaxiAddModal select[name=network] option").filter(function() { return $(this).text() == driverAdsDetail.network; }).prop('selected', true);
+		
+		$("#GeneralAdTaxiAddModal select[name=car] option").filter(function() { return $(this).text() == driverAdsDetail.car; }).prop('selected', true);
+		$("#GeneralAdTaxiAddModal select[name=kilometers] option").filter(function() { return $(this).text() == driverAdsDetail.kilometers; }).prop('selected', true);
+		
+		var vehicles = driverAdsDetail.vehicles;
+		if(vehicles.indexOf("Sedan") > -1) 
+			$("#GeneralAdTaxiAddModal label input[name=vehicles_1]").parents().addClass("active");
+		else 
+			$("#GeneralAdTaxiAddModal label input[name=vehicles_1]").parents().removeClass("active");
+		if(vehicles.indexOf("Wagon") > -1) 
+			$("#GeneralAdTaxiAddModal label input[name=vehicles_2]").parents().addClass("active");
+		else 
+			$("#GeneralAdTaxiAddModal label input[name=vehicles_2]").parents().removeClass("active");
+		if(vehicles.indexOf("Maxi") > -1) 
+			$("#GeneralAdTaxiAddModal label input[name=vehicles_3]").parents().addClass("active");
+		else 
+			$("#GeneralAdTaxiAddModal label input[name=vehicles_3]").parents().removeClass("active");			
+		if(vehicles.indexOf("Luxury/Executive") > -1) 
+			$("#GeneralAdTaxiAddModal label input[name=vehicles_4]").parents().addClass("active");
+		else 
+			$("#GeneralAdTaxiAddModal label input[name=vehicles_4]").parents().removeClass("active");	
+		
+		var options = driverAdsDetail.options;
+		if(options.indexOf("Baby capsule") > -1) {
+			$("#GeneralAdTaxiAddModal label input[name=option_1]").parents().addClass("active");
+		} else { 
+			$("#GeneralAdTaxiAddModal label input[name=option_1]").parents().removeClass("active");
+		}
+		if(options.indexOf("Wheelchair accessible") > -1) {
+			$("#GeneralAdTaxiAddModal label input[name=option_2]").parents().addClass("active");
+		} else { 
+			$("#GeneralAdTaxiAddModal label input[name=option_2]").parents().removeClass("active");
+		}
+		
+		$("#GeneralAdTaxiAddModal input[name=lease]").val(driverAdsDetail.lease);
+		$("#GeneralAdTaxiAddModal input[name=year]").val(driverAdsDetail.year);
+		$("#GeneralAdTaxiAddModal input[name=plate]").val(driverAdsDetail.plate);
+		$("#GeneralAdTaxiAddModal input[name=postal_code]").val(driverAdsDetail.postal_code);
 		$("#GeneralAdTaxiAddModal input[name=comment]").val(driverAdsDetail.comment);
     },
 	setGeneralAdWantToDriveModal: function (driverAdsDetail){
@@ -75,6 +325,107 @@ var driverAdsObject = {
         $("#GeneralAdWantToDriveModal input[name=name]").val(driverAdsDetail.name);
 		$("#GeneralAdWantToDriveModal input[name=contact]").val(driverAdsDetail.contact);
 		
+		if(driverAdsDetail.type == "Taxi") {
+			$("#GeneralAdWantToDriveModal label[name=Taxi]").addClass("active");
+			$("#add_wtdp_type_input").val("Taxi");
+		} else { 
+			$("#GeneralAdWantToDriveModal label[name=Taxi]").removeClass("active");
+		}	
+		if(driverAdsDetail.type == "Hire Car") {
+			$("#GeneralAdWantToDriveModal label[name='Hire Car']").addClass("active");
+			$("#add_wtdp_type_input").val("Hire Car");
+		} else { 
+			$("#GeneralAdWantToDriveModal label[name='Hire Car']").removeClass("active");
+		}
+		
+		var shift = driverAdsDetail.shift;
+		if(shift.indexOf("Day") > -1) {
+			$("#GeneralAdWantToDriveModal label input[name=shift_1]").parents().addClass("active");
+		} else { 
+			$("#GeneralAdWantToDriveModal label input[name=shift_1]").parents().removeClass("active");
+		}
+		if(shift.indexOf("Night Plate") > -1) {
+			shift.replace("Night Plate", "");
+			$("#GeneralAdWantToDriveModal label input[name=shift_3]").parents().addClass("active");
+		} else { 
+			$("#GeneralAdWantToDriveModal label input[name=shift_3]").parents().removeClass("active");
+		}
+		if(shift.indexOf("Night") > -1) {
+			$("#GeneralAdWantToDriveModal label input[name=shift_2]").parents().addClass("active");
+		} else { 
+			$("#GeneralAdWantToDriveModal label input[name=shift_2]").parents().removeClass("active");
+		}
+
+		var days = driverAdsDetail.days;
+		if(days.indexOf("Monday") > -1) 
+			$("#GeneralAdWantToDriveModal label input[name=days_1]").parents().addClass("active");
+		else 
+			$("#GeneralAdWantToDriveModal label input[name=days_1]").parents().removeClass("active");
+			
+		if(days.indexOf("Tuesday") > -1) 
+			$("#GeneralAdWantToDriveModal label input[name=days_2]").parents().addClass("active");
+		else 
+			$("#GeneralAdWantToDriveModal label input[name=days_2]").parents().removeClass("active");
+		
+		if(days.indexOf("Wednesday") > -1) 
+			$("#GeneralAdWantToDriveModal label input[name=days_3]").parents().addClass("active");
+		else 
+			$("#GeneralAdWantToDriveModal label input[name=days_3]").parents().removeClass("active");
+		
+		if(days.indexOf("Thursday") > -1) 
+			$("#GeneralAdWantToDriveModal label input[name=days_4]").parents().addClass("active");
+		else 
+			$("#GeneralAdWantToDriveModal label input[name=days_4]").parents().removeClass("active");
+			
+		if(days.indexOf("Friday") > -1) 
+			$("#GeneralAdWantToDriveModal label input[name=days_5]").parents().addClass("active");
+		else 
+			$("#GeneralAdWantToDriveModal label input[name=days_5]").parents().removeClass("active");
+			
+		if(days.indexOf("Saturday") > -1) 
+			$("#GeneralAdWantToDriveModal label input[name=days_6]").parents().addClass("active");
+		else 
+			$("#GeneralAdWantToDriveModal label input[name=days_6]").parents().removeClass("active");
+			
+		if(days.indexOf("Sunday") > -1) 
+			$("#GeneralAdWantToDriveModal label input[name=days_7]").parents().addClass("active");
+		else 
+			$("#GeneralAdWantToDriveModal label input[name=days_7]").parents().removeClass("active");
+			
+		var vehicles = driverAdsDetail.vehicles;
+		if(vehicles.indexOf("Sedan") > -1) 
+			$("#GeneralAdWantToDriveModal label input[name=vehicles_1]").parents().addClass("active");
+		else 
+			$("#GeneralAdWantToDriveModal label input[name=vehicles_1]").parents().removeClass("active");
+		if(vehicles.indexOf("Wagon") > -1) 
+			$("#GeneralAdWantToDriveModal label input[name=vehicles_2]").parents().addClass("active");
+		else 
+			$("#GeneralAdWantToDriveModal label input[name=vehicles_2]").parents().removeClass("active");
+		if(vehicles.indexOf("Maxi") > -1) 
+			$("#GeneralAdWantToDriveModal label input[name=vehicles_3]").parents().addClass("active");
+		else 
+			$("#GeneralAdWantToDriveModal label input[name=vehicles_3]").parents().removeClass("active");			
+		if(vehicles.indexOf("Luxury/Executive") > -1) 
+			$("#GeneralAdWantToDriveModal label input[name=vehicles_4]").parents().addClass("active");
+		else 
+			$("#GeneralAdWantToDriveModal label input[name=vehicles_4]").parents().removeClass("active");
+		
+		var options = driverAdsDetail.options;
+		if(options.indexOf("Baby capsule") > -1) {
+			$("#GeneralAdWantToDriveModal label input[name=option_1]").parents().addClass("active");
+		} else { 
+			$("#GeneralAdWantToDriveModal label input[name=option_1]").parents().removeClass("active");
+		}
+		if(options.indexOf("Wheelchair accessible") > -1) {
+			$("#GeneralAdWantToDriveModal label input[name=option_2]").parents().addClass("active");
+		} else { 
+			$("#GeneralAdWantToDriveModal label input[name=option_2]").parents().removeClass("active");
+		}
+		
+		$("#GeneralAdWantToDriveModal select[name=state] option").filter(function() { return $(this).text() == driverAdsDetail.state; }).prop('selected', true);
+		$("#GeneralAdWantToDriveModal select[name=area] option").filter(function() { return $(this).text() == driverAdsDetail.area; }).prop('selected', true);
+		$("#GeneralAdWantToDriveModal select[name=network] option").filter(function() { return $(this).text() == driverAdsDetail.network; }).prop('selected', true);
+		$("#GeneralAdWantToDriveModal input[name=postal_code]").val(driverAdsDetail.postal_code);
 		$("#GeneralAdWantToDriveModal input[name=comment]").val(driverAdsDetail.comment);
     },
 	setGeneralAdCPLSModal: function (driverAdsDetail){
@@ -144,7 +495,7 @@ function updateGeneralAdsList () {
 		if (data.error['code'] == 0) {
 			driverAdsObject.allObjects = data.result.result;
 			driverAdsObject.populateGeneralAdsList();
-			driverAdsObject.initDriverAdsPage();
+			//driverAdsObject.initDriverAdsPage();
 		} else if (data.error['code'] == 208) {
             cuadroCommonMethods.showModalView("subscriptionUpdateNeeded");
         }
@@ -158,24 +509,28 @@ function viewDriverAdsDetail(driverAdsID){
 	
 	if(driverAdsDetail.add_type == 4) {
 		driverAdsObject.setGeneralAdCPLSModal(driverAdsDetail);
+		$("form#GeneralAdCPLSForm").trigger( "reset" );
 		$("#GeneralAdCPLSModal h4.modal-title").html("Update Driver Ads Information");
 		$("#GeneralAdCPLSSubmit").html("Update Driver Ads Information");
 		$("#GeneralAdCPLSModal").modal('show');
 	} else if(driverAdsDetail.add_type == 3) {
 		driverAdsObject.setGeneralAdWantToDriveModal(driverAdsDetail);
-		$("#GeneralAdWantToDriveModal h4.modal-title").html("Add New Driver Ads Information");
-		$("#GeneralAdWantToDriveSubmit").html("Add New Driver Ads Information");
+		$("form#GeneralAdWantToDriveForm").trigger( "reset" );
+		$("#GeneralAdWantToDriveModal h4.modal-title").html("Update Driver Ads Information");
+		$("#GeneralAdWantToDriveSubmit").html("Update Driver Ads Information");
 		$("#GeneralAdWantToDriveModal").modal('show');
 	} else if(driverAdsDetail.add_type == 2) {
 		driverAdsObject.setGeneralAdTaxiAddModal(driverAdsDetail);
-		$("#GeneralAdTaxiAddModal h4.modal-title").html("Add New Driver Ads Information");
-		$("#GeneralAdTaxiAddSubmit").html("Add New Driver Ads Information");
+		$("form#GeneralAdTaxiAddForm").trigger( "reset" );
+		$("#GeneralAdTaxiAddModal h4.modal-title").html("Update Driver Ads Information");
+		$("#GeneralAdTaxiAddSubmit").html("Update Driver Ads Information");
 		$("#GeneralAdTaxiAddModal").modal('show');
 	} else if(driverAdsDetail.add_type == 1) {
 		driverAdsObject.setGeneralAdDriverWantedModal(driverAdsDetail);
-		$("#GeneralAdDriverWantedModal h4.modal-title").html("Add New Driver Ads Information");
-		$("#GeneralAdDriverWantedSubmit").html("Add New Driver Ads Information");
-		$("#GeneralAdDriverWantedModal").modal('show');
+		$("form#GeneralAdDriversWantedForm").trigger( "reset" );
+		$("#GeneralAdDriversWantedModal h4.modal-title").html("Update Driver Ads Information");
+		$("#GeneralAdDriversWantedSubmit").html("Update Driver Ads Information");
+		$("#GeneralAdDriversWantedModal").modal('show');
 	}
 }
 
@@ -217,7 +572,7 @@ $("form#GeneralAdDriversWantedForm").submit(function(e){
     console.log('form submit');
     $("#GeneralAdDriversWantedModal").modal('hide');
     var postData = $(this).serializeArray();
-    var formURL = $("#GeneralAdDriversWantedSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('GeneralAdsDriverWanted/addDriverAds?')?>" : "<?php echo site_url('GeneralAdsDriverWanted/updateDriverAds?')?>" + selectedDriverAdsID;
+    var formURL = $("#GeneralAdDriversWantedSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('GeneralAdsDriverWanted/addDriverAds?')?>" : "<?php echo site_url('GeneralAdsDriverWanted/updateDriverAds?driverads_id=')?>" + selectedDriverAdsID;
 
     cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){
         if (data.error['code'] == 0) {
@@ -251,7 +606,7 @@ $("form#GeneralAdTaxiAddForm").submit(function(e){
     console.log('form submit');
     $("#GeneralAdTaxiAddModal").modal('hide');
     var postData = $(this).serializeArray();
-    var formURL = $("#GeneralAdTaxiAddSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('GeneralAdsTaxiAds/addDriverAds?')?>" : "<?php echo site_url('GeneralAdsTaxiAds/updateDriverAds?')?>" + selectedDriverAdsID;
+    var formURL = $("#GeneralAdTaxiAddSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('GeneralAdsTaxiAds/addDriverAds?')?>" : "<?php echo site_url('GeneralAdsTaxiAds/updateDriverAds?driverads_id=')?>" + selectedDriverAdsID;
 
     cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){
         if (data.error['code'] == 0) {
@@ -285,7 +640,7 @@ $("form#GeneralAdWantToDriveForm").submit(function(e){
     console.log('form submit');
     $("#GeneralAdWantToDriveModal").modal('hide');
     var postData = $(this).serializeArray();
-    var formURL = $("#GeneralAdWantToDriveSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('GeneralAdsWantToDrive/addDriverAds?')?>" : "<?php echo site_url('GeneralAdsWantToDrive/updateDriverAds?')?>" + selectedDriverAdsID;
+    var formURL = $("#GeneralAdWantToDriveSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('GeneralAdsWantToDrive/addDriverAds?')?>" : "<?php echo site_url('GeneralAdsWantToDrive/updateDriverAds?driverads_id=')?>" + selectedDriverAdsID;
 
     cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){
         if (data.error['code'] == 0) {

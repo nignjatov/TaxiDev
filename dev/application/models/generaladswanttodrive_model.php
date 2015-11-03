@@ -155,6 +155,15 @@ class GeneralAdsWantToDrive_model extends MY_Model {
 			
                         $newAdsEntity->vehicles = trim($newAdsEntity->vehicles, ",");
 			
+			$newAdsEntity->options = "";
+			if ($this->input->post('option_1') != "") 
+				$newAdsEntity->options .= $this->input->post('option_1').",";
+
+			if ($this->input->post('option_2' != ""))
+				$newAdsEntity->options .= $this->input->post('option_2');
+
+			$newAdsEntity->options = trim($newAdsEntity->options, ",");
+			
             $newAdsEntity->comment = $this->input->post('comment');
             $newAdsEntity->postal_code= $this->input->post('postal_code');
 			$newAdsEntity->add_type = 3;
@@ -236,6 +245,15 @@ class GeneralAdsWantToDrive_model extends MY_Model {
 				$newAdsEntity->vehicles .= $this->input->post('vehicles_5');
 			
                         $newAdsEntity->vehicles = trim($newAdsEntity->vehicles, ",");
+			
+			$newAdsEntity->options = "";
+			if ($this->input->post('option_1') != "") 
+				$newAdsEntity->options .= $this->input->post('option_1').",";
+
+			if ($this->input->post('option_2' != ""))
+				$newAdsEntity->options .= $this->input->post('option_2');
+
+			$newAdsEntity->options = trim($newAdsEntity->options, ",");
 			
             $newAdsEntity->comment = $this->input->post('comment');
             $newAdsEntity->postal_code= $this->input->post('postal_code');

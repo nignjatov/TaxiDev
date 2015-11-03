@@ -83,26 +83,31 @@
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Looking for</label>
-						<div class="btn-group col-md-6" data-toggle="buttons">
-							<label class="btn btn-default col-md-6"><input type="checkbox" name="looking_for_1" value="Driver"> Driver</label>
-							<label class="btn btn-default col-md-6"><input type="checkbox" name="looking_for_2" value="Shift Share Partners"> Shift Share Partners</label>
+						<div class="btn-group col-md-9" data-toggle="buttons">
+							<label class="btn btn-default col-md-4"><input type="checkbox" name="looking_for_1" value="Driver"> Driver</label>
+							<label class="btn btn-default col-md-4"><input type="checkbox" name="looking_for_2" value="Shift Share Partners"> Shift Share Partners</label>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Type</label>
-						<div id="add_dwp_type" class="btn-group col-md-6" data-toggle="buttons">
-							<button type="button" class="active btn btn-default col-md-6" value="Taxi">Taxi</button>
-							<button type="button" class="btn btn-default col-md-6" value="Hire Car">Hire Car</button>
+						<div id="add_dwp_type" class="btn-group col-md-9" data-toggle="buttons">
+							<label class="active btn btn-default col-md-4" name="Taxi">
+								<input type="checkbox"> Taxi
+							</label>
+							<label class="btn btn-default col-md-4" name="Hire Car">
+								<input type="checkbox"> Hire Car
+							</label>
 							<input type="hidden" name="type" id="add_dwp_type_input" value="Taxi">
 							<script>
 								$("#add_dwp_type > .btn").click(function(){
-									$("#add_dwp_type > .btn").removeClass("active");
-									$(this).addClass("active");
+									if(!$(this).hasClass("active"))
+										$(this).siblings().removeClass("active");
+									else
+										$(this).removeClass("active");
 									
 									/* Set input */
-									$("#add_dwp_type_input").val($(this).val());
+									$("#add_dwp_type_input").val($(this).attr('name'));
 								});
-							</script>
 							</script>
 						</div>
                     </div>
@@ -282,17 +287,23 @@
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Type</label>
-						<div id="add_taxi_type" class="btn-group col-md-6" data-toggle="buttons">
-							<button type="button" class="active btn btn-default col-md-6" value="Taxi">Taxi</button>
-							<button type="button" class="btn btn-default col-md-6" value="Hire Car">Hire Car</button>
-							<input type="hidden" name="type" id="add_taxi_input" value="Taxi">
+						<div id="add_tap_type" class="btn-group col-md-9" data-toggle="buttons">
+							<label class="active btn btn-default col-md-4" name="Taxi">
+								<input type="checkbox"> Taxi
+							</label>
+							<label class="btn btn-default col-md-4" name="Hire Car">
+								<input type="checkbox"> Hire Car
+							</label>
+							<input type="hidden" name="type" id="add_tap_type_input" value="Taxi">
 							<script>
-								$("#add_taxi_type > .btn").click(function(){
-									$("#add_taxi_type > .btn").removeClass("active");
-									$(this).addClass("active");
+								$("#add_tap_type > .btn").click(function(){
+									if(!$(this).hasClass("active"))
+										$(this).siblings().removeClass("active");
+									else
+										$(this).removeClass("active");
 									
 									/* Set input */
-									$("#add_taxi_input").val($(this).val());
+									$("#add_tap_type_input").val($(this).attr('name'));
 								});
 							</script>
 						</div>
@@ -458,17 +469,23 @@
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Fuel Type</label>
-						<div id="add_taxi_fuel_type" class="btn-group col-md-6">
-							<button type="button" class="active btn btn-default col-md-6" value="LPG">LPG</button>
-							<button type="button" class="btn btn-default col-md-6" value="Petrol">Petrol</button>
+						<div id="add_taxi_fuel_type" class="btn-group col-md-9" data-toggle="buttons">
+							<label class="active btn btn-default col-md-4" name="LPG">
+								<input type="checkbox"> LPG
+							</label>
+							<label class="btn btn-default col-md-4" name="Petrol">
+								<input type="checkbox"> Petrol
+							</label>
 							<input type="hidden" name="fuel" id="add_taxi_fuel_input" value="LPG">
 							<script>
 								$("#add_taxi_fuel_type > .btn").click(function(){
-									$("#add_taxi_fuel_type > .btn").removeClass("active");
-									$(this).addClass("active");
+									if(!$(this).hasClass("active"))
+										$(this).siblings().removeClass("active");
+									else
+										$(this).removeClass("active");
 									
 									/* Set input */
-									$("#add_taxi_fuel_input").val($(this).val());
+									$("#add_taxi_fuel_input").val($(this).attr('name'));
 								});
 							</script>
 						</div>
@@ -574,17 +591,23 @@
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Type</label>
-						<div id="add_wtd_type" class="btn-group col-md-6" data-toggle="buttons">
-							<button type="button" class="active btn btn-default col-md-6" value="Taxi">Taxi</button>
-							<button type="button" class="btn btn-default col-md-6" value="Hire Car">Hire Car</button>
-							<input type="hidden" name="type" id="add_wtd_input" value="Taxi">
+						<div id="add_wtdp_type" class="btn-group col-md-9" data-toggle="buttons">
+							<label class="active btn btn-default col-md-4" name="Taxi">
+								<input type="checkbox"> Taxi
+							</label>
+							<label class="btn btn-default col-md-4" name="Hire Car">
+								<input type="checkbox"> Hire Car
+							</label>
+							<input type="hidden" name="type" id="add_wtdp_type_input" value="Taxi">
 							<script>
-								$("#add_wtd_type > .btn").click(function(){
-									$("#add_wtd_type > .btn").removeClass("active");
-									$(this).addClass("active");
+								$("#add_wtdp_type > .btn").click(function(){
+									if(!$(this).hasClass("active"))
+										$(this).siblings().removeClass("active");
+									else
+										$(this).removeClass("active");
 									
 									/* Set input */
-									$("#add_wtd_input").val($(this).val());
+									$("#add_wtdp_type_input").val($(this).attr('name'));
 								});
 							</script>
 						</div>
