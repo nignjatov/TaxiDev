@@ -120,22 +120,26 @@ class GeneralAdsCPLS_model extends MY_Model {
     public function updateAds($userID, $adsID) {
         if ($userID == $this->getUserID($adsID)) {
             $newAdsEntity = new GeneralAdsCPLSEntity;
-
             $newAdsEntity->user_id = $userID;
 
-            $newAdsEntity->name = "ss";//$this->input->post('name');
-			$newAdsEntity->contact = "ss";//$this->input->post('contact');
-			$newAdsEntity->looking_for = "ss";//$this->input->post('lookingFor');
-			$newAdsEntity->type = "ss";//$this->input->post('type');
-			$newAdsEntity->state = "ss";//$this->input->post('state');
-			$newAdsEntity->area = "ss";//$this->input->post('area');
-			$newAdsEntity->network = "ss";//$this->input->post('network');
-			$newAdsEntity->shift = "ss";//$this->input->post('shift');
-			$newAdsEntity->days = "ss";//$this->input->post('days');
-			$newAdsEntity->vehicles = "ss";//$this->input->post('vehicles');
-            $newAdsEntity->comment = "ss";//$this->input->post('comment');
-
-//        echo $this->db->last_query().'<br>;
+            $newAdsEntity->name = $this->input->post('name');
+			$newAdsEntity->contact = $this->input->post('contact');
+			$newAdsEntity->want_to = $this->input->post('want_to');
+			$newAdsEntity->item = $this->input->post('item');
+			$newAdsEntity->state = $this->input->post('state');
+			$newAdsEntity->area = $this->input->post('area');
+			
+			$newAdsEntity->network = $this->input->post('network');
+			if ($this->input->post('taxiOther') != "") 
+				$newAdsEntity->network .= ",".$this->input->post('taxiOther');
+			
+			$newAdsEntity->car = $this->input->post('car');
+			$newAdsEntity->model = $this->input->post('model');
+            $newAdsEntity->comment = $this->input->post('comment');
+            $newAdsEntity->postal_code = $this->input->post('postal_code');
+			$newAdsEntity->pricerate = $this->input->post('priceRate');
+	
+			$newAdsEntity->add_type = 4;
 
             $this->db->where("ID", $adsID, false);
             $this->db->where("user_id", $userID, false);

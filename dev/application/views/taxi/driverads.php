@@ -16,14 +16,14 @@
                                         <div class="form-group">
                                             <div class="col-md-offset-8 col-md-4">
                                                 <div class="btn-group pull-right">
-                                                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"">
+                                                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                                         Add General Ad<i class="fa fa-plus"></i>
                                                     </button>
                                                     <ul class="dropdown-menu">
-                                                        <li><a href="#GeneralAdDriversWantedModal" data-toggle="modal">Drivers Wanted Post</a></li>
-                                                        <li><a href="#GeneralAdTaxiAddModal" data-toggle="modal">Taxi Add Post</a></li>
-                                                        <li><a href="#GeneralAdWantToDriveModal" data-toggle="modal">Want to Drive Post</a></li>
-                                                        <li><a href="#GeneralAdCPLSModal" data-toggle="modal">Car/Plate/Lease/Sale Post</a></li>
+                                                        <li><a href="#" id="OptionDriverWantedModal">Drivers Wanted Post</a></li>
+                                                        <li><a href="#" id="OptionTaxiAddModal">Taxi Add Post</a></li>
+                                                        <li><a href="#" id="OptionWantToDriveModal">Want to Drive Post</a></li>
+                                                        <li><a href="#" id="OptionCPLSModal">Car/Plate/Lease/Sale Post</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -838,7 +838,7 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">State</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="state">
+							<select id="staterr" class="form-control" name="state">
 								<?php
 									$row = 1;
 									if (($handle = fopen("application/files/states.csv", "r")) !== FALSE) {
@@ -930,7 +930,9 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">Car Model</label>
 						<div class="col-md-6">
-                            <input id="" type="text" class="form-control m-bot15" name="model">
+							<select class="form-control" name="model">
+								<option>1</option>
+							</select>
                         </div>
                     </div>
 					<div class="form-group">
@@ -945,13 +947,13 @@
 					<div class="form-group">
 						<label class="control-label col-md-3">Price/Rate</label>
 						<div class="col-md-6">
-							<input id="" type="text" class="form-control m-bot15" id="driver_shift_start" name="priceRate">
+							<input type="text" class="form-control m-bot15" name="priceRate">
 						</div>
 					</div>
                     <div class="form-group">
                         <label class="control-label col-md-3">Description</label>
                         <div class="col-md-6">
-                            <textarea id="comment" rows="6" class="form-control" name="comment"></textarea>
+                            <textarea rows="6" class="form-control" name="comment"></textarea>
                         </div>
                     </div>
 
