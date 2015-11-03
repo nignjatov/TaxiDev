@@ -23,7 +23,7 @@ var driverAdsObject = {
 			
             driverAdsListString += '<td>'+allDriverAdsObjects[i].name+'</td>';
             driverAdsListString += '<td>'+allDriverAdsObjects[i].contact+'</td>';
-			driverAdsListString += '<td>'+allDriverAdsObjects[i].date+'</td>';
+			driverAdsListString += '<td>'+$.datepicker.formatDate("D, d M yy", new Date((allDriverAdsObjects[i].date)))+'</td>';
 				
 			var deleteAction = allDriverAdsObjects[i].add_type;	
 			
@@ -94,7 +94,7 @@ var driverAdsObject = {
 			$("#GeneralAdDriversWantedModal label input[name=shift_1]").parents().removeClass("active");
 		}
 		if(shift.indexOf("Night Plate") > -1) {
-			shift.replace("Night Plate", "");
+			shift = shift.replace("Night Plate", "");
 			$("#GeneralAdDriversWantedModal label input[name=shift_3]").parents().addClass("active");
 			$("#GeneralAdDriversWantedModal label input[name=shift_3]").prop('checked', true);
 		} else { 
@@ -168,7 +168,7 @@ var driverAdsObject = {
 			$("#GeneralAdDriversWantedModal label input[name=vehicles_3]").parents().removeClass("active");			
 		if(vehicles.indexOf("Luxury/Executive") > -1) {
 			$("#GeneralAdDriversWantedModal label input[name=vehicles_4]").parents().addClass("active");
-			$("#GeneralAdDriversWantedModal label input[name=vehicles_14]").prop('checked', true);
+			$("#GeneralAdDriversWantedModal label input[name=vehicles_4]").prop('checked', true);
 		} else 
 			$("#GeneralAdDriversWantedModal label input[name=vehicles_4]").parents().removeClass("active");	
 			
@@ -384,7 +384,7 @@ var driverAdsObject = {
 			$("#GeneralAdWantToDriveModal label input[name=shift_1]").parents().removeClass("active");
 		}
 		if(shift.indexOf("Night Plate") > -1) {
-			shift.replace("Night Plate", "");
+			shift = shift.replace("Night Plate", "");
 			$("#GeneralAdWantToDriveModal label input[name=shift_3]").parents().addClass("active");
 			$("#GeneralAdWantToDriveModal label input[name=shift_3]").prop('checked', true);
 		} else { 
@@ -753,9 +753,18 @@ $("form#GeneralAdCPLSForm").submit(function(e){
     e.preventDefault(); //STOP default action
 });
 
+/*
+* Add new ad callbacks
+*/
 $("#OptionDriverWantedModal").click(function(e){
 	// CONSIDER CHECK!
 	//var serverURL = "<?php echo site_url('DriverAds/canAddMoreDriverAds')?>";
+	
+	$("#GeneralAdDriversWantedForm input").parents().removeClass("active");
+	$("#GeneralAdDriversWantedForm label input").prop('checked', false);
+	
+	$("#add_dwp_type label[name=Taxi]").addClass("active");
+	$("#add_dwp_type_input").val('Taxi');
 	
 	$("form#GeneralAdDriversWantedForm").trigger( "reset" );
 	$("#GeneralAdDriversWantedModal h4.modal-title").html("Add New Driver Ads Information");
@@ -763,18 +772,40 @@ $("#OptionDriverWantedModal").click(function(e){
 	$("#GeneralAdDriversWantedModal").modal('show');
 });
 $("#OptionTaxiAddModal").click(function(e){
+	$("#GeneralAdTaxiAddForm input").parents().removeClass("active");
+	$("#GeneralAdTaxiAddForm label input").prop('checked', false);
+	
+	$("#add_tap_type label[name=Taxi]").addClass("active");
+	$("#add_tap_type_input").val('Taxi');
+	$("#add_taxi_fuel_type label[name=LPG]").addClass("active");
+	$("#add_taxi_fuel_input").val('LPG');
+	
 	$("form#GeneralAdTaxiAddForm").trigger( "reset" );
 	$("#GeneralAdTaxiAddModal h4.modal-title").html("Add New Driver Ads Information");
 	$("#GeneralAdTaxiAddSubmit").html("Add New Driver Ads Information");
 	$("#GeneralAdTaxiAddModal").modal('show');
 });
 $("#OptionWantToDriveModal").click(function(e){
+	$("#GeneralAdWantToDriveForm input").parents().removeClass("active");
+	$("#GeneralAdWantToDriveForm label input").prop('checked', false);
+	
+	$("#add_wtdp_type label[name=Taxi]").addClass("active");
+	$("#add_wtdp_type_input").val('Taxi');
+	
 	$("form#GeneralAdWantToDriveForm").trigger( "reset" );
 	$("#GeneralAdWantToDriveModal h4.modal-title").html("Add New Driver Ads Information");
 	$("#GeneralAdWantToDriveSubmit").html("Add New Driver Ads Information");
 	$("#GeneralAdWantToDriveModal").modal('show');
 });
 $("#OptionCPLSModal").click(function(e){
+	$("#GeneralAdCPLSForm input").parents().removeClass("active");
+	$("#GeneralAdCPLSForm label input").prop('checked', false);
+	
+	$("#add_cpls_want_to label[name=Sell]").addClass("active");
+	$("#add_cpls_want_to_input").val('Sell');
+	$("#add_cpls_item label[name=Taxi]").addClass("active");
+	$("#add_cpls_item_input").val('Taxi');
+	
 	$("form#GeneralAdCPLSForm").trigger( "reset" );
 	$("#GeneralAdCPLSModal h4.modal-title").html("Add New Driver Ads Information");
 	$("#GeneralAdCPLSSubmit").html("Add New Driver Ads Information");
