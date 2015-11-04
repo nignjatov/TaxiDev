@@ -30,7 +30,7 @@ var maintenanceObject = {
 				allMaintenanceObjects[i].license_plate_no+'<span style="display: none">td_item_id'+ allMaintenanceObjects[i].ID+'td_item_id</span>',
 				allMaintenanceObjects[i].maintenance_task,
 				status,
-				allMaintenanceObjects[i].maintenance_date,
+				$.datepicker.formatDate("D, d M yy", new Date((allMaintenanceObjects[i].maintenance_date))),
 				allMaintenanceObjects[i].parts_required,
 				parts_available,
 				total_cost,

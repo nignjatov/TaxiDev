@@ -33,7 +33,7 @@
 					allTaxiObjects[i].car_style,
 					allTaxiObjects[i].fuel_type,
 					allTaxiObjects[i].kilometres,
-					allTaxiObjects[i].insurance_due_date,
+					$.datepicker.formatDate("D, d M yy", new Date((allTaxiObjects[i].insurance_due_date))),
 					'<a data-toggle="modal" class="edit" title="" onclick="viewTaxiDetail('+allTaxiObjects[i].ID+')" ><i class="ico-pencil"></i></a>' +
                     '<a data-toggle="modal" class="remove" title="" onclick="deleteTaxiDetail('+allTaxiObjects[i].ID+')" ><i class="ico-close"></i></a>'
 				]);
