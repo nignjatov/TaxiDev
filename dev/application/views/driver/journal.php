@@ -42,24 +42,27 @@
                                     </div>
                                 </div>
                             </div>
-                            <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered tb_roster_paying" id="journal_list">
-                                <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Shift</th>
-                                    <th>Taxi #</th>
-                                    <th>Operator Name</th>
-                                    <th>Shift Rate</th>
-                                    <th>Fuel Cost</th>
-                                    <th>Other Cost</th>
-                                    <th>Cash</th>
-                                    <th>Eftpos Shift Total</th>
-                                    <th>Docket</th>
-									<th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
+							<div class="table-responsive">
+								<table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered tb_roster_paying" id="journal_list">
+									<thead>
+									<tr>
+										<th></th>
+										<th>Date</th>
+										<th>Shift</th>
+										<th>Taxi #</th>
+										<th>Operator Name</th>
+										<th>Shift Rate</th>
+										<th>Fuel Cost</th>
+										<th>Other Cost</th>
+										<th>Cash</th>
+										<th>Eftpos Shift Total</th>
+										<th>Docket</th>
+										<th>Action</th>
+									</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+							</div>	
                         </div>
                     </div>
                 </section>

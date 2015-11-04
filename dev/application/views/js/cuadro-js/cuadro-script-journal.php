@@ -1,33 +1,31 @@
 <script>
 var selectedJournalID = 0;
+var journalDataTable = '';
 var journalObject = {
     allObjects: [],
     populateJournalList: function(){
         var allJournalObjects = this.allObjects;
         var totalJournal = allJournalObjects.length;
-        var journalListString = '';
-        for (var i = 0; i < totalJournal; i++) {
-//            var total_expanse = parseInt(allJournalObjects[i].shift_rate) + parseInt(allJournalObjects[i].fuel_cost) + parseInt(allJournalObjects[i].other_cost);
-//            var total_income = parseInt(allJournalObjects[i].cash_payment) + parseInt(allJournalObjects[i].eftpos_shift_total) + parseInt(allJournalObjects[i].docket);
-            journalListString += '<tr class="gradeA">';
-            journalListString += '<td>'+allJournalObjects[i].paying_date+'</td>';
-            journalListString += '<td>'+allJournalObjects[i].shift+'</td>';
-            journalListString += '<td>'+allJournalObjects[i].license_plate_no+'<span style="display: none">td_item_id'+allJournalObjects[i].ID+'td_item_id</span> </td>';
-            journalListString += '<td>'+allJournalObjects[i].operator_name+'</td>';
-            journalListString += '<td>'+allJournalObjects[i].shift_rate+'</td>';
-            journalListString += '<td>'+allJournalObjects[i].fuel_cost+'</td>';
-            journalListString += '<td>'+allJournalObjects[i].other_cost+'</td>';
-            journalListString += '<td>'+allJournalObjects[i].cash_payment+'</td>';
-            journalListString += '<td>'+allJournalObjects[i].eftpos_shift_total+'</td>';
-            journalListString += '<td>'+allJournalObjects[i].docket+'</td>';
-            journalListString += '<td class="action_button">' +
+			
+		journalDataTable.fnClearTable();
+		for (var i = 0; i < totalJournal; i++) {
+			journalDataTable.fnAddData([
+				'<img src="<?php echo base_url()?>application/views/img/details_open.png">',
+				$.datepicker.formatDate("D, d M yy", new Date(allJournalObjects[i].paying_date)),
+				allJournalObjects[i].shift,
+				allJournalObjects[i].license_plate_no+'<span style="display: none">td_item_id'+allJournalObjects[i].ID+'td_item_id</span>',
+				allJournalObjects[i].operator_name,
+				allJournalObjects[i].shift_rate,
+				allJournalObjects[i].fuel_cost,
+				allJournalObjects[i].other_cost,
+				allJournalObjects[i].cash_payment,
+				allJournalObjects[i].eftpos_shift_total,
+				allJournalObjects[i].docket,
                 '<a data-toggle="modal" class="edit" onclick="viewJournalDetail('+allJournalObjects[i].ID+')" ><i class="ico-pencil"></i></a>' +
-                '<a data-toggle="modal" class="remove" onclick="deleteJournalDetail('+allJournalObjects[i].ID+')" ><i class="ico-close"></i></a>' +
-                '</td>';
-            journalListString += '</tr>';
-        }
-
-        $("#journal_list tbody").html(journalListString);
+                '<a data-toggle="modal" class="remove" onclick="deleteJournalDetail('+allJournalObjects[i].ID+')" ><i class="ico-close"></i></a>'
+			]);
+		}
+		$("#journal_list tbody tr").addClass('gradeA');		
     },
     getJournalDetailFromID: function (ID) {
         var journalDetailArray = [];
@@ -57,14 +55,14 @@ var journalObject = {
         $("#docket").val(journalDetail.docket);
         $("#comment").val(journalDetail.comment);
     },
-    fnFormatDetails:function ( oTable, nTr ) {
-        var aData = oTable.fnGetData( nTr );
+    fnFormatDetails:function ( journalDataTable, nTr ) {
+        var aData = journalDataTable.fnGetData( nTr );
         console.dir(aData);
         var item_id = cuadroCommonMethods.getItemID(aData[1]);
         var aData = this.getJournalDetailFromID(item_id);
 
-        var total_expanse = parseInt(allJournalObjects[i].shift_rate) + parseInt(allJournalObjects[i].fuel_cost) + parseInt(allJournalObjects[i].other_cost);
-        var total_income = parseInt(allJournalObjects[i].cash_payment) + parseInt(allJournalObjects[i].eftpos_shift_total) + parseInt(allJournalObjects[i].docket);
+        var total_expanse = parseInt(aData.shift_rate) + parseInt(aData.fuel_cost) + parseInt(aData.other_cost);
+        var total_income = parseInt(aData.cash_payment) + parseInt(aData.eftpos_shift_total) + parseInt(aData.docket);
         var gross_profit = total_income - total_expanse;
 
         var sOut = '<div class="col-sm-12">';
@@ -99,25 +97,23 @@ var journalObject = {
     },
     initJournalPage: function() {
         /*
-         * Insert a 'details' column to the table
-
-        var nCloneTh = document.createElement( 'th' );
-        var nCloneTd = document.createElement( 'td' );
-        nCloneTd.innerHTML = '<img src="<?php echo base_url()?>application/views/img/details_open.png">';
-        nCloneTd.className = "center";
- */
-        $('#journal_list thead tr').each( function () {
-            this.insertBefore( nCloneTh, this.childNodes[0] );
-        } );
-
-        $('#journal_list tbody tr').each( function () {
-            this.insertBefore(  nCloneTd.cloneNode( true ), this.childNodes[0] );
-        } );
-
-        /*
          * Initialse DataTables, with no sorting on the 'details' column
          */
-        var oTable = $('#journal_list').dataTable( {
+        journalDataTable = $('#journal_list').dataTable( {
+			"aoColumns": [
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,				
+				null,
+				null,
+				null,
+				{ "sClass": "action_button"}
+			], 
             "aoColumnDefs": [
                 { "bSortable": false, "aTargets": [ 0 ] }
             ],
@@ -130,17 +126,17 @@ var journalObject = {
          */
         $(document).on('click','#journal_list tbody td img',function () {
             var nTr = $(this).parents('tr')[0];
-            if ( oTable.fnIsOpen(nTr) )
+            if ( journalDataTable.fnIsOpen(nTr) )
             {
                 /* This row is already open - close it */
                 this.src = "<?php echo base_url()?>application/views/img/details_open.png";
-                oTable.fnClose( nTr );
+                journalDataTable.fnClose( nTr );
             }
             else
             {
                 /* Open this row */
                 this.src = "<?php echo base_url()?>application/views/img/details_close.png";
-                oTable.fnOpen( nTr, journalObject.fnFormatDetails(oTable, nTr), 'details' );
+                journalDataTable.fnOpen( nTr, journalObject.fnFormatDetails(journalDataTable, nTr), 'details' );
             }
         } );
     }
@@ -155,24 +151,6 @@ function searchJournal() {
 //            $('#journal_list').dataTable().fnClearTable();
         console.dir(data.result.result);
         journalObject.allObjects = data.result.result;
-        $('#journal_list_wrapper').remove();
-        var temp = '<table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered tb_roster_paying" id="journal_list">' +
-            '<thead>' +
-            '<tr>' +
-            '<th>Date</th>' +
-            '<th>Shift</th>' +
-            '<th>Taxi #</th>' +
-            '<th>Operator name</th>' +
-            '<th>Shift Rate</th>' +
-            '<th>Fuel Cost</th>' +
-            '<th>Other Cost</th>' +
-            '<th>Cash</th>' +
-            '<th>Eftpos Shift Total</th>' +
-            '<th>Docket</th>' +
-            '</tr>' +
-            '</thead>' +
-            '<tbody></tbody></table>';
-        $(".adv-table").append(temp);
         journalObject.populateJournalList();
         journalObject.initJournalPage();
     });
@@ -186,7 +164,18 @@ function updateJournalList () {
             console.dir(data.result.result);
         journalObject.allObjects = data.result.result;
         journalObject.populateJournalList();
-        journalObject.initJournalPage();
+    });
+}
+
+function initJournalList () {
+    var serverURL = "<?php echo site_url('Journal/getAllJournalDetail')?>";
+
+    cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', 'updateJournalList', function(data){
+//            $('#journal_list').dataTable().fnClearTable();
+            console.dir(data.result.result);
+        journalObject.allObjects = data.result.result;
+		journalObject.initJournalPage();
+        journalObject.populateJournalList();
     });
 }
 
@@ -213,25 +202,6 @@ function deleteJournalDetail(journalID){
 
     cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', '', function(data){
         if (data.error['code'] == 0) {
-            $('#journal_list_wrapper').remove();
-            var temp = '<table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered tb_roster_paying" id="journal_list">' +
-                '<thead>' +
-                '<tr>' +
-                '<th>Date</th>' +
-                '<th>Shift</th>' +
-                '<th>Taxi #</th>' +
-                '<th>Operator name</th>' +
-                '<th>Shift Rate</th>' +
-                '<th>Fuel Cost</th>' +
-                '<th>Other Cost</th>' +
-                '<th>Cash</th>' +
-                '<th>Eftpos Shift Total</th>' +
-                '<th>Docket</th>' +
-				'<th>Action</th>' +
-                '</tr>' +
-                '</thead>' +
-                '<tbody></tbody></table>';
-            $(".adv-table").append(temp);
             updateJournalList();
         }
     });
@@ -250,25 +220,6 @@ $("form#journalDetailForm").submit(function(e){
     console.log(postData);
     cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'journalDetailFormSubmit', function(data){
         if (data.error['code'] == 0) {
-            $('#journal_list_wrapper').remove();
-            var temp = '<table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered tb_roster_paying" id="journal_list">' +
-                '<thead>' +
-                '<tr>' +
-                '<th>Date</th>' +
-                '<th>Shift</th>' +
-                '<th>Taxi #</th>' +
-                '<th>Operator name</th>' +
-                '<th>Shift Rate</th>' +
-                '<th>Fuel Cost</th>' +
-                '<th>Other Cost</th>' +
-                '<th>Cash</th>' +
-                '<th>Eftpos Shift Total</th>' +
-                '<th>Docket</th>' +
-				'<th>Action</th>' +
-                '</tr>' +
-                '</thead>' +
-                '<tbody></tbody></table>';
-            $(".adv-table").append(temp);
             updateJournalList();
         } else {
 //                cuadroCommonMethods.showGeneralPopUp('Error!!!', data.error['description'], false);
@@ -307,5 +258,5 @@ $("#paying_date").datepicker({
     .on('changeDate', function (ev) {
         $(this).datepicker('hide');
     });
-updateJournalList();
+initJournalList();
 </script>
