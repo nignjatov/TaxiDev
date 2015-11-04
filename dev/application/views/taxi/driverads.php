@@ -70,26 +70,26 @@
             <form class="form-horizontal" id="GeneralAdDriversWantedForm">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="control-label col-md-3">Name</label>
+                        <label class="control-label col-md-3">Name*</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control m-bot15" name="name">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Contact Number</label>
+                        <label class="control-label col-md-3">Contact Number*</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control m-bot15" name="contact">
                         </div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Looking for</label>
+                        <label class="control-label col-md-3">Looking for*</label>
 						<div class="btn-group col-md-6" data-toggle="buttons">
 							<label class="btn btn-default col-md-6"><input type="checkbox" name="looking_for_1" value="Driver"> Driver</label>
 							<label class="btn btn-default col-md-6"><input type="checkbox" name="looking_for_2" value="Shift Share Partners"> Shift Share Partners</label>
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Type</label>
+                        <label class="control-label col-md-3">Type*</label>
 						<div id="add_dwp_type" class="btn-group col-md-6" data-toggle="buttons">
 							<button type="button" class="active btn btn-default col-md-6" value="Taxi">Taxi</button>
 							<button type="button" class="btn btn-default col-md-6" value="Hire Car">Hire Car</button>
@@ -107,7 +107,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">State</label>
+                        <label class="control-label col-md-3">State*</label>
 						<div class="dropdown col-md-6">
 							<select class="form-control" name="state">
 								<?php
@@ -127,7 +127,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Area</label>
+                        <label class="control-label col-md-3">Area*</label>
 						<div class="dropdown col-md-6">
 							<select class="form-control" name="area">
 								<?php
@@ -147,7 +147,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Available Network</label>
+                        <label class="control-label col-md-3">Available Network*</label>
 						<div class="dropdown col-md-6">
 							<select class="form-control" name="network">
 								<?php
@@ -169,17 +169,17 @@
 							Other:
 						</label>
 						<div class="col-md-2">
-							<textarea rows="1" class="form-control" name="taxiOther"></textarea>
+							<textarea rows="1" class="form-control" name="networkOther"></textarea>
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Suburb/Postcode</label>
+                        <label class="control-label col-md-3">Suburb/Postcode*</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control m-bot15" name="postal_code">
                         </div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Shift</label>
+                        <label class="control-label col-md-3">Shift*</label>
 						<div class="btn-group col-md-6" data-toggle="buttons">
 							<label class="btn btn-default col-md-4">
 								<input type="checkbox" name="shift_1" value="Day"> Day
@@ -193,7 +193,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Days</label>
+                        <label class="control-label col-md-3">Days*</label>
 						<div class="btn-group col-md-8" data-toggle="buttons">
 							<label class="btn btn-default btn-xs">
 								<input type="checkbox" name="days_1" value="Monday"> Monday
@@ -219,7 +219,7 @@
 						</div>
                     </div>					
 					<div class="form-group">
-                        <label class="control-label col-md-3">Available vehicles</label>
+                        <label class="control-label col-md-3">Available vehicles*</label>
 						<div class="btn-group col-md-9" data-toggle="buttons">
 							<label class="btn btn-default btn-sm">
 								<input type="checkbox" name="vehicles_1" value="Sedan"> Sedan
@@ -250,7 +250,8 @@
                 </div>
 
                 <div class="modal-footer" style="display: block;">
-                    <button type="button" class="btn btn-info" id="GeneralAdDriversWantedSubmit">Add</button>
+                	<h5 class="col-sm-10" style="color:#FF0000; font-weight:bold;" id="driversWantedError"></h5>
+                    <button type="button" class="col-sm-2 btn btn-info" id="GeneralAdDriversWantedSubmit">Add</button>
                 </div>
             </form>
         </div>
@@ -269,19 +270,19 @@
             <form class="form-horizontal" id="GeneralAdTaxiAddForm">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="control-label col-md-3">Name</label>
+                        <label class="control-label col-md-3">Name*</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control m-bot15" name="name">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Contact Number</label>
+                        <label class="control-label col-md-3">Contact Number*</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control m-bot15" name="contact">
                         </div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Type</label>
+                        <label class="control-label col-md-3">Type*</label>
 						<div id="add_taxi_type" class="btn-group col-md-6" data-toggle="buttons">
 							<button type="button" class="active btn btn-default col-md-6" value="Taxi">Taxi</button>
 							<button type="button" class="btn btn-default col-md-6" value="Hire Car">Hire Car</button>
@@ -298,7 +299,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">State</label>
+                        <label class="control-label col-md-3">State*</label>
 						<div class="dropdown col-md-6">
 							<select class="form-control" name="state">
 								<?php
@@ -318,7 +319,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Area</label>
+                        <label class="control-label col-md-3">Area*</label>
 						<div class="dropdown col-md-6">
 							<select class="form-control" name="area">
 								<?php
@@ -338,7 +339,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Network</label>
+                        <label class="control-label col-md-3">Network*</label>
 						<div class="dropdown col-md-6">
 							<select class="form-control" name="network">
 								<?php
@@ -359,19 +360,19 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Postal Code</label>
+                        <label class="control-label col-md-3">Suburb/Postcode*</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control m-bot15" name="postal_code">
                         </div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Taxi Plate</label>
+                        <label class="control-label col-md-3">Taxi Plate*</label>
                         <div class="col-md-6">
                             <input id="add_taxi_post_plate" type="text" class="form-control m-bot15" name="plate">
                         </div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Shift Available</label>
+                        <label class="control-label col-md-3">Shift Available*</label>
 						<div class="btn-group col-md-8" data-toggle="buttons">
 							<label class="btn btn-info btn-xs">
 								<input type="checkbox" name="days_1" value="Monday"> Monday
@@ -431,7 +432,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Car Manufacturer</label>
+                        <label class="control-label col-md-3">Car Manufacturer*</label>
 						<div class="dropdown col-md-6">
 							<select class="form-control" name="car">
 								<?php
@@ -451,13 +452,13 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Year Manufactured</label>
+                        <label class="control-label col-md-3">Year Manufactured*</label>
 						<div class="col-md-6">
                             <input id="" type="text" class="form-control m-bot15" name="year">
                         </div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Fuel Type</label>
+                        <label class="control-label col-md-3">Fuel Type*</label>
 						<div id="add_taxi_fuel_type" class="btn-group col-md-6">
 							<button type="button" class="active btn btn-default col-md-6" value="LPG">LPG</button>
 							<button type="button" class="btn btn-default col-md-6" value="Petrol">Petrol</button>
@@ -474,7 +475,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Kilometres travelled</label>
+                        <label class="control-label col-md-3">Kilometres travelled*</label>
 						<div class="dropdown col-md-6">
 							<select class="form-control" name="kilometers">
 								<option>1</option>
@@ -486,7 +487,7 @@
 						</div>
                     </div>			
 					<div class="form-group">
-                        <label class="control-label col-md-3">Vehicle type</label>
+                        <label class="control-label col-md-3">Vehicle type*</label>
 						<div class="btn-group col-md-9" data-toggle="buttons">
 							<label class="btn btn-default btn-sm">
 								<input type="checkbox" name="vehicles_1" value="Sedan"> Sedan
@@ -509,7 +510,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Options included</label>
+                        <label class="control-label col-md-3">Options included*</label>
 						<div class="btn-group col-md-6" data-toggle="buttons">
 							<label class="btn btn-default col-md-6">
 								<input type="checkbox" name="option_1" value="Baby capsule"> Baby capsule
@@ -520,7 +521,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Lease Rate/Term</label>
+                        <label class="control-label col-md-3">Lease Rate/Term*</label>
 						<div class="col-md-6">
                             <input id="" type="text" class="form-control m-bot15" id="driver_shift_start" name="lease">
                         </div>
@@ -542,7 +543,8 @@
                     </div>
                 </div>
                 <div class="modal-footer" style="display: block;">
-                    <button type="button" class="btn btn-info" id="GeneralAdTaxiAddSubmit">Add</button>
+               		 <h5 class="col-sm-10" style="color:#FF0000; font-weight:bold;" id="taxiError"></h5>
+                    <button type="button" class="col-sm-2 btn btn-info" id="GeneralAdTaxiAddSubmit">Add</button>
                 </div>
             </form>
         </div>
@@ -561,19 +563,19 @@
             <form class="form-horizontal" id="GeneralAdWantToDriveForm">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="control-label col-md-3">Name</label>
+                        <label class="control-label col-md-3">Name*</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control m-bot15" name="name">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Contact Number</label>
+                        <label class="control-label col-md-3">Contact Number*</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control m-bot15" name="contact">
                         </div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Type</label>
+                        <label class="control-label col-md-3">Type*</label>
 						<div id="add_wtd_type" class="btn-group col-md-6" data-toggle="buttons">
 							<button type="button" class="active btn btn-default col-md-6" value="Taxi">Taxi</button>
 							<button type="button" class="btn btn-default col-md-6" value="Hire Car">Hire Car</button>
@@ -590,7 +592,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">State</label>
+                        <label class="control-label col-md-3">State*</label>
 						<div class="dropdown col-md-6">
 							<select class="form-control" name="state">
 								<?php
@@ -610,7 +612,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Area</label>
+                        <label class="control-label col-md-3">Area*</label>
 						<div class="dropdown col-md-6">
 							<select class="form-control" name="area">
 								<?php
@@ -630,7 +632,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Network</label>
+                        <label class="control-label col-md-3">Network*</label>
 						<div class="dropdown col-md-6">
 							<select class="form-control" name="network">
 								<?php
@@ -656,13 +658,13 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Suburb/Postcode</label>
+                        <label class="control-label col-md-3">Suburb/Postcode*</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control m-bot15" name="postal_code">
                         </div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Prefered Shift</label>
+                        <label class="control-label col-md-3">Prefered Shift*</label>
 						<div class="btn-group col-md-6" data-toggle="buttons">
 							<label class="btn btn-default col-md-4">
 								<input type="checkbox" name="shift_1" value="Day"> Day
@@ -676,7 +678,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Days</label>
+                        <label class="control-label col-md-3">Days*</label>
 						<div class="btn-group col-md-8" data-toggle="buttons">
 							<label class="btn btn-info btn-xs">
 								<input type="checkbox" name="days_1" value="Monday"> Monday
@@ -702,7 +704,7 @@
 						</div>
                     </div>					
 					<div class="form-group">
-                        <label class="control-label col-md-3">Prefered Vehicles</label>
+                        <label class="control-label col-md-3">Prefered Vehicles*</label>
 						<div class="btn-group col-md-9" data-toggle="buttons">
 							<label class="btn btn-default btn-sm">
 								<input type="checkbox" name="vehicles_1" value="Sedan"> Sedan
@@ -725,7 +727,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-						<label class="control-label col-md-3">Options included</label>
+						<label class="control-label col-md-3">Options included*</label>
 						<div class="btn-group col-md-6" data-toggle="buttons">
 							<label class="btn btn-default col-md-6">
 								<input type="checkbox" name="option_1" value="Baby capsule"> Baby capsule
@@ -750,7 +752,8 @@
                 </div>
                 
                 <div class="modal-footer" style="display: block;">
-                    <button type="button" class="btn btn-info" id="GeneralAdWantToDriveSubmit">Add</button>
+                	<h5 class="col-sm-10" style="color:#FF0000; font-weight:bold;" id="wantTODriveError"></h5>
+                    <button type="button" class="col-sm-2 btn btn-info" id="GeneralAdWantToDriveSubmit">Add</button>
                 </div>
             </form>
         </div>
@@ -769,19 +772,19 @@
             <form class="form-horizontal" id="GeneralAdCPLSForm">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="control-label col-md-3">Name</label>
+                        <label class="control-label col-md-3">Name*</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control m-bot15" name="name">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">Contact Number</label>
+                        <label class="control-label col-md-3">Contact Number*</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control m-bot15" name="contact">
                         </div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Want To</label>
+                        <label class="control-label col-md-3">Want To*</label>
 						<div id="add_cpls_want_to" class="btn-group col-md-9" data-toggle="buttons">
 							<label class="active btn btn-default col-md-3" name="Sell">
 								<input type="checkbox"> Sell
@@ -807,7 +810,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Item</label>
+                        <label class="control-label col-md-3">Item*</label>
 						<div id="add_cpls_item" class="btn-group col-md-9" data-toggle="buttons">
 							<label class="active btn btn-default col-md-3" name="Taxi">
 								<input type="checkbox"> Taxi
@@ -836,7 +839,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">State</label>
+                        <label class="control-label col-md-3">State*</label>
 						<div class="dropdown col-md-6">
 							<select class="form-control" name="state">
 								<?php
@@ -856,7 +859,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Area</label>
+                        <label class="control-label col-md-3">Area*</label>
 						<div class="dropdown col-md-6">
 							<select class="form-control" name="area">
 								<?php
@@ -876,7 +879,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Taxi Network</label>
+                        <label class="control-label col-md-3">Taxi Network*</label>
 						<div class="dropdown col-md-6">
 							<select class="form-control" name="network">
 								<?php
@@ -902,13 +905,13 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Postal Code</label>
+                        <label class="control-label col-md-3">Suburb/Postcode*</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control m-bot15" name="postal_code">
                         </div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Car Manufacturer</label>
+                        <label class="control-label col-md-3">Car Manufacturer*</label>
 						<div class="dropdown col-md-6">
 							<select class="form-control" name="car">
 								<?php
@@ -928,7 +931,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Car Model</label>
+                        <label class="control-label col-md-3">Car Model*</label>
 						<div class="col-md-6">
                             <input id="" type="text" class="form-control m-bot15" name="model">
                         </div>
@@ -943,7 +946,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-md-3">Price/Rate</label>
+						<label class="control-label col-md-3">Price/Rate*</label>
 						<div class="col-md-6">
 							<input id="" type="text" class="form-control m-bot15" id="driver_shift_start" name="priceRate">
 						</div>
@@ -958,7 +961,8 @@
                 </div>
 
                 <div class="modal-footer" style="display: block;">
-                    <button type="button" class="btn btn-info" id="GeneralAdCPLSSubmit">Add</button>
+                	<h5 class="col-sm-10" style="color:#FF0000; font-weight:bold;" id="cplsError"></h5>
+                    <button type="button" class="col-sm-2btn btn-info" id="GeneralAdCPLSSubmit">Add</button>
                 </div>
             </form>
         </div>

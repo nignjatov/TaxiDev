@@ -240,30 +240,107 @@ $("#GeneralAdDriversWantedSubmit").click(function(e) {
 
 $("form#GeneralAdDriversWantedForm").submit(function(e){
     console.log('form submit');
-    $("#GeneralAdDriversWantedModal").modal('hide');
     var postData = $(this).serializeArray();
-    var formURL = $("#GeneralAdDriversWantedSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('GeneralAdsDriverWanted/addDriverAds?')?>" : "<?php echo site_url('GeneralAdsDriverWanted/addDriverAds?')?>" + selectedDriverAdsID;
-
-    cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){
-        if (data.error['code'] == 0) {
-            $('#driverads_list_wrapper').remove();
-            var temp = '<table id="driverads_list" cellpadding="0" cellspacing="0" border="0"' + 'class="dynamic-table display table table-bordered">' +
-                '<thead><tr>' +
-                '<th>Type</th>' +
-                '<th>Name</th>' +
-                '<th>Contact</th>' +
-				'<th>Date</th>' +
-                '<th>Action</th>' +
-                '</tr></thead><tbody></tbody></table>';
-            $(".adv-table").append(temp);
-            updateGeneralAdsList();
-        } else if (data.error['code'] == 208) {
-            cuadroCommonMethods.showModalView("subscriptionUpdateNeeded");
-        } else {
-//                cuadroCommonMethods.showGeneralPopUp('Error!!!', data.error['description'], false);
+    var name="", contact="",looking_for = "",type ="",state="",area="",network="",postal="",shift="",days="",vehicles="";
+    var missing = "";
+    for( var i = 0; i < postData.length;i++){
+        console.log(postData[i]);
+        if(postData[i].name == "name"){
+            name = postData[i].value;
+        } else if(postData[i].name == "contact"){
+            contact = postData[i].value;
+        } else if(postData[i].name.indexOf("looking_") > -1){
+            looking_for += postData[i].value + ",";
+        } else if(postData[i].name.indexOf("type") > -1){
+            type += postData[i].value + ",";
+        } else if (postData[i].name == "state"){
+            state = postData[i].value;
+        } else if (postData[i].name == "area"){
+            area = postData[i].value;
+        } else if (postData[i].name == "network"){
+            network += postData[i].value + ",";
+        } else if (postData[i].name == "networkOther"){
+            network += postData[i].value + ",";
+        } else if (postData[i].name == "postal_code"){
+            postal = postData[i].value;
+        } else if (postData[i].name.indexOf("shift") > -1){
+            shift += postData[i].value + ",";
+        }  else if (postData[i].name.indexOf("days") > -1){
+            days += postData[i].value + ",";
+        }   else if (postData[i].name.indexOf("vehicles") > -1){
+            if(postData[i].value.length > 0 ){
+                vehicles += postData[i].value + ",";
+            }
         }
-//            $(".registrationLoaderBox").hide();
-    });
+    }
+
+    if(name.length == 0){
+        missing += "Name,";
+    }
+    if(contact.length == 0){
+        missing += "Contact,";
+    }
+    if(looking_for.length == 0){
+        missing += "Looking for,";
+    }
+    if(type.length == 0){
+        missing += "Type,";
+    }
+    if(state.length == 0){
+        missing += "State,";
+    }
+    if(area.length == 0){
+        missing += "Area,";
+    }
+    if(network.length == 0){
+        missing += "Network,";
+    }
+    if(postal.length == 0){
+        missing += "Postcode,";
+    }
+    if(shift.length == 0){
+        missing += "Shift,";
+    }
+    if(days.length == 0){
+        missing += "Days,";
+    }
+    if(vehicles.length == 0){
+        missing += "Vehicles";
+    }
+    if(missing.length >0 && missing[missing.length-1] == ","){
+        missing=missing.substring(0,missing.length-1);
+    }
+    if( missing.length == 0){
+         $("#GeneralAdDriversWantedModal").modal('hide');
+        var formURL = $("#GeneralAdDriversWantedSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('GeneralAdsDriverWanted/addDriverAds?')?>" : "<?php echo site_url('GeneralAdsDriverWanted/addDriverAds?')?>" + selectedDriverAdsID;
+
+        cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){
+            if (data.error['code'] == 0) {
+                $('#driverads_list_wrapper').remove();
+                var temp = '<table id="driverads_list" cellpadding="0" cellspacing="0" border="0"' + 'class="dynamic-table display table table-bordered">' +
+                    '<thead><tr>' +
+                    '<th>Type</th>' +
+                    '<th>Name</th>' +
+                    '<th>Contact</th>' +
+                    '<th>Date</th>' +
+                    '<th>Action</th>' +
+                    '</tr></thead><tbody></tbody></table>';
+                $(".adv-table").append(temp);
+                updateGeneralAdsList();
+            } else if (data.error['code'] == 208) {
+                cuadroCommonMethods.showModalView("subscriptionUpdateNeeded");
+            } else {
+    //                cuadroCommonMethods.showGeneralPopUp('Error!!!', data.error['description'], false);
+            }
+    //            $(".registrationLoaderBox").hide();
+        });
+    } else {
+        $(document).ready(function() {
+            $('#driversWantedError').text(function(i, oldText) {
+                return "Missing required fields: "+ missing+" !!!";
+            });
+        });
+    }
     e.preventDefault(); //STOP default action
 });
 
