@@ -42,23 +42,26 @@
                                     </div>
                                 </div>
                             </div>
-                            <table cellpadding="0" cellspacing="0" border="0"
+							<div class="table-responsive">
+								<table cellpadding="0" cellspacing="0" border="0"
                                    class="display table table-bordered tb_roster_paying"
                                    id="roster_list">
-                                <thead>
-                                <tr>
-                                    <th>Taxi #</th>
-                                    <th>Date</th>
-                                    <th>Shift</th>
-                                    <th>Driver Name</th>
-                                    <th>Paid</th>
-                                    <th>Amount Paid</th>
-                                    <th>Balance</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
+									<thead>
+									<tr>
+										<th></th>
+										<th>Taxi #</th>
+										<th>Date</th>
+										<th>Shift</th>
+										<th>Driver Name</th>
+										<th>Paid</th>
+										<th>Amount Paid</th>
+										<th>Balance</th>
+										<th>Action</th>
+									</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+							</div>	
                         </div>
                     </div>
                 </section>
