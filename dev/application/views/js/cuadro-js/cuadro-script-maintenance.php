@@ -1,5 +1,6 @@
 <script>
 var selectedMaintenanceID = 0;
+var maintenanceDataTable = '';
 var maintenanceObject = {
     allObjects: [],
     getTaxiList: function (){
@@ -18,27 +19,26 @@ var maintenanceObject = {
     populateMaintenanceList: function(){
         var allMaintenanceObjects = this.allObjects;
         var totalMaintenance = allMaintenanceObjects.length;
-        var maintenanceListString = '';
-        for (var i = 0; i < totalMaintenance; i++) {
-            var status = parseInt(allMaintenanceObjects[i].is_scheduled) ? 'Scheduled' : 'Unscheduled';
+		
+		maintenanceDataTable.fnClearTable();
+		for (var i = 0; i < totalMaintenance; i++) {
+			var status = parseInt(allMaintenanceObjects[i].is_scheduled) ? 'Scheduled' : 'Unscheduled';
             var parts_available = parseInt(allMaintenanceObjects[i].parts_available) ? 'Yes' : 'No';
             var total_cost = parseInt(allMaintenanceObjects[i].parts_cost) + parseInt(allMaintenanceObjects[i].repair_cost);
-            maintenanceListString += '<tr class="gradeA">';
-            maintenanceListString += '<td>'+allMaintenanceObjects[i].license_plate_no+'<span style="display: none">td_item_id'+allMaintenanceObjects[i].ID+'td_item_id</span> </td>';
-            maintenanceListString += '<td>'+allMaintenanceObjects[i].maintenance_task+'</td>';
-            maintenanceListString += '<td>'+status+'</td>';
-            maintenanceListString += '<td>'+allMaintenanceObjects[i].maintenance_date+'</td>';
-            maintenanceListString += '<td>'+allMaintenanceObjects[i].parts_required+'</td>';
-            maintenanceListString += '<td>'+parts_available+'</td>';
-            maintenanceListString += '<td>'+total_cost+'</td>';
-            maintenanceListString += '<td class="action_button">' +
+			maintenanceDataTable.fnAddData([
+				'<img src="<?php echo base_url()?>application/views/img/details_open.png">',
+				allMaintenanceObjects[i].license_plate_no+'<span style="display: none">td_item_id'+ allMaintenanceObjects[i].ID+'td_item_id</span>',
+				allMaintenanceObjects[i].maintenance_task,
+				status,
+				$.datepicker.formatDate("D, d M yy", new Date((allMaintenanceObjects[i].maintenance_date))),
+				allMaintenanceObjects[i].parts_required,
+				parts_available,
+				total_cost,
                 '<a data-toggle="modal" class="edit" title="" onclick="viewMaintenanceDetail('+allMaintenanceObjects[i].ID+')" ><i class="ico-pencil"></i></a>' +
-                '<a data-toggle="modal" class="remove" title="" onclick="deleteMaintenanceDetail('+allMaintenanceObjects[i].ID+')" ><i class="ico-close"></i></a>' +
-                '</td>';
-            maintenanceListString += '</tr>';
-        }
-
-        $("#maintenance_list tbody").html(maintenanceListString);
+                '<a data-toggle="modal" class="remove" title="" onclick="deleteMaintenanceDetail('+allMaintenanceObjects[i].ID+')" ><i class="ico-close"></i></a>'
+			]);
+		}
+		$("#maintenance_list tbody tr").addClass('gradeA');
     },
     getMaintenanceDetailFromID: function (ID) {
         var maintenanceDetailArray = [];
@@ -90,8 +90,8 @@ var maintenanceObject = {
         $("#maintenance_date").val(maintenanceDetail.maintenance_date);
         $("#comment").val(maintenanceDetail.comment);
     },
-    fnFormatDetails:function ( oTable, nTr ) {
-        var aData = oTable.fnGetData( nTr );
+    fnFormatDetails:function (  maintenanceDataTable, nTr ) {
+        var aData =  maintenanceDataTable.fnGetData( nTr );
         var item_id = cuadroCommonMethods.getItemID(aData[1]);
         var aData = this.getMaintenanceDetailFromID(item_id);
 
@@ -125,25 +125,20 @@ var maintenanceObject = {
     },
     initMaintenancePage: function() {
         /*
-         * Insert a 'details' column to the table
-         */
-        var nCloneTh = document.createElement( 'th' );
-        var nCloneTd = document.createElement( 'td' );
-        nCloneTd.innerHTML = '<img src="<?php echo base_url()?>application/views/img/details_open.png">';
-        nCloneTd.className = "center";
-
-        $('#maintenance_list thead tr').each( function () {
-            this.insertBefore( nCloneTh, this.childNodes[0] );
-        } );
-
-        $('#maintenance_list tbody tr').each( function () {
-            this.insertBefore(  nCloneTd.cloneNode( true ), this.childNodes[0] );
-        } );
-
-        /*
          * Initialse DataTables, with no sorting on the 'details' column
          */
-        var oTable = $('#maintenance_list').dataTable( {
+        maintenanceDataTable = $('#maintenance_list').dataTable( {
+			"aoColumns": [
+				null,
+				null,			
+				null,
+				null,			
+				null,
+				null,
+				null,
+				null,
+				{ "sClass": "action_button"}
+			],
             "aoColumnDefs": [
                 { "bSortable": false, "aTargets": [ 0 ] }
             ],
@@ -156,17 +151,17 @@ var maintenanceObject = {
          */
         $(document).on('click','#maintenance_list tbody td img',function () {
             var nTr = $(this).parents('tr')[0];
-            if ( oTable.fnIsOpen(nTr) )
+            if (  maintenanceDataTable.fnIsOpen(nTr) )
             {
                 /* This row is already open - close it */
                 this.src = "<?php echo base_url()?>application/views/img/details_open.png";
-                oTable.fnClose( nTr );
+                 maintenanceDataTable.fnClose( nTr );
             }
             else
             {
                 /* Open this row */
                 this.src = "<?php echo base_url()?>application/views/img/details_close.png";
-                oTable.fnOpen( nTr, maintenanceObject.fnFormatDetails(oTable, nTr), 'details' );
+                 maintenanceDataTable.fnOpen( nTr, maintenanceObject.fnFormatDetails( maintenanceDataTable, nTr), 'details' );
             }
         } );
     }
@@ -181,23 +176,19 @@ function searchMaintenance() {
 //            $('#maintenance_list').dataTable().fnClearTable();
         console.dir(data.result.result);
         maintenanceObject.allObjects = data.result.result;
-        $('#maintenance_list_wrapper').remove();
-        var temp = '<table cellpadding="0" cellspacing="0" border="0"' +
-            'class="display table table-bordered tb_roster_paying"' +
-            'id="maintenance_list">' +
-            '<thead><tr>' +
-            '<th>Taxi #</th>' +
-            '<th>Maintenance Task</th>' +
-            '<th>Status</th>' +
-            '<th>Date</th>' +
-            '<th>Parts Required</th>' +
-            '<th>Parts Available</th>' +
-            '<th>Total Cost AU$</th>' +
-            '<th>Action</th>' +
-            '</tr></thead><tbody></tbody></table>';
-        $(".adv-table").append(temp);
         maintenanceObject.populateMaintenanceList();
-        maintenanceObject.initMaintenancePage();
+    });
+}
+
+function initMaintenanceList () {
+    var serverURL = "<?php echo site_url('Maintenance/getAllMaintenanceDetail')?>";
+
+    cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', 'updateMaintenanceList', function(data){
+//            $('#maintenance_list').dataTable().fnClearTable();
+            console.dir(data.result.result);
+        maintenanceObject.allObjects = data.result.result;
+		maintenanceObject.initMaintenancePage();
+        maintenanceObject.populateMaintenanceList();
     });
 }
 
@@ -209,7 +200,6 @@ function updateMaintenanceList () {
             console.dir(data.result.result);
         maintenanceObject.allObjects = data.result.result;
         maintenanceObject.populateMaintenanceList();
-        maintenanceObject.initMaintenancePage();
     });
 }
 
@@ -244,21 +234,6 @@ function deleteMaintenanceDetail(maintenanceID){
 
     cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', '', function(data){
         if (data.error['code'] == 0) {
-            $('#maintenance_list_wrapper').remove();
-            var temp = '<table cellpadding="0" cellspacing="0" border="0"' +
-                'class="display table table-bordered tb_roster_paying"' +
-                'id="maintenance_list">' +
-                '<thead><tr>' +
-                '<th>Taxi #</th>' +
-                '<th>Maintenance Task</th>' +
-                '<th>Status</th>' +
-                '<th>Date</th>' +
-                '<th>Parts Required</th>' +
-                '<th>Parts Available</th>' +
-                '<th>Total Cost AU$</th>' +
-                '<th>Action</th>' +
-                '</tr></thead><tbody></tbody></table>';
-            $(".adv-table").append(temp);
             updateMaintenanceList();
         }
     });
@@ -277,21 +252,6 @@ $("form#maintenanceDetailForm").submit(function(e){
 
     cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'maintenanceDetailFormSubmit', function(data){
         if (data.error['code'] == 0) {
-            $('#maintenance_list_wrapper').remove();
-            var temp = '<table cellpadding="0" cellspacing="0" border="0"' +
-                'class="display table table-bordered tb_roster_paying"' +
-                'id="maintenance_list">' +
-                '<thead><tr>' +
-                '<th>Taxi #</th>' +
-                '<th>Maintenance Task</th>' +
-                '<th>Status</th>' +
-                '<th>Date</th>' +
-                '<th>Parts Required</th>' +
-                '<th>Parts Available</th>' +
-                '<th>Total Cost AU$</th>' +
-                '<th>Action</th>' +
-                '</tr></thead><tbody></tbody></table>';
-            $(".adv-table").append(temp);
             updateMaintenanceList();
         } else {
 //                cuadroCommonMethods.showGeneralPopUp('Error!!!', data.error['description'], false);
@@ -330,6 +290,7 @@ $("#maintenance_date").datepicker({
     .on('changeDate', function (ev) {
         $(this).datepicker('hide');
     });
-updateMaintenanceList();
+	
+initMaintenanceList();
 maintenanceObject.getTaxiList();
 </script>

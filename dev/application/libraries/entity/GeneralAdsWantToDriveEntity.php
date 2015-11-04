@@ -37,11 +37,15 @@ class GeneralAdsWantToDriveEntity {
 	// vehicles
 	var $vehicles;
 
+	// options
+	var $options;
+	
     // comment
     var $comment;
 	
 	// add_type
 	var $add_type;
 
+	//postal_code
 	var $postal_code;
 } 

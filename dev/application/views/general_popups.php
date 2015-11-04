@@ -156,3 +156,25 @@
         </div>
     </div>
 </div>
+<!-- Warning Start -->
+<div class="modal fade confirmation_modal" id="warningModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Warning!</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger">
+                    <span class="alert-icon"><i class="fa fa-question"></i></span>
+                    <div class="confirmationMessage notification-info">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default" type="button">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Warning End -->

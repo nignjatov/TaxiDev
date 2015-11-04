@@ -42,23 +42,26 @@
                                     </div>
                                 </div>
                             </div>
-                            <table cellpadding="0" cellspacing="0" border="0"
-                                   class="display table table-bordered tb_roster_paying"
-                                   id="maintenance_list">
-                                <thead>
-                                <tr>
-                                    <th>Taxi #</th>
-                                    <th>Maintenance Task</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
-                                    <th>Parts Required</th>
-                                    <th>Parts Available</th>
-                                    <th>Total Cost AU$</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
+							<div class="table-responsive">
+								<table cellpadding="0" cellspacing="0" border="0"
+									class="display table table-bordered tb_roster_paying"
+									id="maintenance_list">
+									<thead>
+									<tr>
+										<th></th>
+										<th>Taxi #</th>
+										<th>Maintenance Task</th>
+										<th>Status</th>
+										<th>Date</th>
+										<th>Parts Required</th>
+										<th>Parts Available</th>
+										<th>Total Cost AU$</th>
+										<th>Action</th>
+									</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+							</div>	
                         </div>
                     </div>
                 </section>

@@ -16,14 +16,14 @@
                                         <div class="form-group">
                                             <div class="col-md-offset-8 col-md-4">
                                                 <div class="btn-group pull-right">
-                                                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"">
+                                                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                                         Add General Ad<i class="fa fa-plus"></i>
                                                     </button>
                                                     <ul class="dropdown-menu">
-                                                        <li><a href="#GeneralAdDriversWantedModal" data-toggle="modal">Drivers Wanted Post</a></li>
-                                                        <li><a href="#GeneralAdTaxiAddModal" data-toggle="modal">Taxi Add Post</a></li>
-                                                        <li><a href="#GeneralAdWantToDriveModal" data-toggle="modal">Want to Drive Post</a></li>
-                                                        <li><a href="#GeneralAdCPLSModal" data-toggle="modal">Car/Plate/Lease/Sale Post</a></li>
+                                                        <li><a href="#" id="OptionDriverWantedModal">Drivers Wanted Post</a></li>
+                                                        <li><a href="#" id="OptionTaxiAddModal">Taxi Add Post</a></li>
+                                                        <li><a href="#" id="OptionWantToDriveModal">Want to Drive Post</a></li>
+                                                        <li><a href="#" id="OptionCPLSModal">Car/Plate/Lease/Sale Post</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -31,19 +31,21 @@
                                     </div>
                                 </div>
                             </div>
-                            <table id="driverads_list" cellpadding="0" cellspacing="0" border="0" class="dynamic-table display table table-bordered">
-                                <thead>
-                                <tr>
-									<th>Type</th>
-                                    <th>Name</th>
-                                    <th>Contact</th>
-									<th>Date</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
+                            <div class="table-responsive"> 
+								<table id="driverads_list" cellpadding="0" cellspacing="0" border="0" class="dynamic-table display table table-bordered">
+									<thead>
+									<tr>
+										<th>Type</th>
+										<th>Name</th>
+										<th>Contact</th>
+										<th>Date</th>
+										<th>Action</th>
+									</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
                         </div>
                     </div>
                 </section>
@@ -83,87 +85,86 @@
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Looking for*</label>
-						<div class="btn-group col-md-6" data-toggle="buttons">
-							<label class="btn btn-default col-md-6"><input type="checkbox" name="looking_for_1" value="Driver"> Driver</label>
-							<label class="btn btn-default col-md-6"><input type="checkbox" name="looking_for_2" value="Shift Share Partners"> Shift Share Partners</label>
+						<div class="btn-group col-md-9" data-toggle="buttons">
+							<label class="btn btn-default col-md-4"><input type="checkbox" name="looking_for_1" value="Driver"> Driver</label>
+							<label class="btn btn-default col-md-4"><input type="checkbox" name="looking_for_2" value="Shift Share Partners"> Shift Share Partners</label>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Type*</label>
-						<div id="add_dwp_type" class="btn-group col-md-6" data-toggle="buttons">
-							<button type="button" class="active btn btn-default col-md-6" value="Taxi">Taxi</button>
-							<button type="button" class="btn btn-default col-md-6" value="Hire Car">Hire Car</button>
+						<div id="add_dwp_type" class="btn-group col-md-9" data-toggle="buttons">
+							<label class="active btn btn-default col-md-4" name="Taxi">
+								<input type="checkbox"> Taxi
+							</label>
+							<label class="btn btn-default col-md-4" name="Hire Car">
+								<input type="checkbox"> Hire Car
+							</label>
 							<input type="hidden" name="type" id="add_dwp_type_input" value="Taxi">
 							<script>
 								$("#add_dwp_type > .btn").click(function(){
-									$("#add_dwp_type > .btn").removeClass("active");
-									$(this).addClass("active");
+									if(!$(this).hasClass("active"))
+										$(this).siblings().removeClass("active");
+									else
+										$(this).removeClass("active");
 									
 									/* Set input */
-									$("#add_dwp_type_input").val($(this).val());
+									$("#add_dwp_type_input").val($(this).attr('name'));
 								});
-							</script>
 							</script>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">State*</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="state">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/states.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
+							<select id="state" onchange="refreshArea('GeneralAdDriversWantedModal')" class="form-control" name="state">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$json = json_decode($string, true);
+
+								foreach ($json as $states) {
+									foreach($states as $state => $areas) {
+										echo '<option>'.$state.'</option>';
 									}
-								?>
-                            </select>
+								}
+							?>
+							</select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Area*</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="area">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/areas.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
-									}
-								?>
-                            </select>
+							<select id="area"  onchange="refreshNetwork('GeneralAdDriversWantedModal')" class="form-control" name="area">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$states = json_decode($string, true);
+
+								foreach ($json as $states) 
+									foreach($states as $state => $areasArray) 
+										foreach($areasArray as $areas) 
+											foreach($areas as $area => $networks) 
+												echo '<option state="'.$state.'">'.$area.'</option>';
+								
+							?>	
+							</select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Available Network*</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="network">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/networks.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
-									}
-								?>
-                            </select>
+							<select id="network" class="form-control" name="network">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$states = json_decode($string, true);
+
+								foreach ($json as $states) 
+									foreach($states as $state => $areasArray) 
+										foreach($areasArray as $areas) 
+											foreach($areas as $area => $networks) 
+												foreach($networks as $network) 
+													echo '<option area="'.$area.'">'.$network.'</option>';
+		
+							?>	
+							</select>
 						</div>
 						<label class="control-label col-md-1">
 							Other:
@@ -221,23 +222,29 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">Available vehicles*</label>
 						<div class="btn-group col-md-9" data-toggle="buttons">
-							<label class="btn btn-default btn-sm">
+							<label class="btn btn-default btn-xs">
 								<input type="checkbox" name="vehicles_1" value="Sedan"> Sedan
 							</label>
-							<label class="btn btn-default btn-sm">
+							<label class="btn btn-default btn-xs">
 								<input type="checkbox" name="vehicles_2" value="Wagon"> Wagon
 							</label>
-							<label class="btn btn-default btn-sm">
+							<label class="btn btn-default btn-xs">
 								<input type="checkbox" name="vehicles_3" value="Maxi"> Maxi
 							</label>
-							<label class="btn btn-default btn-sm">
-								<input type="checkbox" name="vehicles_4" value="Luxury/Executive"> Luxury/Executive
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="vehicles_4" value="SUV"> SUV
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="vehicles_5" value="Van"> Van
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="vehicles_6" value="Luxury/Executive"> Luxury/Executive
 							</label>
 							<label class="control-label col-md-1">
 								Other:
 							</label>
 							<div class="col-md-3">
-								<textarea rows="1" class="form-control" name="vehicles_5"></textarea>
+								<textarea rows="1" class="form-control" name="vehicles_7"></textarea>
 							</div>
 						</div>
                     </div>
@@ -283,17 +290,23 @@
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Type*</label>
-						<div id="add_taxi_type" class="btn-group col-md-6" data-toggle="buttons">
-							<button type="button" class="active btn btn-default col-md-6" value="Taxi">Taxi</button>
-							<button type="button" class="btn btn-default col-md-6" value="Hire Car">Hire Car</button>
-							<input type="hidden" name="type" id="add_taxi_input" value="Taxi">
+						<div id="add_tap_type" class="btn-group col-md-9" data-toggle="buttons">
+							<label class="active btn btn-default col-md-4" name="Taxi">
+								<input type="checkbox"> Taxi
+							</label>
+							<label class="btn btn-default col-md-4" name="Hire Car">
+								<input type="checkbox"> Hire Car
+							</label>
+							<input type="hidden" name="type" id="add_tap_type_input" value="Taxi">
 							<script>
-								$("#add_taxi_type > .btn").click(function(){
-									$("#add_taxi_type > .btn").removeClass("active");
-									$(this).addClass("active");
+								$("#add_tap_type > .btn").click(function(){
+									if(!$(this).hasClass("active"))
+										$(this).siblings().removeClass("active");
+									else
+										$(this).removeClass("active");
 									
 									/* Set input */
-									$("#add_taxi_input").val($(this).val());
+									$("#add_tap_type_input").val($(this).attr('name'));
 								});
 							</script>
 						</div>
@@ -301,62 +314,55 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">State*</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="state">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/states.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
+							<select id="state" onchange="refreshArea('GeneralAdTaxiAddModal')" class="form-control" name="state">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$json = json_decode($string, true);
+
+								foreach ($json as $states) {
+									foreach($states as $state => $areas) {
+										echo '<option>'.$state.'</option>';
 									}
-								?>
-                            </select>
+								}
+							?>
+							</select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Area*</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="area">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/areas.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
-									}
-								?>
-                            </select>
+							<select id="area"  onchange="refreshNetwork('GeneralAdTaxiAddModal')" class="form-control" name="area">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$states = json_decode($string, true);
+
+								foreach ($json as $states) 
+									foreach($states as $state => $areasArray) 
+										foreach($areasArray as $areas) 
+											foreach($areas as $area => $networks) 
+												echo '<option state="'.$state.'">'.$area.'</option>';
+								
+							?>	
+							</select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Network*</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="network">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/networks.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
-									}
+							<select id="network" class="form-control" name="network">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$states = json_decode($string, true);
 
-								?>
-                            </select>
+								foreach ($json as $states) 
+									foreach($states as $state => $areasArray) 
+										foreach($areasArray as $areas) 
+											foreach($areas as $area => $networks) 
+												foreach($networks as $network) 
+													echo '<option area="'.$area.'">'.$network.'</option>';
+		
+							?>	
+							</select>
 						</div>
                     </div>
 					<div class="form-group">
@@ -434,21 +440,17 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">Car Manufacturer*</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="car">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/cars.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
-									}
-								?>
-                            </select>
+							<select onchange="" class="form-control" name="car">
+							<?php
+								$string = file_get_contents("application/files/cars.json");
+								$json = json_decode($string, true);
+
+
+								foreach ($json as $cars) 
+									foreach($cars as $car => $models) 
+										echo '<option>'.$car.'</option>';
+							?>
+							</select>
 						</div>
                     </div>
 					<div class="form-group">
@@ -459,17 +461,29 @@
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Fuel Type*</label>
-						<div id="add_taxi_fuel_type" class="btn-group col-md-6">
-							<button type="button" class="active btn btn-default col-md-6" value="LPG">LPG</button>
-							<button type="button" class="btn btn-default col-md-6" value="Petrol">Petrol</button>
+						<div id="add_taxi_fuel_type" class="btn-group col-md-6" data-toggle="buttons">
+							<label class="active btn btn-default col-md-3" name="LPG">
+								<input type="checkbox"> LPG
+							</label>
+							<label class="btn btn-default col-md-3" name="Petrol">
+								<input type="checkbox"> Petrol
+							</label>
+							<label class="btn btn-default col-md-3" name="Hybrid">
+								<input type="checkbox"> Hybrid
+							</label>
+							<label class="btn btn-default col-md-3" name="Diesel">
+								<input type="checkbox"> Diesel
+							</label>
 							<input type="hidden" name="fuel" id="add_taxi_fuel_input" value="LPG">
 							<script>
 								$("#add_taxi_fuel_type > .btn").click(function(){
-									$("#add_taxi_fuel_type > .btn").removeClass("active");
-									$(this).addClass("active");
+									if(!$(this).hasClass("active"))
+										$(this).siblings().removeClass("active");
+									else
+										$(this).removeClass("active");
 									
 									/* Set input */
-									$("#add_taxi_fuel_input").val($(this).val());
+									$("#add_taxi_fuel_input").val($(this).attr('name'));
 								});
 							</script>
 						</div>
@@ -489,23 +503,29 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">Vehicle type*</label>
 						<div class="btn-group col-md-9" data-toggle="buttons">
-							<label class="btn btn-default btn-sm">
+							<label class="btn btn-default btn-xs">
 								<input type="checkbox" name="vehicles_1" value="Sedan"> Sedan
 							</label>
-							<label class="btn btn-default btn-sm">
+							<label class="btn btn-default btn-xs">
 								<input type="checkbox" name="vehicles_2" value="Wagon"> Wagon
 							</label>
-							<label class="btn btn-default btn-sm">
+							<label class="btn btn-default btn-xs">
 								<input type="checkbox" name="vehicles_3" value="Maxi"> Maxi
 							</label>
-							<label class="btn btn-default btn-sm">
-								<input type="checkbox" name="vehicles_4" value="Luxury/Executive"> Luxury/Executive
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="vehicles_4" value="SUV"> SUV
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="vehicles_5" value="Van"> Van
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="vehicles_6" value="Luxury/Executive"> Luxury/Executive
 							</label>
 							<label class="control-label col-md-1">
 								Other:
 							</label>
 							<div class="col-md-3">
-								<textarea rows="1" class="form-control" name="vehicles_5"></textarea>
+								<textarea rows="1" class="form-control" name="vehicles_7"></textarea>
 							</div>
 						</div>
                     </div>
@@ -543,7 +563,7 @@
                     </div>
                 </div>
                 <div class="modal-footer" style="display: block;">
-               		 <h5 class="col-sm-10" style="color:#FF0000; font-weight:bold;" id="taxiError"></h5>
+               		 <h5 class="col-sm-10" style="color:#FF0000; font-weight:bold;" id="taxiAdError"></h5>
                     <button type="button" class="col-sm-2 btn btn-info" id="GeneralAdTaxiAddSubmit">Add</button>
                 </div>
             </form>
@@ -576,17 +596,23 @@
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Type*</label>
-						<div id="add_wtd_type" class="btn-group col-md-6" data-toggle="buttons">
-							<button type="button" class="active btn btn-default col-md-6" value="Taxi">Taxi</button>
-							<button type="button" class="btn btn-default col-md-6" value="Hire Car">Hire Car</button>
-							<input type="hidden" name="type" id="add_wtd_input" value="Taxi">
+						<div id="add_wtdp_type" class="btn-group col-md-9" data-toggle="buttons">
+							<label class="active btn btn-default col-md-4" name="Taxi">
+								<input type="checkbox"> Taxi
+							</label>
+							<label class="btn btn-default col-md-4" name="Hire Car">
+								<input type="checkbox"> Hire Car
+							</label>
+							<input type="hidden" name="type" id="add_wtdp_type_input" value="Taxi">
 							<script>
-								$("#add_wtd_type > .btn").click(function(){
-									$("#add_wtd_type > .btn").removeClass("active");
-									$(this).addClass("active");
+								$("#add_wtdp_type > .btn").click(function(){
+									if(!$(this).hasClass("active"))
+										$(this).siblings().removeClass("active");
+									else
+										$(this).removeClass("active");
 									
 									/* Set input */
-									$("#add_wtd_input").val($(this).val());
+									$("#add_wtdp_type_input").val($(this).attr('name'));
 								});
 							</script>
 						</div>
@@ -594,67 +620,61 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">State*</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="state">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/states.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
+							<select id="state" onchange="refreshArea('GeneralAdWantToDriveModal')" class="form-control" name="state">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$json = json_decode($string, true);
+
+								foreach ($json as $states) {
+									foreach($states as $state => $areas) {
+										echo '<option>'.$state.'</option>';
 									}
-								?>
-                            </select>
+								}
+							?>
+							</select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Area*</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="area">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/areas.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
-									}
-								?>
-                            </select>
+							<select id="area"  onchange="refreshNetwork('GeneralAdWantToDriveModal')" class="form-control" name="area">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$states = json_decode($string, true);
+
+								foreach ($json as $states) 
+									foreach($states as $state => $areasArray) 
+										foreach($areasArray as $areas) 
+											foreach($areas as $area => $networks) 
+												echo '<option state="'.$state.'">'.$area.'</option>';
+								
+							?>	
+							</select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Network*</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="network">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/networks.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
-									}
-								?>
-                            </select>
+							<select id="network" class="form-control" name="network">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$states = json_decode($string, true);
+
+								foreach ($json as $states) 
+									foreach($states as $state => $areasArray) 
+										foreach($areasArray as $areas) 
+											foreach($areas as $area => $networks) 
+												foreach($networks as $network) 
+													echo '<option area="'.$area.'">'.$network.'</option>';
+		
+							?>	
+							</select>
 						</div>
 						<label class="control-label col-md-1">
 							Other:
 						</label>
 						<div class="col-md-2">
-							<textarea rows="1" class="form-control" name="taxiOther"></textarea>
+							<textarea rows="1" class="form-control" name="networkOther"></textarea>
 						</div>
                     </div>
 					<div class="form-group">
@@ -706,23 +726,29 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">Prefered Vehicles*</label>
 						<div class="btn-group col-md-9" data-toggle="buttons">
-							<label class="btn btn-default btn-sm">
+							<label class="btn btn-default btn-xs">
 								<input type="checkbox" name="vehicles_1" value="Sedan"> Sedan
 							</label>
-							<label class="btn btn-default btn-sm">
+							<label class="btn btn-default btn-xs">
 								<input type="checkbox" name="vehicles_2" value="Wagon"> Wagon
 							</label>
-							<label class="btn btn-default btn-sm">
+							<label class="btn btn-default btn-xs">
 								<input type="checkbox" name="vehicles_3" value="Maxi"> Maxi
 							</label>
-							<label class="btn btn-default btn-sm">
-								<input type="checkbox" name="vehicles_4" value="Luxury/Executive"> Luxury/Executive
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="vehicles_4" value="SUV"> SUV
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="vehicles_5" value="Van"> Van
+							</label>
+							<label class="btn btn-default btn-xs">
+								<input type="checkbox" name="vehicles_6" value="Luxury/Executive"> Luxury/Executive
 							</label>
 							<label class="control-label col-md-1">
 								Other:
 							</label>
 							<div class="col-md-3">
-								<textarea rows="1" class="form-control" name="vehicles_5"></textarea>
+								<textarea rows="1" class="form-control" name="vehicles_7"></textarea>
 							</div>
 						</div>
                     </div>
@@ -740,7 +766,7 @@
 							Other:
 						</label>
 						<div class="col-md-2">
-							<textarea rows="1" class="form-control" name="vehicles_5"></textarea>
+							<textarea rows="1" class="form-control" name="option_3"></textarea>
 						</div>
 					</div>
                     <div class="form-group">
@@ -752,7 +778,7 @@
                 </div>
                 
                 <div class="modal-footer" style="display: block;">
-                	<h5 class="col-sm-10" style="color:#FF0000; font-weight:bold;" id="wantTODriveError"></h5>
+                	<h5 class="col-sm-10" style="color:#FF0000; font-weight:bold;" id="wantToDriveError"></h5>
                     <button type="button" class="col-sm-2 btn btn-info" id="GeneralAdWantToDriveSubmit">Add</button>
                 </div>
             </form>
@@ -774,7 +800,7 @@
                     <div class="form-group">
                         <label class="control-label col-md-3">Name*</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control m-bot15" name="name">
+                            <input id="sdsd" type="text" class="form-control m-bot15" name="name">
                         </div>
                     </div>
                     <div class="form-group">
@@ -841,67 +867,61 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">State*</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="state">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/states.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
+							<select onchange="refreshArea('GeneralAdCPLSModal')" class="form-control" name="state">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$json = json_decode($string, true);
+
+								foreach ($json as $states) {
+									foreach($states as $state => $areas) {
+										echo '<option>'.$state.'</option>';
 									}
-								?>
-                            </select>
+								}
+							?>
+							</select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Area*</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="area">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/areas.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
-									}
-								?>
-                            </select>
+							<select onchange="refreshNetwork('GeneralAdCPLSModal')" class="form-control" name="area">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$states = json_decode($string, true);
+
+								foreach ($json as $states) 
+									foreach($states as $state => $areasArray) 
+										foreach($areasArray as $areas) 
+											foreach($areas as $area => $networks) 
+												echo '<option state="'.$state.'">'.$area.'</option>';
+								
+							?>	
+							</select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Taxi Network*</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="network">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/networks.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
-									}
-								?>
-                            </select>
+							<select id="network" class="form-control" name="network">
+							<?php
+								$string = file_get_contents("application/files/states.json");
+								$states = json_decode($string, true);
+
+								foreach ($json as $states) 
+									foreach($states as $state => $areasArray) 
+										foreach($areasArray as $areas) 
+											foreach($areas as $area => $networks) 
+												foreach($networks as $network) 
+													echo '<option area="'.$area.'">'.$network.'</option>';
+		
+							?>	
+							</select>
 						</div>
 						<label class="control-label col-md-1">
 							Other:
 						</label>
 						<div class="col-md-2">
-							<textarea rows="1" class="form-control" name="taxiOther"></textarea>
+							<textarea rows="1" class="form-control" name="networkOther"></textarea>
 						</div>
                     </div>
 					<div class="form-group">
@@ -913,27 +933,33 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">Car Manufacturer*</label>
 						<div class="dropdown col-md-6">
-							<select class="form-control" name="car">
-								<?php
-									$row = 1;
-									if (($handle = fopen("application/files/cars.csv", "r")) !== FALSE) {
-										while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-											$num = count($data);
-											$row++;
-											for ($c=0; $c < $num; $c++) {
-												echo "<option>" . $data[$c] . "</option>\n";
-											}
-										}
-										fclose($handle);
-									}
-								?>
-                            </select>
+							<select onchange="refreshCars('GeneralAdCPLSModal')" class="form-control" name="car">
+							<?php
+								$string = file_get_contents("application/files/cars.json");
+								$json = json_decode($string, true);
+
+
+								foreach ($json as $cars) 
+									foreach($cars as $car => $models) 
+										echo '<option>'.$car.'</option>';
+							?>
+							</select>
 						</div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Car Model*</label>
 						<div class="col-md-6">
-                            <input id="" type="text" class="form-control m-bot15" name="model">
+							<select class="form-control" name="model">
+							<?php
+								$string = file_get_contents("application/files/cars.json");
+								$states = json_decode($string, true);
+
+								foreach ($json as $cars) 
+									foreach($cars as $car => $models) 
+										foreach($models as $model) 
+											echo '<option car="'.$car.'">'.$model.'</option>';
+							?>	
+							</select>
                         </div>
                     </div>
 					<div class="form-group">
@@ -948,13 +974,13 @@
 					<div class="form-group">
 						<label class="control-label col-md-3">Price/Rate*</label>
 						<div class="col-md-6">
-							<input id="" type="text" class="form-control m-bot15" id="driver_shift_start" name="priceRate">
+							<input type="text" class="form-control m-bot15" name="priceRate">
 						</div>
 					</div>
                     <div class="form-group">
                         <label class="control-label col-md-3">Description</label>
                         <div class="col-md-6">
-                            <textarea id="comment" rows="6" class="form-control" name="comment"></textarea>
+                            <textarea rows="6" class="form-control" name="comment"></textarea>
                         </div>
                     </div>
 
@@ -962,7 +988,7 @@
 
                 <div class="modal-footer" style="display: block;">
                 	<h5 class="col-sm-10" style="color:#FF0000; font-weight:bold;" id="cplsError"></h5>
-                    <button type="button" class="col-sm-2btn btn-info" id="GeneralAdCPLSSubmit">Add</button>
+                    <button type="button" class="col-sm-2 btn btn-info" id="GeneralAdCPLSSubmit">Add</button>
                 </div>
             </form>
         </div>
@@ -971,8 +997,9 @@
 <!-- CPLS Post Modal View End -->
 </body>
 <script>
-    document.title = '<?php echo config_item("site_title");?>: Driver Wanted Ads\' List';
-    $("#nav-accordion li a").removeClass("active");
-    $("#driver_ad_menu a").addClass("active");
+document.title = '<?php echo config_item("site_title");?>: Driver Wanted Ads\' List';
+$("#nav-accordion li a").removeClass("active");
+$("#driver_ad_menu a").addClass("active");
+	
 </script>
 </html>

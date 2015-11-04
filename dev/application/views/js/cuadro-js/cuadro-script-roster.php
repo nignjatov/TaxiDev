@@ -1,5 +1,6 @@
 <script>
 var selectedRosterID = 0;
+var rosterDataTable = '';
 var rosterObject = {
     allObjects: [],
     getTaxiList: function (){
@@ -18,25 +19,26 @@ var rosterObject = {
     populateRosterList: function(){
         var allRosterObjects = this.allObjects;
         var totalRoster = allRosterObjects.length;
-        var rosterListString = '';
-        for (var i = 0; i < totalRoster; i++) {
-            var balance = parseInt(allRosterObjects[i].amount_paid) - parseInt(allRosterObjects[i].mf_amount) - parseInt(allRosterObjects[i].m7_amount) - parseInt(allRosterObjects[i].cash_amount) - parseInt(allRosterObjects[i].fine_toll_amount) - parseInt(allRosterObjects[i].expenses);
+		
+		rosterDataTable.fnClearTable();
+		for (var i = 0; i < totalRoster; i++) {
+			var balance = parseInt(allRosterObjects[i].amount_paid) - parseInt(allRosterObjects[i].mf_amount) - parseInt(allRosterObjects[i].m7_amount) - parseInt(allRosterObjects[i].cash_amount) - parseInt(allRosterObjects[i].fine_toll_amount) - parseInt(allRosterObjects[i].expenses);
             var is_paid = parseInt(allRosterObjects[i].is_paid) ? 'Yes' : 'No';
-            rosterListString += '<tr class="gradeA">';
-            rosterListString += '<td>'+allRosterObjects[i].license_plate_no+'<span style="display: none">td_item_id'+allRosterObjects[i].ID+'td_item_id</span> </td>';
-            rosterListString += '<td>'+allRosterObjects[i].paying_date+'</td>';
-            rosterListString += '<td>'+allRosterObjects[i].shift+'</td>';
-            rosterListString += '<td>'+allRosterObjects[i].driver_name+'</td>';
-            rosterListString += '<td>'+is_paid+'</td>';
-            rosterListString += '<td>'+allRosterObjects[i].amount_paid+'</td>';
-            rosterListString += '<td>'+balance+'</td>';
-            rosterListString += '<td class="action_button">' + '<a data-toggle="modal" class="edit" title="" onclick="viewRosterDetail(\''+allRosterObjects[i].ID+'\','+allRosterObjects[i].taxi_id+',\''+allRosterObjects[i].paying_date+'\',\''+allRosterObjects[i].shift+'\')" ><i class="ico-pencil"></i></a>';
-            rosterListString += allRosterObjects[i].ID == '' ? '' : '<a data-toggle="modal" class="remove" title="" onclick="deleteRosterDetail('+allRosterObjects[i].ID+')" ><i class="ico-close"></i></a>' +
-                '</td>';
-            rosterListString += '</tr>';
-        }
-
-        $("#roster_list tbody").html(rosterListString);
+			
+			rosterDataTable.fnAddData([
+				'<img src="<?php echo base_url()?>application/views/img/details_open.png">',
+				allRosterObjects[i].license_plate_no+'<span style="display: none">td_item_id'+allRosterObjects[i].ID+'td_item_id</span>',
+				$.datepicker.formatDate("D, d M yy", new Date(allRosterObjects[i].paying_date)),
+				allRosterObjects[i].shift,
+				allRosterObjects[i].driver_name,
+				is_paid,
+				allRosterObjects[i].amount_paid,
+				balance,
+				'<a data-toggle="modal" class="edit" title="" onclick="viewRosterDetail(\''+allRosterObjects[i].ID+'\','+allRosterObjects[i].taxi_id+',\''+allRosterObjects[i].paying_date+'\',\''+allRosterObjects[i].shift+'\')" ><i class="ico-pencil"></i></a>'+ 
+				'<a data-toggle="modal" class="remove" title="" onclick="deleteRosterDetail('+allRosterObjects[i].ID+')" ><i class="ico-close"></i></a>'
+			]);
+		}
+		$("#roster_list tbody tr").addClass('gradeA');
     },
     getRosterDetailFromID: function (ID) {
         var rosterDetailArray = [];
@@ -95,8 +97,8 @@ var rosterObject = {
         $("#expenses").val(rosterDetail.expenses);
         $("#comment").val(rosterDetail.comment);
     },
-    fnFormatDetails:function ( oTable, nTr ) {
-        var aData = oTable.fnGetData( nTr );
+    fnFormatDetails:function ( rosterDataTable, nTr ) {
+        var aData = rosterDataTable.fnGetData( nTr );
         var item_id = cuadroCommonMethods.getItemID(aData[1]);
         var aData = this.getRosterDetailFromID(item_id);
 
@@ -134,25 +136,20 @@ var rosterObject = {
     },
     initRosterPage: function() {
         /*
-         * Insert a 'details' column to the table
-         */
-        var nCloneTh = document.createElement( 'th' );
-        var nCloneTd = document.createElement( 'td' );
-        nCloneTd.innerHTML = '<img src="<?php echo base_url()?>application/views/img/details_open.png">';
-        nCloneTd.className = "center";
-
-        $('#roster_list thead tr').each( function () {
-            this.insertBefore( nCloneTh, this.childNodes[0] );
-        } );
-
-        $('#roster_list tbody tr').each( function () {
-            this.insertBefore(  nCloneTd.cloneNode( true ), this.childNodes[0] );
-        } );
-
-        /*
          * Initialse DataTables, with no sorting on the 'details' column
          */
-        var oTable = $('#roster_list').dataTable( {
+        rosterDataTable = $('#roster_list').dataTable( {
+			"aoColumns": [
+				null,
+				null,
+				null,
+				null,				
+				null,
+				null,
+				null,
+				null,
+				{ "sClass": "action_button"}
+			],
             "aoColumnDefs": [
                 { "bSortable": false, "aTargets": [ 0 ] }
             ],
@@ -165,17 +162,17 @@ var rosterObject = {
          */
         $(document).on('click','#roster_list tbody td img',function () {
             var nTr = $(this).parents('tr')[0];
-            if ( oTable.fnIsOpen(nTr) )
+            if ( rosterDataTable.fnIsOpen(nTr) )
             {
                 /* This row is already open - close it */
                 this.src = "<?php echo base_url()?>application/views/img/details_open.png";
-                oTable.fnClose( nTr );
+                rosterDataTable.fnClose( nTr );
             }
             else
             {
                 /* Open this row */
                 this.src = "<?php echo base_url()?>application/views/img/details_close.png";
-                oTable.fnOpen( nTr, rosterObject.fnFormatDetails(oTable, nTr), 'details' );
+                rosterDataTable.fnOpen( nTr, rosterObject.fnFormatDetails(rosterDataTable, nTr), 'details' );
             }
         } );
     }
@@ -190,23 +187,7 @@ function searchRoster() {
 //            $('#roster_list').dataTable().fnClearTable();
         console.dir(data.result.result);
         rosterObject.allObjects = data.result.result;
-        $('#roster_list_wrapper').remove();
-        var temp = '<table cellpadding="0" cellspacing="0" border="0"' +
-            'class="display table table-bordered tb_roster_paying"' +
-            'id="roster_list">' +
-            '<thead><tr>' +
-            '<th>Taxi #</th>' +
-            '<th>Date</th>' +
-            '<th>Shift</th>' +
-            '<th>Driver Name</th>' +
-            '<th>Paid</th>' +
-            '<th>Amount Paid</th>' +
-            '<th>Balance</th>' +
-            '<th>Action</th>' +
-            '</tr></thead><tbody></tbody></table>';
-        $(".adv-table").append(temp);
-        rosterObject.populateRosterList();
-        rosterObject.initRosterPage();
+        updateRosterList();
     });
 }
 
@@ -218,7 +199,18 @@ function updateRosterList () {
         console.dir(data.result.result);
         rosterObject.allObjects = data.result.result;
         rosterObject.populateRosterList();
-        rosterObject.initRosterPage();
+    });
+}
+
+function initRosterList () {
+    var serverURL = "<?php echo site_url('Roster/getAllRosterDetail')?>";
+
+    cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', 'updateRosterList', function(data){
+//            $('#roster_list').dataTable().fnClearTable();
+        console.dir(data.result.result);
+        rosterObject.allObjects = data.result.result;
+		rosterObject.initRosterPage();
+        rosterObject.populateRosterList();
     });
 }
 
@@ -266,7 +258,7 @@ function deleteRosterDetail(rosterID){
 	$('#confirmDelete').click(function(e) {
 		cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', '', function(data){
 			if (data.error['code'] == 0) 
-					<?php echo 'top.location=\''.site_url('Roster/getAllRoster').'\';';?>
+				updateRosterList();
 				
 		});
 	});
@@ -284,8 +276,14 @@ $("form#rosterDetailForm").submit(function(e){
     var formURL = $(this).attr("action");
 
     cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'rosterDetailFormSubmit', function(data){
-        if (data.error['code'] == 0) 
-            <?php echo 'top.location=\''.site_url('Roster/getAllRoster').'\';';?>
+		if(data.error['code'] == 0 && data.result['result'] == false){
+			$('#warningModal div.confirmationMessage').html("Bad input parameters!");
+			$('#warningModal').modal('show');
+		} else if (data.error['code'] == 0) { 
+			updateRosterList();
+		} else {
+		
+		}
     });
 });
 
@@ -318,6 +316,6 @@ $("#paying_date").datepicker({
     .on('changeDate', function (ev) {
         $(this).datepicker('hide');
     });
-updateRosterList();
+initRosterList();
 rosterObject.getTaxiList();
 </script>

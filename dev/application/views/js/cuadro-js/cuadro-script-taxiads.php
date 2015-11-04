@@ -1,5 +1,6 @@
 <script>
 var selectedTaxiAdsID = 0;
+var taxiAdsDataTable = '';
 var taxiAdsObject = {
     allObjects: [],
     getTaxiList: function (){
@@ -18,22 +19,21 @@ var taxiAdsObject = {
     populateTaxiAdsList: function(){
         var allTaxiAdsObjects = this.allObjects;
         var totalTaxiAds = allTaxiAdsObjects.length;
-        var taxiAdsListString = '';
-        for (var i = 0; i < totalTaxiAds; i++) {
-            taxiAdsListString += '<tr class="gradeA">';
-            taxiAdsListString += '<td>'+allTaxiAdsObjects[i].license_plate_no+'<span style="display: none">td_item_id'+allTaxiAdsObjects[i].license_plate_no+'td_item_id</span> </td>';
-            taxiAdsListString += '<td>'+allTaxiAdsObjects[i].days+'</td>';
-            taxiAdsListString += '<td>'+allTaxiAdsObjects[i].shift_end+'</td>';
-            taxiAdsListString += '<td>'+allTaxiAdsObjects[i].shift_start+'</td>';
-            taxiAdsListString += '<td>'+allTaxiAdsObjects[i].lease_rate+'</td>';
-            taxiAdsListString += '<td class="action_button">' +
+		
+		taxiAdsDataTable.fnClearTable();
+		for (var i = 0; i < totalTaxiAds; i++) {
+			taxiAdsDataTable.fnAddData([
+				'<img src="<?php echo base_url()?>application/views/img/details_open.png">',
+				allTaxiAdsObjects[i].license_plate_no+'<span style="display: none">td_item_id'+allTaxiAdsObjects[i].license_plate_no+'td_item_id</span>',
+				allTaxiAdsObjects[i].days,
+				$.datepicker.formatDate("D, d M yy", new Date((allTaxiAdsObjects[i].shift_end))),
+				$.datepicker.formatDate("D, d M yy", new Date((allTaxiAdsObjects[i].shift_start))),
+				allTaxiAdsObjects[i].lease_rate,
                 '<a data-toggle="modal" class="edit" title="" onclick="viewTaxiAdsDetail('+allTaxiAdsObjects[i].ID+')" ><i class="ico-pencil"></i></a>' +
-                '<a data-toggle="modal" class="remove" title="" onclick="deleteTaxiAdsDetail('+allTaxiAdsObjects[i].ID+')" ><i class="ico-close"></i></a>' +
-                '</td>';
-            taxiAdsListString += '</tr>';
-        }
-
-        $("#taxiads_list tbody").html(taxiAdsListString);
+                '<a data-toggle="modal" class="remove" title="" onclick="deleteTaxiAdsDetail('+allTaxiAdsObjects[i].ID+')" ><i class="ico-close"></i></a>'
+			]);
+		}
+		$("#taxiads_list tbody tr").addClass('gradeA');
     },
     getTaxiAdsDetailFromID: function (ID) {
         var taxiAdsDetailArray = [];
@@ -70,8 +70,8 @@ var taxiAdsObject = {
         $("#lease_rate").val(taxiAdsDetail.lease_rate);
         $("#comment").val(taxiAdsDetail.comment);
     },
-    fnFormatDetails:function ( oTable, nTr ) {
-        var aData = oTable.fnGetData( nTr );
+    fnFormatDetails:function ( taxiAdsDataTable, nTr ) {
+        var aData = taxiAdsDataTable.fnGetData( nTr );
         var item_id = cuadroCommonMethods.getItemID(aData[1]);
         var aData = this.getTaxiAdsDetailFromID(item_id);
 
@@ -89,76 +89,63 @@ var taxiAdsObject = {
     },
     initTaxiAdsPage: function() {
         /*
-         * Insert a 'details' column to the table
-         */
-        var nCloneTh = document.createElement( 'th' );
-        var nCloneTd = document.createElement( 'td' );
-        nCloneTd.innerHTML = '<img src="<?php echo base_url()?>application/views/img/details_open.png">';
-        nCloneTd.className = "center";
-
-        $('#taxiads_list thead tr').each( function () {
-            this.insertBefore( nCloneTh, this.childNodes[0] );
-        } );
-
-        $('#taxiads_list tbody tr').each( function () {
-            this.insertBefore(  nCloneTd.cloneNode( true ), this.childNodes[0] );
-        } );
-
-        /*
          * Initialse DataTables, with no sorting on the 'details' column
          */
-        var oTable = $('#taxiads_list').dataTable( {
+        taxiAdsDataTable = $('#taxiads_list').dataTable( {
+			"aoColumns": [
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,
+				{ "sClass": "action_button"}
+			],      
             "aoColumnDefs": [
                 { "bSortable": false, "aTargets": [ 0 ] }
-            ],
+			],
             "aaSorting": [[1, 'asc']]
         });
-
-        /* Add event listener for opening and closing details
+		
+		/* Add event listener for opening and closing details
          * Note that the indicator for showing which row is open is not controlled by DataTables,
          * rather it is done here
          */
         $(document).on('click','#taxiads_list tbody td img',function () {
             var nTr = $(this).parents('tr')[0];
-            if ( oTable.fnIsOpen(nTr) )
+            if ( taxiAdsDataTable.fnIsOpen(nTr) )
             {
                 /* This row is already open - close it */
                 this.src = "<?php echo base_url()?>application/views/img/details_open.png";
-                oTable.fnClose( nTr );
+                taxiAdsDataTable.fnClose( nTr );
             }
             else
             {
                 /* Open this row */
                 this.src = "<?php echo base_url()?>application/views/img/details_close.png";
-                oTable.fnOpen( nTr, taxiAdsObject.fnFormatDetails(oTable, nTr), 'details' );
+                taxiAdsDataTable.fnOpen( nTr, taxiAdsObject.fnFormatDetails(taxiAdsDataTable, nTr), 'details' );
             }
         } );
     }
 }
 
-function updateTaxiAdsList () {
-    $('#taxiads_list_wrapper').remove();
-    var temp = '<table id="taxiads_list" cellpadding="0" cellspacing="0" border="0"' +
-        'class="dynamic-table display table table-bordered tb_roster_paying"' +
-        'id="hidden-table-info">' +
-        '<thead><tr>' +
-        '<th>Taxi #</th>' +
-        '<th>Days</th>' +
-        '<th>Shift Start</th>' +
-        '<th>Shift End</th>' +
-        '<th>Lease Rate</th>' +
-        '<th>Action</th>' +
-        '</tr></thead><tbody></tbody></table>';
-    $(".adv-table").append(temp);
-
+function initTaxiAdsList () {
     var serverURL = "<?php echo site_url('Ads/getAllAdsDetail')?>";
 
     cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', 'updateTaxiAdsList', function(data){
-//            $('#taxiads_list').dataTable().fnClearTable();
-            console.dir(data.result.result);
+        taxiAdsObject.allObjects = data.result.result;
+		taxiAdsObject.initTaxiAdsPage();
+        taxiAdsObject.populateTaxiAdsList();
+        
+    });
+}
+
+function updateTaxiAdsList () {
+    var serverURL = "<?php echo site_url('Ads/getAllAdsDetail')?>";
+
+    cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', 'updateTaxiAdsList', function(data){
         taxiAdsObject.allObjects = data.result.result;
         taxiAdsObject.populateTaxiAdsList();
-        taxiAdsObject.initTaxiAdsPage();
     });
 }
 
@@ -191,17 +178,6 @@ function deleteTaxiAdsDetail(taxiAdsID){
 
     cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', '', function(data){
         if (data.error['code'] == 0) {
-            $('#taxiads_list_wrapper').remove();
-            var temp = '<table id="taxiads_list" cellpadding="0" cellspacing="0" border="0"' + 'class="dynamic-table display table table-bordered">' +
-                '<thead><tr>' +
-                '<th>Taxi #</th>' +
-                '<th>Days</th>' +
-                '<th>Shift Start</th>' +
-                '<th>Shift End</th>' +
-                '<th>Lease Rate</th>' +
-                '<th>Action</th>' +
-                '</tr></thead><tbody></tbody></table>';
-            $(".adv-table").append(temp);
             updateTaxiAdsList();
         }
     });
@@ -249,6 +225,7 @@ $("#shift_end").datepicker({
     .on('changeDate', function (ev) {
         $(this).datepicker('hide');
     });
-updateTaxiAdsList();
+	
+initTaxiAdsList();
 taxiAdsObject.getTaxiList();
 </script>

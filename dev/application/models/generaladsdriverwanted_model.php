@@ -121,9 +121,9 @@ class GeneralAdsDriverWanted_model extends MY_Model {
 				$newAdsEntity->shift .= ",";	
 			}
 			if ($this->input->post('shift_3') != "") { 
-
 				$newAdsEntity->shift .= $this->input->post('shift_3');
-			$newAdsEntity->shift = trim($newAdsEntity->shift, ",");
+				$newAdsEntity->shift = trim($newAdsEntity->shift, ",");
+			}
 			
 			$newAdsEntity->days = "";
 			if ($this->input->post('days_1') != "") 
@@ -163,6 +163,13 @@ class GeneralAdsDriverWanted_model extends MY_Model {
 
 			if ($this->input->post('vehicles_5') != "")
 				$newAdsEntity->vehicles .= $this->input->post('vehicles_5');
+			
+			if ($this->input->post('vehicles_6') != "")
+				$newAdsEntity->vehicles .= $this->input->post('vehicles_6');
+			
+			if ($this->input->post('vehicles_7') != "")
+				$newAdsEntity->vehicles .= $this->input->post('vehicles_7');
+			
 			$newAdsEntity->vehicles = trim($newAdsEntity->vehicles, ",");			
 			
  			$newAdsEntity->comment = $this->input->post('comment');
@@ -179,22 +186,92 @@ class GeneralAdsDriverWanted_model extends MY_Model {
     public function updateAds($userID, $adsID) {
         if ($userID == $this->getUserID($adsID)) {
             $newAdsEntity = new GeneralAdsDriverWantedEntity;
-
             $newAdsEntity->user_id = $userID;
 
-            $newAdsEntity->name = "ss";//$this->input->post('name');
-			$newAdsEntity->contact = "ss";//$this->input->post('contact');
-			$newAdsEntity->looking_for = "ss";//$this->input->post('lookingFor');
-			$newAdsEntity->type = "ss";//$this->input->post('type');
-			$newAdsEntity->state = "ss";//$this->input->post('state');
-			$newAdsEntity->area = "ss";//$this->input->post('area');
-			$newAdsEntity->network = "ss";//$this->input->post('network');
-			$newAdsEntity->shift = "ss";//$this->input->post('shift');
-			$newAdsEntity->days = "ss";//$this->input->post('days');
-			$newAdsEntity->vehicles = "ss";//$this->input->post('vehicles');
-            $newAdsEntity->comment = "ss";//$this->input->post('comment');
+            $newAdsEntity->add_type = 1;
+            $newAdsEntity->name = $this->input->post('name');
+            $newAdsEntity->contact = $this->input->post('contact');
 
-//        echo $this->db->last_query().'<br>;
+            $newAdsEntity->looking_for = "";
+            if ($this->input->post("looking_for_1") != "") 
+		    $newAdsEntity->looking_for .= $this->input->post("looking_for_1").", ";
+				
+            if ($this->input->post('looking_for_2') != "") 
+	            $newAdsEntity->looking_for .= $this->input->post('looking_for_2');
+				
+            $newAdsEntity->looking_for = trim($newAdsEntity->looking_for, ",");
+			
+            $newAdsEntity->type = $this->input->post('type');
+			$newAdsEntity->state = $this->input->post('state');
+			$newAdsEntity->area = $this->input->post('area');
+			
+			$newAdsEntity->network = $this->input->post('network');
+			if ($this->input->post('taxiOther') != "") 
+				$newAdsEntity->network .= ",".$this->input->post('taxiOther');
+			
+			$newAdsEntity->shift = "";
+			if ($this->input->post('shift_1') != "") {
+				$newAdsEntity->shift .= $this->input->post('shift_1');
+				$newAdsEntity->shift .= ",";	
+			}
+			if ($this->input->post('shift_2') != "") { 
+				$newAdsEntity->shift .= $this->input->post('shift_2');
+				$newAdsEntity->shift .= ",";	
+			}
+			if ($this->input->post('shift_3') != "") { 
+				$newAdsEntity->shift .= $this->input->post('shift_3');
+				$newAdsEntity->shift = trim($newAdsEntity->shift, ",");
+			}
+			
+			$newAdsEntity->days = "";
+			if ($this->input->post('days_1') != "") 
+				$newAdsEntity->days .= $this->input->post('days_1').",";
+
+			if ($this->input->post('days_2') != "") 
+				$newAdsEntity->days .= $this->input->post('days_2').",";
+
+			if ($this->input->post('days_3') != "") 
+				$newAdsEntity->days .= $this->input->post('days_3').",";
+
+			if ($this->input->post('days_4') != "")  
+				$newAdsEntity->days .= $this->input->post('days_4').",";
+
+			if ($this->input->post('days_5') != "")  
+				$newAdsEntity->days .= $this->input->post('days_5').",";
+
+			if ($this->input->post('days_6') != "") 
+				$newAdsEntity->days .= $this->input->post('days_6').",";
+
+			if ($this->input->post('days_7') != "")
+				$newAdsEntity->days .= $this->input->post('days_7');
+			$newAdsEntity->days = trim($newAdsEntity->days, ",");
+			
+			$newAdsEntity->vehicles = "";
+			if ($this->input->post('vehicles_1') != "") 
+				$newAdsEntity->vehicles .= $this->input->post('vehicles_1').",";
+
+			if ($this->input->post('vehicles_2') != "") 
+				$newAdsEntity->vehicles .= $this->input->post('vehicles_2').",";
+
+			if ($this->input->post('vehicles_3') != "")  
+				$newAdsEntity->vehicles .= $this->input->post('vehicles_3').",";
+
+			if ($this->input->post('vehicles_4') != "")  
+				$newAdsEntity->vehicles .= $this->input->post('vehicles_4').",";
+
+			if ($this->input->post('vehicles_5') != "")
+				$newAdsEntity->vehicles .= $this->input->post('vehicles_5');
+			
+			if ($this->input->post('vehicles_6') != "")
+				$newAdsEntity->vehicles .= $this->input->post('vehicles_6');
+			
+			if ($this->input->post('vehicles_7') != "")
+				$newAdsEntity->vehicles .= $this->input->post('vehicles_7');
+			
+			$newAdsEntity->vehicles = trim($newAdsEntity->vehicles, ",");			
+			
+ 			$newAdsEntity->comment = $this->input->post('comment');
+			$newAdsEntity->postal_code= $this->input->post('postal_code');
 
             $this->db->where("ID", $adsID, false);
             $this->db->where("user_id", $userID, false);
