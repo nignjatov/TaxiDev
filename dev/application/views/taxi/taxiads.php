@@ -27,6 +27,23 @@
                                     </div>
                                 </div>
                             </div>
+							<div id="tbd" class="table-responsive">
+								<table id="taxiads_list" cellpadding="0" cellspacing="0" border="0" class="dataTable dynamic-table display table table-bordered tb_roster_paying">
+									<thead>
+										<tr>
+											<th></th>
+											<th>Taxi #</th>
+											<th>Days</th>
+											<th>Shift Start</th>
+											<th>Shift End</th>
+											<th>Lease Rate</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>	
                         </div>
                     </div>
                 </section>
