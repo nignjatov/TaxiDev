@@ -1,6 +1,6 @@
 <script>
 var selectedTaxiAdsID = 0;
-var oTable = '';
+var taxiAdsDataTable = '';
 var taxiAdsObject = {
     allObjects: [],
     getTaxiList: function (){
@@ -20,9 +20,9 @@ var taxiAdsObject = {
         var allTaxiAdsObjects = this.allObjects;
         var totalTaxiAds = allTaxiAdsObjects.length;
 		
-		oTable.fnClearTable();
+		taxiAdsDataTable.fnClearTable();
 		for (var i = 0; i < totalTaxiAds; i++) {
-			oTable.fnAddData([
+			taxiAdsDataTable.fnAddData([
 				'<img src="<?php echo base_url()?>application/views/img/details_open.png">',
 				allTaxiAdsObjects[i].license_plate_no+'<span style="display: none">td_item_id'+allTaxiAdsObjects[i].license_plate_no+'td_item_id</span>',
 				allTaxiAdsObjects[i].days,
@@ -70,8 +70,8 @@ var taxiAdsObject = {
         $("#lease_rate").val(taxiAdsDetail.lease_rate);
         $("#comment").val(taxiAdsDetail.comment);
     },
-    fnFormatDetails:function ( oTable, nTr ) {
-        var aData = oTable.fnGetData( nTr );
+    fnFormatDetails:function ( taxiAdsDataTable, nTr ) {
+        var aData = taxiAdsDataTable.fnGetData( nTr );
         var item_id = cuadroCommonMethods.getItemID(aData[1]);
         var aData = this.getTaxiAdsDetailFromID(item_id);
 
@@ -91,7 +91,7 @@ var taxiAdsObject = {
         /*
          * Initialse DataTables, with no sorting on the 'details' column
          */
-        oTable = $('#taxiads_list').dataTable( {
+        taxiAdsDataTable = $('#taxiads_list').dataTable( {
 			"aoColumns": [
 				null,
 				null,
@@ -113,17 +113,17 @@ var taxiAdsObject = {
          */
         $(document).on('click','#taxiads_list tbody td img',function () {
             var nTr = $(this).parents('tr')[0];
-            if ( oTable.fnIsOpen(nTr) )
+            if ( taxiAdsDataTable.fnIsOpen(nTr) )
             {
                 /* This row is already open - close it */
                 this.src = "<?php echo base_url()?>application/views/img/details_open.png";
-                oTable.fnClose( nTr );
+                taxiAdsDataTable.fnClose( nTr );
             }
             else
             {
                 /* Open this row */
                 this.src = "<?php echo base_url()?>application/views/img/details_close.png";
-                oTable.fnOpen( nTr, taxiAdsObject.fnFormatDetails(oTable, nTr), 'details' );
+                taxiAdsDataTable.fnOpen( nTr, taxiAdsObject.fnFormatDetails(taxiAdsDataTable, nTr), 'details' );
             }
         } );
     }
