@@ -276,8 +276,14 @@ $("form#rosterDetailForm").submit(function(e){
     var formURL = $(this).attr("action");
 
     cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'rosterDetailFormSubmit', function(data){
-        if (data.error['code'] == 0) 
-            updateRosterList();
+		if(data.error['code'] == 0 && data.result['result'] == false){
+			$('#warningModal div.confirmationMessage').html("Bad input parameters!");
+			$('#warningModal').modal('show');
+		} else if (data.error['code'] == 0) { 
+			updateRosterList();
+		} else {
+		
+		}
     });
 });
 
