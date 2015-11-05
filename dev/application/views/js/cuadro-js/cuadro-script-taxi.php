@@ -129,6 +129,15 @@
              * Initialse DataTables, with no sorting on the 'details' column
              */
             taxiDataTable = $('#taxi_list').dataTable( {
+				/*"iDisplayLength": 100,
+				"oLanguage": {
+					"sLengthMenu": 'Select taxi'+
+						' <select>'+
+						'<option value="10">10</option>'+
+						'<option value="100">100</option>'+
+						'<option value="-1">All</option>'+
+						'</select>'
+				},*/
 				"aoColumns": [
 					null,
 					null,
@@ -165,6 +174,19 @@
                     taxiDataTable.fnOpen( nTr, taxiObject.fnFormatDetails(taxiDataTable, nTr), 'details' );
                 }
             } );
+			
+			/*$(window).resize(function() {
+				if($( "#taxi_list" ).width() > $( "#taxi_list_container" ).width())
+					$( "#taxi_list_container" ).addClass("datatable-scroll");
+				else
+					$( "#taxi_list_container" ).removeClass("datatable-scroll");
+			});*/
+			
+			/* Put this class to style-cuadro.css
+			* .datatable-scroll{
+			*	overflow-x:scroll;overflow-y:hidden;white-space:nowrap;border: 1px solid #ddd;
+			* }
+			*/
         }
     }
 

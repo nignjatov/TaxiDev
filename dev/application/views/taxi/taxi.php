@@ -28,9 +28,9 @@
                                     </div>
                                 </div>
                             </div>
-							<div class="table-responsive">
-								<table id="taxi_list" cellpadding="0" cellspacing="0" border="0"
-                                   class="dynamic-table display table table-bordered tb_roster_paying table-hover">
+							<div id="taxi_list_container" class="table-responsive">
+								<table id="taxi_list" cellpadding="0" cellspacing="0" border="0" 
+                                   class="dynamic-table display table table-bordered tb_roster_paying">
 									<thead>
 									<tr>
 										<th></th>
