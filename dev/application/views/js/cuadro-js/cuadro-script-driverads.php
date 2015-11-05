@@ -607,25 +607,25 @@ function viewDriverAdsDetail(driverAdsID, type){
 		$("form#GeneralAdCPLSForm").trigger( "reset" );
 		driverAdsObject.setGeneralAdCPLSModal(driverAdsDetail);
 		$("#GeneralAdCPLSModal h4.modal-title").html("Update Driver Ads Information");
-		$("#GeneralAdCPLSSubmit").html("Update Driver Ads Information");
+		$("#GeneralAdCPLSSubmit").html("Update");
 		$("#GeneralAdCPLSModal").modal('show');
 	} else if(driverAdsDetail.add_type == 3) {
 		$("form#GeneralAdWantToDriveForm").trigger( "reset" );
 		driverAdsObject.setGeneralAdWantToDriveModal(driverAdsDetail);
 		$("#GeneralAdWantToDriveModal h4.modal-title").html("Update Driver Ads Information");
-		$("#GeneralAdWantToDriveSubmit").html("Update Driver Ads Information");
+		$("#GeneralAdWantToDriveSubmit").html("Update");
 		$("#GeneralAdWantToDriveModal").modal('show');
 	} else if(driverAdsDetail.add_type == 2) {
 		$("form#GeneralAdTaxiAddForm").trigger( "reset" );
 		driverAdsObject.setGeneralAdTaxiAddModal(driverAdsDetail);
 		$("#GeneralAdTaxiAddModal h4.modal-title").html("Update Driver Ads Information");
-		$("#GeneralAdTaxiAddSubmit").html("Update Driver Ads Information");
+		$("#GeneralAdTaxiAddSubmit").html("Update");
 		$("#GeneralAdTaxiAddModal").modal('show');
 	} else if(driverAdsDetail.add_type == 1) {
 		$("form#GeneralAdDriversWantedForm").trigger( "reset" );
 		driverAdsObject.setGeneralAdDriverWantedModal(driverAdsDetail);
 		$("#GeneralAdDriversWantedModal h4.modal-title").html("Update Driver Ads Information");
-		$("#GeneralAdDriversWantedSubmit").html("Update Driver Ads Information");
+		$("#GeneralAdDriversWantedSubmit").html("Update");
 		$("#GeneralAdDriversWantedModal").modal('show');
 	}
 }
@@ -753,7 +753,7 @@ $("form#GeneralAdDriversWantedForm").submit(function(e){
                             return "";
                         });
                     });
-            var formURL = $("#GeneralAdDriversWantedSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('GeneralAdsDriverWanted/addDriverAds?')?>" : "<?php echo site_url('GeneralAdsDriverWanted/updateDriverAds?driverads_id=')?>" + selectedDriverAdsID;
+            var formURL = $("#GeneralAdDriversWantedSubmit").html() == "Add" ? "<?php echo site_url('GeneralAdsDriverWanted/addDriverAds?')?>" : "<?php echo site_url('GeneralAdsDriverWanted/updateDriverAds?driverads_id=')?>" + selectedDriverAdsID;
 
             cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){
                 if (data.error['code'] == 0) {
@@ -919,7 +919,7 @@ $("form#GeneralAdTaxiAddForm").submit(function(e){
                     });
                 });
 
-        var formURL = $("#GeneralAdTaxiAddSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('GeneralAdsTaxiAds/addDriverAds?')?>" : "<?php echo site_url('GeneralAdsTaxiAds/updateDriverAds?driverads_id=')?>" + selectedDriverAdsID;
+        var formURL = $("#GeneralAdTaxiAddSubmit").html() == "Add" ? "<?php echo site_url('GeneralAdsTaxiAds/addDriverAds?')?>" : "<?php echo site_url('GeneralAdsTaxiAds/updateDriverAds?driverads_id=')?>" + selectedDriverAdsID;
 
         cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){
             if (data.error['code'] == 0) {
@@ -1044,7 +1044,7 @@ $("form#GeneralAdWantToDriveForm").submit(function(e){
                           return "";
                       });
                   });
-        var formURL = $("#GeneralAdWantToDriveSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('GeneralAdsWantToDrive/addDriverAds?')?>" : "<?php echo site_url('GeneralAdsWantToDrive/updateDriverAds?driverads_id=')?>" + selectedDriverAdsID;
+        var formURL = $("#GeneralAdWantToDriveSubmit").html() == "Add" ? "<?php echo site_url('GeneralAdsWantToDrive/addDriverAds?')?>" : "<?php echo site_url('GeneralAdsWantToDrive/updateDriverAds?driverads_id=')?>" + selectedDriverAdsID;
 
         cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){
             if (data.error['code'] == 0) {
@@ -1169,7 +1169,7 @@ $("form#GeneralAdCPLSForm").submit(function(e){
                       return "";
                   });
               });
-    var formURL = $("#GeneralAdCPLSSubmit").html() == "Add New Driver Ads Information" ? "<?php echo site_url('GeneralAdsCPLS/addDriverAds?')?>" : "<?php echo site_url('GeneralAdsCPLS/updateDriverAds?driverads_id=')?>" + selectedDriverAdsID;
+    var formURL = $("#GeneralAdCPLSSubmit").html() == "Add" ? "<?php echo site_url('GeneralAdsCPLS/addDriverAds?')?>" : "<?php echo site_url('GeneralAdsCPLS/updateDriverAds?driverads_id=')?>" + selectedDriverAdsID;
 
     cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){
         if (data.error['code'] == 0) {
@@ -1220,7 +1220,7 @@ $("#OptionDriverWantedModal").click(function(e){
 	refreshArea('GeneralAdDriversWantedModal');
 	
 	$("#GeneralAdDriversWantedModal h4.modal-title").html("Add New Driver Ads Information");
-	$("#GeneralAdDriversWantedSubmit").html("Add New Driver Ads Information");
+	$("#GeneralAdDriversWantedSubmit").html("Add");
 	$("#GeneralAdDriversWantedModal").modal('show');
 });
 $("#OptionTaxiAddModal").click(function(e){
@@ -1238,7 +1238,7 @@ $("#OptionTaxiAddModal").click(function(e){
 	refreshArea('GeneralAdTaxiAddModal');
 	
 	$("#GeneralAdTaxiAddModal h4.modal-title").html("Add New Driver Ads Information");
-	$("#GeneralAdTaxiAddSubmit").html("Add New Driver Ads Information");
+	$("#GeneralAdTaxiAddSubmit").html("Add");
 	$("#GeneralAdTaxiAddModal").modal('show');
 });
 $("#OptionWantToDriveModal").click(function(e){
@@ -1254,7 +1254,7 @@ $("#OptionWantToDriveModal").click(function(e){
 	refreshArea('GeneralAdWantToDriveModal');
 	
 	$("#GeneralAdWantToDriveModal h4.modal-title").html("Add New Driver Ads Information");
-	$("#GeneralAdWantToDriveSubmit").html("Add New Driver Ads Information");
+	$("#GeneralAdWantToDriveSubmit").html("Add");
 	$("#GeneralAdWantToDriveModal").modal('show');
 });
 $("#OptionCPLSModal").click(function(e){
@@ -1275,7 +1275,7 @@ $("#OptionCPLSModal").click(function(e){
 	refreshCars('GeneralAdCPLSModal');
 	
 	$("#GeneralAdCPLSModal h4.modal-title").html("Add New Driver Ads Information");
-	$("#GeneralAdCPLSSubmit").html("Add New Driver Ads Information");
+	$("#GeneralAdCPLSSubmit").html("Add");
 	$("#GeneralAdCPLSModal").modal('show');
 });
 
