@@ -58,7 +58,7 @@ var journalObject = {
     fnFormatDetails:function ( journalDataTable, nTr ) {
         var aData = journalDataTable.fnGetData( nTr );
         console.dir(aData);
-        var item_id = cuadroCommonMethods.getItemID(aData[1]);
+        var item_id = cuadroCommonMethods.getItemID(aData[3]);
         var aData = this.getJournalDetailFromID(item_id);
 
         var total_expanse = parseInt(aData.shift_rate) + parseInt(aData.fuel_cost) + parseInt(aData.other_cost);
@@ -68,9 +68,9 @@ var journalObject = {
         var sOut = '<div class="col-sm-12">';
         sOut += '<div class="adv-table col-sm-6">';
         sOut += '<table class="display table table-bordered " cellspacing="0" cellpadding="0" border="0" <thead="">';
-        sOut += '<tr><td>License Plate No:</td><td>'+aData.license_plate_no+'</td></tr>';
         sOut += '<tr><td>Date:</td><td>'+aData.paying_date+'</td></tr>';
-        sOut += '<tr><td>Shift:</td><td>'+aData.Shift+'</td></tr>';
+        sOut += '<tr><td>Shift:</td><td>'+aData.shift+'</td></tr>';
+		sOut += '<tr><td>License Plate No:</td><td>'+aData.license_plate_no+'</td></tr>';
         sOut += '<tr><td>Operator name:</td><td>'+aData.operator_name+'</td></tr>';
         sOut += '<tr><td>Shift Rate (AU$):</td><td>'+aData.shift_rate+'</td></tr>';
         sOut += '<tr><td>Fuel Cost (AU$):</td><td>'+aData.fuel_cost+'</td></tr>';
@@ -124,21 +124,21 @@ var journalObject = {
          * Note that the indicator for showing which row is open is not controlled by DataTables,
          * rather it is done here
          */
-        $(document).on('click','#journal_list tbody td img',function () {
+        /*$(document).on('click','#journal_list tbody td img',function () {
             var nTr = $(this).parents('tr')[0];
             if ( journalDataTable.fnIsOpen(nTr) )
             {
-                /* This row is already open - close it */
+                // This row is already open - close it 
                 this.src = "<?php echo base_url()?>application/views/img/details_open.png";
                 journalDataTable.fnClose( nTr );
             }
             else
             {
-                /* Open this row */
+                // Open this row 
                 this.src = "<?php echo base_url()?>application/views/img/details_close.png";
                 journalDataTable.fnOpen( nTr, journalObject.fnFormatDetails(journalDataTable, nTr), 'details' );
             }
-        } );
+        } );*/
     }
 }
 

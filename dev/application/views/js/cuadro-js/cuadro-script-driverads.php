@@ -28,7 +28,7 @@ var driverAdsObject = {
 			var deleteAction = allDriverAdsObjects[i].add_type;	
 			
             driverAdsListString += '<td class="action_button">' +
-                '<a data-toggle="modal" class="edit" title="" onclick="viewDriverAdsDetail('+allDriverAdsObjects[i].ID+','+deleteAction+')" ><i class="ico-pencil"></i></a>' +
+                //'<a data-toggle="modal" class="edit" title="" onclick="viewDriverAdsDetail('+allDriverAdsObjects[i].ID+','+deleteAction+')" ><i class="ico-pencil"></i></a>' +
                 '<a data-toggle="modal" class="remove" title="" onclick="deleteDriverAdsDetail('+allDriverAdsObjects[i].ID+','+deleteAction+')" ><i class="ico-close"></i></a>' +
                 '</td>';
             driverAdsListString += '</tr>';
