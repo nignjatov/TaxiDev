@@ -9,6 +9,37 @@
                         Roster & Paying List
                     </header>
                     <div class="panel-body">
+<!--
+						<div class="row">	
+							<div class="col-md-2">
+								Select a taxi 
+								<select id="taxiFilter" class="form-control" name="taxiFilter" onchange="searchTaxi(this)">
+								</select>
+                            </div>
+							<div class="col-md-2">
+								Select a week 
+								<select id="weekFilter" class="form-control" name="weekFilter" >
+									<option from="" to="">All</option>
+									<?php
+									function getStartAndEndDate($week, $year){
+										$time = strtotime("1 January $year", time());
+										$day = date('w', $time);
+										$time += ((7*$week)+1-$day)*24*3600;
+										$return[0] = date('n/j/Y', $time);
+										$time += 6*24*3600;
+										$return[1] = date('n/j/Y', $time);
+										return $return;
+									}
+													
+									//for ($i=1;$i<=52;$i++)
+									//	echo '<option from="'.getStartAndEndDate($i,date("Y"))[0].'" to="'.getStartAndEndDate($i,date("Y"))[1].'">' . $i .'</option>';
+									?>
+								</select>
+                            </div>
+						</div>
+				
+						</br>
+-->
                         <div class="adv-table">
                             <div class="query_box row-fluid">
                                 <div class="container-fluid">
@@ -37,7 +68,7 @@
                                                         Add Roster & Paying<i class="fa fa-plus"></i>
                                                     </a>
                                                 </div>
-                                            </div>
+                                            </div>											
                                         </div>
                                     </div>
                                 </div>
@@ -52,6 +83,7 @@
 										<th>Taxi #</th>
 										<th>Date</th>
 										<th>Shift</th>
+										<th>Leased</th>
 										<th>Driver Name</th>
 										<th>Paid</th>
 										<th>Amount Paid</th>

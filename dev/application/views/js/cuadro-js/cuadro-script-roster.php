@@ -1,6 +1,12 @@
 <script>
 var selectedRosterID = 0;
 var rosterDataTable = '';
+
+/* Filters */
+var filterTaxi = 'All';
+var filterTo = '';
+var filterFrom = '';
+
 var rosterObject = {
     allObjects: [],
     getTaxiList: function (){
@@ -20,25 +26,53 @@ var rosterObject = {
         var allRosterObjects = this.allObjects;
         var totalRoster = allRosterObjects.length;
 		
+		var taxiFilterOptions = "<option>All</option>";
+		
 		rosterDataTable.fnClearTable();
 		for (var i = 0; i < totalRoster; i++) {
 			var balance = parseInt(allRosterObjects[i].amount_paid) - parseInt(allRosterObjects[i].mf_amount) - parseInt(allRosterObjects[i].m7_amount) - parseInt(allRosterObjects[i].cash_amount) - parseInt(allRosterObjects[i].fine_toll_amount) - parseInt(allRosterObjects[i].expenses);
             var is_paid = parseInt(allRosterObjects[i].is_paid) ? 'Yes' : 'No';
+			var is_leased = parseInt(allRosterObjects[i].is_leased) ? 'Yes' : 'No';
 			
-			rosterDataTable.fnAddData([
-				'<img src="<?php echo base_url()?>application/views/img/details_open.png">',
-				allRosterObjects[i].license_plate_no+'<span style="display: none">td_item_id'+allRosterObjects[i].ID+'td_item_id</span>',
-				$.datepicker.formatDate("D, d M yy", new Date(allRosterObjects[i].paying_date)),
-				allRosterObjects[i].shift,
-				allRosterObjects[i].driver_name,
-				is_paid,
-				allRosterObjects[i].amount_paid,
-				balance,
-				'<a data-toggle="modal" class="edit" title="" onclick="viewRosterDetail(\''+allRosterObjects[i].ID+'\','+allRosterObjects[i].taxi_id+',\''+allRosterObjects[i].paying_date+'\',\''+allRosterObjects[i].shift+'\')" ><i class="ico-pencil"></i></a>'+ 
-				'<a data-toggle="modal" class="remove" title="" onclick="deleteRosterDetail('+allRosterObjects[i].ID+')" ><i class="ico-close"></i></a>'
-			]);
+			if(taxiFilterOptions.indexOf("<option>" + allRosterObjects[i].license_plate_no + "</option>") == -1)
+				taxiFilterOptions += "<option>" + allRosterObjects[i].license_plate_no + "</option>";
+			
+			var date = new Date(allRosterObjects[i].paying_date);
+			
+			/* Filter dates */
+			var filterDates = true;
+			if(filterFrom != '' && filterTo != '')
+				filterDates = (filterFrom < date && filterTo > date);
+			
+			/* Filter #taxis */
+			var filterTaxis = (filterTaxi == "All" || filterTaxi == allRosterObjects[i].license_plate_no);
+			
+			if(filterTaxis && filterDates) {
+				rosterDataTable.fnAddData([
+					'<img src="<?php echo base_url()?>application/views/img/details_open.png">',
+					allRosterObjects[i].license_plate_no+'<span style="display: none">td_item_id'+allRosterObjects[i].ID+'td_item_id</span>',
+					$.datepicker.formatDate("D, d M yy", date),
+					allRosterObjects[i].shift,
+					is_leased,
+					allRosterObjects[i].driver_name,
+					is_paid,
+					allRosterObjects[i].amount_paid,
+					balance,
+					'<a data-toggle="modal" class="edit" title="" onclick="viewRosterDetail(\''+allRosterObjects[i].ID+'\','+allRosterObjects[i].taxi_id+',\''+allRosterObjects[i].paying_date+'\',\''+allRosterObjects[i].shift+'\')" ><i class="ico-pencil"></i></a>'+ 
+					'<a data-toggle="modal" class="remove" title="" onclick="deleteRosterDetail('+allRosterObjects[i].ID+')" ><i class="ico-close"></i></a>'
+				]);
+			}	
 		}
 		$("#roster_list tbody tr").addClass('gradeA');
+		
+		$("#taxiFilter").html(taxiFilterOptions);
+		if(taxiFilterOptions.indexOf(filterTaxi) > -1)
+			$("#taxiFilter option").filter(function() { return $(this).text() == filterTaxi; }).prop('selected', true);
+		else {
+			$("#taxiFilter option").filter(function() { return $(this).text() == "All"; }).prop('selected', true);
+			filterFrom = '';
+			filterTo = '';
+		}
     },
     getRosterDetailFromID: function (ID) {
         var rosterDetailArray = [];
@@ -139,7 +173,18 @@ var rosterObject = {
          * Initialse DataTables, with no sorting on the 'details' column
          */
         rosterDataTable = $('#roster_list').dataTable( {
+			/*"iDisplayLength": 100,
+			"oLanguage": {
+				"sLengthMenu": 'Select a taxi '+
+					'<select class="form-control">'+
+					'<option value="10">10</option>'+
+					'<option value="50">50</option>'+
+					'<option value="100">100</option>'+
+					'<option value="-1">All</option>'+
+					'</select>'
+			},*/
 			"aoColumns": [
+				null,
 				null,
 				null,
 				null,
@@ -178,8 +223,41 @@ var rosterObject = {
     }
 }
 
+function searchTaxi(val) {
+	filterTaxi = val.value;
+	rosterObject.populateRosterList();
+}
+
+$("#weekFilter").click(function() {
+	var open = $(this).data("isopen");
+	
+	if(open) {
+		if($("#weekFilter option:selected").attr("from") == '' || $("#weekFilter option:selected").attr("to") == '') {
+			filterFrom = '';
+			filterTo = '';
+		} else {
+			filterFrom = new Date($("#weekFilter option:selected").attr("from"));
+			filterTo = new Date($("#weekFilter option:selected").attr("to"));
+		}
+		
+		rosterObject.populateRosterList();
+	
+		$("#rosterStart").val("Date form");
+		$("#rosterEnd").val("Date to");
+	}
+	
+	$(this).data("isopen", !open);
+});
+
 function searchRoster() {
-    var start_date = $("#rosterStart").val();
+	filterFrom = new Date($("#rosterStart").val());
+	filterTo = new Date($("#rosterEnd").val());
+
+	rosterObject.populateRosterList();
+	
+	$("#weekFilter option").filter(function() { return $(this).text() == "All"; }).prop('selected', true);
+	
+    /*var start_date = $("#rosterStart").val();
     var end_date = $("#rosterEnd").val();
     var serverURL = "<?php echo site_url('Roster/getAllRosterDetailWithDateRange?rosterStart=')?>" + start_date + "&rosterEnd=" + end_date;
 
@@ -187,8 +265,8 @@ function searchRoster() {
 //            $('#roster_list').dataTable().fnClearTable();
         console.dir(data.result.result);
         rosterObject.allObjects = data.result.result;
-        updateRosterList();
-    });
+        rosterObject.populateRosterList();
+    });*/
 }
 
 function updateRosterList () {
