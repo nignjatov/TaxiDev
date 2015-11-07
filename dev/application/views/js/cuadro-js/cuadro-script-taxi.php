@@ -71,12 +71,16 @@
         setTaxiObjectValue: function (taxiDetail){
             selectedTaxiID = taxiDetail.ID;
             $("#taxi_network").val(taxiDetail.taxi_network);
+            $("#state").val(taxiDetail.state);
+            $("#area").val(taxiDetail.area);
+            $("#suburb").val(taxiDetail.suburb);
+            $("#options").val(taxiDetail.options);
             $("#license_plate_no").val(taxiDetail.license_plate_no);
             $("#car_type").val(taxiDetail.car_type);
             $("#car_style").val(taxiDetail.car_style);
             $("#fuel_type").val(taxiDetail.fuel_type);
             $("#car_manufacturer").val(taxiDetail.car_manufacturer);
-            $("#year_manufacturerd").val(taxiDetail.year_manufacturerd);
+            $("#year_manufacturerd").val(taxiDetail.year_manufactured);
             $("#kilometres").val(taxiDetail.kilometres);
             $("#plate_fee").val(taxiDetail.plate_fee);
             $("#network_fee").val(taxiDetail.network_fee);
@@ -97,12 +101,16 @@
             sOut += '<table class="display table table-bordered " cellspacing="0" cellpadding="0" border="0" <thead="">';
             sOut += '<tr><td>Network:</td><td>'+aData.taxi_network+'</td></tr>';
             sOut += '<tr><td>Taxi License Plate No:</td><td>'+aData.license_plate_no+'</td></tr>';
+            sOut += '<tr><td>State:</td><td>'+aData.state+'</td></tr>';
+            sOut += '<tr><td>Area:</td><td>'+aData.area+'</td></tr>';
+            sOut += '<tr><td>Suburb/Postcode:</td><td>'+aData.suburb+'</td></tr>';
             sOut += '<tr><td>Car Type:</td><td>'+aData.car_type+'</td></tr>';
             sOut += '<tr><td>Car Style:</td><td>'+aData.car_style+'</td></tr>';
             sOut += '<tr><td>Fuel Type:</td><td>'+aData.fuel_type+'</td></tr>';
             sOut += '<tr><td>Car Manufacturer:</td><td>'+aData.car_manufacturer+'</td></tr>';
-            sOut += '<tr><td>Year of Manufacturer:</td><td>'+aData.year_manufacturerd+'</td></tr>';
+            sOut += '<tr><td>Year of Manufacturer:</td><td>'+aData.year_manufactured+'</td></tr>';
             sOut += '<tr><td>Kilometres:</td><td>'+aData.kilometres+'</td></tr>';
+            sOut += '<tr><td>Options:</td><td>'+aData.options+'</td></tr>';
             sOut += '</table>';
             sOut += '</div>';
             sOut += '<div class="adv-table col-sm-6">';
@@ -249,6 +257,7 @@
         console.log('form submit');
         $("#taxiDetailModal").modal('hide');
         var postData = $(this).serializeArray();
+        console.log(postData);
         var formURL = $("#taxi_submit_button").html() == "Add New Taxi Information" ? "<?php echo site_url('Taxi/addTaxi')?>" : "<?php echo site_url('Taxi/updateTaxi?taxi_id=')?>" + selectedTaxiID;
 
         cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'loginSubmit', function(data){
@@ -283,6 +292,23 @@
         .on('changeDate', function (ev) {
             $(this).datepicker('hide');
         });
-		
+
+
+    /* Connected selects handles */
+    function refreshArea(modal){
+        var setSelected=false;
+        $("#" + modal + " [name='area'] option").each(function(){
+            if ($(this).attr('state') != $("#" + modal + " [name='state']").find('option:selected').text()) {
+                $(this).addClass("hidden");
+            } else {
+                if(!setSelected) {
+                    $(this).attr("selected", "selected");
+                    setSelected=true;
+                }
+                $(this).removeClass("hidden");
+                refreshNetwork(modal);
+            }
+        });
+    }
     initTaxiList();
 </script>

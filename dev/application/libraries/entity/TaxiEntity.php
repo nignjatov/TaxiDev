@@ -16,6 +16,18 @@ class TaxiEntity {
     // license_plate_no
     var $license_plate_no;
 
+    // state
+    var $state = '';
+
+    // area
+    var $area = '';
+
+    // suburb
+    var $suburb = '';
+
+    // options
+    var $options = '';
+
     // car_type
     var $car_type = '';
 

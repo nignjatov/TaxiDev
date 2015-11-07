@@ -100,6 +100,7 @@ class GeneralAdsTaxiAds_model extends MY_Model {
 			$newAdsEntity->fuel = $this->input->post('fuel');
 			$newAdsEntity->plate = $this->input->post('plate');
 			$newAdsEntity->car = $this->input->post('car');
+			$newAdsEntity->model = $this->input->post('model');
 			$newAdsEntity->year = $this->input->post('year');
 			$newAdsEntity->kilometers = $this->input->post('kilometers');
 			$newAdsEntity->lease = $this->input->post('lease');
@@ -220,6 +221,7 @@ class GeneralAdsTaxiAds_model extends MY_Model {
 			$newAdsEntity->fuel = $this->input->post('fuel');
 			$newAdsEntity->plate = $this->input->post('plate');
 			$newAdsEntity->car = $this->input->post('car');
+			$newAdsEntity->model = $this->input->post('model');
 			$newAdsEntity->year = $this->input->post('year');
 			$newAdsEntity->kilometers = $this->input->post('kilometers');
 			$newAdsEntity->lease = $this->input->post('lease');

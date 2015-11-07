@@ -99,6 +99,10 @@ class Taxi_model extends MY_Model {
         if ($canAddMoreTaxi->error['code'] == 0) {
             $newTaxiEntity = new TaxiEntity;
             $newTaxiEntity->user_id = $userID;
+            $newTaxiEntity->state = $this->input->post('state');
+            $newTaxiEntity->area = $this->input->post('area');
+            $newTaxiEntity->suburb = $this->input->post('suburb');
+            $newTaxiEntity->options = $this->input->post('options');
             $newTaxiEntity->car_finance_fee = $this->input->post('car_finance_fee');
             $newTaxiEntity->car_style = $this->input->post('car_style');
             $newTaxiEntity->car_type = $this->input->post('car_type');
@@ -139,6 +143,10 @@ class Taxi_model extends MY_Model {
         if ($userID == $this->getUserID($taxiID)) {
             $newTaxiEntity = new TaxiEntity;
             $newTaxiEntity->user_id = $userID;
+            $newTaxiEntity->state = $this->input->post('state');
+            $newTaxiEntity->area = $this->input->post('area');
+            $newTaxiEntity->suburb = $this->input->post('suburb');
+            $newTaxiEntity->options = $this->input->post('options');
             $newTaxiEntity->car_finance_fee = $this->input->post('car_finance_fee');
             $newTaxiEntity->car_style = $this->input->post('car_style');
             $newTaxiEntity->car_type = $this->input->post('car_type');

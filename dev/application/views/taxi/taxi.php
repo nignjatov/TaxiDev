@@ -80,6 +80,47 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-md-3">State</label>
+                        <div class="dropdown col-md-6">
+                            <select id="state" onchange="refreshArea('taxiDetailModal')" class="form-control" name="state">
+                            <?php
+                                $string = file_get_contents("application/files/states.json");
+                                $json = json_decode($string, true);
+
+                                foreach ($json as $states) {
+                                    foreach($states as $state => $areas) {
+                                        echo '<option>'.$state.'</option>';
+                                    }
+                                }
+                            ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Area</label>
+                        <div class="dropdown col-md-6">
+                            <select id="area"  onchange="refreshNetwork('taxiDetailModal')" class="form-control" name="area">
+                            <?php
+                                $string = file_get_contents("application/files/states.json");
+                                $states = json_decode($string, true);
+
+                                foreach ($json as $states)
+                                    foreach($states as $state => $areasArray)
+                                        foreach($areasArray as $areas)
+                                            foreach($areas as $area => $networks)
+                                                echo '<option state="'.$state.'">'.$area.'</option>';
+
+                            ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Suburb/Postcode</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control m-bot15" id="suburb" name="suburb">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label col-md-3">Taxi Network</label>
                         <div class="col-md-6">
                             <input id="taxi_network" name="taxi_network" type="text" maxlength="50" class="form-control m-bot15">
@@ -127,6 +168,12 @@
                                 <option value="200K-250K">200K-250K</option>
                                 <option value="250k+">250k+</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Options included</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control m-bot15" id="options" name="options">
                         </div>
                     </div>
                     <div class="form-group">

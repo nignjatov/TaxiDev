@@ -35,6 +35,9 @@ class UserDetailEntity {
     // state
     var $state;
 
+    // state
+    var $area;
+
     // comment
     var $comment = '';
 } 

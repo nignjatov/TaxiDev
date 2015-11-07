@@ -440,7 +440,7 @@
 					<div class="form-group">
                         <label class="control-label col-md-3">Car Manufacturer*</label>
 						<div class="dropdown col-md-6">
-							<select onchange="" class="form-control" name="car">
+							<select onchange="refreshCars('GeneralAdTaxiAddModal')" class="form-control" name="car">
 							<?php
 								$string = file_get_contents("application/files/cars.json");
 								$json = json_decode($string, true);
@@ -453,6 +453,22 @@
 							</select>
 						</div>
                     </div>
+                    <div class="form-group">
+						<label class="control-label col-md-3">Car Model*</label>
+						<div class="col-md-6">
+							<select class="form-control" name="model">
+							<?php
+								$string = file_get_contents("application/files/cars.json");
+								$states = json_decode($string, true);
+
+								foreach ($json as $cars)
+									foreach($cars as $car => $models)
+										foreach($models as $model)
+											echo '<option car="'.$car.'">'.$model.'</option>';
+							?>
+							</select>
+						</div>
+					</div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Year Manufactured*</label>
 						<div class="col-md-6">
@@ -492,11 +508,13 @@
                         <label class="control-label col-md-3">Kilometres travelled*</label>
 						<div class="dropdown col-md-6">
 							<select class="form-control" name="kilometers">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
+                                <option value="0-25k">0-25k</option>
+                                <option value="25k-50k">25k-50k</option>
+                                <option value="50k-100k">50k-100k</option>
+                                <option value="100k-150k">100k-150k</option>
+                                <option value="150k –200k">150k –200k</option>
+                                <option value="200K-250K">200K-250K</option>
+                                <option value="250k+">250k+</option>
                             </select>
 						</div>
                     </div>			

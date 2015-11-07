@@ -186,6 +186,12 @@
                 </div>
             </div>
             <div class="text-field clearfix m-bot15">
+                <div class="col-md-12"><p>Area</p></div>
+                <div class="col-md-12">
+                    <input type="text" name="area" placeholder="Area" class="form-control" maxlength="20" value="<?php echo isset($userInfo->area) ? $userInfo->area : ''?>">
+                </div>
+            </div>
+            <div class="text-field clearfix m-bot15">
                 <div class="col-md-12"><p>Street Detail</p></div>
                 <div class="col-md-6">
                     <input type="text" name="street_name" placeholder="Street Name" class="form-control" maxlength="100" value="<?php echo isset($userInfo->street_name) ? $userInfo->street_name : ''?>">

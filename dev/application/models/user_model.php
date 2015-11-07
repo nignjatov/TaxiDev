@@ -202,6 +202,7 @@ class User_model extends MY_Model {
         $userDetailEntity->phone = $this->input->post('phone');
         $userDetailEntity->fax = $this->input->post('fax');
         $userDetailEntity->state = $this->input->post('state');
+        $userDetailEntity->area = $this->input->post('area');
         $userDetailEntity->street_name = $this->input->post('street_name');
         $userDetailEntity->street_number = $this->input->post('street_number');
         $userDetailEntity->suburb = $this->input->post('suburb');

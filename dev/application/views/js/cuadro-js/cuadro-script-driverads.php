@@ -795,7 +795,7 @@ $("form#GeneralAdTaxiAddForm").submit(function(e){
 
     var postData = $(this).serializeArray();
 
-    var name="", contact="",type ="",state="",area="",network="",postal="",plate ="",shift="",days="",ndays="",car="",year="",fuel="",kilometers="",vehicles="",option="",lease="";
+    var name="", contact="",type ="",state="",area="",network="",postal="",plate ="",shift="",days="",ndays="",car="",model="",year="",fuel="",kilometers="",vehicles="",option="",lease="";
     var missing = "";
     for( var i = 0; i < postData.length;i++){
         console.log(postData[i]);
@@ -831,7 +831,9 @@ $("form#GeneralAdTaxiAddForm").submit(function(e){
             }
         } else if (postData[i].name == "car"){
             car = postData[i].value;
-        } else if (postData[i].name == "year"){
+        } else if (postData[i].name == "model"){
+		    model = postData[i].value;
+	    } else if (postData[i].name == "year"){
             year = postData[i].value;
         } else if (postData[i].name == "fuel"){
             fuel = postData[i].value;
@@ -886,8 +888,11 @@ $("form#GeneralAdTaxiAddForm").submit(function(e){
         missing += "Night shift days,";
     }
     if(car.length == 0){
-        missing += "Car";
+        missing += "Car,";
     }
+	if(model.length == 0){
+		missing += "Car model,";
+	}
     if(year.length == 0){
         missing += "Year,";
     }

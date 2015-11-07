@@ -42,6 +42,9 @@ class GeneralAdsTaxiAdsEntity {
 	
 	// car;
 	var $car;
+
+	// model;
+	var $model;
 	
 	// year
 	var $year;
