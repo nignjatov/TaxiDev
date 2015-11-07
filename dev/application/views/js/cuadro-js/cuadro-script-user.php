@@ -104,7 +104,7 @@
             }
 //            $(".registrationLoaderBox").hide();
         });
-		 
+
         e.preventDefault(); //STOP default action
     });
 
