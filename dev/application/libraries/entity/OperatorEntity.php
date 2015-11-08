@@ -16,6 +16,9 @@ class OperatorEntity {
     // abn_number
     var $abn_number;
 
+    // operator_type
+    var $operator_type;
+
     // contact_name
     var $contact_name;
 

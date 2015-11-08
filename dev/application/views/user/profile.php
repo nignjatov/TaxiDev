@@ -90,6 +90,13 @@
                     </div>
                 </div>
                 <div class="text-field clearfix m-bot15">
+                    <div class="col-md-12"><p>Operator type</p></div>
+                    <div class="col-md-12">
+                        <input type="text" name="operator_type" placeholder="Operator type" class="form-control" maxlength="100" value="<?php echo isset($operatorInfo->operator_type) ? $operatorInfo->operator_type : ''?>"
+                               required>
+                    </div>
+                </div>
+                <div class="text-field clearfix m-bot15">
                     <div class="col-md-12"><p>ABN number</p></div>
                     <div class="col-md-12">
                         <input type="text" name="abn_number" placeholder="ABN number" class="form-control" maxlength="100" value="<?php echo isset($operatorInfo->abn_number) ? $operatorInfo->abn_number : ''?>"

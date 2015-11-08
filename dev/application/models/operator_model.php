@@ -44,6 +44,7 @@ class Operator_model extends MY_Model {
         $operatorEntity->user_id = $userID;
         $operatorEntity->operator_number = $this->input->post('operator_number');
         $operatorEntity->abn_number = $this->input->post('abn_number');
+        $operatorEntity->operator_type = $this->input->post('operator_type');
         $operatorEntity->contact_name = $this->input->post('contact_name');
         $operatorEntity->number_of_taxi_operates = $this->input->post("number_of_taxi_operates");
 
