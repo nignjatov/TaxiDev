@@ -145,6 +145,8 @@ class Journal_model extends MY_Model {
                 $newJournalEntity->paying_date = $this->timezone->convertDateToMKTime($paying_date);
             }
 
+            $newJournalEntity->operator_name = $this->input->post('operator_name');//operator
+            $newJournalEntity->paid = $this->input->post('journal_paid');//paid
             $newJournalEntity->comment = $this->input->post('comment');
 
             $this->db->where("ID", $journalID, false);
