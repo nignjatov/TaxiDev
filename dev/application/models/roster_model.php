@@ -174,6 +174,18 @@ class Roster_model extends MY_Model {
         return parent::returnData($allRoster);
     }
 
+    public function getLatestEntryForTaxi($taxiID){
+        $this->db->select('r.*');
+        $this->db->from('wp_roster_paying AS r');
+        $this->db->where('r.taxi_id', $taxiID);
+        $this->db->order_by('paying_date', 'DESC');
+        $this->db->limit(1);
+
+        $result = $this->db->get()->result();
+
+        return parent::returnData($result);
+    }
+
     public function addRoster($userID) {
         $newRosterEntity = new RosterPayingEntity();
         $newRosterEntity->user_id = $userID;
@@ -208,6 +220,33 @@ class Roster_model extends MY_Model {
         $newRosterEntity->comment = $this->input->post('comment');
 
 //        echo $this->db->last_query().'<br>;
+        if ($this->db->insert('wp_roster_paying', $newRosterEntity)) {
+            return parent::returnData($this->db->insert_id());
+        }
+
+        return parent::returnData(false, ConstExceptionCode::UNKNOWN_ERROR_CODE);
+    }
+
+    public function addRosterTemplate($userID,$taxiId,$shift,$mkTime) {
+        $newRosterEntity = new RosterPayingEntity();
+
+        $newRosterEntity->user_id = $userID;
+        $newRosterEntity->taxi_id = $taxiId;
+        $newRosterEntity->shift = $shift;
+        $newRosterEntity->paying_date = $mkTime;
+
+
+        //blank data
+        $newRosterEntity->is_leased = '0';
+        $newRosterEntity->driver_name = '';
+        $newRosterEntity->is_paid = '0';
+        $newRosterEntity->amount_paid = '';
+        $newRosterEntity->mf_amount = '';
+        $newRosterEntity->m7_amount = '';
+        $newRosterEntity->cash_amount = '';
+        $newRosterEntity->fine_toll_amount = '';
+        $newRosterEntity->expenses = '';
+
         if ($this->db->insert('wp_roster_paying', $newRosterEntity)) {
             return parent::returnData($this->db->insert_id());
         }

@@ -11,6 +11,7 @@ class Taxi extends MY_Controller {
         parent::__construct();
 
         $this->load->model('Taxi_model');
+        $this->load->model('roster_model');
     }
 
     public function getAllTaxiDetail(){
@@ -29,6 +30,11 @@ class Taxi extends MY_Controller {
 
     public function addTaxi() {
         $returnData = $this->Taxi_model->addTaxi($this->userID, $this->subscriptionID);
+        $current_date = strtotime(date("Y-M-d"));
+        for ($i = 0 ; $i < 366; $i++) {
+            $this->roster_model->addRosterTemplate($this->userID,$returnData->result,'Evening',$current_date+$i*86400);
+            $this->roster_model->addRosterTemplate($this->userID,$returnData->result,'Morning',$current_date+$i*86400);
+        }
         echo $_GET['callback'].'('.(json_encode($returnData)).')';
     }
 
