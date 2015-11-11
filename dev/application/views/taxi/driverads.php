@@ -372,7 +372,7 @@
                         </div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Taxi Plate*</label>
+                        <label class="control-label col-md-3">Taxi Plate</label>
                         <div class="col-md-6">
                             <input id="add_taxi_post_plate" type="text" class="form-control m-bot15" name="plate">
                         </div>
@@ -548,7 +548,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Options included*</label>
+                        <label class="control-label col-md-3">Options included</label>
 						<div class="btn-group col-md-6" data-toggle="buttons">
 							<label class="btn btn-default col-md-6">
 								<input type="checkbox" name="option_1" value="Baby capsule"> Baby capsule
@@ -771,7 +771,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-						<label class="control-label col-md-3">Options included*</label>
+						<label class="control-label col-md-3">Options included</label>
 						<div class="btn-group col-md-6" data-toggle="buttons">
 							<label class="btn btn-default col-md-6">
 								<input type="checkbox" name="option_1" value="Baby capsule"> Baby capsule
@@ -918,7 +918,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Taxi Network*</label>
+                        <label class="control-label col-md-3">Taxi Network</label>
 						<div class="dropdown col-md-6">
 							<select id="network" class="form-control" name="network">
 							<?php
@@ -949,7 +949,7 @@
                         </div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Car Manufacturer*</label>
+                        <label class="control-label col-md-3">Car Manufacturer</label>
 						<div class="dropdown col-md-6">
 							<select onchange="refreshCars('GeneralAdCPLSModal')" class="form-control" name="car">
 							<?php
@@ -965,7 +965,7 @@
 						</div>
                     </div>
 					<div class="form-group">
-                        <label class="control-label col-md-3">Car Model*</label>
+                        <label class="control-label col-md-3">Car Model</label>
 						<div class="col-md-6">
 							<select class="form-control" name="model">
 							<?php

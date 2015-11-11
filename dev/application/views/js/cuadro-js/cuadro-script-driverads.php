@@ -795,7 +795,7 @@ $("form#GeneralAdTaxiAddForm").submit(function(e){
 
     var postData = $(this).serializeArray();
 
-    var name="", contact="",type ="",state="",area="",network="",postal="",plate ="",shift="",days="",ndays="",car="",model="",year="",fuel="",kilometers="",vehicles="",option="",lease="";
+    var name="", contact="",type ="",state="",area="",network="",postal="",shift="",days="",ndays="",car="",model="",year="",fuel="",kilometers="",vehicles="",lease="";
     var missing = "";
     for( var i = 0; i < postData.length;i++){
         console.log(postData[i]);
@@ -875,9 +875,6 @@ $("form#GeneralAdTaxiAddForm").submit(function(e){
     if(postal.length == 0){
         missing += "Postcode,";
     }
-    if(plate.length == 0){
-        missing += "Plate,";
-    }
     if(shift.length == 0){
         missing += "Shift,";
     }
@@ -904,9 +901,6 @@ $("form#GeneralAdTaxiAddForm").submit(function(e){
     }
     if(vehicles.length == 0){
         missing += "Vehicles,";
-    }
-    if(option.length == 0){
-        missing += "Option,";
     }
     if(lease.length == 0){
         missing += "Lease";
@@ -965,7 +959,7 @@ $("form#GeneralAdWantToDriveForm").submit(function(e){
 
     var postData = $(this).serializeArray();
 
-    var name="", contact="",type ="",state="",area="",network="",postal="",shift="",days="",vehicles="",option="";
+    var name="", contact="",type ="",state="",area="",network="",postal="",shift="",days="",vehicles="";
     var missing = "";
     for( var i = 0; i < postData.length;i++){
         console.log(postData[i]);
@@ -999,11 +993,6 @@ $("form#GeneralAdWantToDriveForm").submit(function(e){
                 vehicles += postData[i].value + ",";
             }
         }
-        else if (postData[i].name.indexOf("option") > -1){
-            if(postData[i].value.length > 0 ){
-                option += postData[i].value + ",";
-            }
-        }
     }
     if(name.length == 0){
         missing += "Name,";
@@ -1034,9 +1023,6 @@ $("form#GeneralAdWantToDriveForm").submit(function(e){
     }
     if(vehicles.length == 0){
         missing += "Vehicles,";
-    }
-    if(option.length == 0){
-        missing += "Option,";
     }
     if(missing.length >0 && missing[missing.length-1] == ","){
         missing=missing.substring(0,missing.length-1);
@@ -1092,7 +1078,7 @@ $("form#GeneralAdCPLSForm").submit(function(e){
     var postData = $(this).serializeArray();
 
 
-    var name="", contact="",want_to ="",item="",state="",area="",network="",postal="",car="",model="",price="";
+    var name="", contact="",want_to ="",item="",state="",area="",postal="",price="";
     var missing = "";
     for( var i = 0; i < postData.length;i++){
         console.log(postData[i]);
@@ -1110,16 +1096,8 @@ $("form#GeneralAdCPLSForm").submit(function(e){
             state = postData[i].value;
         } else if (postData[i].name == "area"){
             area = postData[i].value;
-        } else if (postData[i].name.indexOf("network") > -1){
-            if(postData[i].value.length > 0 ){
-                network += postData[i].value + ",";
-            }
-        } else if (postData[i].name == "postal_code"){
+        }else if (postData[i].name == "postal_code"){
             postal = postData[i].value;
-        } else if (postData[i].name == "car"){
-            car += postData[i].value + ",";
-        } else if (postData[i].name == "model"){
-            model += postData[i].value + ",";
         } else if (postData[i].name == "priceRate"){
             if(postData[i].value.length > 0 ){
                 price += postData[i].value + ",";
@@ -1146,17 +1124,8 @@ $("form#GeneralAdCPLSForm").submit(function(e){
     if(area.length == 0){
         missing += "Area,";
     }
-    if(network.length == 0){
-        missing += "Network,";
-    }
     if(postal.length == 0){
         missing += "Postcode,";
-    }
-    if(car.length == 0){
-        missing += "Car,";
-    }
-    if(model.length == 0){
-        missing += "Model,";
     }
     if(price.length == 0){
         missing += "Price";
@@ -1224,7 +1193,7 @@ $("#OptionDriverWantedModal").click(function(e){
 	$("#GeneralAdDriversWantedModal select[name=state] option").filter(function() { return $(this).text() == 'NSW'; }).prop('selected', true);
 	refreshArea('GeneralAdDriversWantedModal');
 	
-	$("#GeneralAdDriversWantedModal h4.modal-title").html("Add New Driver Ads Information");
+	$("#GeneralAdDriversWantedModal h4.modal-title").html("Add New Drivers Wanted Ad");
 	$("#GeneralAdDriversWantedSubmit").html("Add");
 	$("#GeneralAdDriversWantedModal").modal('show');
 });
@@ -1242,7 +1211,7 @@ $("#OptionTaxiAddModal").click(function(e){
 	$("#GeneralAdTaxiAddModal select[name=state] option").filter(function() { return $(this).text() == 'NSW'; }).prop('selected', true);
 	refreshArea('GeneralAdTaxiAddModal');
 	
-	$("#GeneralAdTaxiAddModal h4.modal-title").html("Add New Driver Ads Information");
+	$("#GeneralAdTaxiAddModal h4.modal-title").html("Add New Taxi Ad");
 	$("#GeneralAdTaxiAddSubmit").html("Add");
 	$("#GeneralAdTaxiAddModal").modal('show');
 });
@@ -1258,7 +1227,7 @@ $("#OptionWantToDriveModal").click(function(e){
 	$("#GeneralAdWantToDriveModal select[name=state] option").filter(function() { return $(this).text() == 'NSW'; }).prop('selected', true);
 	refreshArea('GeneralAdWantToDriveModal');
 	
-	$("#GeneralAdWantToDriveModal h4.modal-title").html("Add New Driver Ads Information");
+	$("#GeneralAdWantToDriveModal h4.modal-title").html("Add New Want To Drive Ad");
 	$("#GeneralAdWantToDriveSubmit").html("Add");
 	$("#GeneralAdWantToDriveModal").modal('show');
 });
@@ -1279,7 +1248,7 @@ $("#OptionCPLSModal").click(function(e){
 	$("#GeneralAdCPLSModal select[name=car] option").filter(function() { return $(this).text() == 'Toyota'; }).prop('selected', true);
 	refreshCars('GeneralAdCPLSModal');
 	
-	$("#GeneralAdCPLSModal h4.modal-title").html("Add New Driver Ads Information");
+	$("#GeneralAdCPLSModal h4.modal-title").html("Add New Car/Plate Lease/Sale Ad");
 	$("#GeneralAdCPLSSubmit").html("Add");
 	$("#GeneralAdCPLSModal").modal('show');
 });
