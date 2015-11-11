@@ -124,7 +124,7 @@ var journalObject = {
          * Note that the indicator for showing which row is open is not controlled by DataTables,
          * rather it is done here
          */
-        /*$(document).on('click','#journal_list tbody td img',function () {
+        $(document).on('click','#journal_list tbody td img',function () {
             var nTr = $(this).parents('tr')[0];
             if ( journalDataTable.fnIsOpen(nTr) )
             {
@@ -138,7 +138,7 @@ var journalObject = {
                 this.src = "<?php echo base_url()?>application/views/img/details_close.png";
                 journalDataTable.fnOpen( nTr, journalObject.fnFormatDetails(journalDataTable, nTr), 'details' );
             }
-        } );*/
+        } );
     }
 }
 

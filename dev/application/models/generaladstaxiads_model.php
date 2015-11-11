@@ -109,7 +109,7 @@ class GeneralAdsTaxiAds_model extends MY_Model {
 			if ($this->input->post('option_1') != "") 
 				$newAdsEntity->options .= $this->input->post('option_1').",";
 
-			if ($this->input->post('option_2' != ""))
+			if ($this->input->post('option_2') != "")
 				$newAdsEntity->options .= $this->input->post('option_2');
 
 			$newAdsEntity->options = trim($newAdsEntity->options, ",");
@@ -230,7 +230,7 @@ class GeneralAdsTaxiAds_model extends MY_Model {
 			if ($this->input->post('option_1') != "") 
 				$newAdsEntity->options .= $this->input->post('option_1').",";
 
-			if ($this->input->post('option_2' != ""))
+			if ($this->input->post('option_2') != "")
 				$newAdsEntity->options .= $this->input->post('option_2');
 
 			$newAdsEntity->options = trim($newAdsEntity->options, ",");
