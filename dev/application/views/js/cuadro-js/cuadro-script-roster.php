@@ -65,7 +65,6 @@ var rosterObject = {
 		}
 		
 		rosterDataTable.fnDraw();
-		//$("#roster_list tbody tr").addClass('gradeA');
 		
 		$("#taxiFilter").html(taxiFilterOptions);
 		if(taxiFilterOptions.indexOf(filterTaxi) > -1)
@@ -200,7 +199,11 @@ var rosterObject = {
             "aoColumnDefs": [
                 { "bSortable": false, "aTargets": [ 0 ] }
             ],
-            "aaSorting": [[1, 'asc']]
+            "aaSorting": [[1, 'asc']]/*,
+			"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+                $(nRow).addClass( "gradeA" );
+                return nRow;
+            }*/
         });
 
         /* Add event listener for opening and closing details
