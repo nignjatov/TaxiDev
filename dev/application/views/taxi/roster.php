@@ -9,7 +9,6 @@
                         Roster & Paying List
                     </header>
                     <div class="panel-body">
-<!--
 						<div class="row">	
 							<div class="col-md-2">
 								Select a taxi 
@@ -31,15 +30,13 @@
 										return $return;
 									}
 													
-									//for ($i=1;$i<=52;$i++)
-									//	echo '<option from="'.getStartAndEndDate($i,date("Y"))[0].'" to="'.getStartAndEndDate($i,date("Y"))[1].'">' . $i .'</option>';
+									for ($i=1;$i<=52;$i++)
+										echo '<option from="'.getStartAndEndDate($i,date("Y"))[0].'" to="'.getStartAndEndDate($i,date("Y"))[1].'">' . $i .'</option>';
 									?>
 								</select>
                             </div>
 						</div>
-				
 						</br>
--->
                         <div class="adv-table">
                             <div class="query_box row-fluid">
                                 <div class="container-fluid">

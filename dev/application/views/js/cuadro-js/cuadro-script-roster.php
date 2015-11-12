@@ -63,7 +63,7 @@ var rosterObject = {
 				]);
 			}	
 		}
-		$("#roster_list tbody tr").addClass('gradeA');
+		//$("#roster_list tbody tr").addClass('gradeA');
 		
 		$("#taxiFilter").html(taxiFilterOptions);
 		if(taxiFilterOptions.indexOf(filterTaxi) > -1)
@@ -173,16 +173,16 @@ var rosterObject = {
          * Initialse DataTables, with no sorting on the 'details' column
          */
         rosterDataTable = $('#roster_list').dataTable( {
-			/*"iDisplayLength": 100,
+			"iDisplayLength": 100,
 			"oLanguage": {
-				"sLengthMenu": 'Select a taxi '+
+				"sLengthMenu": 'Number of rows: '+
 					'<select class="form-control">'+
 					'<option value="10">10</option>'+
 					'<option value="50">50</option>'+
 					'<option value="100">100</option>'+
 					'<option value="-1">All</option>'+
 					'</select>'
-			},*/
+			},
 			"aoColumns": [
 				null,
 				null,
