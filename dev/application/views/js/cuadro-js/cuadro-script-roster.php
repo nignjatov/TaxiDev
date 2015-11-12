@@ -60,9 +60,11 @@ var rosterObject = {
 					balance,
 					'<a data-toggle="modal" class="edit" title="" onclick="viewRosterDetail(\''+allRosterObjects[i].ID+'\','+allRosterObjects[i].taxi_id+',\''+allRosterObjects[i].paying_date+'\',\''+allRosterObjects[i].shift+'\')" ><i class="ico-pencil"></i></a>'+ 
 					'<a data-toggle="modal" class="remove" title="" onclick="deleteRosterDetail('+allRosterObjects[i].ID+')" ><i class="ico-close"></i></a>'
-				]);
+				], false);
 			}	
 		}
+		
+		rosterDataTable.fnDraw();
 		//$("#roster_list tbody tr").addClass('gradeA');
 		
 		$("#taxiFilter").html(taxiFilterOptions);
