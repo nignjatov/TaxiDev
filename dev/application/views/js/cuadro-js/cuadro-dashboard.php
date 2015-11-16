@@ -5,8 +5,10 @@
     dashboardInit();
 
     var dashboardObject = {
-        populateDashboardListTable: function(){
+        populateOperatorDashboardListTable: function(){
             $('#dashboard-data-table_wrapper').remove();
+            $("#journalChart").remove();
+            $("#yearPickerForm").remove();
             var temp = '<table  class="display table table-bordered table-striped" id="dashboard-data-table">' +
                 '<thead><tr>' +
                 '<th>Taxi #</th>' +
@@ -20,22 +22,46 @@
                 '<th>Profit/<span class="error">Loss</span> (AU$)</th>' +
                 '</tr></thead>' +
                 '<tbody></tbody>' +
-                '<tfoot><tr>' +
-                '<th>Taxi #</th>' +
-                '<th>Plate Fee (AU$)</th>' +
-                '<th>Network Finance (AU$)</th>' +
-                '<th>Insurance Finance (AU$)</th>' +
-                '<th>Car Finance (AU$)</th>' +
-                '<th>Maintenance Cost (AU$)</th>' +
-                '<th>Total (AU$)</th>' +
-                '<th>Balance (AU$)</th>' +
-                '<th>Profit/<span class="error">Loss</span> (AU$)</th>' +
-                '</tr></tfoot>' +
                 '</table>';
             $(".adv-table").append(temp);
         },
-        populateDashboardList: function(objects){
-            this.populateDashboardListTable();
+        populateDriverDashboardListTable: function(){
+            $('#dashboard-data-table_wrapper').remove();
+            $('#maintenanceChart').remove();
+            $('#profitChart').remove();
+            $('#datePickerForm').remove();
+            var years = "";
+            var cur_year = new Date().getFullYear();
+            for ( var i = 2015; i<=2020; i++) {
+                if(i != cur_year) {
+                    years+= '<option>'+i+'</option>';
+                } else {
+                    years+= '<option selected="selected">'+i+'</option>';
+                }
+            }
+
+            $('#yearPicker').html(years);
+            var temp = '<table  class="display table table-bordered table-striped" id="dashboard-data-table">' +
+                '<thead><tr>' +
+                '<th>Month</th>' +
+                '<th>Shift pay (AU$)</th>' +
+                '<th>Fuel cost (AU$)</th>' +
+                '<th>Other cost (AU$)</th>' +
+                '<th>Cash (AU$)</th>' +
+                '<th>Eftpos Shift Total(AU$)</th>' +
+                '<th>Docket (AU$)</th>' +
+                '<th>Kilometer Driven</th>' +
+                '<th>Total Expense (AU$)</th>' +
+                '<th>Gross Income(AU$)</th>' +
+                '<th>Net Income(AU$)</th>' +
+                '<th>GST Payable</th>' +
+                '</thead>' +
+                '<tbody></tbody>' +
+                '</table>';
+            $(".adv-table").append(temp);
+        },
+        populateOperatorDashboardList: function(objects){
+            this.populateOperatorDashboardListTable();
             var dashboard_data = objects;
             console.dir(dashboard_data);
             var total_record = dashboard_data.length;
@@ -65,7 +91,32 @@
                 "aaSorting": [[ 8, "desc" ]]
             });
         },
-        makeBarGraph: function(objectID, reportData){
+        populateDriverDashboardList: function(objects){
+            this.populateDriverDashboardListTable();
+            var dashboard_data = objects;
+            console.dir(dashboard_data);
+            var data_string = '';
+            for (var i = 0; i < dashboard_data.length; i++) {
+
+                data_string = '<tr>';
+                data_string += '<td>'+dashboard_data[i].title+'</td>';
+                data_string += '<td>'+dashboard_data[i].shiftPay+'</td>';
+                data_string += '<td>'+dashboard_data[i].fuelCost+'</td>';
+                data_string += '<td>'+dashboard_data[i].otherCost+'</td>';
+                data_string += '<td>'+dashboard_data[i].cash+'</td>';
+                data_string += '<td>'+dashboard_data[i].eftposShiftTotal+'</td>';
+                data_string += '<td>'+dashboard_data[i].docket+'</td>';
+                data_string += '<td>'+dashboard_data[i].kilometer+'</td>';
+                data_string += '<td>'+dashboard_data[i].totalExpense+'</td>';
+                data_string += '<td>'+dashboard_data[i].grossIncome+'</td>';
+                data_string += '<td>'+dashboard_data[i].netIncome+'</td>';
+                data_string += '<td>'+dashboard_data[i].gst+'</td>';
+                data_string += '</tr>';
+
+                $("#dashboard-data-table tbody").append(data_string);
+            }
+        },
+        makeOperatorBarGraph: function(objectID, reportData){
             var chart = AmCharts.makeChart( objectID, {
                 "type": "serial",
                 "theme": "light",
@@ -131,14 +182,19 @@
     }
 
     function updateDashboardData(){
-        var serverURL = "<?php echo site_url('Dashboard/getDashboardDetail')?>";
-        $("#dashboard-data-table tbody").html("");
+        var serverURL = "<?php echo site_url('Dashboard/getDashboardDetail')?>"+"/year/"+(new Date().getFullYear());
+        $("#dashboard-data-table").remove();
         cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', updateDashboardData, function(data){
             if (data.error['code'] == 0) {
                 console.dir(data.result.result);
-                dashboardObject.populateDashboardList(data.result.result.detail);
-                dashboardObject.makeBarGraph('profit_graph', data.result.result.profitData);
-                dashboardObject.makeBarGraph('maintenance_graph', data.result.result.maintenanceData);
+                if(data.result.result.type === "operator"){
+                    dashboardObject.populateOperatorDashboardList(data.result.result.detail);
+                    dashboardObject.makeOperatorBarGraph('profit_graph', data.result.result.profitData);
+                    dashboardObject.makeOperatorBarGraph('maintenance_graph', data.result.result.maintenanceData);
+                } else if(data.result.result.type == "driver") {
+                    dashboardObject.populateDriverDashboardList(data.result.result.profitData);
+
+                }
             }
         });
     }
@@ -146,14 +202,20 @@
     function searchDashboardInformation(){
         var start_date = $("#dashboardStartDate").val();
         var end_date = $("#dashboardEndDate").val();
-        var serverURL = "<?php echo site_url('Dashboard/getDashboardDetail?start_date=')?>" + start_date + "&end_date=" + end_date;
+        var year = $("#yearPicker").val();
+        var serverURL = "<?php echo site_url('Dashboard/getDashboardDetail')?>"+"/start_date/" + start_date + "/end_date/" + end_date+ "/year/"+year;
 
-        $("#dashboard-data-table tbody").html("");
+        $("#dashboard-data-table").remove();
+
         cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', 'searchDashboardInformation', function(data){
             if (data.error['code'] == 0) {
-                dashboardObject.populateDashboardList(data.result.result.detail);
-                dashboardObject.makeBarGraph('profit_graph', data.result.result.profitData);
-                dashboardObject.makeBarGraph('maintenance_graph', data.result.result.maintenanceData);
+                if(data.result.result.type === "operator"){
+                    dashboardObject.populateOperatorDashboardList(data.result.result.detail);
+                    dashboardObject.makeBarGraph('profit_graph', data.result.result.profitData);
+                    dashboardObject.makeBarGraph('maintenance_graph', data.result.result.maintenanceData);
+                } else if(data.result.result.type == "driver") {
+                    dashboardObject.populateDriverDashboardList(data.result.result.profitData);
+                }
             }
         });
     }

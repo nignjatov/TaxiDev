@@ -28,26 +28,30 @@ class Dashboard extends MY_Controller {
     }
 
     public function getDashboardDetail(){
-        $taxis = $this->taxi_model->getAllTaxi($this->userID);
-        foreach($taxis->result as $taxi){
-            $last = $this->roster_model->getLatestEntryForTaxi($taxi->ID);
-            if(count($last->result) > 0){
-                $current_date = strtotime(date("Y-M-d"));
-                for ($i = 0 ; $i < 366; $i++) {
-                    if(($current_date+$i*86400) > (intval(array_values($last->result)[0]->paying_date))){
+        $userInfo = $this->User_model->getUserDetail($this->userID);
+        if($userInfo->result->user_type == 'operator'){
+            $taxis = $this->taxi_model->getAllTaxi($this->userID);
+            foreach($taxis->result as $taxi){
+                $last = $this->roster_model->getLatestEntryForTaxi($taxi->ID);
+                if(count($last->result) > 0){
+                    $current_date = strtotime(date("Y-M-d"));
+                    for ($i = 0 ; $i < 366; $i++) {
+                        if(($current_date+$i*86400) > (intval(array_values($last->result)[0]->paying_date))){
+                            $this->roster_model->addRosterTemplate($this->userID,$taxi->ID,'Evening',$current_date+$i*86400);
+                            $this->roster_model->addRosterTemplate($this->userID,$taxi->ID,'Morning',$current_date+$i*86400);
+                        }
+                    }
+                } else {
+                    $current_date = strtotime(date("Y-M-d"));
+                    for ($i = 0 ; $i < 366; $i++) {
                         $this->roster_model->addRosterTemplate($this->userID,$taxi->ID,'Evening',$current_date+$i*86400);
                         $this->roster_model->addRosterTemplate($this->userID,$taxi->ID,'Morning',$current_date+$i*86400);
                     }
                 }
-            } else {
-                $current_date = strtotime(date("Y-M-d"));
-                for ($i = 0 ; $i < 366; $i++) {
-                    $this->roster_model->addRosterTemplate($this->userID,$taxi->ID,'Evening',$current_date+$i*86400);
-                    $this->roster_model->addRosterTemplate($this->userID,$taxi->ID,'Morning',$current_date+$i*86400);
-                }
             }
         }
-        parent::returnData($this->Dashboard_model->getDashboardDetail($this->userID));
+        parent::returnData($this->Dashboard_model->getDashboardDetail($this->userID,$userInfo->result->user_type));
+
     }
 }
 ?>

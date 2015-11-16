@@ -31,7 +31,7 @@
 									}
 													
 									for ($i=1;$i<=52;$i++)
-										echo '<option from="'.getStartAndEndDate($i,date("Y"))[0].'" to="'.getStartAndEndDate($i,date("Y"))[1].'">' . $i .'</option>';
+										echo '<option from="'.array_slice(getStartAndEndDate($i,date("Y")),0,1).'" to="'.array_slice(getStartAndEndDate($i,date("Y")),1,1).'">' . $i .'</option>';
 									?>
 								</select>
                             </div>
