@@ -20,18 +20,22 @@
 								<select id="weekFilter" class="form-control" name="weekFilter" >
 									<option from="" to="">All</option>
 									<?php
-									function getStartAndEndDate($week, $year){
+									function getStartAndEndDate($week, $year, $fromOrTo){
 										$time = strtotime("1 January $year", time());
 										$day = date('w', $time);
 										$time += ((7*$week)+1-$day)*24*3600;
-										$return[0] = date('n/j/Y', $time);
+										$return_from = date('n/j/Y', $time);
 										$time += 6*24*3600;
-										$return[1] = date('n/j/Y', $time);
-										return $return;
+										$return_to = date('n/j/Y', $time);
+										
+										if($fromOrTo == 1)
+											return $return_from;
+										else
+											return $return_to;
 									}
 													
 									for ($i=1;$i<=52;$i++)
-										echo '<option from="'.array_slice(getStartAndEndDate($i,date("Y")),0,1).'" to="'.array_slice(getStartAndEndDate($i,date("Y")),1,1).'">' . $i .'</option>';
+										echo '<option from="'.getStartAndEndDate($i,date("Y"),1).'" to="'.getStartAndEndDate($i,date("Y"),2).'">' . $i .'</option>';
 									?>
 								</select>
                             </div>
