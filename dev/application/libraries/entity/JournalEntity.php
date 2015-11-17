@@ -18,6 +18,7 @@ class JournalEntity {
     var $cash_payment = 0;
     var $eftpos_shift_total = 0;
     var $docket = 0;
+    var $kilometer = 0;
     var $comment = '';
     var $operator_name = '';
     var $paid = '';

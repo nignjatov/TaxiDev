@@ -136,6 +136,16 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-md-3">Kilometer driven</label>
+                        <div class="col-md-6">
+                            <div id="spinner3">
+                                <div class="">
+                                    <input id="kilometer" name="kilometer" type="number" maxlength="6" class="form-control" min="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label col-md-3">Fuel Cost</label>
                         <div class="col-md-6">
                             <div id="spinner3">

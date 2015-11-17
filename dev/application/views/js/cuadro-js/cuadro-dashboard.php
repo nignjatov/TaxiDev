@@ -155,6 +155,100 @@
                 }
 
             } );
+        },
+
+        makeDriverProfitGraph: function(reportData){
+            data = reportData.slice(0, 12);
+            var chart = AmCharts.makeChart( 'journal_graph', {
+                "type": "serial",
+                "categoryField": "title",
+                "startDuration": 1,
+                "categoryAxis": {
+                    "gridPosition": "start"
+                },
+                "trendLines": [],
+                "graphs": [
+                    {
+                        "balloonText": "[[title]]:[[value]]",
+                        "fillAlphas": 1,
+                        "id": "AmGraph-1",
+                        "title": "Gross income",
+                        "type": "column",
+                        "valueField": "grossIncome",
+                        "valueAxis": "v1",
+                    },
+                    {
+                        "balloonText": "[[title]]:[[value]]",
+                        "fillAlphas": 1,
+                        "id": "AmGraph-2",
+                        "title": "Total expense",
+                        "type": "column",
+                        "valueAxis": "v1",
+                        "valueField": "totalExpense"
+                    },
+                    {
+                        "balloonText": "[[title]]:[[value]]",
+                        "fillAlphas": 1,
+                        "id": "AmGraph-4",
+                        "title": "GST Payable",
+                        "type": "column",
+                        "valueAxis": "v1",
+                        "valueField": "gst"
+                    },
+                    {
+                        "balloonText": "[[title]]:[[value]]",
+                        "fillAlphas": 1,
+                        "id": "AmGraph-5",
+                        "title": "Net income",
+                        "type": "column",
+                        "valueAxis": "v1",
+                        "valueField": "netIncome"
+                    },
+                    {
+                        "id": "AmGraph-3",
+                        "title": "Kilometer driven",
+                        "valueAxis": "v2",
+                        "valueField": "kilometer"
+                    }
+                ],
+                "guides": [],
+                "valueAxes": [{
+                     "id":"v1",
+                     "axisColor": "#FF6600",
+                     "axisThickness": 2,
+                     "gridAlpha": 0,
+                     "axisAlpha": 1,
+                     "position": "left",
+                     "title": "AU$"
+                 }, {
+                     "id":"v2",
+                     "axisColor": "#FCD202",
+                     "axisThickness": 2,
+                     "gridAlpha": 0,
+                     "axisAlpha": 1,
+                     "position": "right",
+                     "title": "Kilometer driven"
+                 }
+                ],
+                "allLabels": [],
+                "balloon": {},
+                "legend": {
+                    "useGraphSettings": true
+                },
+                "titles": [
+                    {
+                        "id": "Title-1",
+                        "size": 15,
+                        "text": "Driver Journal"
+                    },
+                    {
+                        "id": "Title-2",
+                        "size": 10,
+                        "text": "Monthly relationship between income, expense and kilometer driven"
+                    }
+                ],
+                "dataProvider": data
+            } );
         }
     }
 
@@ -193,7 +287,7 @@
                     dashboardObject.makeOperatorBarGraph('maintenance_graph', data.result.result.maintenanceData);
                 } else if(data.result.result.type == "driver") {
                     dashboardObject.populateDriverDashboardList(data.result.result.profitData);
-
+                    dashboardObject.makeDriverProfitGraph(data.result.result.profitData);
                 }
             }
         });
@@ -215,6 +309,7 @@
                     dashboardObject.makeBarGraph('maintenance_graph', data.result.result.maintenanceData);
                 } else if(data.result.result.type == "driver") {
                     dashboardObject.populateDriverDashboardList(data.result.result.profitData);
+                    dashboardObject.makeDriverProfitGraph(data.result.result.profitData);
                 }
             }
         });

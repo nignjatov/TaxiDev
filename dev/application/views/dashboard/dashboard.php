@@ -29,10 +29,10 @@
                             </section>
                         </div>
                         <div class="col-md-12" id="journalChart">
-                            <section class="panel">
-                                <div class="panel-body">
+                            <section class="panel" style="height: 500px;">
+                                <div class="panel-body" style="height: 500px;">
                                     <div class="widget_title">Driver Journal</div>
-                                        <div class="top-stats-panel dashboard_widget" id="maintenance_graph">
+                                        <div class="top-stats-panel dashboard_widget" id="journal_graph" style="height: 450px;">
                                     </div>
                                 </div>
                             </section>

@@ -104,7 +104,7 @@ class Journal_model extends MY_Model {
         $newJournalEntity->cash_payment = $this->input->post('cash_payment');//total cash
         $newJournalEntity->eftpos_shift_total = $this->input->post('eftpos_shift_total');//total eftpos
         $newJournalEntity->docket = $this->input->post('docket');//docket
-
+        $newJournalEntity->kilometer = $this->input->post('kilometer');//docket
         $paying_date = $this->input->post('paying_date');//date
 
         //operator name
@@ -139,6 +139,7 @@ class Journal_model extends MY_Model {
             $newJournalEntity->cash_payment = $this->input->post('cash_payment');
             $newJournalEntity->eftpos_shift_total = $this->input->post('eftpos_shift_total');
             $newJournalEntity->docket = $this->input->post('docket');
+            $newJournalEntity->kilometer = $this->input->post('kilometer');//docket
 
             $paying_date = $this->input->post('paying_date');
             if (!empty($paying_date)) {

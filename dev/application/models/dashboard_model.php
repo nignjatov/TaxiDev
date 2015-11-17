@@ -146,6 +146,7 @@ class Dashboard_model extends MY_Model {
                     $jan_info->cash+=$item->cash_payment;
                     $jan_info->eftposShiftTotal+=$item->eftpos_shift_total;
                     $jan_info->docket+=$item->docket;
+                    $jan_info->kilometer+=$item->kilometer;
                 } else if($item->paying_date < $feb){
                     $feb_info->shiftPay+=$item->shift_rate;
                     $feb_info->fuelCost+=$item->fuel_cost;
@@ -153,6 +154,7 @@ class Dashboard_model extends MY_Model {
                     $feb_info->cash+=$item->cash_payment;
                     $feb_info->eftposShiftTotal+=$item->eftpos_shift_total;
                     $feb_info->docket+=$item->docket;
+                    $feb_info->kilometer+=$item->kilometer;
                 } else if($item->paying_date < $march){
                     $march_info->shiftPay+=$item->shift_rate;
                     $march_info->fuelCost+=$item->fuel_cost;
@@ -160,6 +162,7 @@ class Dashboard_model extends MY_Model {
                     $march_info->cash+=$item->cash_payment;
                     $march_info->eftposShiftTotal+=$item->eftpos_shift_total;
                     $march_info->docket+=$item->docket;
+                    $march_info->kilometer+=$item->kilometer;
                 } else if($item->paying_date < $april){
                     $april_info->shiftPay+=$item->shift_rate;
                     $april_info->fuelCost+=$item->fuel_cost;
@@ -167,6 +170,7 @@ class Dashboard_model extends MY_Model {
                     $april_info->cash+=$item->cash_payment;
                     $april_info->eftposShiftTotal+=$item->eftpos_shift_total;
                     $april_info->docket+=$item->docket;
+                    $april_info->kilometer+=$item->kilometer;
                 } else if($item->paying_date < $may){
                     $may_info->shiftPay+=$item->shift_rate;
                     $may_info->fuelCost+=$item->fuel_cost;
@@ -174,6 +178,7 @@ class Dashboard_model extends MY_Model {
                     $may_info->cash+=$item->cash_payment;
                     $may_info->eftposShiftTotal+=$item->eftpos_shift_total;
                     $may_info->docket+=$item->docket;
+                    $may_info->kilometer+=$item->kilometer;
                 } else if($item->paying_date < $jun){
                     $jun_info->shiftPay+=$item->shift_rate;
                     $jun_info->fuelCost+=$item->fuel_cost;
@@ -181,6 +186,7 @@ class Dashboard_model extends MY_Model {
                     $jun_info->cash+=$item->cash_payment;
                     $jun_info->eftposShiftTotal+=$item->eftpos_shift_total;
                     $jun_info->docket+=$item->docket;
+                    $jun_info->kilometer+=$item->kilometer;
                 } else if($item->paying_date < $july){
                     $july_info->shiftPay+=$item->shift_rate;
                     $july_info->fuelCost+=$item->fuel_cost;
@@ -188,6 +194,7 @@ class Dashboard_model extends MY_Model {
                     $july_info->cash+=$item->cash_payment;
                     $july_info->eftposShiftTotal+=$item->eftpos_shift_total;
                     $july_info->docket+=$item->docket;
+                    $july_info->kilometer+=$item->kilometer;
                 } else if($item->paying_date < $aug){
                     $august_info->shiftPay+=$item->shift_rate;
                     $august_info->fuelCost+=$item->fuel_cost;
@@ -195,6 +202,7 @@ class Dashboard_model extends MY_Model {
                     $august_info->cash+=$item->cash_payment;
                     $august_info->eftposShiftTotal+=$item->eftpos_shift_total;
                     $august_info->docket+=$item->docket;
+                    $august_info->kilometer+=$item->kilometer;
                  } else if($item->paying_date < $sep){
                      $sep_info->shiftPay+=$item->shift_rate;
                      $sep_info->fuelCost+=$item->fuel_cost;
@@ -202,6 +210,7 @@ class Dashboard_model extends MY_Model {
                      $sep_info->cash+=$item->cash_payment;
                      $sep_info->eftposShiftTotal+=$item->eftpos_shift_total;
                      $sep_info->docket+=$item->docket;
+                     $sep_info->kilometer+=$item->kilometer;
                  } else if($item->paying_date < $oct){
                      $oct_info->shiftPay+=$item->shift_rate;
                      $oct_info->fuelCost+=$item->fuel_cost;
@@ -209,6 +218,7 @@ class Dashboard_model extends MY_Model {
                      $oct_info->cash+=$item->cash_payment;
                      $oct_info->eftposShiftTotal+=$item->eftpos_shift_total;
                      $oct_info->docket+=$item->docket;
+                     $oct_info->kilometer+=$item->kilometer;
                  } else if($item->paying_date < $nov){
                      $nov_info->shiftPay+=$item->shift_rate;
                      $nov_info->fuelCost+=$item->fuel_cost;
@@ -216,6 +226,7 @@ class Dashboard_model extends MY_Model {
                      $nov_info->cash+=$item->cash_payment;
                      $nov_info->eftposShiftTotal+=$item->eftpos_shift_total;
                      $nov_info->docket+=$item->docket;
+                     $nov_info->kilometer+=$item->kilometer;
                  } else {
                      $dec_info->shiftPay+=$item->shift_rate;
                      $dec_info->fuelCost+=$item->fuel_cost;
@@ -223,10 +234,35 @@ class Dashboard_model extends MY_Model {
                      $dec_info->cash+=$item->cash_payment;
                      $dec_info->eftposShiftTotal+=$item->eftpos_shift_total;
                      $dec_info->docket+=$item->docket;
+                     $dec_info->kilometer+=$item->kilometer;
                  }
             }
 
-            // TODO do the calculations totalExpense, grossIncome
+            $jan_info->totalExpense =$jan_info->shiftPay + $jan_info->fuelCost + $jan_info->otherCost;
+            $feb_info->totalExpense =$feb_info->shiftPay + $feb_info->fuelCost + $feb_info->otherCost;
+            $march_info->totalExpense =$march_info->shiftPay + $march_info->fuelCost + $march_info->otherCost;
+            $april_info->totalExpense =$april_info->shiftPay + $april_info->fuelCost + $april_info->otherCost;
+            $may_info->totalExpense =$may_info->shiftPay + $may_info->fuelCost + $may_info->otherCost;
+            $jun_info->totalExpense =$jun_info->shiftPay + $jun_info->fuelCost + $jun_info->otherCost;
+            $july_info->totalExpense =$july_info->shiftPay + $july_info->fuelCost + $july_info->otherCost;
+            $august_info->totalExpense =$august_info->shiftPay + $august_info->fuelCost + $august_info->otherCost;
+            $sep_info->totalExpense =$sep_info->shiftPay + $sep_info->fuelCost + $sep_info->otherCost;
+            $oct_info->totalExpense =$oct_info->shiftPay + $oct_info->fuelCost + $oct_info->otherCost;
+            $nov_info->totalExpense =$nov_info->shiftPay + $nov_info->fuelCost + $nov_info->otherCost;
+            $dec_info->totalExpense =$dec_info->shiftPay + $dec_info->fuelCost + $dec_info->otherCost;
+
+            $jan_info->grossIncome =$jan_info->cash + $jan_info->eftposShiftTotal + $jan_info->docket;
+            $feb_info->grossIncome =$feb_info->cash + $feb_info->eftposShiftTotal + $feb_info->docket;
+            $march_info->grossIncome =$march_info->cash + $march_info->eftposShiftTotal + $march_info->docket;
+            $april_info->grossIncome =$april_info->cash + $april_info->eftposShiftTotal + $april_info->docket;
+            $may_info->grossIncome =$may_info->cash + $may_info->eftposShiftTotal + $may_info->docket;
+            $jun_info->grossIncome =$jun_info->cash + $jun_info->eftposShiftTotal + $jun_info->docket;
+            $july_info->grossIncome =$july_info->cash + $july_info->eftposShiftTotal + $july_info->docket;
+            $august_info->grossIncome =$august_info->cash + $august_info->eftposShiftTotal + $august_info->docket;
+            $sep_info->grossIncome =$sep_info->cash + $sep_info->eftposShiftTotal + $sep_info->docket;
+            $oct_info->grossIncome =$oct_info->cash + $oct_info->eftposShiftTotal + $oct_info->docket;
+            $nov_info->grossIncome =$nov_info->cash + $nov_info->eftposShiftTotal + $nov_info->docket;
+            $dec_info->grossIncome =$dec_info->cash + $dec_info->eftposShiftTotal + $dec_info->docket;
 
             $jan_info->gst+=$jan_info->grossIncome / 10;
             $feb_info->gst+=$feb_info->grossIncome / 10;
@@ -241,18 +277,18 @@ class Dashboard_model extends MY_Model {
             $nov_info->gst+=$nov_info->grossIncome / 10;
             $dec_info->gst+=$dec_info->grossIncome / 10;
 
-            $jan_info->netIncome+=$jan_info->grossIncome - $jan_info->totalExpense ;
-            $feb_info->netIncome+=$feb_info->grossIncome - $feb_info->totalExpense;
-            $march_info->netIncome+=$march_info->grossIncome - $march_info->totalExpense;
-            $april_info->netIncome+=$april_info->grossIncome - $april_info->totalExpense;
-            $may_info->netIncome+=$may_info->grossIncome - $may_info->totalExpense;
-            $jun_info->netIncome+=$jun_info->grossIncome - $jun_info->totalExpense;
-            $july_info->netIncome+=$july_info->grossIncome - $july_info->totalExpense;
-            $august_info->netIncome+=$august_info->grossIncome - $august_info->totalExpense;
-            $sep_info->netIncome+=$sep_info->grossIncome - $sep_info->totalExpense;
-            $oct_info->netIncome+=$oct_info->grossIncome - $oct_info->totalExpense;
-            $nov_info->netIncome+=$nov_info->grossIncome - $nov_info->totalExpense;
-            $dec_info->netIncome+=$dec_info->grossIncome - $dec_info->totalExpense;
+            $jan_info->netIncome+=$jan_info->grossIncome - $jan_info->totalExpense - $jan_info->gst;
+            $feb_info->netIncome+=$feb_info->grossIncome - $feb_info->totalExpense - $feb_info->gst;
+            $march_info->netIncome+=$march_info->grossIncome - $march_info->totalExpense - $march_info->gst;
+            $april_info->netIncome+=$april_info->grossIncome - $april_info->totalExpense - $april_info->gst;
+            $may_info->netIncome+=$may_info->grossIncome - $may_info->totalExpense - $may_info->gst;
+            $jun_info->netIncome+=$jun_info->grossIncome - $jun_info->totalExpense - $jun_info->gst;
+            $july_info->netIncome+=$july_info->grossIncome - $july_info->totalExpense - $july_info->gst;
+            $august_info->netIncome+=$august_info->grossIncome - $august_info->totalExpense - $august_info->gst;
+            $sep_info->netIncome+=$sep_info->grossIncome - $sep_info->totalExpense - $sep_info->gst;
+            $oct_info->netIncome+=$oct_info->grossIncome - $oct_info->totalExpense - $oct_info->gst;
+            $nov_info->netIncome+=$nov_info->grossIncome - $nov_info->totalExpense - $nov_info->gst;
+            $dec_info->netIncome+=$dec_info->grossIncome - $dec_info->totalExpense - $dec_info->gst;
 
 
             $q1_info->shiftPay= $jan_info->shiftPay + $feb_info->shiftPay + $march_info->shiftPay;
