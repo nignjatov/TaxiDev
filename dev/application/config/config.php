@@ -476,7 +476,9 @@ $config['stripe_publishable'] = $config['stripe'][$config['environment']]['publi
 /******* Stripe Settings End ****************/
 
 /******* Email Settings Start ****************/
-$config['support_email_id'] = 'support@texideals.com';
+$config['support_email'] = 'MAIL';
+$config['support_email_pass'] = 'PASS';
+
 $config['accounts_email_id'] = 'accounts@texideals.com';
 /******* Email Settings End ****************/
 

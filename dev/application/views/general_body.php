@@ -58,7 +58,7 @@
 <!--                    </ul>-->
                 </li>
                 <li id="menu_help">
-                    <a href="mailto:<?php echo config_item('support_email_id');?>" target="_top">
+                    <a href="mailto:<?php echo config_item('support_email');?>" target="_top">
                         <i class="fa fa-question-circle"></i>
                         <span>Help</span>
                     </a>

@@ -15,3 +15,4 @@ $config['no_user_error_msg'] = 'No user found with this user/password. Please tr
 $config['duplicate_email_error_msg'] = 'This email address is already registered with our system. Please try with a new one or you can login with this email address.';
 $config['invalid_email_error_msg'] = 'This email id is not registered in our system. Please try again.';
 $config['update_subscription_error_msg'] = 'You need to update your subscription.';
+$config['not_activated_account'] = 'You need to activate your account. The activation email has been sent to you email';

@@ -51,6 +51,8 @@ class User_model extends MY_Model {
         $newUserEntity->user_name = $this->input->post('user_name');
 //        $newUserEntity->user_type = $this->input->post('user_type');
 
+		$newUserEntity->is_active = 0;
+
         if ($this->db->insert("wp_server_users", $newUserEntity)) {
             UserEntity::setUserValues($newUserEntity);
             return parent::returnData($this->db->insert_id());
@@ -222,5 +224,22 @@ class User_model extends MY_Model {
         $this->db->where("ID", $userID, false);
         $this->db->set("password",md5($password));
         return $this->db->update("wp_server_users");
+    }
+	
+    public function accountActivate($userID){
+		
+		$this->db->select("*");
+        $this->db->where("ID", $userID);
+        $this->db->from("wp_server_users", false);
+
+        $query = $this->db->get();
+        if ($query->num_rows()) {
+			$this->db->where("ID", $userID, false);
+			$this->db->set("is_active",1);
+			$this->db->update("wp_server_users");
+			return true;
+		} else {
+			return false;
+		}	
     }
 }

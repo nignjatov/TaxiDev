@@ -10,7 +10,7 @@ class User extends CI_Controller {
     public  $userID;
     public  $CI;
     public $subscriptionID;
-
+	
     function __construct()
     {
         parent::__construct();
@@ -47,6 +47,15 @@ class User extends CI_Controller {
         $this->load->view('footer');
     }
 
+	public function activate(){   
+		$this->load->view('header');
+		$this->load->view('user/activate', array('status' => $this->User_model->accountActivate($this->decryptID($_GET["tag"]))));
+        $this->load->view('general_popups');
+        $this->load->view('js/cuadro-js/common-script');
+        $this->load->view('js/cuadro-js/cuadro-script-user');
+        $this->load->view('footer');
+    }
+	
     public function login(){
         if ($this->userID){
             if ($this->subscriptionID == 0){
@@ -79,7 +88,14 @@ class User extends CI_Controller {
                 }
 
                 $user_detail = $this->User_model->getUserDetail($this->userID);
-                if ($user_detail->result->subscription_id) {
+				
+                if($user_detail->result->is_active != 1) {
+                    $this->userID = null;
+                    $this->sendActivationMail($user_detail->result->email_id, $user_detail->result->ID);
+                    $this->session->sess_destroy();
+                    UserEntity::setDefault();
+                    self::returnData(true, ConstExceptionCode::NOT_ACTIVATED_ACCOUNT);
+                } else /*if ($user_detail->result->subscription_id)*/ {
                     $userEntity = new stdClass();
                     $userEntity->first_name = $user_detail->result->first_name;
                     $userEntity->last_name = $user_detail->result->last_name;
@@ -94,11 +110,11 @@ class User extends CI_Controller {
                     $this->subscriptionID = $userEntity->subscription_id;
                     $array = array('user_id' => $this->userID, 'user_name' => $user_name,'user_pass' => md5($user_password/*.config_item('encryption_key')*/));
                     $this->session->set_userdata($array);
-
+					
                     self::returnData(true);
-                } else {
+                } /*else {
                     $this->chooseSubscription();
-                }
+                }*/
             } else {
                 self::returnData(false, ConstExceptionCode::INVALID_USER_ERROR);
             }
@@ -152,16 +168,19 @@ class User extends CI_Controller {
             //$this->util->echoObject($isValidUserNameForRegister);
             if ($isValidUserNameForRegister->result) {
                 $result = $this->User_model->createUser($_REQUEST);
-                //$this->util->echoObject($result);
-                if ($result->result) {
-                    $user_name = $this->input->post('user_name');
-                    $user_pass = $this->input->post('user_password');
-                    $array = array('user_id' => $result->result, 'user_name' => $user_name,'user_pass' => md5($user_pass/*.config_item('encryption_key')*/));
-                    $this->session->set_userdata($array);
-                }
 				
-				self::returnData(true);
-                ///echo $_GET['callback'].'('.(json_encode($result)).')';
+                //$this->util->echoObject($result);
+                //if ($result->result) {
+                    //$user_name = $this->input->post('user_name');
+                    //$user_pass = $this->input->post('user_password');
+                    //$array = array('user_id' => $result->result, 'user_name' => $user_name,'user_pass' => //md5($user_pass/*.config_item('encryption_key')*/));
+                    //$this->session->set_userdata($array);
+                //}
+				
+				$user_detail = $this->User_model->getUserDetail($result->result);
+				$this->sendActivationMail($user_detail->result->email_id, $user_detail->result->ID);
+				self::returnData(true, ConstExceptionCode::NOT_ACTIVATED_ACCOUNT);
+                //echo $_GET['callback'].'('.(json_encode($result)).')';
             } else {
                 echo $_GET['callback'].'('.(json_encode($isValidUserNameForRegister)).')';
             }
@@ -186,7 +205,7 @@ class User extends CI_Controller {
             if ($resetPassword){
                 $this->load->library('email');
                 $message = sprintf("Your New Password is: %s",$newPassword);
-                $this->email->from(config_item('support_email_id'), 'The LifeData Team');
+                $this->email->from(config_item('support_email'), 'The LifeData Team');
                 $this->email->to($email);
                 $this->email->subject('LifeData New Password');
                 $this->email->message($message);
@@ -281,4 +300,30 @@ class User extends CI_Controller {
         $this->load->view('js/cuadro-js/commonMethods');
         $this->load->view('js/cuadro-js/cuadro-script-user', array("subscriptionInfo" => $subscriptionInfo));
     }
+	
+    public function sendActivationMail($email, $id){
+        $ci = get_instance();
+        $ci->load->library('email');
+        $ci->email->from(config_item('support_email'), 'Taxideals support service');
+        $list = array($email);
+        $ci->email->to($list);
+        $this->email->reply_to($email, '');
+        $ci->email->subject('User acount activation');
+		
+		$msg = "Click on: <a href=\"http://$_SERVER[HTTP_HOST]/dev/index.php/User/activate?tag='".$this->encryptID($id)."'\">activation_link</a>  to activate your account.";
+        $ci->email->message($msg);
+        $ci->email->send();
+    }
+	
+	public function encryptID( $q ) {
+		$cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
+		$qEncoded      = base64_encode( mcrypt_encrypt( MCRYPT_RIJNDAEL_256, md5( $cryptKey ), $q, MCRYPT_MODE_CBC, 	md5( md5( $cryptKey ) ) ) );
+		return( $qEncoded );
+	}
+
+	public function decryptID( $q ) {
+		$cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
+		$qDecoded      = rtrim( mcrypt_decrypt( MCRYPT_RIJNDAEL_256, md5( $cryptKey ), base64_decode( $q ), MCRYPT_MODE_CBC, md5( md5( $cryptKey ) ) ), "\0");
+		return( $qDecoded );
+	}
 }

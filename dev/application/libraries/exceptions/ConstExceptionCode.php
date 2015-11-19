@@ -33,7 +33,8 @@ final class ConstExceptionCode
     const DUPLICATE_EMAIL_ERROR         = 206;
     const INVALID_EMAIL_ERROR           = 207;
     const UPDATE_SUBSCRIPTION_ERROR     = 208;
-
+	const NOT_ACTIVATED_ACCOUNT         = 209;
+	
 	private $code;
 	private $code_mapping;
 
@@ -147,7 +148,12 @@ final class ConstExceptionCode
             self::UPDATE_SUBSCRIPTION_ERROR => array(
                 "code"        => self::UPDATE_SUBSCRIPTION_ERROR,
                 "action"      => self::ACTION_NOTIFY_USER_BIG,
-                "description" => config_item('update_subscription_error_msg'))
+                "description" => config_item('update_subscription_error_msg')),
+				
+			self::NOT_ACTIVATED_ACCOUNT => array(
+                "code"        => self::NOT_ACTIVATED_ACCOUNT,
+                "action"      => self::ACTION_NOTIFY_USER_BIG,
+                "description" => config_item('not_activated_account'))	
 		);
 
 		return (!empty($mapping[$code]) ? $mapping[$code] : $mapping[self::UNKNOWN_ERROR_CODE]);

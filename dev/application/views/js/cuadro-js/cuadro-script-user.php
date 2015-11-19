@@ -76,10 +76,13 @@
         cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'registrationSubmit', function(data){
             console.dir(data);
 			
-			if (data.error['code'] == 0) {
+			/*if (data.error['code'] == 0) {
                 var success_msg = 'You have successfully registered.';
                 cuadroCommonMethods.showGeneralPopUp('Success!!!', success_msg, true);
-                <?php echo 'top.location=\''.site_url('Dashboard/viewDashboard').'\';';?>
+                <?php echo 'top.location=\''.site_url('User/login').'\';';?>
+            } else */if (data.error['code'] == 209) {
+				var success_msg = 'You have successfully registered.';
+                cuadroCommonMethods.showGeneralPopUp('Success!!!', success_msg + "\n" + data.error['description'], false);
             } else {
                 cuadroCommonMethods.showGeneralPopUp('Error!!!', data.error['description'], false);
             }
@@ -99,6 +102,8 @@
                 var success_msg = 'You have successfully registered.';
                 cuadroCommonMethods.showGeneralPopUp('Success!!!', success_msg, true);
                 <?php echo 'top.location=\''.site_url('Dashboard/viewDashboard').'\';';?>
+            } else if (data.error['code'] == 209) {
+                cuadroCommonMethods.showGeneralPopUp('Warning!!!', data.error['description'], false);
             } else {
                 cuadroCommonMethods.showGeneralPopUp('Error!!!', data.error['description'], false);
             }

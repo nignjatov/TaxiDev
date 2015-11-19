@@ -293,7 +293,7 @@ class Subscription_model extends MY_Model {
         The %s Team
         %s
         %s
-', config_item("site_title"), $first_name, $last_name, $plan, config_item("site_title"), $user_email, site_url(), config_item("site_title"), config_item('support_email_id'), config_item("site_title"), site_url(), config_item('accounts_email_id'));
+', config_item("site_title"), $first_name, $last_name, $plan, config_item("site_title"), $user_email, site_url(), config_item("site_title"), config_item('support_email'), config_item("site_title"), site_url(), config_item('accounts_email_id'));
 
         return $emailBody;
     }
