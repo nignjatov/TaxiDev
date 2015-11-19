@@ -316,14 +316,33 @@ class User extends CI_Controller {
     }
 	
 	public function encryptID( $q ) {
-		$cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
-		$qEncoded      = base64_encode( mcrypt_encrypt( MCRYPT_RIJNDAEL_256, md5( $cryptKey ), $q, MCRYPT_MODE_CBC, 	md5( md5( $cryptKey ) ) ) );
-		return( $qEncoded );
+		$output = false;
+
+        $encrypt_method = "AES-256-CBC";
+        $secret_key = 'This is my secret key';
+        $secret_iv = 'This is my secret iv';
+
+        // hash
+        $key = hash('sha256', $secret_key);
+    
+        // iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+        $iv = substr(hash('sha256', $secret_iv), 0, 16);
+        $output = openssl_encrypt($q, $encrypt_method, $key, 0, $iv);
+        return  base64_encode($output);
 	}
 
 	public function decryptID( $q ) {
-		$cryptKey  = 'qJB0rGtIn5UB1xG03efyCp';
-		$qDecoded      = rtrim( mcrypt_decrypt( MCRYPT_RIJNDAEL_256, md5( $cryptKey ), base64_decode( $q ), MCRYPT_MODE_CBC, md5( md5( $cryptKey ) ) ), "\0");
-		return( $qDecoded );
-	}
+		$output = false;
+
+        $encrypt_method = "AES-256-CBC";
+        $secret_key = 'This is my secret key';
+        $secret_iv = 'This is my secret iv';
+
+        // hash
+        $key = hash('sha256', $secret_key);
+    
+        // iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+        $iv = substr(hash('sha256', $secret_iv), 0, 16);
+        return openssl_decrypt(base64_decode($q), $encrypt_method, $key, 0, $iv);
+    }
 }
