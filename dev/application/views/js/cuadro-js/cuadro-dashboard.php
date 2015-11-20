@@ -9,7 +9,7 @@
             $('#dashboard-data-table_wrapper').remove();
             $("#journalChart").remove();
             $("#yearPickerForm").remove();
-            var temp = '<table  class="display table table-bordered table-striped" id="dashboard-data-table">' +
+            var temp = '<div class="table-responsive"><table class="display table table-bordered table-striped" id="dashboard-data-table">' +
                 '<thead><tr>' +
                 '<th>Taxi #</th>' +
                 '<th>Plate Fee (AU$)</th>' +
@@ -22,7 +22,7 @@
                 '<th>Profit/<span class="error">Loss</span> (AU$)</th>' +
                 '</tr></thead>' +
                 '<tbody></tbody>' +
-                '</table>';
+                '</table></div>';
             $(".adv-table").append(temp);
         },
         populateDriverDashboardListTable: function(){
@@ -41,7 +41,7 @@
             }
 
             $('#yearPicker').html(years);
-            var temp = '<table  class="display table table-bordered table-striped" id="dashboard-data-table">' +
+            var temp = '<div class="table-responsive"><table class="display table table-bordered table-striped" id="dashboard-data-table">' +
                 '<thead><tr>' +
                 '<th>Month</th>' +
                 '<th>Shift pay (AU$)</th>' +
@@ -57,7 +57,7 @@
                 '<th>GST Payable</th>' +
                 '</thead>' +
                 '<tbody></tbody>' +
-                '</table>';
+                '</table></div>';
             $(".adv-table").append(temp);
         },
         populateOperatorDashboardList: function(objects){
@@ -74,14 +74,14 @@
                 profit_class = dashboard_data[i].profit < 0 ? "error" : "";
                 data_string = '<tr class="'+tr_class+'">';
                 data_string += '<td>'+dashboard_data[i].license_plate_no+'</td>';
-                data_string += '<td>'+dashboard_data[i].plate_fee+'</td>';
-                data_string += '<td>'+dashboard_data[i].network_fee+'</td>';
-                data_string += '<td>'+dashboard_data[i].insurance_fee+'</td>';
-                data_string += '<td>'+dashboard_data[i].car_finance_fee+'</td>';
-                data_string += '<td>'+dashboard_data[i].maintenance_cost+'</td>';
-                data_string += '<td>'+dashboard_data[i].total+'</td>';
-                data_string += '<td>'+dashboard_data[i].balance+'</td>';
-                data_string += '<td class="'+profit_class+'">'+dashboard_data[i].profit+'</td>';
+                data_string += '<td>'+parseFloat(dashboard_data[i].plate_fee).toFixed(2)+'</td>';
+                data_string += '<td>'+parseFloat(dashboard_data[i].network_fee).toFixed(2)+'</td>';
+                data_string += '<td>'+parseFloat(dashboard_data[i].insurance_fee).toFixed(2)+'</td>';
+                data_string += '<td>'+parseFloat(dashboard_data[i].car_finance_fee).toFixed(2)+'</td>';
+                data_string += '<td>'+parseFloat(dashboard_data[i].maintenance_cost).toFixed(2)+'</td>';
+                data_string += '<td>'+parseFloat(dashboard_data[i].total).toFixed(2)+'</td>';
+                data_string += '<td>'+parseFloat(dashboard_data[i].balance).toFixed(2)+'</td>';
+                data_string += '<td class="'+profit_class+'">'+parseFloat(dashboard_data[i].profit).toFixed(2)+'</td>';
                 data_string += '</tr>';
 
                 $("#dashboard-data-table tbody").append(data_string);
