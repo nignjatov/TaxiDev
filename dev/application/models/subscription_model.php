@@ -220,6 +220,18 @@ class Subscription_model extends MY_Model {
 
                 $file_name = $this->util->getEncryptedFileName($order_no);
                 $this->util->uploadFileToServer($file_name, $pdf_content);
+				
+				/* Send invoice in mail */
+				$ci = get_instance();
+				$ci->load->library('email');
+				$ci->email->from(config_item('support_email'), 'Taxideals support service');
+				$list = array($userEmail);
+				$ci->email->to($list);
+				$this->email->reply_to($userEmail, '');
+				$ci->email->subject('Pruchase invoice');
+				$ci->email->attach($_SERVER['DOCUMENT_ROOT'].'dev/invoices/'.$file_name.'.pdf');
+				$ci->email->message('Attached pdf file contains pruchase details.');
+				$ci->email->send();
             }
 
             return $order_no;
