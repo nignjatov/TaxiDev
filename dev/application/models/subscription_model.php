@@ -65,7 +65,15 @@ class Subscription_model extends MY_Model {
         $data->end_date = $endDate;
         $data->stripe_subscription_id = $stripeSubscriptionID;
 
-        $clientSubscriptionID = $this->db->update("wp_user_subscription", $data);
+        $this->db->select("*");
+        $this->db->where("user_id", $userID);
+        $this->db->from("wp_user_subscription", false);
+        $query = $this->db->get();
+        if ($query->num_rows()) {
+			$this->db->where("user_id", $userID);
+			$this->db->delete("wp_user_subscription");
+		} 
+		$clientSubscriptionID = $this->db->insert("wp_user_subscription", $data);
         if ($clientSubscriptionID) {
             $paymentData = new PaymentEntity();
             $paymentData->user_id = $userID;
