@@ -225,10 +225,17 @@
     }
 
     function forgotPassword(){
-        cuadroCommonMethods.showModalView('modalForgotPassword');
+        var serverURL ='/dev/index.php/User/forgotPassword?user='+ $("#userLogin input[name=user_name]").val();
+		cuadroServerAPI.getServerData('GET', serverURL, '', arguments.callee.name, function(data){
+			if(data == 'success') {
+				cuadroCommonMethods.showGeneralPopUp('Forgot Password!', 'Password recivery mail is sent to your e-mail address.', false);
+			} else {
+				cuadroCommonMethods.showGeneralPopUp('Error!!!', 'Not existing username', false);
+			}
+		});
     }
 
-    $('button#forgotPasswordButton').click(function(e){
+    /*$('button#forgotPasswordButton').click(function(e){
         $('#modalForgotPassword').modal('hide');
         if ($("#loaderModal").css("display") != "block") cuadroCommonMethods.showModalView('loaderModal');
         var UserEmail = $('#UserEmail').val();
@@ -247,7 +254,7 @@
         });
 
         e.preventDefault(); //STOP default action
-    });
+    });*/
 </script>
 </body>
 </html>

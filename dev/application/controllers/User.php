@@ -56,6 +56,38 @@ class User extends CI_Controller {
         $this->load->view('footer');
     }
 	
+	public function forgotPassword(){
+		$user_detail = $this->User_model->getUserDetailByUsername($_GET["user"]);
+		if($user_detail) {
+			$email = $user_detail->result->email_id;
+			$id = $user_detail->result->ID;
+		
+			$ci = get_instance();
+			$ci->load->library('email');
+			$ci->email->from(config_item('support_email'), 'Taxideals support service');
+			$list = array($email);
+			$ci->email->to($list);
+			$this->email->reply_to($email, '');
+			$ci->email->subject('Password recovery');
+		
+			$msg = "Click on: <a href=\"http://$_SERVER[HTTP_HOST]/dev/index.php/User/changePassword?tag='".$this->encryptID($id)."'\">recovery_link</a>  to change your account password.";
+			$ci->email->message($msg);
+			$ci->email->send();
+		
+			echo 'success';
+		} else {
+			echo 'failed';
+		}
+	}
+	
+	public function changePassword(){   
+		$this->load->view('user/changePassword', array('tag' => $_GET["tag"]));
+        $this->load->view('general_popups');
+        $this->load->view('js/cuadro-js/common-script');
+        $this->load->view('js/cuadro-js/cuadro-script-user');
+        $this->load->view('footer');
+    }
+	
     public function login(){
         if ($this->userID){
             if ($this->subscriptionID == 0){
@@ -195,7 +227,7 @@ class User extends CI_Controller {
         redirect('User/login');
     }
 
-    public function forgotPassword($emailID, $domain){
+    /*public function forgotPassword($emailID, $domain){
         $success = 1;
         $email = $emailID.'@'.$domain;
         $emailInfo = $this->User_model->validEmailID($email);
@@ -220,7 +252,7 @@ class User extends CI_Controller {
         }
 
         echo $success;
-    }
+    }*/
 
     public function checkSession(){
         echo $this->userID ? 0 : 1;

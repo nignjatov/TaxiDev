@@ -25,6 +25,19 @@ class User_model extends MY_Model {
             return parent::returnData(false, ConstExceptionCode::DATA_NOT_FOUND);
         }
     }
+	
+	public function getUserDetailByUsername($user){
+        $this->db->select("*");
+        $this->db->where("user_name", $user);
+        $this->db->from("wp_server_users", false);
+
+        $query = $this->db->get();
+        if ($query->num_rows()) {
+            return parent::returnData($query->row());
+        } else {
+            return false;
+        }
+    }
 
     private function getUserType($userID) {
         $this->db->select("user_type");

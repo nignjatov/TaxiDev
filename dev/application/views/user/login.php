@@ -44,17 +44,13 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Forgot Password ?</h4>
+                        <h4 class="modal-title">Forgot Password </h4>
                     </div>
                     <div class="modal-body">
-                        <p>Enter your e-mail address below to reset your password.</p>
-                        <input id="UserEmail" type="email" name="UserEmail" placeholder="Email" autocomplete="off"
-                               class="form-control placeholder-no-fix">
-
+                        <p>Password recivery mail is sent to e-mail address.</p>
                     </div>
                     <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-                        <button id="forgotPasswordButton" class="btn btn-success" type="button">Submit</button>
+                        <button data-dismiss="modal" class="btn btn-default" type="button">Ok</button>
                     </div>
                 </div>
             </div>
