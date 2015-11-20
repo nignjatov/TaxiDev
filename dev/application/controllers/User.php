@@ -81,12 +81,22 @@ class User extends CI_Controller {
 	}
 	
 	public function changePassword(){   
+		$this->load->view('header');
 		$this->load->view('user/changePassword', array('tag' => $_GET["tag"]));
         $this->load->view('general_popups');
         $this->load->view('js/cuadro-js/common-script');
         $this->load->view('js/cuadro-js/cuadro-script-user');
         $this->load->view('footer');
     }
+	
+	public function resetPassword(){
+		$userID = $this->decryptID($_GET["tag"]);
+		$password = $_GET["pass"];
+		
+		$user_detail = $this->User_model->getUserDetail($userID);
+		$this->User_model->changePassword($userID, $password);
+		echo true;
+	}
 	
     public function login(){
         if ($this->userID){

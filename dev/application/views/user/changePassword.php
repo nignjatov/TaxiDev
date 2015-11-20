@@ -1,7 +1,7 @@
 <body class="login-body">
 
 <div class="container">
-    <form id="changePassword" class="form-signin login_form">
+    <form id="changePasswordForm" class="form-signin login_form">
         <h2 class="form-signin-heading"><em>TaxiDeals</em></h2>
 
         <div class="login-wrap">
@@ -13,18 +13,24 @@
 				<input name="cp_user_password_confirm" type="password" class="form-control" placeholder="Confirm Password" required>
 				<input name="cp_user_password_tag" class="hidden" value="<?php echo $tag;  ?>">
             </div>
-            <button id="changePasswordSubmit" class="btn btn-lg btn-login btn-block" type="submit">Change</button>
+            <button id="changePasswordSubmit" class="btn btn-lg btn-login btn-block" type="button">Change</button>
 
             <div class="loaderBox userLoaderBox">
                 <div class="three-quarters">
                     Loading...
                 </div>
             </div>
-
+			<div class="registration clearfix">
+                Go to 
+                <a href="login">
+                    Login!
+                </a>
+            </div>
         </div>
     </form>
 </div>
 <script>
+	
     $(document).bind('keydown', function(e){
         if (e.which == 13){
             $('#changePasswordSubmit').trigger('click');

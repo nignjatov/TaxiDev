@@ -91,6 +91,22 @@
         e.preventDefault(); //STOP default action
     });
 
+	$("#changePasswordSubmit").click(function(){
+		if($("#changePasswordForm input[name=cp_user_password]").val() == '')
+			cuadroCommonMethods.showGeneralPopUp('Warning!!!', 'Password is empty! ', false);
+		else if($("#changePasswordForm input[name=cp_user_password]").val() != $("#changePasswordForm input[name=cp_user_password_confirm]").val())
+			cuadroCommonMethods.showGeneralPopUp('Warning!!!', 'Password and Confirm Password are not th same! ', false);
+		else {
+			var serverURL ='/dev/index.php/User/resetPassword?pass='+ $('#changePasswordForm input[name=cp_user_password]').val() + "&tag='" + $("#changePasswordForm input[name=cp_user_password_tag]").val()+"'";
+			cuadroServerAPI.getServerData('GET', serverURL, '', arguments.callee.name, function(data){
+				if(data)
+					cuadroCommonMethods.showGeneralPopUp('Success!!!', 'Password is successfuly changed! Please Login. ', false);
+				else	
+					cuadroCommonMethods.showGeneralPopUp('Error!!!', 'Password change failed. ', false);
+			});
+		}
+	});
+	
     $("form#userLogin").submit(function(e){
         var postData = $(this).serializeArray();
         var formURL = "<?php echo site_url('User/userLogin')?>";
