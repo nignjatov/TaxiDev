@@ -7,6 +7,24 @@ var filterTaxi = 'All';
 var filterTo = '';
 var filterFrom = '';
 
+Date.prototype.getWeek = function(start)
+{
+        //Calcing the starting point
+    start = start || 0;
+    var today = new Date(this.setHours(0, 0, 0, 0));
+    var day = today.getDay() - start;
+    var date = today.getDate() - day +1;
+
+        // Grabbing Start/End Dates
+    var StartDate = new Date(today.setDate(date));
+    var EndDate = new Date(today.setDate(date + 6));
+    return [StartDate, EndDate];
+}
+
+var Dates = new Date().getWeek();
+var filterTo = Dates[1];
+var filterFrom = Dates[0];
+
 var rosterObject = {
     allObjects: [],
     getTaxiList: function (){
@@ -337,6 +355,8 @@ function addNewRoster() {
     $("#roster_submit_button ").html("Add New Roster Information");
     $("#rosterDetailModal").modal('show');
 }
+
+
 
 function deleteRosterDetail(rosterID){
     var serverURL = "<?php echo site_url('Roster/removeRoster?roster_id=')?>" + rosterID;
