@@ -129,7 +129,6 @@
 								</a>
 								<ul class="sub">
 									<li id="taxi_menu"><a href="<?php echo site_url('Operator/getAllTaxi')?>" class="active">Taxi List</a></li>
-									<li id="taxi_ad_menu"><a href="<?php echo site_url('Operator/getAllTaxiAds')?>">Taxi Ad List</a></li>
 								</ul>
 							</li>
 							<li class="sub-menu">

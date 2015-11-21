@@ -194,7 +194,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">MF (AU$)</label>
+                        <label class="control-label col-md-3">Eftpos dockets (AU$)</label>
 
                         <div class="col-md-6">
                             <input type="number" min="0" max="999999" data-bv-notempty-message="" required
@@ -202,7 +202,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">M7 (AU$)</label>
+                        <label class="control-label col-md-3">Other dockets (AU$)</label>
 
                         <div class="col-md-6">
                             <input type="number" min="0" max="999999" data-bv-notempty-message="" required

@@ -313,6 +313,8 @@ function viewRosterDetail(rosterID, taxi_id, paying_date, shift){
         $('#shift_evening').val('Evening');
         $('#is_leased_yes').val(1);
         $('#is_leased_no').val(0);
+        $('#is_paid_yes').val(1);
+        $('#is_paid_no').val(0);
         var rosterDetail = rosterObject.getRosterDetailFromID(rosterID);
         rosterObject.setRosterObjectValue(rosterDetail);
         $('form#rosterDetailForm').attr('action', "<?php echo site_url('Roster/updateRoster?roster_id=')?>" + selectedRosterID);
@@ -328,6 +330,8 @@ function addNewRoster() {
     $('#shift_evening').val('Evening');
     $('#is_leased_yes').val(1);
     $('#is_leased_no').val(0);
+    $('#is_paid_yes').val(1);
+    $('#is_paid_no').val(0);
     $('form#rosterDetailForm').attr('action', "<?php echo site_url('Roster/addRoster')?>");
     $("#rosterDetailModal h4.modal-title").html("Add New Roster Information");
     $("#roster_submit_button ").html("Add New Roster Information");
