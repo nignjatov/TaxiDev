@@ -37,7 +37,9 @@
             </div>
             <div class="col-md-12">
                 <label class="checkbox">
-                    <input id="termsServiceAgreement" type="checkbox" value="agree this condition">I agree to TaxiDeals's <a href="<?php echo site_url('Support/termsAndConditionWeb')?>" target="_blank">Terms of Service</a> and <a href="<?php echo site_url('Support/privacyPolicyWeb')?>" target="_blank">Privacy Policy</a>
+                    <input id="termsServiceAgreement" type="checkbox" value="agree this condition">
+                        I agree to TaxiDeals's <a href="#" id="TermsOfServiceModalBtn">Terms of Service</a>
+                        and <a href="#" id="PrivacyPolicyModalBtn">Privacy Policy</a>
                 </label>
                 <span class="error agreement_error">Please agree with the Terms of Service and Privacy Policy.</span>
                 <button id="signup_button" class="btn btn-lg btn-login btn-block" type="submit">Sign Up</button>
@@ -57,4 +59,42 @@
             <!--</div>-->
         </div>
     </form>
+</div>
+
+<div class="modal fade" id="termsOfServiceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">X</button>
+                <h4 class="modal-title">Terms of service</h4>
+            </div>
+            <form class="form-horizontal">
+                <div class="modal-body">
+                <p>Terms of service text</p>
+                </div>
+                <div class="modal-footer" style="display: block;">
+                    <button type="button" data-dismiss="modal" class="col-sm-offset-10 col-sm-2 btn btn-info">OK</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="PrivacyPolicyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">X</button>
+                <h4 class="modal-title">Terms of service</h4>
+            </div>
+            <form class="form-horizontal">
+                <div class="modal-body">
+                <p>Privacy policy text</p>
+                </div>
+                <div class="modal-footer" style="display: block;">
+                    <button type="button" data-dismiss="modal" class="col-sm-offset-10 col-sm-2 btn btn-info">OK</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

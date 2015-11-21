@@ -91,6 +91,14 @@
         e.preventDefault(); //STOP default action
     });
 
+    $("#TermsOfServiceModalBtn").click(function(e){
+        $("#termsOfServiceModal").modal('show');
+    });
+
+    $("#PrivacyPolicyModalBtn").click(function(e){
+        $("#PrivacyPolicyModal").modal('show');
+    });
+
 	$("#changePasswordSubmit").click(function(){
 		if($("#changePasswordForm input[name=cp_user_password]").val() == '')
 			cuadroCommonMethods.showGeneralPopUp('Warning!!!', 'Password is empty! ', false);
