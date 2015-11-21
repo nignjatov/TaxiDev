@@ -42,7 +42,7 @@ var rosterObject = {
 			/* Filter dates */
 			var filterDates = true;
 			if(filterFrom != '' && filterTo != '')
-				filterDates = (filterFrom < date && filterTo > date);
+				filterDates = (filterFrom <= date && filterTo >= date);
 			
 			/* Filter #taxis */
 			var filterTaxis = (filterTaxi == "All" || filterTaxi == allRosterObjects[i].license_plate_no);
