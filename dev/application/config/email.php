@@ -1,7 +1,7 @@
 <?php
 
 $config['protocol'] = "smtp";
-$config['smtp_host'] = "ssl://smtp.mail.yahoo.com";
+$config['smtp_host'] = "ssl://s7-sydney.accountservergroup.com";
 $config['smtp_port'] = "465";
 $config['smtp_user'] = config_item('support_email'); 
 $config['smtp_pass'] = config_item('support_email_pass'); 

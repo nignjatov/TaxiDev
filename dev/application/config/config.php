@@ -476,8 +476,8 @@ $config['stripe_publishable'] = $config['stripe'][$config['environment']]['publi
 /******* Stripe Settings End ****************/
 
 /******* Email Settings Start ****************/
-$config['support_email'] = 'MAIL';
-$config['support_email_pass'] = 'PASS';
+$config['support_email'] = 'support@taxideals.com.au';
+$config['support_email_pass'] = 'test1!';
 
 $config['accounts_email_id'] = 'accounts@texideals.com';
 /******* Email Settings End ****************/
