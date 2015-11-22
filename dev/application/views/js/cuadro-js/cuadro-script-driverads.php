@@ -5,9 +5,14 @@ var driverAdsObject = {
     allObjects: [],
 
 	populateGeneralAdsList: function(){
-        var allDriverAdsObjects = this.allObjects;
+		var type = this.allObjects['type'];
+		if(type === 'driver'){
+			$("#taxiAdLink").remove();
+		}
+        var allDriverAdsObjects = this.allObjects['array'];
         var totalDriverAds = allDriverAdsObjects.length;
         var driverAdsListString = '';
+
         for (var i = 0; i < totalDriverAds; i++) {
             var tr_class = "gradeA";//i % 2 == 0 ? "gradeA" : "gradeB";
             driverAdsListString += '<tr class="'+tr_class+'">';

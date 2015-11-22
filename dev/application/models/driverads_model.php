@@ -31,7 +31,7 @@ class Driverads_model extends MY_Model {
         return $user_id;
     }
 
-    public function getAllDriverAds($userID){
+    public function getAllDriverAds($userID,$userType){
         /*$this->db->select('*');
         $this->db->from('wp_driver_ads');
         $this->db->where('user_id', $userID);
@@ -81,8 +81,10 @@ class Driverads_model extends MY_Model {
         foreach ($result AS $driverAdsInfo) {
             $allDriverAds[$count++] = $driverAdsInfo;
         }
-
-        return parent::returnData($allDriverAds);
+        $ret = array();
+        $ret['array'] = $allDriverAds;
+        $ret['type'] = $userType;
+        return parent::returnData($ret);
     }
 
     public function getLocationBasedDriverAds($location){

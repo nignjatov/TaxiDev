@@ -11,6 +11,7 @@ class Driverads extends MY_Controller {
         parent::__construct();
 
         $this->load->model('Driverads_model');
+        $this->load->model('User_model');
     }
 
     public function canAddMoreDriverAds() {
@@ -34,6 +35,7 @@ class Driverads extends MY_Controller {
     }
 
     public function getAllDriverAdsDetail() {
-        parent::returnData($this->Driverads_model->getAllDriverAds($this->userID));
+        $userInfo = $this->User_model->getUserDetail($this->userID);
+        parent::returnData($this->Driverads_model->getAllDriverAds($this->userID,$userInfo->result->user_type));
     }
 }

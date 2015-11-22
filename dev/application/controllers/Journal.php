@@ -18,7 +18,11 @@ class Journal extends MY_Controller {
         $userInfo = $this->User_model->getUserDetail($this->userID);
         $data['userInfo'] = $userInfo->error['code'] == 0 ? $userInfo->result : array();
         $user_name['username'] = $data['userInfo']->first_name . ' ' . $data['userInfo']->last_name;
-        $this->load->view('header_with_side_menu', $user_name);
+        if($userInfo->result->user_type == 'operator'){
+            $this->load->view('header_with_side_menu', $user_name);
+        } else {
+            $this->load->view('header_with_side_menu_driver', $user_name);
+        }
         $this->load->view('driver/journal', array());
         $this->load->view('general_popups');
         $this->load->view('js/cuadro-js/common-script');

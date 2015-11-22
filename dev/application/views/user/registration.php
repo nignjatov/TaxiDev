@@ -70,7 +70,229 @@
             </div>
             <form class="form-horizontal">
                 <div class="modal-body">
-                <p>Terms of service text</p>
+                <h5><b>1. Registration</b></h5>
+                <p>By completing the user registration process you agree to be bound by the terms and conditions below.</p>
+                </br>
+                <h5><b>2. Terms and conditions</b></h5>
+                <p>Before you begin to use the services on the website we need to outline to you for you to read and understand, the terms and conditions of your use of the website and Taxi Deals services.</br></br>
+                   The Terms and Conditions (as published on the website) together with any additional terms, conditions, notices and disclaimers published on the website and any documents available for download on the website (Terms and Conditions) regulate your use of the website and Taxi Deals services.</br></br>
+                   Through your use of the website and Taxi Seeking services, you acknowledge and agree that the Terms and Conditions constitute the rules and conditions of access to, use of and supply of information from the website.</br></br>
+                   Please take time to review this document. If you use or continue to use the website and/or services provided by Taxideals you acknowledge and agree that you accept to abide by and be bound by the Terms and Conditions and any changes made by Taxi Deals or any authorised officer, agent, employee or contractor of Taxi Deals to the Terms and Conditions from time to time.</br></br>
+                   All terms and conditions that govern your use of the website (including disclaimers) may be amended by Taxi Deals from time to time by posting those amendments on the website without any notice to you. Those amendments apply to your next usage of the website. You are responsible for ensuring that you regularly review the website and these Terms and Conditions. Your continued use of the website after any such changes are made will be deemed to constitute your acceptance of those changes.</br></br>
+                   If you object to any of the Terms and Conditions or any subsequent changes to them, or become dissatisfied with your use of the Taxi Deals service in any way, your only remedy is to immediately stop using the services of Taxi Deals and the website.</br></br>
+                    A link to this Terms and Conditions Agreement is published on every page of the website.</p>
+                </br>
+                <h5><b>3. Taxideals.com.au and other Taxi Deals websites</b></h5>
+                <p>The Taxideals.com.au website is owned and operated by Taxi Deals Pty Ltd (ACN 604 675 247).</br></br>
+                   A link to this Terms and Conditions Agreement will be published on the user registration forms on all websites owned and operated by Taxi Deals (website).</br></br>
+                   From time to time the website will generate automated emails to registered users, or website users will send emails and messages to one another through the website. Emails sent by the website or through the website are considered a part of the Taxi Deals website.</br></br>
+                   If hyperlinks and other redirection tools taking the user to other websites operated by third parties appear on the website, you acknowledge that these websites (Outside Sites) are not controlled by Taxi Deals and do not form part the Taxi Deals website and agree that you will not hold Taxi Deals liable or in any way accountable for anything that occurs on Outside Sites.
+                   </p>
+                </br>
+                <h5><b>4. Applicable law</b></h5>
+                <p>The Terms and Conditions and all other specific and additional terms which govern your use or membership of and access to the website will be governed by the laws of New South Wales, Australia.</p>
+                </br>
+                <h5><b>5. General information only</b></h5>
+                <p>The information, opinions and other similar statements and content published on the website are provided for information purposes only and are not intended as, nor do they constitute legal, financial, taxation, technical or expert advice or to be in any way relied upon by you without undertaking your own independent verification. Information provided on the website has been derived from sources believed to be accurate at the time of compilation and no warranty or representation is made as to the accuracy or authenticity of the content of the website.</br></br>
+                   Taxi Deals and its directors, agents or employees do not accept and are by these Terms and Conditions released by you of any liability to you arising (whether directly or indirectly) out of the information provided on the website or anyone else through the website or any errors in, or omissions from information on the website.</br></br>
+                   Taxi Deals does not make any representation or warranty that any user is reputable, or will act in good faith, or according to their terms of engagement; any information on the website will be complete, reliable or accurate; or your access to the website will be secure, available or uninterrupted.</br></br>
+                   Taxi Deals disclaims and will not be liable for loss arising out of (whether directly or indirectly) and action or decision by you in reliance on the information on or provided to you through the website or provided by any business you engage on the website, nor any interruption, delay or impairment in the functioning, operation or availability of the website, exposure to or transmission of any computer virus, internet access difficulties in connection with the website, or malfunction in equipment or software.</br></br>
+                   You should seek legal or other professional advice before acting or relying on the information set out on or provided to you through the website or provided by any business you engage on the website.</br></br>
+                   Information on the website is for general information only.</br></br>
+                   As a user of the website, you should make your own inquiries and obtain independent advice based on your specific circumstances prior to making any decisions.</p>
+                </br>
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
+                <h5><b></b></h5>
+                <p></p>
+                </br>
+
                 </div>
                 <div class="modal-footer" style="display: block;">
                     <button type="button" data-dismiss="modal" class="col-sm-offset-10 col-sm-2 btn btn-info">OK</button>
