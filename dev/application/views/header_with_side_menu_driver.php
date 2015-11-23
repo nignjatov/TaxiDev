@@ -117,7 +117,7 @@
 					<ul class="nav navbar-nav">
 						<ul class="sidebar-menu" id="nav-accordion">
 							<li class="sub-menu" id="dashboard_menu">
-								<a href="<?php echo site_url('Dashboard/viewDashboard')?>">
+								<a href="<?php echo site_url('Dashboard/viewDriverDashboard')?>">
 									<i class="fa fa-dashboard"></i>
 									<span>Driver Dashboard</span>
 								</a>

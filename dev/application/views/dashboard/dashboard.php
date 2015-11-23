@@ -4,8 +4,8 @@
         <div class="row">
             <div class="col-sm-12">
                 <section class="panel">
-                    <header class="panel-heading">
-                        Dashboard
+                    <header class="panel-heading" id="dashboardType">
+                        <?php echo $type?> Dashboard
                     </header>
                     <div class="row graph-container">
                         <div class="col-md-6" id="profitChart">
@@ -87,5 +87,4 @@
 <script>
     document.title = '<?php echo config_item("site_title");?>: Dashboard';
     $("#nav-accordion li a").removeClass("active");
-    $("#dashboard_menu a").addClass("active");
 </script>

@@ -24,7 +24,25 @@ class Dashboard extends MY_Controller {
         } else {
             $this->load->view('header_with_side_menu_driver', $user_name);
         }
-        $this->load->view('dashboard/dashboard', array());
+        $data['type'] = "operator";
+        $this->load->view('dashboard/dashboard', $data);
+        $this->load->view('general_popups');
+        $this->load->view('js/cuadro-js/common-script');
+        $this->load->view('js/cuadro-js/cuadro-dashboard');
+        $this->load->view('footer_with_side_menu');
+    }
+
+    public function viewDriverDashboard(){
+        $userInfo = $this->User_model->getUserDetail($this->userID);
+        $data['userInfo'] = $userInfo->error['code'] == 0 ? $userInfo->result : array();
+        $user_name['username'] = $data['userInfo']->first_name . ' ' . $data['userInfo']->last_name;
+        if($userInfo->result->user_type == 'operator'){
+            $this->load->view('header_with_side_menu', $user_name);
+        } else {
+            $this->load->view('header_with_side_menu_driver', $user_name);
+        }
+        $data['type'] = "Driver";
+        $this->load->view('dashboard/dashboard', $data);
         $this->load->view('general_popups');
         $this->load->view('js/cuadro-js/common-script');
         $this->load->view('js/cuadro-js/cuadro-dashboard');
@@ -54,7 +72,14 @@ class Dashboard extends MY_Controller {
                 }
             }
         }
-        parent::returnData($this->Dashboard_model->getDashboardDetail($this->userID,$userInfo->result->user_type));
+
+        $args = $this->uri->uri_to_assoc(3);
+        $type = "";
+        if((count($args) > 0) && ($args['type'] != "")){
+            $type = $args['type'];
+        }
+
+        parent::returnData($this->Dashboard_model->getDashboardDetail($this->userID,$type));
 
     }
 }

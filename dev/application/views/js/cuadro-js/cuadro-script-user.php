@@ -125,7 +125,7 @@
             if (data.error['code'] == 0) {
                 var success_msg = 'You have successfully registered.';
                 cuadroCommonMethods.showGeneralPopUp('Success!!!', success_msg, true);
-                <?php echo 'top.location=\''.site_url('Dashboard/viewDashboard').'\';';?>
+                <?php echo 'top.location=\''.site_url('Dashboard/viewDriverDashboard').'\';';?>
             } else if (data.error['code'] == 209) {
                 cuadroCommonMethods.showGeneralPopUp('Warning!!!', data.error['description'], false);
             } else {
@@ -216,7 +216,7 @@
                             //cuadroCommonMethods.resetModal('stripeBuySuccess');
                             $("#stripeBuySuccess .note").html('[' + planTitle + ']');
                             cuadroCommonMethods.showModalView("stripeBuySuccess");
-                            <?php echo 'top.location=\''.site_url('Dashboard/viewDashboard').'\';';?>
+                            <?php echo 'top.location=\''.site_url('Dashboard/viewDriverDashboard').'\';';?>
                         }
                     });
                 }
@@ -238,14 +238,14 @@
 
                         $("#stripeBuySuccess .note").html('[' + planTitle + ']');
                         cuadroCommonMethods.showModalView("stripeBuySuccess");
-                        <?php echo 'top.location=\''.site_url('Dashboard/viewDashboard').'\';';?>
+                        <?php echo 'top.location=\''.site_url('Dashboard/viewDriverDashboard').'\';';?>
                     }
                 });
         }
     }
 
     function successfullyBuy(){
-        <?php echo 'top.location=\''.site_url('Dashboard/viewDashboard').'\';';?>
+        <?php echo 'top.location=\''.site_url('Dashboard/viewDriverDashboard').'\';';?>
     }
 
     function forgotPassword(){

@@ -2,6 +2,13 @@
 <script type="text/javascript" src="<?php echo base_url()?>application/views/js/amcharts/serial.js"></script>
 <script type="text/javascript" src="<?php echo base_url()?>application/views/js/amcharts/themes/light.js"></script>
 <script>
+    var type = $('#dashboardType').html();
+    if(type.indexOf('river') > -1){
+        type = 'driver';
+    } else {
+        type = 'operator';
+    }
+    console.log(type);
     dashboardInit();
 
     var dashboardObject = {
@@ -276,7 +283,7 @@
     }
 
     function updateDashboardData(){
-        var serverURL = "<?php echo site_url('Dashboard/getDashboardDetail')?>"+"/year/"+(new Date().getFullYear());
+        var serverURL = "<?php echo site_url('Dashboard/getDashboardDetail')?>"+"/type/"+type+"/year/"+(new Date().getFullYear());
         $("#dashboard-data-table").remove();
         cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', updateDashboardData, function(data){
             if (data.error['code'] == 0) {
@@ -297,7 +304,7 @@
         var start_date = $("#dashboardStartDate").val();
         var end_date = $("#dashboardEndDate").val();
         var year = $("#yearPicker").val();
-        var serverURL = "<?php echo site_url('Dashboard/getDashboardDetail')?>"+"/start_date/" + start_date + "/end_date/" + end_date+ "/year/"+year;
+        var serverURL = "<?php echo site_url('Dashboard/getDashboardDetail')?>"+"/type/"+type+"/start_date/" + start_date + "/end_date/" + end_date+ "/year/"+year;
 
         $("#dashboard-data-table").remove();
 

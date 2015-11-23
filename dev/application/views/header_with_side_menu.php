@@ -116,14 +116,29 @@
 				<div  class="navbar-collapse collapse sidebar-navbar-collapse">
 					<ul class="nav navbar-nav">
 						<ul class="sidebar-menu" id="nav-accordion">
-							<li class="sub-menu" id="dashboard_menu">
+                            <li class="sub-menu" id="dashboard_menu">
+                                <a href="<?php echo site_url('Dashboard/viewDriverDashboard')?>">
+                                    <i class="fa fa-dashboard"></i>
+                                    <span>Driver Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="sub-menu">
+                                <a id="operator_menu" href="javascript:;" class="active">
+                                    <i class="fa fa-cab"></i>
+                                    <span>Driver</span>
+                                </a>
+                                <ul class="sub">
+                                    <li id="taxi_menu"><a href="<?php echo site_url('Journal/getAllJournal')?>" class="active">Journal</a></li>
+                                </ul>
+                            </li>
+							<li class="sub-menu" id="dashboard_menu_operator">
 								<a href="<?php echo site_url('Dashboard/viewDashboard')?>">
 									<i class="fa fa-dashboard"></i>
-									<span>Dashboard</span>
+									<span>Operator Dashboard</span>
 								</a>
 							</li>
 							<li class="sub-menu">
-								<a id="operator_menu" href="javascript:;" class="active">
+								<a id="operator_menu" href="javascript:;">
 									<i class="fa fa-cab"></i>
 									<span>Operator</span>
 								</a>
@@ -131,19 +146,10 @@
 									<li id="taxi_menu"><a href="<?php echo site_url('Operator/getAllTaxi')?>" class="active">Taxi List</a></li>
 								</ul>
 							</li>
-							<li class="sub-menu">
-								<a id="operator_menu" href="javascript:;" class="active">
-									<i class="fa fa-cab"></i>
-									<span>Driver</span>
-								</a>
-								<ul class="sub">
-									<li id="taxi_menu"><a href="<?php echo site_url('Journal/getAllJournal')?>" class="active">Journal</a></li>
-								</ul>
-							</li>
 							<li id="roster_menu" class="sub-menu">
 								<a href="<?php echo site_url('Roster/getAllRoster')?>">
 									<i class="fa fa-calendar"></i>
-									<span>Roster & paying</span>
+									<span>Roster & pay-in</span>
 								</a>
 							</li>
 							<li id="maintenance_menu" class="sub-menu">

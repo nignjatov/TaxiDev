@@ -228,9 +228,9 @@ class Subscription_model extends MY_Model {
 				$list = array($userEmail);
 				$ci->email->to($list);
 				$this->email->reply_to($userEmail, '');
-				$ci->email->subject('Pruchase invoice');
+				$ci->email->subject('Purchase invoice');
 				$ci->email->attach($_SERVER['DOCUMENT_ROOT'].'dev/invoices/'.$file_name.'.pdf');
-				$ci->email->message('Attached pdf file contains pruchase details.');
+				$ci->email->message('Dear customer, </br> thank you for your purchase.</br> Please find attached pdf file containing purchase details.');
 				$ci->email->send();
             }
 
