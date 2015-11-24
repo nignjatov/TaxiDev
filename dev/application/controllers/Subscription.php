@@ -85,4 +85,8 @@ class Subscription extends CI_Controller {
         $allSubscriptionDetail = $this->Subscription_model->getAllSubscriptionDetail();
         echo $_GET['callback'].'('.(json_encode($allSubscriptionDetail)).')';
     }
+	
+	public function deactivateSubscription(){
+		echo $this->Subscription_model->deactivateSubscription($this->userDetail->ID);
+    }
 }

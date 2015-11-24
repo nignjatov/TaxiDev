@@ -2266,7 +2266,7 @@ ul.itemList > li.add_item.col-md-6:first-child a {
 }
 
 .profile .panel-body .panel .col-md-8 .profile_right .profile_footer .btn {
-    margin: 0;
+    margin: 10;
 }
 
 .profile .panel-body .panel .col-md-8 .profile_right .profile-item .field .avatar1_wrap .avatar-info .btn.small {

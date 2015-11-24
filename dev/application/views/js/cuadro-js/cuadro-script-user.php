@@ -258,6 +258,18 @@
 			}
 		});
     }
+	
+	$("#deactivateAccount").click(function(){
+		$('#confirmationModal div.confirmationMessage').html("Are you sure you want deactivate your account!");
+		$('#confirmationModal').modal('show'); 
+		$('#confirmDelete').click(function(e){
+		var serverURL ='/dev/index.php/Subscription/deactivateSubscription';
+			cuadroServerAPI.getServerData('GET', serverURL, '', arguments.callee.name, function(ret){
+				if(ret)
+					top.location='/dev/index.php/User/chooseSubscription';
+			});
+		});
+	});
 
     /*$('button#forgotPasswordButton').click(function(e){
         $('#modalForgotPassword').modal('hide');

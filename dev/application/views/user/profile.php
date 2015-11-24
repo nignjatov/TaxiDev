@@ -219,6 +219,7 @@
     </div>
 </div>
         <div class="profile_footer">
+            <button id="deactivateAccount" type="button" class="btn">Deactivate</button>
             <button type="submit" class="btn">Save &amp; Update</button>
         </div>
     </form>

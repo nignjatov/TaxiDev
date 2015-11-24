@@ -332,4 +332,16 @@ class Subscription_model extends MY_Model {
         $this->email->message($email_body);
         $this->email->send();
     }
+	
+	public function deactivateSubscription($userID){
+        $data = new stdClass();
+        $data->stripe_id = 0;
+		$data->subscription_id = 0;
+        $this->db->where("ID", $userID);
+        $this->db->update("wp_server_users", $data);
+		
+		$this->db->where("user_id", $userID);
+		$this->db->delete("wp_user_subscription");
+		return true;
+    }
 }
