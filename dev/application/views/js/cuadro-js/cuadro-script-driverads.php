@@ -50,10 +50,10 @@ var driverAdsObject = {
     getDriverAdsDetailFromID: function (ID, type) {
         var driverAdsDetailArray = [];
         var allDriverAdsObjects = this.allObjects;
-        var totalDriverAds = allDriverAdsObjects.length;
+        var totalDriverAds = allDriverAdsObjects.array.length;
         for (var i = 0; i < totalDriverAds; i++) {
-            if (ID == allDriverAdsObjects[i].ID && type == allDriverAdsObjects[i].add_type) {
-                driverAdsDetailArray = allDriverAdsObjects[i];
+            if (ID == allDriverAdsObjects.array[i].ID && type == allDriverAdsObjects.array[i].add_type) {
+                driverAdsDetailArray = allDriverAdsObjects.array[i];
                 break;
             }
         }
