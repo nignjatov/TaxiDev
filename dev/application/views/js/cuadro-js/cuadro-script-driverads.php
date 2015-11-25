@@ -862,11 +862,6 @@ $("form#GeneralAdTaxiAddForm").submit(function(e){
             if(postData[i].value.length > 0 ){
                 vehicles += postData[i].value + ",";
             }
-        }
-        else if (postData[i].name.indexOf("option") > -1){
-            if(postData[i].value.length > 0 ){
-                option += postData[i].value + ",";
-            }
         } else if (postData[i].name == "lease"){
             lease = postData[i].value;
         }
