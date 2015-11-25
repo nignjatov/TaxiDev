@@ -61,16 +61,20 @@ class User extends CI_Controller {
 		if($user_detail) {
 			$email = $user_detail->result->email_id;
 			$id = $user_detail->result->ID;
-		
+			$name = $user_detail->result->first_name;
+			$user = $user_detail->result->user_name;
+			
 			$ci = get_instance();
 			$ci->load->library('email');
 			$ci->email->from(config_item('support_email'), 'Taxideals support service');
 			$list = array($email);
 			$ci->email->to($list);
 			$this->email->reply_to($email, '');
-			$ci->email->subject('Password recovery');
+			$ci->email->subject('Password recovery email');
 		
-			$msg = "Click on: <a href=\"http://$_SERVER[HTTP_HOST]/dev/index.php/User/changePassword?tag='".$this->encryptID($id)."'\">recovery_link</a>  to change your account password.";
+			$msg = "Dear $name,<br/><br/> we received a request for password change for username $user.<br/>";
+			$msg = $msg."Go to this page: <a href=\"http://$_SERVER[HTTP_HOST]/dev/index.php/User/changePassword?tag='".$this->encryptID($id)."'\">recovery_link</a> to set your new password.<br/>";
+			$msg = $msg."<br/>Regards,<br/>The Taxideals team";
 			$ci->email->message($msg);
 			$ci->email->send();
 		
@@ -350,11 +354,20 @@ class User extends CI_Controller {
         $list = array($email);
         $ci->email->to($list);
         $this->email->reply_to($email, '');
-        $ci->email->subject('User acount activation');
+        $ci->email->subject('User activation email');
 		
-		$msg = "Click on: <a href=\"http://$_SERVER[HTTP_HOST]/dev/index.php/User/activate?tag='".$this->encryptID($id)."'\">activation_link</a>  to activate your account.";
-        $ci->email->message($msg);
-        $ci->email->send();
+		$user_detail = $this->User_model->getUserDetail($id);
+		if($user_detail) {
+			$name = $user_detail->result->first_name;
+			$user = $user_detail->result->user_name;
+			
+			$msg = "Dear $name,<br/><br/>";
+			$msg = $msg."your account with username $user has been created at Taxideals service.<br/>";
+			$msg = $msg."Please visit this url to activate your account: <a href=\"http://$_SERVER[HTTP_HOST]/dev/index.php/User/activate?tag='".$this->encryptID($id)."'\">activation_link</a>.<br/>";
+			$msg = $msg."<br/>Regards,<br/>The Taxideals team";
+			$ci->email->message($msg);
+			$ci->email->send();
+		}	
     }
 	
 	public function encryptID( $q ) {

@@ -228,9 +228,16 @@ class Subscription_model extends MY_Model {
 				$list = array($userEmail);
 				$ci->email->to($list);
 				$this->email->reply_to($userEmail, '');
-				$ci->email->subject('Purchase invoice');
+				$ci->email->subject('New invoice email');
 				$ci->email->attach($_SERVER['DOCUMENT_ROOT'].'dev/invoices/'.$file_name.'.pdf');
-				$ci->email->message('Dear customer, </br> thank you for your purchase.</br> Please find attached pdf file containing purchase details.');
+				
+				$msg = "Dear customer,<br/><br/>";
+				$msg = $msg."We are contacting you in regard to a new invoice that has been created on your account. You may find the invoice attached.<br/>";
+				$msg = $msg."If you have questions, we're happy to help. ";
+				$msg = $msg."Please conntact us via email: <a href=\"mailto:support@taxideals.com.au\">Taxideals Support</a>.<br/>";
+				$msg = $msg."<br/>Regards,<br/>The Taxideals team";
+				
+				$ci->email->message($msg);
 				$ci->email->send();
             }
 
