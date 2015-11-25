@@ -188,8 +188,20 @@ var driverAdsObject = {
 			$("#GeneralAdDriversWantedModal label input[name=vehicles_6]").parents().removeClass("active");	
 			
 		$("#GeneralAdDriversWantedModal select[name=state] option").filter(function() { return $(this).text() == driverAdsDetail.state; }).prop('selected', true);
+		refreshArea('GeneralAdDriversWantedModal');
+		
 		$("#GeneralAdDriversWantedModal select[name=area] option").filter(function() { return $(this).text() == driverAdsDetail.area; }).prop('selected', true);
-		$("#GeneralAdDriversWantedModal select[name=network] option").filter(function() { return $(this).text() == driverAdsDetail.network; }).prop('selected', true);
+		refreshNetwork('GeneralAdDriversWantedModal');
+		
+		var dataarray=driverAdsDetail.network.split(",");
+		$('#GeneralAdDriversWantedModal select[name=network] option').each(function () {
+			$(this).removeAttr('selected');
+				
+			if($(this).attr('area') == driverAdsDetail.area) 
+				if(dataarray.indexOf($(this).text()) != -1)
+					$(this).attr('selected', 'selected');
+		});
+		
 		$("#GeneralAdDriversWantedModal input[name=postal_code]").val(driverAdsDetail.postal_code);
 		$("#GeneralAdDriversWantedModal input[name=comment]").val(driverAdsDetail.comment);
     },
@@ -666,6 +678,7 @@ function deleteDriverAdsDetail(driverAdsID, type){
 
 /* Driver Wanted Adds */
 $("#GeneralAdDriversWantedSubmit").click(function(e) {
+	$('#GeneralAdDriversWantedModal [name=network_hidden]').val($('#GeneralAdDriversWantedModal [name=network]').val());
     $("form#GeneralAdDriversWantedForm").submit();
 });
 
@@ -693,7 +706,7 @@ $("form#GeneralAdDriversWantedForm").submit(function(e){
             state = postData[i].value;
         } else if (postData[i].name == "area"){
             area = postData[i].value;
-        } else if (postData[i].name == "network"){
+        } else if (postData[i].name == "network_hidden"){
             network += postData[i].value + ",";
         } else if (postData[i].name == "networkOther"){
             network += postData[i].value + ",";
@@ -1276,6 +1289,10 @@ function refreshArea(modal){
 }
 
 function refreshNetwork(modal){
+	$("#" + modal + " [name='network'] option").each(function () {
+		$(this).removeAttr('selected');
+	});
+
 	var setSelected=false;
 	$("#" + modal + " [name='network'] option").each(function(){
 		if ($(this).attr('area') != $("#" + modal + " [name='area']").find('option:selected').text()) {

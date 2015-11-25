@@ -107,7 +107,7 @@ class GeneralAdsDriverWanted_model extends MY_Model {
 			$newAdsEntity->state = $this->input->post('state');
 			$newAdsEntity->area = $this->input->post('area');
 			
-			$newAdsEntity->network = $this->input->post('network');
+			$newAdsEntity->network = $this->input->post('network_hidden');
 			if ($this->input->post('taxiOther') != "") 
 				$newAdsEntity->network .= ",".$this->input->post('taxiOther');
 			
@@ -205,7 +205,7 @@ class GeneralAdsDriverWanted_model extends MY_Model {
 			$newAdsEntity->state = $this->input->post('state');
 			$newAdsEntity->area = $this->input->post('area');
 			
-			$newAdsEntity->network = $this->input->post('network');
+			$newAdsEntity->network = $this->input->post('network_hidden');
 			if ($this->input->post('taxiOther') != "") 
 				$newAdsEntity->network .= ",".$this->input->post('taxiOther');
 			

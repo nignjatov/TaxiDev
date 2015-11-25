@@ -150,8 +150,9 @@
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Available Network*</label>
+						<input type="hidden" name="network_hidden">
 						<div class="dropdown col-md-6">
-							<select id="network" class="form-control" name="network">
+							<select id="gadw_network_multiselect" class="form-control" name="network" multiple="multiple">
 							<?php
 								$string = file_get_contents("application/files/states.json");
 								$states = json_decode($string, true);
@@ -165,6 +166,15 @@
 		
 							?>	
 							</select>
+							<script>
+								$("#gadw_network_multiselect").mousedown(function(e){
+									e.preventDefault();
+									var scroll = this.scrollTop;
+									e.target.selected = !e.target.selected;
+									this.scrollTop = scroll;
+									$(this).focus();
+								}).mousemove(function(e){e.preventDefault()});
+							</script>
 						</div>
 						<label class="control-label col-md-1">
 							Other:
