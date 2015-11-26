@@ -1185,7 +1185,7 @@ $("form#GeneralAdCPLSForm").submit(function(e){
 		reader.readAsDataURL(selectedFile);
 		reader.onload = function(event) {
 			var result = event.target.result;
-			var fileName = selectedFile.name;
+			var fileName = (new Date).getTime() + selectedFile.name;
 			$.post('/dev/scripts/upload.php', { data: result, name: fileName }, function() {});
 		};
     } else {
