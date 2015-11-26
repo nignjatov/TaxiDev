@@ -1182,7 +1182,7 @@ $("form#GeneralAdCPLSForm").submit(function(e){
 		/* upload selected file */
 		var selectedFile = $('#CPLSFileSelector')[0].files[0];
 		var reader = new FileReader();
-		reader.readAsText(selectedFile, 'UTF-8');
+		reader.readAsDataURL(selectedFile);
 		reader.onload = function(event) {
 			var result = event.target.result;
 			var fileName = selectedFile.name;

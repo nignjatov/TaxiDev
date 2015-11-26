@@ -992,7 +992,7 @@
                     </div>
 					<div class="form-group">
 						<label class="control-label col-md-3">Upload car pic</label>
-						<input type="file" id="CPLSFileSelector">
+						<input class="btn" type="file" id="CPLSFileSelector">
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-3">Price/Rate*</label>
