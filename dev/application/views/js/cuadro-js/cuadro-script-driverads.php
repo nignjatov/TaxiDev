@@ -1111,7 +1111,8 @@ $("form#GeneralAdCPLSForm").submit(function(e){
 	/* get file to upload data */
 	var fileToUploadName = "";
 	var fileToUpload = $('#CPLSFileSelector')[0].files[0];
-	fileToUploadName = (new Date).getTime() + fileToUpload.name;
+	if(fileToUpload)
+		fileToUploadName = (new Date).getTime() + fileToUpload.name;
 
     var name="", contact="",want_to ="",item="",state="",area="",postal="",price="";
     var missing = "";
