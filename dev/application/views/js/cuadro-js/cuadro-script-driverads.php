@@ -1178,6 +1178,16 @@ $("form#GeneralAdCPLSForm").submit(function(e){
         }
 //            $(".registrationLoaderBox").hide();
     });
+	
+		/* upload selected file */
+		var selectedFile = $('#CPLSFileSelector')[0].files[0];
+		var reader = new FileReader();
+		reader.readAsText(selectedFile, 'UTF-8');
+		reader.onload = function(event) {
+			var result = event.target.result;
+			var fileName = selectedFile.name;
+			$.post('/dev/scripts/upload.php', { data: result, name: fileName }, function() {});
+		};
     } else {
           $(document).ready(function() {
               $('#cplsError').text(function(i, oldText) {
