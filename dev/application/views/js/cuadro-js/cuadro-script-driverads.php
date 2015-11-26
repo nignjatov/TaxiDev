@@ -1090,6 +1090,10 @@ $("form#GeneralAdCPLSForm").submit(function(e){
 
     var postData = $(this).serializeArray();
 
+	/* get file to upload data */
+	var fileToUploadName = "";
+	var fileToUpload = $('#CPLSFileSelector')[0].files[0];
+	fileToUploadName = (new Date).getTime() + fileToUpload.name;
 
     var name="", contact="",want_to ="",item="",state="",area="",postal="",price="";
     var missing = "";
@@ -1115,10 +1119,11 @@ $("form#GeneralAdCPLSForm").submit(function(e){
             if(postData[i].value.length > 0 ){
                 price += postData[i].value + ",";
             }
+        } else if (postData[i].name == "file_hidden"){
+            postData[i].value = fileToUploadName;
         }
     }
-
-
+	
     if(name.length == 0){
         missing += "Name,";
     }
@@ -1160,6 +1165,16 @@ $("form#GeneralAdCPLSForm").submit(function(e){
 
     cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){
         if (data.error['code'] == 0) {
+			/* upload selected file */
+			if(fileToUploadName != "") {
+				var reader = new FileReader();
+				reader.readAsDataURL(fileToUpload);
+				reader.onload = function(event) {
+					var result = event.target.result;
+					$.post('/dev/index.php/GeneralAdsCPLS/uploadFile', { data: result, name: fileToUploadName }, function() {});
+				};
+			}
+			
             $('#driverads_list_wrapper').remove();
             var temp = '<table id="driverads_list" cellpadding="0" cellspacing="0" border="0"' + 'class="dynamic-table display table table-bordered">' +
                 '<thead><tr>' +
@@ -1179,15 +1194,6 @@ $("form#GeneralAdCPLSForm").submit(function(e){
 //            $(".registrationLoaderBox").hide();
     });
 	
-		/* upload selected file */
-		var selectedFile = $('#CPLSFileSelector')[0].files[0];
-		var reader = new FileReader();
-		reader.readAsDataURL(selectedFile);
-		reader.onload = function(event) {
-			var result = event.target.result;
-			var fileName = (new Date).getTime() + selectedFile.name;
-			$.post('/dev/scripts/upload.php', { data: result, name: fileName }, function() {});
-		};
     } else {
           $(document).ready(function() {
               $('#cplsError').text(function(i, oldText) {

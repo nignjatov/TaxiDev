@@ -48,4 +48,7 @@ class GeneralAdsCPLSEntity {
 	
 	// pricerate
 	var $pricerate;
+
+	// file_name
+	var $file_name;	
 } 

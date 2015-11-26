@@ -106,6 +106,7 @@ class GeneralAdsCPLS_model extends MY_Model {
             $newAdsEntity->comment = $this->input->post('comment');
             $newAdsEntity->postal_code = $this->input->post('postal_code');
 			$newAdsEntity->pricerate = $this->input->post('priceRate');
+			$newAdsEntity->file_name = $this->input->post('file_hidden');
 	
 			$newAdsEntity->add_type = 4;
             
@@ -138,7 +139,8 @@ class GeneralAdsCPLS_model extends MY_Model {
             $newAdsEntity->comment = $this->input->post('comment');
             $newAdsEntity->postal_code = $this->input->post('postal_code');
 			$newAdsEntity->pricerate = $this->input->post('priceRate');
-	
+			$newAdsEntity->file_name = $this->input->post('file_hidden');
+			
 			$newAdsEntity->add_type = 4;
 
             $this->db->where("ID", $adsID, false);

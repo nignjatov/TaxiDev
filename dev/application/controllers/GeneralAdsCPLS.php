@@ -36,4 +36,24 @@ class GeneralAdsCPLS extends MY_Controller {
     public function getAllDriverAdsDetail() {
         parent::returnData($this->generaladscpls_model->getAllDriverAds($this->userID));
     }
+	
+    public function uploadFile() {
+        $data = $_POST['data'];
+        $data = explode(",", $data);
+        $data[1] = str_replace(' ', '+', $data[1]);
+  
+		$allowedImageTypes = array( "image/pjpeg","image/jpeg","image/jpg","image/png","image/x-png","image/gif");
+		$fileType = str_replace('data:', '', $data[0]);
+		$fileType = substr($fileType, 0, strpos($fileType, ";"));
+		if (in_array($fileType, $allowedImageTypes)) { 
+			$serverFile = $_POST['name'];
+			$fp = fopen($_SERVER['DOCUMENT_ROOT'].'dev/uploads/'.$serverFile,'w'); //Prepends timestamp to prevent overwriting
+			fwrite($fp, base64_decode($data[1]));
+			fclose($fp);
+			$returnData = array( "serverFile" => $serverFile );
+			echo true;
+		} else {
+			echo "Invalid file type";
+		}	
+    }
 }
