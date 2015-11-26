@@ -813,6 +813,12 @@ $("form#GeneralAdTaxiAddForm").submit(function(e){
 
     var postData = $(this).serializeArray();
 
+	/* get file to upload data */
+	var fileToUploadName = "";
+	var fileToUpload = $('#TaxiAdsFileSelector')[0].files[0];
+	if(fileToUpload)
+		fileToUploadName = (new Date).getTime() + fileToUpload.name;
+	
     var name="", contact="",type ="",state="",area="",network="",postal="",shift="",days="",ndays="",car="",model="",year="",fuel="",kilometers="",vehicles="",lease="";
     var missing = "";
     for( var i = 0; i < postData.length;i++){
@@ -864,6 +870,8 @@ $("form#GeneralAdTaxiAddForm").submit(function(e){
             }
         } else if (postData[i].name == "lease"){
             lease = postData[i].value;
+        } else if (postData[i].name == "file_hidden"){
+            postData[i].value = fileToUploadName;
         }
     }
 
@@ -935,6 +943,16 @@ $("form#GeneralAdTaxiAddForm").submit(function(e){
 
         cuadroServerAPI.postDataToServer(formURL, postData, 'JSONp', 'driverAdsDetailFormSubmit', function(data){
             if (data.error['code'] == 0) {
+				/* upload selected file */
+				if(fileToUploadName != "") {
+					var reader = new FileReader();
+					reader.readAsDataURL(fileToUpload);
+					reader.onload = function(event) {
+						var result = event.target.result;
+						$.post('/dev/index.php/GeneralAdsTaxiAds/uploadFile', { data: result, name: fileToUploadName }, function() {});
+					};
+				}
+				
                 $('#driverads_list_wrapper').remove();
                 var temp = '<table id="driverads_list" cellpadding="0" cellspacing="0" border="0"' + 'class="dynamic-table display table table-bordered">' +
                     '<thead><tr>' +

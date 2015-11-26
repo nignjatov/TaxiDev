@@ -576,12 +576,8 @@
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-3">Upload car pic</label>
-						<div class="btn-group col-md-6">
-							<label class="btn btn-info" for="my-file-selector">
-								<input id="my-file-selector" type="file" style="display:none;">
-								Choose File
-							</label>
-						</div>
+						<input type="hidden" value="" name="file_hidden">
+						<input class="btn" type="file" id="TaxiAdsFileSelector">
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3">Description</label>
