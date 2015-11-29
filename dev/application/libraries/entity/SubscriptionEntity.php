@@ -19,6 +19,14 @@ class SubscriptionEntity
         ),
         array(
             "id" => 2,
+            "title" => "Operator Subscription",
+            "detail" => "Unlimited General Ads",
+            "user_type" => "operator",
+            "stripe_id" => "OperatorSubscription",
+            "amount" => 0
+        ),
+        array(
+            "id" => 3,
             "title" => "Basic Subscription",
             "detail" => "Unlimited Drivers Wanted ad, upto 4 Taxi specific ads, up to 2 taxi profiles",
             "user_type" => "operator",
@@ -26,7 +34,7 @@ class SubscriptionEntity
             "amount" => 995
         ),
         array(
-            "id" => 3,
+            "id" => 4,
             "title" => "Silver Subscription",
             "detail" => "Unlimited Drivers Wanted ad, up to 20 taxi  ads, up to 5 taxi profiles",
             "user_type" => "operator",
@@ -34,7 +42,7 @@ class SubscriptionEntity
             "amount" => 2995
         ),
         array(
-            "id" => 4,
+            "id" => 5,
             "title" => "Golden Subscription",
             "detail" => "Unlimited Drivers Wanted ad, unlimited taxi ads, up to 10 taxi profiles",
             "user_type" => "operator",
@@ -42,7 +50,7 @@ class SubscriptionEntity
             "amount" => 4995
         ),
         array(
-            "id" => 5,
+            "id" => 6,
             "title" => "Platinum Subscription",
             "detail" => "Unlimited Drivers Wanted ad, unlimited taxi ads, up to 25 taxi profiles",
             "user_type" => "operator",
@@ -50,41 +58,33 @@ class SubscriptionEntity
             "amount" => 9995
         ),
         array(
-            "id" => 6,
+            "id" => 7,
             "title" => "Diamond Subscription",
             "detail" => "Unlimited Drivers Wanted ad, unlimited taxi ads, up to 50 taxi profiles",
             "user_type" => "operator",
             "stripe_id" => "DiamondSubscription",
             "amount" => 17995
-        ),
-        array(
-            "id" => 7,
-            "title" => "Operator Subscription",
-            "detail" => "Unlimited General Ads",
-            "user_type" => "operator",
-            "stripe_id" => "OperatorSubscription",
-            "amount" => 0
         )
     );
 
     private static $taxiLimit = array(
-        "local" => array(0,1,2,3,4,5),
-        "dev" => array(0,2,5,10,25,50),
-        "qa" => array(0,2,5,10,25,50),
-        "prod" => array(0,2,5,10,25,50)
+        "local" => array(0,0,1,2,3,4,5),
+        "dev" => array(0,0,2,5,10,25,50),
+        "qa" => array(0,0,2,5,10,25,50),
+        "prod" => array(0,0,2,5,10,25,50)
     );
     private static $adsLimit = array(
-        "local" => array(0,1,2,3,4,5),
-        "dev" => array(0,2,5,10,25,50),
-        "qa" => array(0,2,5,10,25,50),
-        "prod" => array(0,4,20,-1,-1,-1)
+        "local" => array(0,0,1,2,3,4,5),
+        "dev" => array(0,0,2,5,10,25,50),
+        "qa" => array(0,0,2,5,10,25,50),
+        "prod" => array(0,0,4,20,-1,-1,-1)
     );
 
     private static $driverAdsLimit = array(
-        "local" => array(0,1,2,3,4,5),
-        "dev" => array(0,2,5,10,25,50),
-        "qa" => array(0,2,5,10,25,50),
-        "prod" => array(-1,-1,-1,-1,-1)
+        "local" => array(0,0,1,2,3,4,5),
+        "dev" => array(0,0,2,5,10,25,50),
+        "qa" => array(0,0,2,5,10,25,50),
+        "prod" => array(-1,-1,-1,-1,-1,-1)
     );
 
     public function getAllSubscriptionDetail(){
