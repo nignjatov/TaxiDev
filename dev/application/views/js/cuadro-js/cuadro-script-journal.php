@@ -72,13 +72,14 @@ var journalObject = {
         sOut += '<tr><td>Shift:</td><td>'+aData.shift+'</td></tr>';
 		sOut += '<tr><td>License Plate No:</td><td>'+aData.license_plate_no+'</td></tr>';
         sOut += '<tr><td>Operator name:</td><td>'+aData.operator_name+'</td></tr>';
+        sOut += '<tr><td>Kilometer driven:</td><td>'+aData.kilometer+'</td></tr>';
         sOut += '<tr><td>Shift Rate (AU$):</td><td>'+aData.shift_rate+'</td></tr>';
         sOut += '<tr><td>Fuel Cost (AU$):</td><td>'+aData.fuel_cost+'</td></tr>';
-        sOut += '<tr><td>Other Cost (AU$):</td><td>'+aData.other_cost+'</td></tr>';
         sOut += '</table>';
         sOut += '</div>';
         sOut += '<div class="adv-table col-sm-6">';
         sOut += '<table class="display table table-bordered " cellspacing="0" cellpadding="0" border="0" <thead="">';
+        sOut += '<tr><td>Other Cost (AU$):</td><td>'+aData.other_cost+'</td></tr>';
         sOut += '<tr><td>Cash Payment (AU$):</td><td>'+aData.cash_payment+'</td></tr>';
         sOut += '<tr><td>Eftpos Shift Total (AU$):</td><td>'+aData.eftpos_shift_total+'</td></tr>';
         sOut += '<tr><td>docket (AU$):</td><td>'+aData.docket+'</td></tr>';

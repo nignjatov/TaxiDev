@@ -18,7 +18,7 @@
                                                 <div class="input-group input-large" data-date="13/07/2013"
                                                      data-date-format="mm/dd/yyyy">
                                                     <input type="text" class="form-control dpd1" name="from"
-                                                           placeholder="Date form" id="maintenanceStart">
+                                                           placeholder="Date from" id="maintenanceStart">
                                                     <span class="input-group-addon">To</span>
                                                     <input type="text" class="form-control dpd2" name="to"
                                                            placeholder="Date to" id="maintenanceEnd">

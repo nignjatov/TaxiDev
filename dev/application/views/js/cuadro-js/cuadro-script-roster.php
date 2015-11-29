@@ -1,4 +1,13 @@
 <script>
+
+$(document).ready(function(){
+    $('[data-toggle="tooltipAmount"]').tooltip();
+});
+
+$(document).ready(function(){
+    $('[data-toggle="tooltipBalance"]').tooltip();
+});
+
 var selectedRosterID = 0;
 var rosterDataTable = '';
 
@@ -265,7 +274,7 @@ $("#weekFilter").click(function() {
 		
 		rosterObject.populateRosterList();
 	
-		$("#rosterStart").val("Date form");
+		$("#rosterStart").val("Date from");
 		$("#rosterEnd").val("Date to");
 	}
 	

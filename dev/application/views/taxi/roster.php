@@ -50,7 +50,7 @@
                                                 <div class="input-group input-large" data-date="13/07/2013"
                                                      data-date-format="mm/dd/yyyy">
                                                     <input type="text" class="form-control dpd1" name="from"
-                                                           value="Date form" id="rosterStart">
+                                                           value="Date from" id="rosterStart">
                                                     <span class="input-group-addon">To</span>
                                                     <input type="text" class="form-control dpd2" name="to"
                                                            value="Date to" id="rosterEnd">
@@ -87,8 +87,15 @@
 										<th>Leased</th>
 										<th>Driver Name</th>
 										<th>Paid</th>
-										<th>Amount Paid</th>
-										<th>Balance</th>
+										<th>Amount Paid <a href="#" data-toggle="tooltipAmount" title="Total amount paid by driver.
+										                The total amount is Cash, Eftpos Shift total and Other Dockets combined."><i class="fa fa-question-circle"></i>
+										                </a>
+										</th>
+										<th>Balance <a href="#" data-toggle="tooltipBalance" title="Balance confirms cash, eftpos and other dockets paid by driver
+										    is equal to amount paid. Therefore, balance should be zero. If no cash,eftpos,docket entries are made
+										    the balance should be equal to amount paid."><i class="fa fa-question-circle"></i>
+                                        </a>
+                                        </th>
 										<th>Action</th>
 									</tr>
 									</thead>

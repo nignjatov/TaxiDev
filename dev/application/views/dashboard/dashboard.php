@@ -49,7 +49,7 @@
                                                 <div class="input-group input-large"
                                                      data-date-format="dd-mm-yyyy">
                                                     <input type="text" class="form-control dpd1" name="from"
-                                                           value="Date form" id="dashboardStartDate">
+                                                           value="Date from" id="dashboardStartDate">
                                                     <span class="input-group-addon">To</span>
                                                     <input type="text" class="form-control dpd2" name="to"
                                                            value="Date to" id="dashboardEndDate">
@@ -57,7 +57,7 @@
                                             </div>
                                             <div class="col-md-3" id="yearPickerForm">
                                                 <div class="col-sm-2">
-                                                    <label class="control-label" style="margin-top: 100%;">Year</label>
+                                                    <label class="control-label" style="margin-top: 8px;">Year</label>
                                                 </div>
                                                 <div class="col-sm-8">
                                                     <select class="form-control" name="year" id="yearPicker">

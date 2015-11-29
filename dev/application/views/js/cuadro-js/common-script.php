@@ -247,7 +247,7 @@ if (strcmp(config_item('environment'),'dev') == 0) {
                 // (string | mandatory) the text inside the notification
                 text: text,
                 // (string | optional) the image to display on the left
-                image: '<?php echo base_url()?>application/views/images/'+icon_image,
+                image: '<?php echo base_url()?>application/views/img/'+icon_image,
                 // (bool | optional) if you want it to fade out on its own or just sit there
                 sticky: false,
                 // (int | optional) the time you want it to be alive for before fading out
