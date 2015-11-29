@@ -46,8 +46,8 @@
                                     <div class="row m-bot20">
                                         <div class="form-group">
                                             <div class="col-md-4" id="datePickerForm">
-                                                <div class="input-group input-large" data-date="13/07/2013"
-                                                     data-date-format="mm/dd/yyyy">
+                                                <div class="input-group input-large"
+                                                     data-date-format="dd-mm-yyyy">
                                                     <input type="text" class="form-control dpd1" name="from"
                                                            value="Date form" id="dashboardStartDate">
                                                     <span class="input-group-addon">To</span>

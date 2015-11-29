@@ -19,13 +19,13 @@
             var temp = '<div class="table-responsive"><table class="display table table-bordered table-striped" id="dashboard-data-table">' +
                 '<thead><tr>' +
                 '<th>Taxi #</th>' +
-                '<th>Plate Fee (AU$)</th>' +
-                '<th>Network Finance (AU$)</th>' +
-                '<th>Insurance Finance (AU$)</th>' +
+                '<th>Plate Fee(AU$)</th>' +
+                '<th>Network Fee(AU$)</th>' +
+                '<th>Insurance Fee(AU$)</th>' +
                 '<th>Car Finance (AU$)</th>' +
                 '<th>Maintenance Cost (AU$)</th>' +
-                '<th>Total (AU$)</th>' +
-                '<th>Balance (AU$)</th>' +
+                '<th>Total Amount Paid(AU$)</th>' +
+                '<th>Balance(AU$)</th>' +
                 '<th>Profit/<span class="error">Loss</span> (AU$)</th>' +
                 '</tr></thead>' +
                 '<tbody></tbody>' +
@@ -283,7 +283,8 @@
     }
 
     function updateDashboardData(){
-        var serverURL = "<?php echo site_url('Dashboard/getDashboardDetail')?>"+"/type/"+type+"/year/"+(new Date().getFullYear());
+        var year = new Date().getFullYear();
+        var serverURL = "<?php echo site_url('Dashboard/getDashboardDetail')?>"+"/type/"+type+"/year/"+year+"/start_date/"+"01-01-"+year+"/end_date/31-12-"+year;
         $("#dashboard-data-table").remove();
         cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', updateDashboardData, function(data){
             if (data.error['code'] == 0) {
@@ -303,7 +304,14 @@
     function searchDashboardInformation(){
         var start_date = $("#dashboardStartDate").val();
         var end_date = $("#dashboardEndDate").val();
+        var start = (new Date(Date.parse(start_date)));
+        var end = (new Date(Date.parse(end_date)));
         var year = $("#yearPicker").val();
+        start_date = start.getDate()+"-"+parseInt(start.getMonth()+1)+"-"+start.getFullYear();
+        end_date = end.getDate()+"-"+parseInt(end.getMonth()+1)+"-"+end.getFullYear();
+        if(type == 'operator'){
+            year = new Date().getFullYear();
+        }
         var serverURL = "<?php echo site_url('Dashboard/getDashboardDetail')?>"+"/type/"+type+"/start_date/" + start_date + "/end_date/" + end_date+ "/year/"+year;
 
         $("#dashboard-data-table").remove();

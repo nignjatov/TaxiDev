@@ -15,20 +15,29 @@ class Dashboard_model extends MY_Model {
     }
     public function getDashboardDetail($userID,$user_type){
         if($user_type == 'operator'){
-            $start_date = $this->input->get('start_date');
-            $start_date = !empty($start_date) ? $this->timezone->convertDateToMKTime($start_date) : '';
-            $end_date = $this->input->get('end_date');
-            $end_date = !empty($end_date) ? $this->timezone->convertDateToMKTime($end_date) + 24 * 60 - 1 : '';
+
+            $args = $this->uri->uri_to_assoc(3);
+
+            if((count($args) > 0) && ($args['start_date'] != "")){
+                $start_date = $args['start_date'];
+                $start_date_int = strtotime($start_date);
+            }
+
+            if((count($args) > 0) && ($args['end_date'] != "")){
+                $end_date = $args['end_date'];
+                $end_date_int = strtotime($end_date);
+            }
+
             $select = sprintf("license_plate_no, plate_fee, network_fee, insurance_fee, car_finance_fee, registration_fee,
             sum(parts_cost + repair_cost) AS %s, sum(amount_paid - mf_amount - m7_amount - fine_toll_amount) AS %s,
             MAX(maintenance_date) AS max_maintenance_date, MIN(maintenance_date) AS min_maintenance_date,
             MAX(paying_date) AS max_paying_date, MIN(paying_date) AS min_paying_date", "maintenance_cost", "balance");
 
-            $m_where = empty($start_date) ? "" : " AND m.maintenance_date >= " . $start_date;
-            $m_where .= empty($end_date) ? "" : " AND m.maintenance_date <= " . $end_date;
+            $m_where = " AND m.maintenance_date >= " . $start_date_int;
+            $m_where .= " AND m.maintenance_date <= " . $end_date_int;
 
-            $r_where = empty($start_date) ? "" : " AND r.paying_date >= " . $start_date;
-            $r_where .= empty($end_date) ? "" : " AND r.paying_date <= " . $end_date;
+            $r_where = " AND r.paying_date >= " . $start_date_int;
+            $r_where .= " AND r.paying_date <= " . $end_date_int;
 
             $where = sprintf("t.user_id = %s", $userID);
 
@@ -46,23 +55,39 @@ class Dashboard_model extends MY_Model {
             $dashboardMaintenanceData = array();
             $count = 0;
             foreach ($result AS $info) {
+                $date_start = 0;
+                $date_end = 0;
+                $month_diff = -1;
                 $dashboardMaintenanceData[$count]['taxi_id'] = $info->license_plate_no;
                 $dashboardProfitData[$count]['taxi_id'] = $info->license_plate_no;
+                if(count($date_start) == 0){
+                   $date_start = $info->min_paying_date;
+                }
 
-                $date_start = $start_date == '' ? $info->min_paying_date : $start_date;
-                $date_end = $end_date == '' ? $info->max_paying_date : $end_date;
-                $date_diff = (($date_end - $date_start) / (24 * 3600)) + 1;
-                $info->plate_fee = ($info->plate_fee / 30) * $date_diff;
-                $info->network_fee = ($info->network_fee / 30) * $date_diff;
-                $info->insurance_fee = ($info->insurance_fee / 30) * $date_diff;
-                $info->car_finance_fee = ($info->car_finance_fee / 30) * $date_diff;
+                if(count($date_end) == 0){
+                   $date_end = $info->max_paying_date;
+                }
+
+                if($month_diff < 0 ){
+                    $end_month = date("n",strtotime($date_end));
+                    $end_year = date("Y",strtotime($date_end));
+                    $start_month = date("n",strtotime($date_start));
+                    $start_year = date("Y",strtotime($date_start));
+                    $num_of_years = $end_year - $start_year;
+                    $month_diff = $end_month - $start_month + 1 + $num_of_years*12;
+                }
+
+                $info->plate_fee = $info->plate_fee  * $month_diff;
+                $info->network_fee = $info->network_fee * $month_diff;
+                $info->insurance_fee = $info->insurance_fee * $month_diff;
+                $info->car_finance_fee = $info->car_finance_fee * $month_diff;
                 $info->total = $info->maintenance_cost + $info->plate_fee + $info->network_fee + $info->insurance_fee + $info->car_finance_fee;
     //            $info->registration_fee = ($info->registration_fee / 30) * $date_diff;
                 $info->balance = $info->balance;
                 $info->profit = $info->balance - $info->total;
 
-                $info->maintenance_cost = intval($info->maintenance_cost) ? intval($info->maintenance_cost) : 0;
-                $info->profit = intval($info->profit) ? intval($info->profit) : 0;
+                $info->maintenance_cost = floatval($info->maintenance_cost) ? floatval($info->maintenance_cost) : 0;
+                $info->profit = floatval($info->profit) ? floatval($info->profit) : 0;
 
                 $dashboardMaintenanceData[$count]['value'] = $info->maintenance_cost;
                 $dashboardProfitData[$count]['value'] = $info->profit;
