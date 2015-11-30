@@ -659,21 +659,25 @@ function deleteDriverAdsDetail(driverAdsID, type){
 		serverURL = "<?php echo site_url('GeneralAdsDriverWanted/removeDriverAds?driverads_id=')?>" + driverAdsID;
 	}
 
-    cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', '', function(data){
-        if (data.error['code'] == 0) {
-            $('#driverads_list_wrapper').remove();
-            var temp = '<table id="driverads_list" cellpadding="0" cellspacing="0" border="0"' + 'class="dynamic-table display table table-bordered">' +
-                '<thead><tr>' +
-                '<th>Type</th>' +
-                '<th>Name</th>' +
-                '<th>Contact</th>' +
-				'<th>Date</th>' +
-                '<th>Action</th>' +
-                '</tr></thead><tbody></tbody></table>';
-            $(".adv-table").append(temp);
-            updateGeneralAdsList();
-        }
-    });
+	$('#confirmationModal div.confirmationMessage').html("Are you sure you want to delete this ad?");
+	$('#confirmationModal').modal('show');
+	$('#confirmDelete').click(function(e) {
+		cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', '', function(data){
+            if (data.error['code'] == 0) {
+                $('#driverads_list_wrapper').remove();
+                var temp = '<table id="driverads_list" cellpadding="0" cellspacing="0" border="0"' + 'class="dynamic-table display table table-bordered">' +
+                    '<thead><tr>' +
+                    '<th>Type</th>' +
+                    '<th>Name</th>' +
+                    '<th>Contact</th>' +
+    				'<th>Date</th>' +
+                    '<th>Action</th>' +
+                    '</tr></thead><tbody></tbody></table>';
+                $(".adv-table").append(temp);
+                updateGeneralAdsList();
+            }
+        });
+	});
 }
 
 /* Driver Wanted Adds */

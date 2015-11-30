@@ -369,7 +369,7 @@ function addNewRoster() {
 
 function deleteRosterDetail(rosterID){
     var serverURL = "<?php echo site_url('Roster/removeRoster?roster_id=')?>" + rosterID;
-
+    $('#confirmationModal div.confirmationMessage').html("Are you sure you want to delete this roster item?");
 	$('#confirmationModal').modal('show'); 
 	$('#confirmDelete').click(function(e) {
 		cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', '', function(data){

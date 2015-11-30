@@ -241,11 +241,14 @@
 
     function deleteTaxiDetail(taxiID){
         var serverURL = "<?php echo site_url('Taxi/removeTaxi?taxi_id=')?>" + taxiID;
-
+        $('#confirmationModal div.confirmationMessage').html("Are you sure you want to delete this taxi item?");
+        $('#confirmationModal').modal('show');
+        $('#confirmDelete').click(function(e) {
         cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', updateTaxiList, function(data){
             if (data.error['code'] == 0) {
                 updateTaxiList();
             }
+            });
         });
     }
 

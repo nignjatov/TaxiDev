@@ -256,7 +256,6 @@
         </div>
     </div>
 </div>
-<!-- Modal View End -->
 </body>
 <script>
     document.title = '<?php echo config_item("site_title");?>: Roster & Paying';

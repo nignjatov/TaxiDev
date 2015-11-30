@@ -231,12 +231,15 @@ function addNewMaintenance() {
 
 function deleteMaintenanceDetail(maintenanceID){
     var serverURL = "<?php echo site_url('Maintenance/removeMaintenance?maintenance_id=')?>" + maintenanceID;
-
-    cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', '', function(data){
-        if (data.error['code'] == 0) {
-            updateMaintenanceList();
-        }
-    });
+    $('#confirmationModal div.confirmationMessage').html("Are you sure you want to delete this maintenance item?");
+	$('#confirmationModal').modal('show');
+	$('#confirmDelete').click(function(e) {
+		cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', '', function(data){
+                if (data.error['code'] == 0) {
+                    updateMaintenanceList();
+                }
+        });
+	});
 }
 
 $("#maintenance_submit_button").click(function(e) {
