@@ -28,7 +28,7 @@ class Dashboard_model extends MY_Model {
                 $end_date_int = strtotime($end_date);
             }
 
-            $select = sprintf("license_plate_no, plate_fee, network_fee, insurance_fee, car_finance_fee, registration_fee,
+            $select = sprintf("license_plate_no, plate_fee, network_fee, insurance_fee, car_finance_fee, registration_fee, amount_paid,
             sum(parts_cost + repair_cost) AS %s, sum(amount_paid - mf_amount - m7_amount - fine_toll_amount) AS %s,
             MAX(maintenance_date) AS max_maintenance_date, MIN(maintenance_date) AS min_maintenance_date,
             MAX(paying_date) AS max_paying_date, MIN(paying_date) AS min_paying_date", "maintenance_cost", "balance");
@@ -84,7 +84,7 @@ class Dashboard_model extends MY_Model {
                 $info->total = $info->maintenance_cost + $info->plate_fee + $info->network_fee + $info->insurance_fee + $info->car_finance_fee;
     //            $info->registration_fee = ($info->registration_fee / 30) * $date_diff;
                 $info->balance = $info->balance;
-                $info->profit = $info->balance - $info->total;
+                $info->profit = $info->amount_paid - $info->total;
 
                 $info->maintenance_cost = floatval($info->maintenance_cost) ? floatval($info->maintenance_cost) : 0;
                 $info->profit = floatval($info->profit) ? floatval($info->profit) : 0;
