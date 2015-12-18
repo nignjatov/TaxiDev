@@ -200,11 +200,14 @@ function addNewJournal() {
 
 function deleteJournalDetail(journalID){
     var serverURL = "<?php echo site_url('Journal/removeJournal?journal_id=')?>" + journalID;
-
-    cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', '', function(data){
-        if (data.error['code'] == 0) {
-            updateJournalList();
-        }
+    $('#confirmationModal div.confirmationMessage').html("Are you sure you want to delete this journal item?");
+    $('#confirmationModal').modal('show');
+    $('#confirmDelete').click(function(e) {
+        cuadroServerAPI.getServerData('GET', serverURL, 'JSONp', '', function(data){
+            if (data.error['code'] == 0) {
+                updateJournalList();
+            }
+        });
     });
 }
 

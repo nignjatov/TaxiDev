@@ -355,7 +355,7 @@ class User extends CI_Controller {
         $ci->email->to($list);
         $this->email->reply_to($email, '');
         $ci->email->subject('User activation email');
-		
+		//$this->email->bcc('ignjatov90@hotmail.com');
 		$user_detail = $this->User_model->getUserDetail($id);
 		if($user_detail) {
 			$name = $user_detail->result->first_name;

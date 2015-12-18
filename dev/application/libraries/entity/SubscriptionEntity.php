@@ -76,14 +76,14 @@ class SubscriptionEntity
     private static $adsLimit = array(
         "local" => array(0,0,1,2,3,4,5),
         "dev" => array(0,0,2,5,10,25,50),
-        "qa" => array(0,0,2,5,10,25,50),
+        "qa" => array(0,0,4,20,-1,-1,-1),
         "prod" => array(0,0,4,20,-1,-1,-1)
     );
 
     private static $driverAdsLimit = array(
         "local" => array(0,0,1,2,3,4,5),
         "dev" => array(0,0,2,5,10,25,50),
-        "qa" => array(0,0,2,5,10,25,50),
+        "qa" => array(-1,-1,-1,-1,-1,-1,-1),
         "prod" => array(-1,-1,-1,-1,-1,-1)
     );
 
