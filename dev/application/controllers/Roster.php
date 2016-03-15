@@ -38,7 +38,7 @@ class Roster extends MY_Controller {
 
     public function removeRoster() {
         $roster_id = $this->input->get('roster_id');
-        parent::returnData($this->Roster_model->updateRoster($this->userID, $roster_id));
+        parent::returnData($this->Roster_model->removeRoster($this->userID, $roster_id));
     }
 
     public function getAllRosterDetail() {
@@ -68,5 +68,38 @@ class Roster extends MY_Controller {
 
     public function getRosterDetail($operatorID, $taxiID) {
 
+    }
+	
+	public function getRosters() {
+		$time[0] =[];
+		$time[0] = microtime(true);
+		
+		$count = $this->Roster_model->getRostersCount(
+			$this->userID, 
+			$this->input->post('taxiID'), 
+			$this->input->post('dateFrom'), 
+			$this->input->post('dateTo'), 
+			$this->input->post('search')
+		);
+		$time[1] = microtime(true);
+		$data = $this->Roster_model->getRosters(
+			$this->userID, 
+			$this->input->post('taxiID'), 
+			$this->input->post('pageSize'),  
+			$this->input->post('from'), 
+			$this->input->post('dateFrom'), 
+			$this->input->post('dateTo'),  
+			$this->input->post('sortField'), 
+			$this->input->post('sort'),
+			$this->input->post('search')
+		);
+		$time[2] = microtime(true);
+		$this->output
+		->set_content_type('application/json')
+		->set_output(json_encode(array('data' => $data, 'count' => $count, "time" => $time)));
+    }
+	
+	public function dummy() {
+		$this->Roster_model->dummy($this->userID);
     }
 }

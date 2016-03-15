@@ -304,4 +304,274 @@ class Roster_model extends MY_Model {
 
         return parent::returnData(false, ConstExceptionCode::INVALID_ACTION);
     }
+	
+	/* Descriptin:
+	* Optimized query with limits, sorts and filters
+	* SELECT  * FROM wp_roster_paying AS t FORCE INDEX (PRIMARY) 
+	* JOIN ( 
+	* 	SELECT ID FROM wp_roster_paying 
+	* 	WHERE ... (ALL FILTERS)
+	* 	ORDER BY ... DESC/ASC
+	* ) AS t_temp ON t.ID = t_temp.ID 
+	* LIMIT 10
+	* 
+	* if sort taxi_id then join taxis table:
+	* SELECT * FROM wp_roster_paying AS t  
+	* JOIN ( 
+	* 	SELECT r.ID FROM wp_roster_paying AS r 
+	* 	JOIN wp_taxi_details AS r_temp ON r.taxi_id = r_temp.ID
+	* 	WHERE ... (ALL FILTERS)
+	* 	ORDER BY r_temp.license_plate_no DESC 
+	* ) AS t_temp ON t.ID = t_temp.ID  
+	* LIMIT 10
+	*/
+	public function getRosters( $userID, $taxiID, $num, $from, $dateFrom, $dateTo, $sortField, $sort, $search) {	
+		$request = 'SELECT * FROM wp_roster_paying AS t ';
+		
+		$request = $request . ' JOIN ( SELECT r.ID FROM wp_roster_paying AS r ';
+	
+		if($sortField=='taxi_id' && $sort)
+			$request = $request . ' JOIN wp_taxi_details AS r_temp ON r.taxi_id = r_temp.ID ';
+	
+		$request = $request . ' WHERE r.user_id=' . $userID;
+  
+		if($dateFrom)
+			$request = $request . ' AND r.paying_date >= '. $dateFrom;
+  
+		if($dateTo)
+			$request = $request . ' AND r.paying_date <= '. $dateTo;
+  
+		if($taxiID && !is_array($taxiID))
+			$request = $request . ' AND r.taxi_id = '. $taxiID;
+		
+		if($search) {
+			$requestTaxis = "";
+			if($taxiID  && is_array($taxiID)) {
+				$taxiIDCnt = 0;
+			
+				foreach ($taxiID as $value) {
+					if($taxiIDCnt == 0)
+						$requestTaxis = $requestTaxis . 'r.taxi_id IN ('. $value;
+					else
+						$requestTaxis = $requestTaxis . ','. $value;
+					$taxiIDCnt = $taxiIDCnt + 1;
+				}
+				if($taxiIDCnt > 0)
+					$requestTaxis = $requestTaxis . ') OR';
+			}
+		
+			$yesNo = "";
+			if($search == "Yes" || $search == "yes"){
+				$yesNo = "OR r.is_leased=1 OR r.is_paid=1";
+			} else if($search == "No" || $search == "no"){
+				$yesNo = "OR r.is_leased=0 OR r.is_paid=0";
+			}
+			
+			$request = $request . ' AND (' . $requestTaxis . ' r.driver_name LIKE \'%' . $search . '%\' OR r.amount_paid LIKE \'%' . $search . '%\' OR r.shift LIKE \'%' . $search . '%\' ' . $yesNo . ')';
+		}
+		
+		if($sortField == "taxi_id" && $sort)
+			$request = $request . ' ORDER BY r_temp.license_plate_no ' . $sort;
+		else if($sortField && $sort)
+			$request = $request . ' ORDER BY r.' . $sortField . ' ' . $sort;
+
+		$request = $request . ' ) AS t_temp ON t.ID = t_temp.ID ';	
+			
+		if($from == 0 && $num)
+			$request = $request . ' LIMIT '. $num;
+		else if($from && $num)
+			$request = $request . ' LIMIT ' . $from . ',' . $num;
+
+		return $this->db->query($request)->result();
+	}	
+	
+	/*
+	* Description: Standard select where forcing index on sort
+	* SELECT * FROM wp_roster_paying as t FORCE INDEX (PRIMARY) 
+	* WHERE ... (ALL FILTERS)
+	* ORDER BY ... DESC/ASC 
+	* LIMIT 10
+	*
+	* if sort taxi_id then join taxis table:
+	* SELECT * FROM wp_roster_paying as t FORCE INDEX (PRIMARY) 
+	* JOIN wp_taxi_details AS temp ON t.taxi_id = temp.ID
+	* WHERE ... (ALL FILTERS)
+	* ORDER BY temp.license_plate_no DESC/ASC 
+	* LIMIT 10
+	*/
+	public function getRosters_BACKUP( $userID, $taxiID, $num, $from, $dateFrom, $dateTo, $sortField, $sort, $search) {
+		$forceIndex = "";
+		if($sortField && $sort) {
+			$forceIndex = "FORCE INDEX (PRIMARY)";
+			
+			/* sort by taxi plate -> join taxi table */
+			if($sortField == "taxi_id")
+				$forceIndex = $forceIndex . " JOIN wp_taxi_details AS temp ON t.taxi_id = temp.ID ";
+		}	
+		
+		$request = 'SELECT * FROM wp_roster_paying AS t ' . $forceIndex . ' WHERE t.user_id=' . $userID;
+  
+		if($dateFrom)
+			$request = $request . ' AND t.paying_date >='. $dateFrom;
+  
+		if($dateTo)
+			$request = $request . ' AND t.paying_date <='. $dateTo;
+  
+		if($taxiID && !is_array($taxiID))
+			$request = $request . ' AND t.taxi_id='. $taxiID;
+		
+		if($search) {
+			$requestTaxis = "";
+			if($taxiID  && is_array($taxiID)) {
+				$taxiIDCnt = 0;
+			
+				foreach ($taxiID as $value) {
+					if($taxiIDCnt == 0)
+						$requestTaxis = $requestTaxis . 't.taxi_id IN ('. $value;
+					else
+						$requestTaxis = $requestTaxis . ','. $value;
+					$taxiIDCnt = $taxiIDCnt + 1;
+				}
+				if($taxiIDCnt > 0)
+					$requestTaxis = $requestTaxis . ') OR';
+			}
+		
+			$yesNo = "";
+			if($search == "Yes" || $search == "yes"){
+				$yesNo = "OR t.is_leased=1 OR t.is_paid=1";
+			} else if($search == "No" || $search == "no"){
+				$yesNo = "OR t.is_leased=0 OR t.is_paid=0";
+			}
+			
+			$request = $request . ' AND (' . $requestTaxis . ' t.driver_name LIKE \'%' . $search . '%\' OR t.amount_paid LIKE \'%' . $search . '%\' OR t.shift LIKE \'%' . $search . '%\' ' . $yesNo . ')';
+		}
+		
+		if($sortField == "taxi_id" && $sort)
+			$request = $request . ' ORDER BY temp.license_plate_no ' . $sort;
+		else if($sortField && $sort)
+			$request = $request . ' ORDER BY t.' . $sortField . ' ' . $sort;
+
+		if($from == 0 && $num)
+			$request = $request . ' LIMIT '. $num;
+		else if($from && $num)
+			$request = $request . ' LIMIT ' . $from . ',' . $num;
+
+		return $this->db->query($request)->result();
+	
+		/*$this->db->select("*");
+        $this->db->where("user_id", $userID);
+        
+		if($taxiID)
+			$this->db->where('taxi_id', $taxiID);
+		
+		if($dateFrom)
+			$this->db->where('paying_date >=', $dateFrom);
+		
+		if($dateTo)
+			$this->db->where('paying_date <=', $dateTo);
+		
+		if($from == 0 && $num)
+			$this->db->limit($num);
+		else if($from && $num)
+			$this->db->limit($num, $from);
+		
+		if($search && $searchField) 
+			$this->db->like($searchField, $search);
+		
+		if($sortField && $sort)
+			$this->db->order_by($sortField, $sort);
+		
+		$this->db->from("wp_roster_paying");
+		
+        return $this->db->get()->result();*/
+    }
+	
+	public function getRostersCount( $userID, $taxiID, $dateFrom, $dateTo, $search ) {
+		$request = 'SELECT COUNT(*) FROM wp_roster_paying WHERE user_id=' . $userID;
+  
+		if($dateFrom)
+			$request = $request . ' AND paying_date >='. $dateFrom;
+  
+		if($dateTo)
+			$request = $request . ' AND paying_date <='. $dateTo;
+  
+		if($taxiID && !is_array($taxiID))
+			$request = $request . ' AND taxi_id='. $taxiID;
+		
+		if($search) {
+			$requestTaxis = "";
+			if($taxiID  && is_array($taxiID)) {
+				$taxiIDCnt = 0;
+			
+				foreach ($taxiID as $value) {
+					if($taxiIDCnt == 0)
+						$requestTaxis = $requestTaxis . 'taxi_id IN ('. $value;
+					else
+						$requestTaxis = $requestTaxis . ','. $value;
+					$taxiIDCnt = $taxiIDCnt + 1;
+				}
+				if($taxiIDCnt > 0)
+					$requestTaxis = $requestTaxis . ') OR';
+			}
+		
+			$yesNo = "";
+			if($search == "Yes" || $search == "yes"){
+				$yesNo = "OR is_leased=1 OR is_paid=1";
+			} else if($search == "No" || $search == "no"){
+				$yesNo = "OR is_leased=0 OR is_paid=0";
+			}
+			
+			$request = $request . ' AND (' . $requestTaxis . ' driver_name LIKE \'%' . $search . '%\' OR amount_paid LIKE \'%' . $search . '%\' OR shift LIKE \'%' . $search . '%\' ' . $yesNo . ')';
+		}
+		
+		$query = $this->db->query($request);
+		foreach ($query->result_array() as $row) {
+			return intval($row["COUNT(*)"]);
+		}
+		return null;
+		
+		/*$this->db->select("*");
+        $this->db->where("user_id", $userID);
+        
+		if($taxiID)
+			$this->db->where('taxi_id', $taxiID);
+		
+		if($dateFrom)
+			$this->db->where('paying_date >=', $dateFrom);
+		
+		if($dateTo)
+			$this->db->where('paying_date <=', $dateTo);
+
+		if($search && $searchField) 
+			$this->db->like($searchField, $search);
+		
+		$this->db->from("wp_roster_paying");
+		
+        return $this->db->count_all_results();*/
+    }
+	
+	public function dummy($userID) {
+	
+		for ($i = 1; $i <= 50000; $i++) {
+			$str = substr(sha1(rand()), 0, 5);
+			
+			$newRosterEntity = new RosterPayingEntity();
+			$newRosterEntity->user_id = rand(666,999);
+			$newRosterEntity->taxi_id = rand(666,999);
+			$newRosterEntity->shift = (rand(0,1) == 0) ? "Evening" : "Morning";
+			$newRosterEntity->is_leased = rand(0,1);
+			$newRosterEntity->driver_name = $str."_".$i;
+			$newRosterEntity->is_paid = rand(0,1);
+			$newRosterEntity->amount_paid = rand(0,1000);
+			$newRosterEntity->mf_amount = rand(0,1000);
+			$newRosterEntity->m7_amount = rand(0,1000);
+			$newRosterEntity->cash_amount = rand(0,1000);
+			$newRosterEntity->fine_toll_amount = rand(0,1000);
+			$newRosterEntity->expenses = rand(0,1000);
+			$newRosterEntity->comment = $str."_comment".$i;
+			$newRosterEntity->paying_date = time() ;
+		
+			$this->db->insert('wp_roster_paying', $newRosterEntity);
+		}	
+    }
 }
